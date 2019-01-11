@@ -1,8 +1,13 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
+html {
+  font-size: 62.5%; }
 
-a {
-  color: #00B7FF;
-}
+*, *::after, *::before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0; }
+
+body {
+  font-size: 1.6rem;
+  color: #333;
+  font-weight: 300;
+  line-height: 1.5; }

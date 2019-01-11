@@ -1,0 +1,22 @@
+$font-primary: 'Muli', sans-serif;
+$font-title: 'Faustina', serif;
+
+$color-primary: #42b0ee;
+$color-secondary: #f5546e;
+
+html{
+    font-size: 62.5%
+}
+
+*, *::after, *::before{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    font-size: 1.6rem;
+    color: #333;
+    font-weight: 300;
+    line-height: 1.5;
+}
