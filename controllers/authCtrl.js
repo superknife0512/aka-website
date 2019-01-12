@@ -9,3 +9,7 @@ exports.getSignup = (req,res,next)=>{
         title: 'Signup'
     })
 }
+
+exports.postSignup = (req,res,next)=>{
+    console.log('cax');
+}

@@ -1,0 +1,31 @@
+.signup{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 5rem;
+
+    &__wrapper{
+        width: 70%;
+        margin-top: 6rem;
+        padding: 3rem;
+        background-color: white;
+        box-shadow: 0 .5rem 1rem rgba($color: #000000, $alpha: .2);
+    }
+
+    &__form{
+        label{
+            font-size: 1.5rem;
+            color: $color-primary;
+        }
+
+        input{
+            &::placeholder{
+                font-size: 1.3rem;
+            }
+            padding: 1.5rem 2rem;
+        }
+    }
+}
+
+.form-group{
+    margin-bottom: 1.9rem;
+}

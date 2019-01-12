@@ -10,4 +10,49 @@ body {
   font-size: 1.6rem;
   color: #333;
   font-weight: 300;
-  line-height: 1.5; }
+  line-height: 1.5;
+  font-family: "Muli", sans-serif; }
+
+input.file-style {
+  padding-top: 1rem !important;
+  padding-bottom: 3rem !important; }
+
+.btn {
+  font-size: 1.5rem; }
+
+.background-gray {
+  background-color: #dee9e7; }
+
+.signup {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 5rem; }
+  .signup__wrapper {
+    width: 70%;
+    margin-top: 6rem;
+    padding: 3rem;
+    background-color: white;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2); }
+  .signup__form label {
+    font-size: 1.5rem;
+    color: #42b0ee; }
+  .signup__form input {
+    padding: 1.5rem 2rem; }
+    .signup__form input::placeholder {
+      font-size: 1.3rem; }
+
+.form-group {
+  margin-bottom: 1.9rem; }
+
+.heading-title {
+  color: #f5546e;
+  font-size: 2.5rem;
+  font-family: "Faustina", serif;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 1.5rem; }
+
+.warning-title {
+  color: #f5546e !important;
+  font-size: 1.7rem;
+  font-weight: 600; }

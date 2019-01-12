@@ -8,6 +8,7 @@
     "serve": "npm-run-all start watch:sass --parallel"
   },
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "connect-mongo": "^2.0.3",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
