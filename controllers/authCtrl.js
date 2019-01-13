@@ -1,6 +1,7 @@
 const Teacher = require('../models/Teacher');
 const bcrypt = require('bcryptjs');
 const nodemailer = require('nodemailer');
+const crypto = require('crypto');
 
 const transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -158,9 +159,9 @@ exports.sendCode =async (req,res,next)=>{
             subject: 'Your role code!',
             html: ` 
                 <h3>This is your ${role} code</h3>
-                <p>-----------------------------</p>
+                <p>-------------------------------------------------------------</p>
                 <p style="color: red">${roleCode}</p>
-                <p>-----------------------------</p>
+                <p>-------------------------------------------------------------</p>
                 <p>Enter to the code field</p>`
         }
     
@@ -213,5 +214,115 @@ exports.codeCheck =async (req,res,next)=>{
         res.json({
             err: err
         })
+    }
+}
+
+exports.getResetPass = (req,res,next)=>{
+    res.render('teachers/reset',{
+        title: 'Reset password',
+        error: false,
+    })
+}
+
+exports.postResetPass = async (req, res, next)=>{
+    const email = req.body.email;
+    try{
+        const person = await Teacher.findOne({email: email});
+        if(!person){
+            return res.render('teachers/reset',{
+                title: 'Reset password',
+                error: `Your email doesn't exist yet`,
+            })
+        }
+        //create the token
+        const token = crypto.randomBytes(15).toString('hex');
+        const tokenExpiration = Date.now() + 3600000;
+
+        //add token to the account
+        person.token = token;
+        person.tokenExpiration = tokenExpiration;
+
+        await person.save();
+
+        const mailOption = {
+            from: 'TrungtamdanguAK@gmail.com',
+            to: email,
+            subject: 'Reset your password',
+            html: ` 
+                <h3>Click the link bellow to reset your password</h3>
+                <p>-------------------------------------------------------------</p>
+                <a href="http://localhost:3000/teacher/reset/${token}">Reset your password</a>
+                <p>-------------------------------------------------------------</p>
+                <p>Enter to the code field</p>`
+        }
+
+        transporter.sendMail(mailOption, function(error, info){
+            if (error) {
+              console.log(error);              
+            } else {
+              console.log('Email sent: ' + info.response);                
+            }
+          });
+
+        res.redirect('/teacher/login');
+
+    } catch (err) {
+        next(err)
+    }
+}
+
+exports.getResetWithToken = async (req,res,next)=>{
+    const token = req.params.token;
+    try{
+        const person =await Teacher.findOne({token: token, tokenExpiration:{$gt: Date.now()}});
+        if(!person){
+            return res.render('teachers/reset',{
+                title: 'Reset password',
+                error: `Your password reset request has been expried!`,
+            })
+        }
+
+        res.render('teachers/passwordReset',{
+            title: 'Password reset',
+            error: false,
+            resetToken: token,
+        })
+
+    } catch (err) {
+        next(err)
+    }
+}
+
+exports.postResetWithToken = async (req,res,next)=>{
+    const token = req.body.token;
+    const pass = req.body.password;
+    const cfPass = req.body.cfPassword;
+    console.log(pass, cfPass);
+    try{
+        const person =await Teacher.findOne({token: token, tokenExpiration:{$gt: Date.now()}});
+        if(pass.length < 6){
+            return res.render('teachers/passwordReset',{
+                title: 'Password reset',
+                resetToken: token,
+                error: 'Your password should be 6 character long',
+            })
+        }
+        if(pass !== cfPass){
+            return res.render('teachers/passwordReset',{
+                title: 'Password reset',
+                error: 'password and password confirm should be the same',
+                resetToken: token,
+            })
+        }
+        const hashPass = await bcrypt.hash(pass, 15);
+        person.password = hashPass;
+        person.token = undefined;
+        person.tokenExpiration = undefined;
+
+        await person.save();
+        res.redirect('/teacher/login');
+
+    } catch (err) {
+        next(err)
     }
 }

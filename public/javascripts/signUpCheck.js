@@ -8,12 +8,14 @@ const app = new Vue({
         cfPass: '',
         passCheck: null,
         sameCheck: null,
-        role: '',
+        role: 'admin',
         roleCode: '',
         codeInfo: '',
+        popupActive: false,
     },
     methods:{
         checkEmail(){
+            // the method that check email asyncschronously
             fetch('/teacher/email-check',{
                 method: 'POST',
                 headers:{
@@ -41,6 +43,7 @@ const app = new Vue({
                 },
                 body: JSON.stringify({role: this.role})
             }).then(response=>{
+                this.popupActive = true;
                 return response.json();
             }).then(data=>{
                 console.log(data);

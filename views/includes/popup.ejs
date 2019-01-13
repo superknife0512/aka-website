@@ -1,0 +1,8 @@
+<div class="popup__wrapper fadeInAnim" v-if="popupActive">
+    <div class="popup ">
+        <h3 class="popup__heading"><%= heading %></h3>
+        <p class="popup__content"><%= content %></p>
+        <i class="fas fa-times popup__icon"
+            @click="popupActive = false"></i>
+    </div>
+</div>

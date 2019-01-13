@@ -1,8 +1,9 @@
 <%- include('../includes/html-head.ejs') %>
 <div class="background-gray" id="signup">
+<%- include('../includes/popup.ejs',{heading: 'Your code has been send', 
+                    content: 'please take the code and enter it to code field' }) %>
 
     <div class="container signup">
-
         <div class="signup__wrapper">
         
             <h1 class="heading-title">Đăng kí</h1>
@@ -100,14 +101,14 @@
                 <div class="form-group">      
                     <select v-model="role" class="form-control">
                         <option value="admin">admin</option>
-                        <option value="teacher"select>teacher</option>
+                        <option value="teacher">teacher</option>
                     </select>                    
                     <a href="#" @click="getCode()">Get code now !</a><br>
                 </div>
 
                     
                 <button type="submit" class="btn btn-primary" 
-                        :disabled="canUse === false || passCheck === false || sameCheck === false || !basicFill">Submit</button>
+                        :disabled="canUse === false || passCheck === false || sameCheck === false || !basicFill || codeInfo === 'This is invalid code' || roleCode === ''">Submit</button>
             </form>
         </div>
     </div>

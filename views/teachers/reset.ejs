@@ -1,0 +1,31 @@
+<%- include('../includes/html-head.ejs') %>
+<div class="background-gray full-page">
+<br><br>
+    <div class="container signup">
+        <div class="signup__wrapper">
+        
+            <h1 class="heading-title">Reset Password</h1>
+            <hr>
+            <% if(error) { %>
+                <p class="alert alert-danger"><%= error %></p>
+            <% } %>
+            <form class="signup__form" 
+                    action="/teacher/reset" 
+                    method="POST">
+
+                <div class="form-group">
+                    <label for="email">Email address</label>
+                    <input type="email" 
+                            class="form-control" 
+                            name="email"
+                            placeholder="Enter email">
+                    
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+                
+            </form>
+        </div>
+    </div>
+</div>
+
+<%- include('../includes/footer.ejs') %>

@@ -32,8 +32,13 @@ const uploadImg = multer({storage: teacherStorage, fileFilter: teacherFilter}).s
 router.post('/signup', uploadImg, authController.postSignup);
 router.get('/login', authController.getLogin);
 router.post('/login', authController.postLogin);
-
 router.get('/signup', authController.getSignup);
+
+//for reset part
+router.get('/reset-pass', authController.getResetPass);
+router.post('/reset', authController.postResetPass);
+router.get('/reset/:token', authController.getResetWithToken);
+router.post('/reset/password', authController.postResetWithToken);
 
 //email checking
 router.post('/email-check', authController.emailCheck);

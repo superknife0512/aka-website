@@ -71,7 +71,10 @@ const teacherSchema = new mongoose.Schema({
 
     albums:[
         {type: mongoose.Schema.Types.ObjectId, ref: 'Album'}
-    ]
+    ],
+
+    token: String,
+    tokenExpiration: Date,
 })
 
 module.exports = mongoose.model('Teacher', teacherSchema);

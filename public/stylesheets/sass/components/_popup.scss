@@ -1,0 +1,39 @@
+.popup{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 3rem;
+    width: 50%;
+    background-color: white;
+    box-shadow: 0 .5rem 4rem rgba($color: #000000, $alpha: .5);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    transition: all .3s;
+
+    &__heading{
+        font-family: $font-title;
+        color: $color-primary;
+        font-size: 1.9rem;
+        text-transform: uppercase;
+        padding-bottom: 1rem;
+    }
+    &__icon{
+        position: absolute;
+        top: 2rem;
+        right: 2rem;
+        font-size: 1.5rem;
+        color: $color-secondary;
+        cursor: pointer;
+    }
+
+    &__wrapper{
+        position: fixed;
+        background-color: rgba($color: #000000, $alpha: .2);
+        height: 100vh;
+        width: 100vw;
+        z-index: 900;
+    }
+}

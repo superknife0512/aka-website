@@ -31,6 +31,7 @@ app.use(cookieParser());
 //static serve setup
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/teacher', express.static(path.join(__dirname, 'public')));
+app.use('/teacher/reset', express.static(path.join(__dirname, 'public')));
 
 //session setup
 app.use(session({
