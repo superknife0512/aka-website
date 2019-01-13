@@ -1,6 +1,6 @@
 input.file-style{
     padding-top: 1rem !important;
-    padding-bottom: 3rem !important;
+    padding-bottom: 4rem !important;
 }
 
 .btn{
@@ -10,4 +10,14 @@ input.file-style{
 .background-gray{
     background-color: #eff5f4;
     height: 100%;
+}
+
+.full-page{
+    height: 100vh !important;
+}
+
+.danger-text{
+    color: $color-secondary;
+    margin: 1rem 2rem;
+    font-size: 1.5rem;
 }

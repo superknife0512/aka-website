@@ -9,7 +9,10 @@ const MongoStore = require('connect-mongo')(session);
 
 const indexRouter = require('./routes/index');
 const teacherRouter = require('./routes/teacher');
-const authRouter = require('./routes/auth')
+const authRouter = require('./routes/auth');
+const adminRouter = require('./routes/admin');
+
+const Teacher = require('./models/Teacher');
 
 const app = express();
 
@@ -27,11 +30,7 @@ app.use(cookieParser());
 
 //static serve setup
 app.use(express.static(path.join(__dirname, 'public')));
-
-//router setup
-app.use('/', indexRouter);
-app.use('/teacher', teacherRouter);
-app.use('/teacher', authRouter);
+app.use('/teacher', express.static(path.join(__dirname, 'public')));
 
 //session setup
 app.use(session({
@@ -47,6 +46,24 @@ app.use(session({
     stringify: false,
   })
 }))
+
+//user login
+app.use(async (req,res,next)=>{
+  if(req.session.teacher){
+    const teacherId = req.session.teacher._id.toString();
+    req.teacher = await Teacher.findById(teacherId);
+    res.locals.isLogin = req.session.isLogin;
+  } else {
+    res.locals.isLogin = false;
+  }
+  next();
+})
+
+//router setup
+app.use('/', indexRouter);
+app.use('/teacher', teacherRouter);
+app.use('/teacher', authRouter);
+app.use('/admin', adminRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

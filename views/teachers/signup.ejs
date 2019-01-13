@@ -1,46 +1,56 @@
 <%- include('../includes/html-head.ejs') %>
-<div class="background-gray">
+<div class="background-gray" id="signup">
 
     <div class="container signup">
 
         <div class="signup__wrapper">
         
-            <h1 class="heading-title">Đăng kí giáo viên</h1>
+            <h1 class="heading-title">Đăng kí</h1>
+            <h4>Have an account? <a href="/teacher/login">Login now</a></h4>
             <form class="signup__form" 
                     action="/teacher/signup" 
                     method="POST"
                     enctype="multipart/form-data">
 
                 <div class="form-group">
-                    <label for="email">Email address</label>
+                    <label for="email">Email address*</label>
                     <input type="email" 
                             class="form-control" 
                             name="email"
-                            placeholder="Enter email">
+                            placeholder="Enter email"
+                            v-model.lazy="email"
+                            @change="checkEmail">
+                    <small v-if="canUse === false" class="danger-text"> This email has existed ! please choose another one </small>
                     <small id="emailHelp" class="form-text text-muted">Email của bạn sẽ được dùng làm tên đăng nhập</small>
                 </div>
 
                 <div class="form-group">
-                    <label for="password">Password</label>
+                    <label for="password">Password*</label>
                     <input type="password" 
                             class="form-control" 
                             name="password" 
-                            placeholder="Password">
+                            placeholder="Password"
+                            v-model.lazy="pass">
+                    <small v-if="passCheck === false" class="danger-text"> Your password should have at least 6 characters long</small>
                     <small class="form-text text-muted">Password nên có chiều dài từ 6 kí tự trở lên</small>
                 </div>
 
                 <div class="form-group">
-                    <label for="confirmPassword">confirm password</label>
+                    <label for="confirmPassword">confirm password*</label>
                     <input type="password" 
                             class="form-control"  
                             name="cfPassword"
+                            v-model.lazy="cfPass"
                             placeholder="confirm password">
+                    <small v-if="sameCheck === false" class="danger-text"> Password confirm and password should be the same </small>
+                    
                 </div>
 
                 <hr>
 
                 <p class="alert alert-info">
-                    Dưới đây là thông tin cá nhân của một giáo viên cần có
+                    <i class="fas fa-info-circle"></i>
+                    Dưới đây là thông tin cá nhân mà một giáo viên cần có
                     và có thể cập nhật sau này.
                 </p>
 
@@ -48,7 +58,7 @@
                     <label for="name">Họ và Tên của bạn</label>
                     <input type="text" 
                             class="form-control" 
-                            class="teacherName"
+                            name="teacherName"
                             placeholder="Enter Name">                    
                 </div>
 
@@ -63,16 +73,8 @@
 
                 <div class="form-group">
                     <label for="story">Một chút về bạn</label>
-                    <textarea name="story" cols="30" rows="10" placeholder="Your specialty" class="form-control"></textarea>
+                    <textarea name="story" cols="30" rows="10" placeholder="Your story" class="form-control"></textarea>
                     <small class="form-text text-muted">Ví dụ: Tôi là ai, tại sao tôi đến với nghề này,...</small>                  
-                </div>
-
-                <div class="form-group">
-                    <label for="teacherImg">Một số hình ảnh khi giảng dạy</label>
-                    <input type="file" 
-                            class="form-control file-style" 
-                            name="teacherImgs"
-                            multiple>                
                 </div>
 
                 <div class="form-group">
@@ -83,21 +85,34 @@
                             >                
                 </div>
 
-                <!--
+                
                 <div class="form-group">
-                    <label for="name" class="warning-title">Teacher Code</label>
+                    <label for="name" class="warning-title">Role Code</label>
                     <input type="text" 
+                            name="roleCode"
                             class="form-control" 
-                            class="teacherName"
-                            placeholder="Enter Name">                    
+                            placeholder="Enter Code"
+                            v-model.lazy="roleCode"
+                            @change="checkRoleCode()">
+                    <p class="danger-text">{{ codeInfo }}</p>
+                </div>     
+                
+                <div class="form-group">      
+                    <select v-model="role" class="form-control">
+                        <option value="admin">admin</option>
+                        <option value="teacher"select>teacher</option>
+                    </select>                    
+                    <a href="#" @click="getCode()">Get code now !</a><br>
                 </div>
-                -->              
 
                     
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary" 
+                        :disabled="canUse === false || passCheck === false || sameCheck === false || !basicFill">Submit</button>
             </form>
         </div>
     </div>
 </div>
+
+<script src="javascripts/signUpCheck.js"></script>
 
 <%- include('../includes/footer.ejs') %>

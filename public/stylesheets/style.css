@@ -15,13 +15,22 @@ body {
 
 input.file-style {
   padding-top: 1rem !important;
-  padding-bottom: 3rem !important; }
+  padding-bottom: 4rem !important; }
 
 .btn {
   font-size: 1.5rem; }
 
 .background-gray {
-  background-color: #dee9e7; }
+  background-color: #eff5f4;
+  height: 100%; }
+
+.full-page {
+  height: 100vh !important; }
+
+.danger-text {
+  color: #f5546e;
+  margin: 1rem 2rem;
+  font-size: 1.5rem; }
 
 .signup {
   display: flex;
@@ -37,9 +46,12 @@ input.file-style {
     font-size: 1.5rem;
     color: #42b0ee; }
   .signup__form input {
-    padding: 1.5rem 2rem; }
+    padding: 1.5rem 2rem;
+    font-size: 1.5rem; }
     .signup__form input::placeholder {
       font-size: 1.3rem; }
+  .signup__form textarea, .signup__form select {
+    font-size: 1.4rem; }
 
 .form-group {
   margin-bottom: 1.9rem; }
