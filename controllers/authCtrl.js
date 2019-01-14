@@ -47,15 +47,18 @@ exports.postLogin = async (req,res,next)=>{
                 error: 'Wrong password, please try again'
             })
         }
-        req.session.teacher = teacher;
-        req.session.isLogin = true;
-        await setTimeout(() => {
+        const setSession = ()=>{
+            req.session.teacher = teacher;
+            req.session.isLogin = true;
+        }
+
+        await setSession();
+
             if(teacher.role === 'admin'){
                 res.redirect('/admin')
             } else if (teacher.role === 'teacher'){
                 res.redirect('/teacher')
-            }            
-        }, 1500);
+            }
 
     } catch (err) {
         next(err);

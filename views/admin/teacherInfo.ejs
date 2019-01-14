@@ -1,0 +1,36 @@
+<%- include('../includes/html-head.ejs') %>
+    <%- include('../includes/admin-header.ejs') %><br>
+
+    <div class="container">
+        <br>
+        <h1 class="heading-title"> Teachers Info </h1>
+        <hr>
+        <div class="teacher-info">
+            <% teachers.forEach(teacher=>{ %>
+            <div class="teacher-info__card">
+                <a href="#" class="wrap-link"  
+                    data-toggle="tooltip"
+                     data-placement="top" 
+                     data-html="true"
+                     title="<h5>Click to edit this teacher info</h5>">
+                    <img src="<%= teacher.avatar %>" 
+                        alt="teacher.name"
+                        class="teacher-info__avatar">
+                    <h3 class="teacher-info__name"><%= teacher.name %></h3>
+                    <p class="teacher-info__story"><%= teacher.story.split(' ').slice(0,15).join(' ') %>...</p>
+                </a>
+            </div>
+            <% }) %>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function(){
+            $(function () {
+                $('[data-toggle="tooltip"]').tooltip();
+            })
+        })
+    </script>
+
+
+<%- include('../includes/footer.ejs') %>

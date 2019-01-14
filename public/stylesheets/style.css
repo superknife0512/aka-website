@@ -32,6 +32,12 @@ input.file-style {
   margin: 1rem 2rem;
   font-size: 1.5rem; }
 
+.wrap-link:link, .wrap-link:visited {
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center; }
+
 @keyframes fadeIn {
   0% {
     opacity: .2; }
@@ -182,3 +188,34 @@ input.file-style {
 
 .navbar-nav a {
   margin-right: 2rem; }
+
+.teacher-info {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 28rem));
+  grid-column-gap: 2rem;
+  grid-row-gap: 3rem;
+  align-items: center;
+  justify-content: center;
+  margin-top: 3rem; }
+  .teacher-info__card {
+    display: flex;
+    flex-direction: column;
+    align-items: center; }
+  .teacher-info__avatar {
+    height: 20rem;
+    width: 20rem;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 50%; }
+  .teacher-info__name {
+    color: #42b0ee;
+    font-family: "Faustina", serif;
+    font-weight: 500;
+    font-size: 2rem;
+    text-transform: uppercase;
+    margin-top: 1rem; }
+    .teacher-info__name:hover {
+      color: #f5546e; }
+  .teacher-info__story {
+    color: #333;
+    font-size: 1.5rem; }

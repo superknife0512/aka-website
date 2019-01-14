@@ -21,3 +21,11 @@ input.file-style{
     margin: 1rem 2rem;
     font-size: 1.5rem;
 }
+.wrap-link{
+    &:link, &:visited{
+        text-decoration: none;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
