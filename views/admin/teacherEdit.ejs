@@ -1,0 +1,67 @@
+<%- include('../includes/html-head.ejs') %>
+    <%- include('../includes/admin-header.ejs') %><br>
+
+    <div class="container" id="teacher">
+        <br>
+        <h1 class="heading-title"> Edit <%= teacher.name %> information </h1>
+        <hr>
+        <div class="create__form">
+            <form class="signup__form create__form--width" 
+                    action="/admin/teachers-info/edit" 
+                    method="POST"
+                    enctype="multipart/form-data">
+
+                <div class="form-group">
+                    <label for="eventName">Teacher's name</label>
+                    <input type="text" 
+                            class="form-control" 
+                            name="name"
+                            value="<%= teacher.name %>">
+                </div>
+
+                <div class="form-group">
+                    <label for="eventName">Teacher's specialty</label>
+                    <input type="text" 
+                            class="form-control" 
+                            name="specialty"
+                            value="<%= teacher.specialty %>">
+                </div>
+
+                <div class="form-group">
+                    <label for="eventName">Teacher's story</label>
+                    <input type="text" 
+                            class="form-control" 
+                            name="story"
+                            value="<%= teacher.story %>">
+                </div>
+
+                <div class="form-group">
+                    <label for="eventName">Teacher's videos link (from facebook)</label>
+                    <textarea name="videosLink" rows="4" class="form-control"></textarea>
+                    
+                    <small>Mỗi link phân cách bởi dấu ';;' - không nhiều hơn 2 đường link</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="eventName">Teacher's avatar</label>
+                    <input type="file" 
+                            class="form-control file-style" 
+                            name="avatar">
+                </div>
+
+                <input type="hidden" name="teacherId" value="<%= teacher._id %>">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+    </div>
+
+    <script>
+        $(document).ready(function(){
+            $(function () {
+                $('[data-toggle="tooltip"]').tooltip();
+            })
+        })
+
+    </script>
+
+
+<%- include('../includes/footer.ejs') %>

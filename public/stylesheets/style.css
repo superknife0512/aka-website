@@ -202,8 +202,8 @@ input.file-style {
     flex-direction: column;
     align-items: center; }
   .teacher-info__avatar {
-    height: 20rem;
-    width: 20rem;
+    height: 18rem;
+    width: 18rem;
     object-fit: cover;
     object-position: center;
     border-radius: 50%; }

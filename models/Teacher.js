@@ -22,6 +22,15 @@ const teacherSchema = new mongoose.Schema({
         type: String,
     },
 
+    teacherVideo:[{
+        type: String,
+    }],
+    
+    avatar:{
+        type: String,
+        default: 'public/teacherData/avatar/default.png',
+    },
+    
     role:{
         type: String,
     },
@@ -30,14 +39,6 @@ const teacherSchema = new mongoose.Schema({
         type: String
     },
 
-    teacherVideo:[{
-        type: String,
-    }],
-
-    avatar:{
-        type: String,
-        default: 'public/teacherData/avatar/default.png',
-    },
 
     schedule:{
         't2.1': String,

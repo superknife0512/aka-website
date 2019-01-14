@@ -4,6 +4,8 @@ const {protectAuth} =require('../middlewares/protectAuth');
 const {protectForAdmin} =require('../middlewares/protectRole');
 const multer = require('multer');
 
+const {uploadImg} = require('../middlewares/uploadAvatar');
+
 const imagesStorage = multer.diskStorage({
     destination: function(req,file,cb){
         cb(null, 'public/eventImages');
@@ -33,5 +35,7 @@ router.get('/event', protectAuth, protectForAdmin, adminController.getCreateEven
 router.post('/event', protectAuth, protectForAdmin, uploadFiles, adminController.postCreateEvent);
 
 router.get('/teachers-info', protectAuth, protectForAdmin, adminController.getTeachersInfo);
+router.post('/teacher-info/edit', protectAuth, protectForAdmin, uploadImg, adminController.postTeacherEdit);
+router.get('/teacher-info/edit/:teacherId',protectAuth, protectForAdmin, adminController.getTeacherEdit );
 
 module.exports = router;

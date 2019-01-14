@@ -1,14 +1,14 @@
 <%- include('../includes/html-head.ejs') %>
     <%- include('../includes/admin-header.ejs') %><br>
 
-    <div class="container">
+    <div class="container" id="teacher">
         <br>
         <h1 class="heading-title"> Teachers Info </h1>
         <hr>
         <div class="teacher-info">
             <% teachers.forEach(teacher=>{ %>
             <div class="teacher-info__card">
-                <a href="#" class="wrap-link"  
+                <a href="/admin/teacher-info/edit/<%= teacher._id %>" class="wrap-link"  
                     data-toggle="tooltip"
                      data-placement="top" 
                      data-html="true"
@@ -30,6 +30,7 @@
                 $('[data-toggle="tooltip"]').tooltip();
             })
         })
+
     </script>
 
 

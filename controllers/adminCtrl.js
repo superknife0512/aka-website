@@ -136,3 +136,19 @@ exports.getTeachersInfo =async (req, res, next)=>{
         next(err)
     }
 }
+
+exports.getTeacherEdit =async (req,res,next)=>{
+    try{
+        const teacher =await Teacher.findById(req.params.teacherId);
+        
+        res.render('admin/teacherEdit', {
+            title: 'Edit teacher information',
+            path: '/admin/teachers-info',
+            teacher
+        })
+
+    } catch (err) {
+        next(err);
+    }
+}
+
