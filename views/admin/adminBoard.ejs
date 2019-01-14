@@ -1,6 +1,18 @@
 <%- include('../includes/html-head.ejs') %>
-
-    <h1><%= title %></h1>
-    <h2>this is admin board</h2>
+    <%- include('../includes/admin-header.ejs') %><br>
+    <hr>
+    <br>
+    <div class="container">
+        <div class="admin__heading">
+            <h1 class="heading-title">Admin board </h1>
+            <div class="admin__form">
+                <input type="text" 
+                        name="search" 
+                        class="admin__search"
+                        placeholder="Enter your search here">
+                <i class="fas fa-search admin__icon"></i>            
+            </div>
+        </div>
+    </div>
 
 <%- include('../includes/footer.ejs') %>

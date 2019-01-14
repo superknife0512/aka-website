@@ -65,6 +65,53 @@ input.file-style {
 .form-group {
   margin-bottom: 1.9rem; }
 
+.admin__heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; }
+
+.admin__search {
+  border: none;
+  background-color: #ececec;
+  border-radius: 50rem;
+  padding: .2rem 3rem;
+  width: 33rem;
+  height: 50%;
+  transition: all .3s; }
+  .admin__search:focus {
+    outline: none;
+    border: solid 1px #42b0ee; }
+
+.admin__form {
+  position: relative;
+  width: 80%;
+  height: 8.5rem;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center; }
+
+.admin__icon {
+  font-size: 2rem;
+  position: absolute;
+  top: 3.4rem;
+  right: 2rem;
+  cursor: pointer;
+  transition: all .3s; }
+  .admin__icon:hover {
+    color: #f5546e; }
+
+.create__form {
+  display: flex;
+  justify-content: center; }
+  .create__form--width {
+    width: 70%;
+    margin-top: 3rem; }
+
+.create__group {
+  display: flex; }
+  .create__group input {
+    margin-right: 3rem; }
+
 .heading-title {
   color: #f5546e;
   font-size: 2.5rem;
@@ -111,3 +158,27 @@ input.file-style {
     height: 100vh;
     width: 100vw;
     z-index: 900; }
+
+.navbar__style {
+  padding: 2rem 2rem; }
+
+.navbar__brand {
+  font-size: 1.7rem;
+  text-transform: uppercase;
+  font-family: "Faustina", serif;
+  margin-right: 2rem; }
+
+.navbar__item:link, .navbar:visited {
+  padding: .5rem 1rem;
+  border: solid 1px white;
+  border-radius: 3px; }
+  .navbar__item:link:hover, .navbar:visited:hover {
+    background-color: white;
+    color: black; }
+
+.navbar__wrapper {
+  display: flex;
+  justify-content: space-between; }
+
+.navbar-nav a {
+  margin-right: 2rem; }

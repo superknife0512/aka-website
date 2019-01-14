@@ -1,0 +1,29 @@
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar__style">
+        <div class="container">
+            <a class="navbar-brand navbar__brand" href="/admin">Admin board</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse navbar__wrapper" id="navbarNavAltMarkup" >
+                <div class="navbar-nav">
+                    <a class="nav-item nav-link <%= path === '/admin/course' ? 'active' : '' %>" 
+                        href="/admin/course">
+                            Tạo khóa học 
+                        <span class="sr-only">(current)</span>
+                    </a>
+                    <a class="nav-item nav-link <%= path === '/admin/event' ? 'active' : '' %>" 
+                        href="/admin/event">
+                            Tạo sự kiện
+                    </a>
+                    <a class="nav-item nav-link <%= path === '/admin/teachers-info' ? 'active' : '' %>" 
+                        href="/admin/teachers-info">
+                        Thông tin giảng viên
+                    </a>  
+                </div>
+                <form action="/teacher/logout" method="POST">
+                    <button href="#" class="btn btn-warning">Log out</button>               
+                </form>
+            </div>
+        </div>
+    </nav>

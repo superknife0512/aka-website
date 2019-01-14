@@ -1,0 +1,61 @@
+.admin{
+    &__heading{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    &__search{
+        border: none;
+        background-color: #ececec;
+        border-radius: 50rem;
+        padding: .2rem 3rem;
+        width: 33rem;
+        height: 50%;
+        transition: all .3s;
+
+        &:focus{
+            outline: none;
+            border: solid 1px $color-primary;
+        }
+    }
+
+    &__form{
+        position: relative;
+        width: 80%;
+        height: 8.5rem;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+    }
+
+    &__icon{
+        font-size: 2rem;
+        position: absolute;
+        top: 3.4rem;
+        right: 2rem;
+        cursor: pointer;
+        transition: all .3s;
+
+        &:hover{
+            color: $color-secondary;
+        }
+    }
+}
+.create{
+
+    &__form{
+        display: flex;
+        justify-content: center;
+
+        &--width{
+            width: 70%;
+            margin-top: 3rem;
+        }
+    }
+    &__group{
+        display: flex;
+        input{
+            margin-right: 3rem;
+        }
+    }
+}

@@ -33,6 +33,7 @@ router.post('/signup', uploadImg, authController.postSignup);
 router.get('/login', authController.getLogin);
 router.post('/login', authController.postLogin);
 router.get('/signup', authController.getSignup);
+router.post('/logout', authController.postLogout);
 
 //for reset part
 router.get('/reset-pass', authController.getResetPass);

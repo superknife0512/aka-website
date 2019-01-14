@@ -16,7 +16,7 @@ const defautEmail = 'Superknife0512@gmail.com'
 
 const createErr = (msg, statusCode)=>{
     const err = new Error(msg);
-    err.statusCode(statusCode);
+    err.statusCode = statusCode;
     throw err
 }
 
@@ -49,11 +49,13 @@ exports.postLogin = async (req,res,next)=>{
         }
         req.session.teacher = teacher;
         req.session.isLogin = true;
-        if(teacher.role === 'admin'){
-            res.redirect('/admin')
-        } else if (teacher.role === 'teacher'){
-            res.redirect('/teacher')
-        }
+        await setTimeout(() => {
+            if(teacher.role === 'admin'){
+                res.redirect('/admin')
+            } else if (teacher.role === 'teacher'){
+                res.redirect('/teacher')
+            }            
+        }, 1500);
 
     } catch (err) {
         next(err);
@@ -120,6 +122,7 @@ exports.postSignup =async (req,res,next)=>{
         } else {
             return createErr('Your code is invalid, please try another!')
         }
+        
         let avatarUrl;
         if(req.file){
             avatarUrl = req.file.path;
@@ -325,4 +328,9 @@ exports.postResetWithToken = async (req,res,next)=>{
     } catch (err) {
         next(err)
     }
+}
+
+exports.postLogout =async (req, res, next)=>{
+    await req.session.destroy();
+    res.redirect('/teacher/login');
 }

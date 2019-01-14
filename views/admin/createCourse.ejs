@@ -1,0 +1,105 @@
+<%- include('../includes/html-head.ejs') %>
+    <%- include('../includes/admin-header.ejs') %><br>
+
+    <hr>
+    <br>
+    <div class="container">
+        <h1 class="heading-title">Create a course</h1>
+        <% if(error) { %>
+            <h5 class="alert alert-danger"><%= error %></h5>
+        <% } %>
+        <hr>
+        <div class="create__form">
+            <form class="signup__form create__form--width" 
+                    action="/admin/course" 
+                    method="POST">
+
+                <div class="form-group">
+                    <label for="title">Course title</label>
+                    <input type="text" 
+                            class="form-control" 
+                            name="title"
+                            placeholder="Enter title">
+                    <small class="form-text text-muted">Email của bạn sẽ được dùng làm tên đăng nhập</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="shortDes">Short description about course</label>
+                    <textarea type="text" 
+                            class="form-control" 
+                            name="shortDes"
+                            placeholder="Enter description"></textarea>
+                    <small class="form-text text-muted">Nên trong khoảng từ 200 từ đến 500 từ</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="title">Course period</label>
+                    <input type="text" 
+                            class="form-control" 
+                            name="period"
+                            placeholder="Enter period">
+                    <small class="form-text text-muted">Thời gian học kéo dài bao lâu (6 tháng, mấy học kì,..)</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="shortDes">Requirements about course</label>
+                    <textarea type="text" 
+                            class="form-control" 
+                            name="requirements"
+                            placeholder="Enter description"
+                            rows="5"></textarea>
+                    <small class="form-text text-muted">Những yêu cầu cho học viên trước khi đến khóa học này, mỗi yêu cầu cách nhau bởi dấu ';;'</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="shortDes">Course goal</label>
+                    <textarea type="text" 
+                            class="form-control" 
+                            name="courseGoals"
+                            placeholder="Enter goals"
+                            rows="5"></textarea>
+                    <small class="form-text text-muted">Học sinh có thể đạt được gì sau khóa học này</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="title">Course schedule</label>
+                    <input type="text" 
+                            class="form-control" 
+                            name="learningSchedule"
+                            placeholder="Enter schedule">
+                    <small class="form-text text-muted">Học từ thứ mấy đến thứ mấy, khoảng sáng hay chiều,...</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="price">Enter price</label>
+                    <div class="create__group">
+                        <input type="text" 
+                            class="form-control" 
+                            name="oldPrice"
+                            placeholder="Enter old price">
+
+                        <input type="text" 
+                            class="form-control" 
+                            name="price"
+                            placeholder="Enter price">
+                    </div>                        
+                </div>
+
+                <div class="form-group">
+                    <label for="title">Who teach this course</label>
+                    <select name="teacherName" class="form-control">
+
+                        <% teachers.forEach(teacher=>{ %>
+                            <option value="<%= teacher.name %>"><%= teacher.name %></option>
+                        <% }) %>
+
+                    </select>
+                    <small class="form-text text-muted">Chọn tên giáo viên dạy khóa học này</small>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+    <br><br>
+<%- include('../includes/footer.ejs') %>

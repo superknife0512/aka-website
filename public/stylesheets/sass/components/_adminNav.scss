@@ -1,0 +1,32 @@
+
+.navbar{
+
+    &__style{
+        padding: 2rem 2rem;
+    }
+    &__brand{
+        font-size: 1.7rem;
+        text-transform: uppercase;
+        font-family: $font-title;
+        margin-right: 2rem;
+    }
+    &__item:link, &:visited{
+        padding: .5rem 1rem;
+        border: solid 1px white;
+        border-radius: 3px;
+        &:hover{
+            background-color: white;
+            color: black
+        }
+    }
+    &__wrapper{
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
+.navbar-nav{
+    a{
+        margin-right: 2rem;
+    }
+}
