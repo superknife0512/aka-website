@@ -31,6 +31,7 @@ const courseSchema =new mongoose.Schema({
         required:true,
         type: String
     },
+    courseImg: String,
     requirements:[{type: String}],
     courseGoals:[{type: String}],
     teacher:{

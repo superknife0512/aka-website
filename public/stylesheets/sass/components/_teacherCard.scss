@@ -3,7 +3,7 @@
     grid-template-columns: repeat(auto-fit, minmax(20rem, 28rem));
     grid-column-gap: 2rem;
     grid-row-gap: 3rem;
-    align-items: center;
+    align-items: start;
     justify-content: center;
     margin-top: 3rem;
 
@@ -38,7 +38,7 @@
     &__icon{
         font-size: 2rem;
         color: #f5546e;
-        padding: 10px 13px;
+        padding: .5rem .9rem;
         background-color: white;
         border-radius: 50%;
         display: flex;

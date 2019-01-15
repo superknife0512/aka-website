@@ -8,6 +8,27 @@
     margin-bottom: 1.5rem;
 }
 
+
+.medium-title{
+    color: $color-primary;
+    font-size: 1.8rem;
+    text-transform: capitalize;
+    font-family: $font-title;
+    font-weight: 400;
+    position: relative;
+    margin-top: 3rem;
+
+    &::after{
+        content: "";
+        height: 1.3rem;
+        width: 5rem;
+        background-color: #42b0ee;
+        position: absolute;
+        bottom: -2.5rem;
+        left: 0;
+    }
+}
+
 .warning-title{
     color: $color-secondary !important;
     font-size: 1.7rem;

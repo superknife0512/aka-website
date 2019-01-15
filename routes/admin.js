@@ -15,6 +15,15 @@ const imagesStorage = multer.diskStorage({
     }
 })
 
+const courseImgStore = multer.diskStorage({
+    destination: function(req,file,cb){
+        cb(null, 'public/courseImgs');
+    },
+    filename: function(req, file, cb){
+        cb(null, Date.now() + '-' + file.originalname);
+    }
+})
+
 const fileFilter = (req,file,cb)=>{
     if(file.mimetype === 'image/jpg' || file.mimetype === 'image/png' || file.mimetype === 'image/jpeg'){
         cb(null, true)
@@ -25,13 +34,17 @@ const fileFilter = (req,file,cb)=>{
 }
 
 const uploadFiles = multer({storage: imagesStorage, fileFilter: fileFilter}).array('eventImgs', 5);
+const uploadCourseImg = multer({storage: courseImgStore, fileFilter: fileFilter}).single('courseImg');
 
 const adminController = require('../controllers/adminCtrl');
 
 router.get('/', protectAuth, protectForAdmin, adminController.getAdminBoard);
+
 router.post('/delete', protectAuth, protectForAdmin, adminController.postDeleteTeacher);
+
 router.get('/course', protectAuth, protectForAdmin, adminController.getCreateCourse);
-router.post('/course', protectAuth, protectForAdmin, adminController.postCreateCourse);
+router.post('/course', protectAuth, protectForAdmin, uploadCourseImg, adminController.postCreateCourse);
+
 router.get('/event', protectAuth, protectForAdmin, adminController.getCreateEvent);
 router.post('/event', protectAuth, protectForAdmin, uploadFiles, adminController.postCreateEvent);
 

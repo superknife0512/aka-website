@@ -59,3 +59,22 @@
         }
     }
 }
+
+.course-info{
+    margin-bottom: 5rem;
+
+    &__wrap{
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(20rem, 30rem));
+        grid-column-gap: 3.5rem;
+        grid-row-gap: 6rem;
+        justify-content: center;
+        margin-top: 8rem;
+    }
+    &__card-img{
+        height: 21rem;
+        width: 100%;
+        object-fit: cover;
+        object-position: center;
+    }
+}

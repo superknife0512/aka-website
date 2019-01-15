@@ -10,11 +10,21 @@ const createErr = (msg, statusCode)=>{
     throw err
 }
 
-exports.getAdminBoard = (req,res,next)=>{
-    res.render('admin/adminBoard',{
-        title: 'admin board',
-        path: '/'
-    })
+exports.getAdminBoard =async (req,res,next)=>{
+    try{
+        const teachers = await Teacher.find({role: 'teacher'});
+        const courses = await Course.find();
+
+        res.render('admin/adminBoard',{
+            title: 'admin board',
+            path: '/',
+            courses,
+        })
+
+    } catch (err) {
+        next(err)
+    }
+    
 }
 
 exports.getCreateCourse =async (req, res, next)=>{
@@ -41,6 +51,7 @@ exports.postCreateCourse = async (req,res,next)=>{
     const requirements = req.body.requirements;
     const courseGoals = req.body.courseGoals;
     const teacherName = req.body.teacherName;
+    let courseImgPath;
     // refactor code 
     const renderCreateCourse = (res, error)=>{
         res.render('admin/createCourse',{
@@ -56,6 +67,13 @@ exports.postCreateCourse = async (req,res,next)=>{
         if(!title || !shortDes || !price || !period || !requirements || !courseGoals || !teacherName){
             renderCreateCourse(res, 'Your should input all the fields !!');
         }
+
+        if(req.file){
+            courseImgPath = req.file.path.replace(/\\/g, '/');
+        } else {
+            courseImgPath = 'public/courseImgs/default.jpeg';
+        }
+        
 
         const requirementsArr = requirements.split(';;');
         const courseGoalsArr = courseGoals.split(';;');
@@ -74,6 +92,7 @@ exports.postCreateCourse = async (req,res,next)=>{
             requirements: requirementsArr,
             courseGoals: courseGoalsArr,
             teacher: teacherId,
+            courseImg: courseImgPath,
         })
 
         await course.save();

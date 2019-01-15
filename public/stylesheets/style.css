@@ -38,7 +38,9 @@ input.file-style {
   text-decoration: none;
   display: flex;
   flex-direction: column;
-  align-items: center; }
+  align-items: center;
+  width: 75%;
+  text-align: center; }
 
 .activePopup {
   display: flex; }
@@ -126,6 +128,21 @@ form {
   .create__group input {
     margin-right: 3rem; }
 
+.course-info {
+  margin-bottom: 5rem; }
+  .course-info__wrap {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(20rem, 30rem));
+    grid-column-gap: 3.5rem;
+    grid-row-gap: 6rem;
+    justify-content: center;
+    margin-top: 8rem; }
+  .course-info__card-img {
+    height: 21rem;
+    width: 100%;
+    object-fit: cover;
+    object-position: center; }
+
 .heading-title {
   color: #f5546e;
   font-size: 2.5rem;
@@ -133,6 +150,23 @@ form {
   text-transform: uppercase;
   font-weight: 600;
   margin-bottom: 1.5rem; }
+
+.medium-title {
+  color: #42b0ee;
+  font-size: 1.8rem;
+  text-transform: capitalize;
+  font-family: "Faustina", serif;
+  font-weight: 400;
+  position: relative;
+  margin-top: 3rem; }
+  .medium-title::after {
+    content: "";
+    height: 1.3rem;
+    width: 5rem;
+    background-color: #42b0ee;
+    position: absolute;
+    bottom: -2.5rem;
+    left: 0; }
 
 .warning-title {
   color: #f5546e !important;
@@ -214,7 +248,7 @@ form {
   grid-template-columns: repeat(auto-fit, minmax(20rem, 28rem));
   grid-column-gap: 2rem;
   grid-row-gap: 3rem;
-  align-items: center;
+  align-items: start;
   justify-content: center;
   margin-top: 3rem; }
   .teacher-info__card {
@@ -243,7 +277,7 @@ form {
   .teacher-info__icon {
     font-size: 2rem;
     color: #f5546e;
-    padding: 10px 13px;
+    padding: .5rem .9rem;
     background-color: white;
     border-radius: 50%;
     display: flex;

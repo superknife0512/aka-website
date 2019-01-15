@@ -13,6 +13,28 @@
                 <i class="fas fa-search admin__icon"></i>            
             </div>
         </div>
+        <hr>
+        <section class="course-info">
+            <h2 class="medium-title">Courses information</h2>
+            <div class="course-info__wrap">
+
+                <% courses.forEach(course=>{ %>
+
+                    <div class="card">
+                        <img src="<%= course.courseImg %>"
+                             class="card-img-top course-info__card-img" 
+                             alt="<%= course.title %>">
+                        <div class="card-body">
+                            <h2 class="card-title"><%= course.title %></h2>
+                            <p class="card-text"><%= course.shortDes.split(' ').slice(0,14).join(' ') %> ...</p>
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    </div>
+
+                <% }) %>
+
+            </div>
+        </section>
     </div>
 
 <%- include('../includes/footer.ejs') %>
