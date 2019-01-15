@@ -29,6 +29,7 @@ const uploadFiles = multer({storage: imagesStorage, fileFilter: fileFilter}).arr
 const adminController = require('../controllers/adminCtrl');
 
 router.get('/', protectAuth, protectForAdmin, adminController.getAdminBoard);
+router.post('/delete', protectAuth, protectForAdmin, adminController.postDeleteTeacher);
 router.get('/course', protectAuth, protectForAdmin, adminController.getCreateCourse);
 router.post('/course', protectAuth, protectForAdmin, adminController.postCreateCourse);
 router.get('/event', protectAuth, protectForAdmin, adminController.getCreateEvent);

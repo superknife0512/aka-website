@@ -47,12 +47,14 @@ exports.postLogin = async (req,res,next)=>{
                 error: 'Wrong password, please try again'
             })
         }
-        const setSession = ()=>{
             req.session.teacher = teacher;
             req.session.isLogin = true;
-        }
 
-        await setSession();
+            await req.session.save((err)=>{
+                if(err){
+                    throw err;
+                }
+            });
 
             if(teacher.role === 'admin'){
                 res.redirect('/admin')

@@ -19,6 +19,8 @@ input.file-style {
 
 .btn {
   font-size: 1.5rem; }
+  .btn:not(:last-child) {
+    margin-right: 1.5rem; }
 
 .background-gray {
   background-color: #eff5f4;
@@ -37,6 +39,12 @@ input.file-style {
   display: flex;
   flex-direction: column;
   align-items: center; }
+
+.activePopup {
+  display: flex; }
+
+form {
+  margin-right: 1.5rem; }
 
 @keyframes fadeIn {
   0% {
@@ -131,7 +139,7 @@ input.file-style {
   font-size: 1.7rem;
   font-weight: 600; }
 
-.popup {
+.popup, .info-popup {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -145,25 +153,37 @@ input.file-style {
   transform: translate(-50%, -50%);
   z-index: 1000;
   transition: all .3s; }
-  .popup__heading {
-    font-family: "Faustina", serif;
-    color: #42b0ee;
-    font-size: 1.9rem;
-    text-transform: uppercase;
-    padding-bottom: 1rem; }
-  .popup__icon {
-    position: absolute;
-    top: 2rem;
-    right: 2rem;
-    font-size: 1.5rem;
-    color: #f5546e;
-    cursor: pointer; }
-  .popup__wrapper {
-    position: fixed;
-    background-color: rgba(0, 0, 0, 0.2);
-    height: 100vh;
-    width: 100vw;
-    z-index: 900; }
+
+.popup__heading, .info-popup__heading {
+  font-family: "Faustina", serif;
+  color: #42b0ee;
+  font-size: 1.9rem;
+  text-transform: uppercase;
+  padding-bottom: 1rem; }
+
+.popup__wrapper, .info-popup__wrapper {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.2);
+  height: 100vh;
+  width: 100vw;
+  z-index: 900;
+  top: 0;
+  right: 0; }
+
+.popup__icon {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  font-size: 1.5rem;
+  color: #f5546e;
+  cursor: pointer; }
+
+.info-popup {
+  display: none; }
+  .info-popup__content {
+    margin-bottom: 1.5rem; }
+  .info-popup__wrapper {
+    display: none; }
 
 .navbar__style {
   padding: 2rem 2rem; }
@@ -200,7 +220,8 @@ input.file-style {
   .teacher-info__card {
     display: flex;
     flex-direction: column;
-    align-items: center; }
+    align-items: center;
+    position: relative; }
   .teacher-info__avatar {
     height: 18rem;
     width: 18rem;
@@ -219,3 +240,23 @@ input.file-style {
   .teacher-info__story {
     color: #333;
     font-size: 1.5rem; }
+  .teacher-info__icon {
+    font-size: 2rem;
+    color: #f5546e;
+    padding: 10px 13px;
+    background-color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 6rem;
+    cursor: pointer;
+    box-shadow: 0 0.5rem 0.5rem rgba(0, 0, 0, 0.2);
+    transform: translateY(1.2rem);
+    opacity: 0;
+    transition: all .4s; }
+  .teacher-info__card:hover .teacher-info__icon {
+    opacity: 1;
+    transform: translateY(0); }

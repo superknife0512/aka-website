@@ -1,6 +1,7 @@
 const Teacher = require('../models/Teacher');
 const Course = require('../models/Course');
 const Event = require('../models/Event');
+const {clearOldFile}=require('../middlewares/deleteJunk')
 const mongoose = require('mongoose');
 
 const createErr = (msg, statusCode)=>{
@@ -149,6 +150,51 @@ exports.getTeacherEdit =async (req,res,next)=>{
 
     } catch (err) {
         next(err);
+    }
+}
+
+exports.postTeacherEdit = async (req,res,next)=>{
+    try{
+        const name = req.body.name;
+        const specialty = req.body.specialty;
+        const story = req.body.story;
+        const videoLinks = req.body.videoLinks;
+        let avatarUrl = undefined;
+
+        const teacher =await Teacher.findById(req.body.teacherId);
+        console.log(name,specialty, videoLinks);
+
+        if(!req.file){
+            console.log('No file has been sent here');           
+        } else {
+            if(teacher.avatar !== 'public/teacherData/avatar/default.png'){
+                await clearOldFile(teacher.avatar);
+            }
+            avatarUrl = req.file.path.replace(/\\/g, '/');
+            teacher.avatar = avatarUrl;
+        }
+
+        teacher.name = name;
+        teacher.specialty = specialty;
+        teacher.story = story;
+        teacher.teacherVideo = videoLinks.split(';;');
+
+        await teacher.save();
+        res.redirect('/admin/teachers-info');
+    } catch (err) {
+        next(err);
+    }
+}
+
+exports.postDeleteTeacher = async (req,res,next)=>{
+    try{
+        const teacherId = req.body.teacherId;
+        await Teacher.findByIdAndRemove(teacherId);
+        console.log('Delete a teacher');
+        res.redirect('/admin/teachers-info');
+
+    } catch (err) {
+        next(err)
     }
 }
 

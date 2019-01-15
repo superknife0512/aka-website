@@ -12,16 +12,32 @@
                     data-toggle="tooltip"
                      data-placement="top" 
                      data-html="true"
-                     title="<h5>Click to edit this teacher info</h5>">
+                     title="<p>Click to edit this teacher info</p>">
                     <img src="<%= teacher.avatar %>" 
                         alt="teacher.name"
                         class="teacher-info__avatar">
                     <h3 class="teacher-info__name"><%= teacher.name %></h3>
                     <p class="teacher-info__story"><%= teacher.story.split(' ').slice(0,15).join(' ') %>...</p>
                 </a>
+                <i class="fas fa-times teacher-info__icon"></i>
+                <!-- popuo display here -->
+                <div class="info-popup__wrapper">
+                    <div class="info-popup">
+                            <h1 class="info-popup__heading">Are your sure?</h1>
+                            <p class="info-popup__content">Click delete if you want to delete <%= teacher.name %> forever!</p>
+                            <div class="d-flex justify-content-center btn-wrap">
+                                <form action="/admin/delete/" method="POST">
+                                    <input type="hidden" name="teacherId" value="<%= teacher._id %>">
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                </form>
+                                <button class="btn btn-info btn__cancel" >Cancel</button>
+                            </div>
+                    </div>
+                </div>
             </div>
             <% }) %>
         </div>
+       
     </div>
 
     <script>
@@ -29,9 +45,19 @@
             $(function () {
                 $('[data-toggle="tooltip"]').tooltip();
             })
+
+            $('.teacher-info__icon').click(function(){
+                $(this).next('.info-popup__wrapper').fadeIn(500);
+                $(this).next('.info-popup__wrapper').find('.info-popup').fadeIn(500);
+                $(this).next('.info-popup__wrapper').find('.info-popup').css('display', 'flex');
+            })
+
+            $('.btn__cancel').click(function(){
+                $(this).parents('.info-popup').fadeOut(500);
+                $(this).parents('.info-popup__wrapper').fadeOut(500);
+            })
         })
 
     </script>
-
 
 <%- include('../includes/footer.ejs') %>

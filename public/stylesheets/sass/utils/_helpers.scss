@@ -5,6 +5,9 @@ input.file-style{
 
 .btn{
     font-size: 1.5rem;
+    &:not(:last-child){
+        margin-right: 1.5rem;
+    }
 }
 
 .background-gray{
@@ -28,4 +31,12 @@ input.file-style{
         flex-direction: column;
         align-items: center;
     }
+}
+
+.activePopup{
+    display: flex;
+}
+
+form{
+    margin-right: 1.5rem;
 }
