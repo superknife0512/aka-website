@@ -53,7 +53,7 @@ exports.getCreateCourse =async (req, res, next)=>{
 exports.postCreateCourse = async (req,res,next)=>{
     const title = req.body.title;
     const shortDes = req.body.shortDes;
-    const price = req.body.shortDes;
+    const price = req.body.price;
     const oldPrice = req.body.oldPrice;
     const period = req.body.period;
     const learningSchedule = req.body.learningSchedule;
