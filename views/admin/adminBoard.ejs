@@ -27,7 +27,13 @@
                         <div class="card-body">
                             <h2 class="card-title"><%= course.title %></h2>
                             <p class="card-text"><%= course.shortDes.split(' ').slice(0,14).join(' ') %> ...</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                            <div class="d-flex">
+                                <a href="/admin/course/edit?courseId=<%= course._id %>" class="btn btn-warning mr-8">Add information</a>
+                                <form action="/admin/course/delete" method="POST">
+                                    <input type="hidden" value="<%= course._id %>" name="courseId">
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
 

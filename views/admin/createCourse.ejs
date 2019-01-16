@@ -3,24 +3,101 @@
 
     <hr>
     <br>
-    <div class="container">
-        <h1 class="heading-title">Create a course</h1>
+     <!-- popup section -->
+     <% if(editMode) { %>
+        <div class="info-popup__wrapper">
+           <div class="info-popup">
+                       <h1 class="info-popup__heading">Add student testimonial</h1>
+                       <p class="info-popup__content">we should display maximum 3 student testimonials.</p>
+                       <form action="/admin/course/add-testimonial" 
+                               method="POST"
+                               class="testimonial__form">
+                           <div class="form-group">
+                               <input type="text" 
+                                       placeholder="Enter student facebook's link" 
+                                       class="form-control"
+                                       name="facebookLink">
+                           </div>
+   
+                           <div class="form-group">
+                               <input type="text" 
+                                       placeholder="Enter student 's name" 
+                                       class="form-control"
+                                       name="name">
+                           </div>
+   
+                           <div class="form-group">
+                               <textarea type="text" 
+                                       placeholder="Enter student description" 
+                                       class="form-control"
+                                       name="desc"
+                                       rows="4"></textarea>
+                           </div>
+                           <i class="fas fa-times popup__icon" id="popup__icon"></i>
+                           <input type="hidden" name="courseId" value="<%= course._id %>">
+                           <button type="submit" class="btn btn-success">Add testimonial</button>
+                       </form>
+                       <hr>
+                       <div class="quote__wrapper">
+                           <% course.testimonials.forEach(testi=>{ %>
+                           <blockquote class="quote__card">
+                               <p class="quote__card-content">
+                                   "<%=  testi.desc.split(' ').slice(0,15).join(' ') %>..."
+                               </p>
+                               <a href="<%= testi.facebookLink %>" 
+                                   class="quote__card-link"
+                                   target="blank">-<%= testi.name %>-</a>
+                                <i class="fas fa-times popup__icon deleteTesti"></i>
+                                 <input type="hidden" name="courseId" value="<%= course._id %>">
+                                <input type="hidden" class="testiId" name="testiId" value="<%= testi._id %>">
+                           </blockquote>
+                           <% }) %>
+                    </div>
+           </div>
+       </div>
+       <!-- popup section -->
+    <% } %>
+
+    <div class="container">      
+        <div class="heading-wrap">
+            <h1 class="heading-title"><%= editMode ? 'Create a course ' : 'Edit this course' %></h1>
+            <% if(editMode) { %>
+                <button class="btn btn-primary" id="activePopup">Add testimonials</button>
+            <% } %>
+        </div>
         <% if(error) { %>
             <h5 class="alert alert-danger"><%= error %></h5>
         <% } %>
         <hr>
+        
+        <!-- form section -->
         <div class="create__form">
             <form class="signup__form create__form--width" 
-                    action="/admin/course" 
+                    action="<%= editMode? '/admin/course/edit' : '/admin/course'  %>" 
                     method="POST"
                     enctype="multipart/form-data">
+
+                <% if(editMode) { %>
+
+                    <div class="form-group">
+                        <label for="videoUrl" style="color: #ff1c3a">Add video url</label>
+                        <input type="text" 
+                                class="form-control" 
+                                name="videoUrl"
+                                placeholder="Enter video link"
+                                value="<%= editMode? course.videoUrl : '' %>">
+                        <small class="form-text text-muted">Video should be get from facebook</small>
+                    </div>
+    
+                <% } %>
 
                 <div class="form-group">
                     <label for="title">Course title</label>
                     <input type="text" 
                             class="form-control" 
                             name="title"
-                            placeholder="Enter title">
+                            placeholder="Enter title"
+                            value="<%= editMode? course.title : '' %>">
                     <small class="form-text text-muted">Email của bạn sẽ được dùng làm tên đăng nhập</small>
                 </div>
 
@@ -36,7 +113,7 @@
                     <textarea type="text" 
                             class="form-control" 
                             name="shortDes"
-                            placeholder="Enter description"></textarea>
+                            placeholder="Enter description"><%= editMode? course.shortDes : '' %></textarea>
                     <small class="form-text text-muted">Nên trong khoảng từ 200 từ đến 500 từ</small>
                 </div>
 
@@ -45,7 +122,8 @@
                     <input type="text" 
                             class="form-control" 
                             name="period"
-                            placeholder="Enter period">
+                            placeholder="Enter period"
+                            value="<%= editMode? course.period : '' %>">
                     <small class="form-text text-muted">Thời gian học kéo dài bao lâu (6 tháng, mấy học kì,..)</small>
                 </div>
 
@@ -55,7 +133,7 @@
                             class="form-control" 
                             name="requirements"
                             placeholder="Enter description"
-                            rows="5"></textarea>
+                            rows="5"><%= editMode? course.requirements.join(';;') : '' %></textarea>
                     <small class="form-text text-muted">Những yêu cầu cho học viên trước khi đến khóa học này, mỗi yêu cầu cách nhau bởi dấu ';;'</small>
                 </div>
 
@@ -65,7 +143,7 @@
                             class="form-control" 
                             name="courseGoals"
                             placeholder="Enter goals"
-                            rows="5"></textarea>
+                            rows="5"><%= editMode? course.courseGoals.join(';;') : '' %></textarea>
                     <small class="form-text text-muted">Học sinh có thể đạt được gì sau khóa học này</small>
                 </div>
 
@@ -74,7 +152,8 @@
                     <input type="text" 
                             class="form-control" 
                             name="learningSchedule"
-                            placeholder="Enter schedule">
+                            placeholder="Enter schedule"
+                            value="<%= editMode? course.learningSchedule : '' %>">
                     <small class="form-text text-muted">Học từ thứ mấy đến thứ mấy, khoảng sáng hay chiều,...</small>
                 </div>
 
@@ -84,12 +163,14 @@
                         <input type="text" 
                             class="form-control" 
                             name="oldPrice"
-                            placeholder="Enter old price">
+                            placeholder="Enter old price"
+                            value="<%= editMode? course.oldPrice : '' %>">
 
                         <input type="text" 
                             class="form-control" 
                             name="price"
-                            placeholder="Enter price">
+                            placeholder="Enter price"
+                            value="<%= editMode? course.price : '' %>">
                     </div>                        
                 </div>
 
@@ -98,16 +179,22 @@
                     <select name="teacherName" class="form-control">
 
                         <% teachers.forEach(teacher=>{ %>
-                            <option value="<%= teacher.name %>"><%= teacher.name %></option>
+                            <option value="<%= teacher.name %>" <%= editMode && course.teacher.name === teacher.name ? 'selected' : ''  %> ><%= teacher.name %></option>
                         <% }) %>
 
                     </select>
                     <small class="form-text text-muted">Chọn tên giáo viên dạy khóa học này</small>
                 </div>
 
+                <% if(editMode) { %>
+                    <input type="hidden" name="courseId" value="<%= course._id %>">
+                <% } %>
+
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>
     </div>
     <br><br>
+
+    <script src="public/javascripts/activePopup.js"></script>
 <%- include('../includes/footer.ejs') %>

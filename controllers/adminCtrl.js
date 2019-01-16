@@ -10,6 +10,10 @@ const createErr = (msg, statusCode)=>{
     throw err
 }
 
+// ************************************************
+// ADMIN PART 
+// ************************************************
+
 exports.getAdminBoard =async (req,res,next)=>{
     try{
         const teachers = await Teacher.find({role: 'teacher'});
@@ -27,6 +31,10 @@ exports.getAdminBoard =async (req,res,next)=>{
     
 }
 
+// ************************************************
+// COURSE PART 
+// ************************************************
+
 exports.getCreateCourse =async (req, res, next)=>{
     try{
         const teachers = await Teacher.find({role: 'teacher'}).select('name');
@@ -35,6 +43,7 @@ exports.getCreateCourse =async (req, res, next)=>{
             path:'/admin/course',
             teachers,
             error: false,
+            editMode: false,
         })
     } catch (err){
         next(err)
@@ -72,8 +81,7 @@ exports.postCreateCourse = async (req,res,next)=>{
             courseImgPath = req.file.path.replace(/\\/g, '/');
         } else {
             courseImgPath = 'public/courseImgs/default.jpeg';
-        }
-        
+        }        
 
         const requirementsArr = requirements.split(';;');
         const courseGoalsArr = courseGoals.split(';;');
@@ -103,6 +111,127 @@ exports.postCreateCourse = async (req,res,next)=>{
         next(err)
     }
 }
+
+exports.postDeleteCourse =async (req,res,next)=>{
+    const courseId = req.body.courseId;
+    try{
+        const course = await Course.findById(courseId);
+        if(course.courseImg !== 'public/courseImgs/default.jpg'){
+            await clearOldFile(course.courseImg);
+        }
+        await Course.findOneAndRemove(courseId);
+        res.redirect('/admin')
+
+    } catch (err) {
+        next(err)
+    }
+}
+
+exports.getEditCourse = async (req,res,next)=>{
+    const courseId = req.query.courseId;
+    try{
+        const teachers = await Teacher.find({role: 'teacher'});
+        const course = await Course.findById(courseId).populate('teacher');
+        res.render('admin/createCourse',{
+            title: 'Create course',
+            path:'/admin/course',
+            course,
+            error: false,
+            editMode: true,
+            teachers,
+        })
+
+    } catch (err) {
+        next(err)
+    }
+}
+
+
+
+exports.postEditCourse =async (req,res,next)=>{
+    try{
+        const courseId = req.body.courseId;
+        const title = req.body.title;
+        const shortDes = req.body.shortDes;
+        const price = req.body.price;
+        const oldPrice = req.body.oldPrice;
+        const period = req.body.period;
+        const learningSchedule = req.body.learningSchedule;
+        const requirements = req.body.requirements;
+        const courseGoals = req.body.courseGoals;
+        const teacherName = req.body.teacherName;
+        const videoUrl = req.body.videoUrl;
+
+        const course = await Course.findById(courseId);
+        const teacher = await Teacher.findOne({name: teacherName}).select('name');
+
+        const teacherId = mongoose.Types.ObjectId(teacher._id);
+
+        if(req.file){
+            clearOldFile(course.courseImg);
+            course.courseImg = req.file.path.replace(/\\/g, '/');
+        }
+
+        course.title = title;
+        course.shortDes = shortDes;
+        course.price = price;
+        course.oldPrice = oldPrice;
+        course.period = period;
+        course.learningSchedule = learningSchedule;
+        course.requirements = requirements.split(';;');
+        course.courseGoals = courseGoals.split(';;');
+        course.videoUrl = videoUrl;
+        course.teacher = teacherId;
+
+        await course.save();
+        res.redirect('/admin');
+
+    } catch (err) {
+        next(err)
+    }
+}
+
+exports.postAddTesti = async (req,res,next)=>{
+    try{
+        const facebookLink = req.body.facebookLink;
+        const name = req.body.name;
+        const desc = req.body.desc;
+        const courseId = req.body.courseId;
+
+        const course = await Course.findById(courseId);
+        course.testimonials.push({
+            facebookLink,
+            name,
+            desc,
+        })
+
+        await course.save();
+        res.redirect(`/admin/course/edit?courseId=${course._id}`);
+    } catch (err) {
+        next(err)
+    }
+}
+
+exports.postDeleteTesti =async (req,res,next)=>{
+    const testiId = req.body.testiId;
+    const courseId = req.body.courseId;
+    try{
+        const course = await Course.findById(courseId);
+        await course.testimonials.id(testiId).remove();
+        await course.save();
+        res.json({
+            msg: 'Has been deleted a testimonial'
+        })
+    } catch (err) {
+        res.json({
+            msg: err
+        })
+    }
+}
+
+// ************************************************
+// EVENT PART 
+// ************************************************
 
 exports.getCreateEvent = (req,res,next)=>{
     res.render('admin/createEvent',{
@@ -142,6 +271,10 @@ exports.postCreateEvent = async (req,res,next)=>{
         next(err)
     }
 }
+
+// ************************************************
+// TEACHER PART 
+// ************************************************
 
 exports.getTeachersInfo =async (req, res, next)=>{
     try{
@@ -216,4 +349,6 @@ exports.postDeleteTeacher = async (req,res,next)=>{
         next(err)
     }
 }
+
+
 

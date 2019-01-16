@@ -42,12 +42,24 @@ router.get('/', protectAuth, protectForAdmin, adminController.getAdminBoard);
 
 router.post('/delete', protectAuth, protectForAdmin, adminController.postDeleteTeacher);
 
+// create-delete course
 router.get('/course', protectAuth, protectForAdmin, adminController.getCreateCourse);
 router.post('/course', protectAuth, protectForAdmin, uploadCourseImg, adminController.postCreateCourse);
+router.post('/course/delete', protectAuth, protectForAdmin, uploadCourseImg, adminController.postDeleteCourse);
 
+// edit and interact width testimonials
+router.post('/course/add-testimonial', protectAuth, protectForAdmin, adminController.postAddTesti);
+router.post('/course/delete-testimonial', protectAuth, protectForAdmin, adminController.postDeleteTesti);
+
+// edit course
+router.get('/course/edit', protectAuth, protectForAdmin, adminController.getEditCourse);
+router.post('/course/edit', protectAuth, protectForAdmin, uploadCourseImg, adminController.postEditCourse);
+
+// create event
 router.get('/event', protectAuth, protectForAdmin, adminController.getCreateEvent);
 router.post('/event', protectAuth, protectForAdmin, uploadFiles, adminController.postCreateEvent);
 
+//interact with teacher info
 router.get('/teachers-info', protectAuth, protectForAdmin, adminController.getTeachersInfo);
 router.post('/teacher-info/edit', protectAuth, protectForAdmin, uploadImg, adminController.postTeacherEdit);
 router.get('/teacher-info/edit/:teacherId',protectAuth, protectForAdmin, adminController.getTeacherEdit );

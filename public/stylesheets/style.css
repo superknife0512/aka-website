@@ -48,6 +48,22 @@ input.file-style {
 form {
   margin-right: 1.5rem; }
 
+.mr-2 {
+  margin-right: 2rem; }
+
+.heading-wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; }
+
+.testimonial__form input {
+  font-size: 1.5rem;
+  padding: 1.9rem .5rem;
+  font-family: "Muli", sans-serif; }
+
+.testimonial__form textarea {
+  font-size: 1.5rem; }
+
 @keyframes fadeIn {
   0% {
     opacity: .2; }
@@ -133,7 +149,7 @@ form {
   .course-info__wrap {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(20rem, 30rem));
-    grid-column-gap: 3.5rem;
+    grid-column-gap: 4.9rem;
     grid-row-gap: 6rem;
     justify-content: center;
     margin-top: 8rem; }
@@ -177,8 +193,8 @@ form {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 3rem;
-  width: 50%;
+  padding: 3rem 4rem;
+  width: 72rem;
   background-color: white;
   box-shadow: 0 0.5rem 4rem rgba(0, 0, 0, 0.5);
   position: fixed;
@@ -206,8 +222,8 @@ form {
 
 .popup__icon {
   position: absolute;
-  top: 2rem;
-  right: 2rem;
+  top: 1rem;
+  right: 1rem;
   font-size: 1.5rem;
   color: #f5546e;
   cursor: pointer; }
@@ -294,3 +310,24 @@ form {
   .teacher-info__card:hover .teacher-info__icon {
     opacity: 1;
     transform: translateY(0); }
+
+.quote__wrapper {
+  display: grid;
+  grid-template-columns: repeat(3, 20rem);
+  grid-column-gap: 2.2rem;
+  grid-row-gap: 2.5rem; }
+
+.quote__card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 1px solid #cecece;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  position: relative; }
+  .quote__card-content {
+    font-family: "Faustina", serif;
+    font-size: 1.4rem; }
+  .quote__card-link {
+    align-self: flex-end;
+    font-size: 1.4rem; }

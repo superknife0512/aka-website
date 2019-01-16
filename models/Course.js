@@ -2,9 +2,18 @@
 const mongoose = require('mongoose');
 
 const testimonialSchema = mongoose.Schema({
-    linkFacebook: String,
-    Desc: String,
-    Name: String, 
+    facebookLink: {
+        type: String,
+        required: true,
+    },
+    desc: {
+        type: String,
+        required: true,
+    },
+    name: {
+        type: String,
+        required: true,
+    },
 })
 
 const courseSchema =new mongoose.Schema({
@@ -32,13 +41,17 @@ const courseSchema =new mongoose.Schema({
         type: String
     },
     courseImg: String,
+
     requirements:[{type: String}],
+
     courseGoals:[{type: String}],
+
     teacher:{
         type: mongoose.Schema.Types.ObjectId,
         ref:'Teacher',
     },
     videoUrl: String,
+
     testimonials: [testimonialSchema]
 })
 
