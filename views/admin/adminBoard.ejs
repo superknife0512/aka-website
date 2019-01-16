@@ -16,31 +16,64 @@
         <hr>
         <section class="course-info">
             <h2 class="medium-title">Courses information</h2>
-            <div class="course-info__wrap">
+            <div class="glider__body" >
+                
+                <i class="fas fa-angle-left glider__icon glider__icon--left"></i>
+                <i class="fas fa-angle-right glider__icon glider__icon--right"></i>
 
-                <% courses.forEach(course=>{ %>
+                <div class="glider ">
 
-                    <div class="card">
-                        <img src="<%= course.courseImg %>"
-                             class="card-img-top course-info__card-img" 
-                             alt="<%= course.title %>">
-                        <div class="card-body">
-                            <h2 class="card-title"><%= course.title %></h2>
-                            <p class="card-text"><%= course.shortDes.split(' ').slice(0,14).join(' ') %> ...</p>
-                            <div class="d-flex">
-                                <a href="/admin/course/edit?courseId=<%= course._id %>" class="btn btn-warning mr-8">Add information</a>
-                                <form action="/admin/course/delete" method="POST">
-                                    <input type="hidden" value="<%= course._id %>" name="courseId">
-                                    <button type="submit" class="btn btn-danger">Delete</button>
-                                </form>
+                    <% courses.forEach(course=>{ %>
+    
+                        <div class="card">
+                            <img src="<%= course.courseImg %>"
+                                 class="card-img-top course-info__card-img" 
+                                 alt="<%= course.title %>">
+                            <div class="card-body">
+                                <h2 class="card-title"><%= course.title %></h2>
+                                <p class="card-text"><%= course.shortDes.split(' ').slice(0,14).join(' ') %> ...</p>
+                                <div class="d-flex">
+                                    <a href="/admin/course/edit?courseId=<%= course._id %>" class="btn btn-warning mr-8">Add information</a>
+                                    <form action="/admin/course/delete" method="POST">
+                                        <input type="hidden" value="<%= course._id %>" name="courseId">
+                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
-                    </div>
+    
+                    <% }) %>
+                </div>
 
-                <% }) %>
 
             </div>
         </section>
     </div>
+
+    <script>
+        
+        new Glider(document.querySelector('.glider'), {
+            // Mobile-first defaults
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            scrollLock: true,
+            arrows: {
+                prev: '.fa-angle-left',
+                next: '.fa-angle-right'
+            },
+            responsive: [{
+                // screens greater than >= 1024px
+                breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 1,
+                        // itemWidth: 150,                        
+                        dragVelocity: 2,
+                        duration: 2,
+                    }
+                }
+            ]
+        });
+    </script>
 
 <%- include('../includes/footer.ejs') %>

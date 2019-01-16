@@ -64,6 +64,11 @@ form {
 .testimonial__form textarea {
   font-size: 1.5rem; }
 
+.card {
+  margin-top: 6rem; }
+  .card:not(:last-child) {
+    margin-right: 6rem; }
+
 @keyframes fadeIn {
   0% {
     opacity: .2; }
@@ -331,3 +336,19 @@ form {
   .quote__card-link {
     align-self: flex-end;
     font-size: 1.4rem; }
+
+.glider__body {
+  position: relative; }
+
+.glider__icon {
+  font-size: 5rem;
+  color: rgba(0, 0, 0, 0.4);
+  position: absolute;
+  cursor: pointer;
+  z-index: 1000; }
+  .glider__icon--left {
+    top: 21.5rem;
+    left: -4rem; }
+  .glider__icon--right {
+    top: 21.5rem;
+    right: -4rem; }

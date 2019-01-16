@@ -65,3 +65,10 @@ form{
     }
 
 }
+
+.card{
+    margin-top: 6rem;
+    &:not(:last-child){
+        margin-right: 6rem;
+    }
+}

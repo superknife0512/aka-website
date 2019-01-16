@@ -1,0 +1,26 @@
+
+.glider{
+
+    &__body{
+        position: relative;
+
+    }
+    &__icon{
+        font-size: 5rem;
+        color: rgba($color: #000000, $alpha: .4);
+        position: absolute;
+        cursor: pointer;
+        z-index: 1000;
+        &--left{
+            top: 21.5rem;
+            left: -4rem;
+            
+        }
+        &--right{
+            top: 21.5rem;
+            right: -4rem;
+            
+        }
+    }
+    
+}
