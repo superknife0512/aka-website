@@ -168,7 +168,9 @@ exports.postEditCourse =async (req,res,next)=>{
         const teacherId = mongoose.Types.ObjectId(teacher._id);
 
         if(req.file){
-            clearOldFile(course.courseImg);
+            if(course.courseImg !== 'public/courseImgs/default.jpg'){
+                clearOldFile(course.courseImg);
+            }
             course.courseImg = req.file.path.replace(/\\/g, '/');
         }
 
