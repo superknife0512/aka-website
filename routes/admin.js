@@ -15,6 +15,15 @@ const imagesStorage = multer.diskStorage({
     }
 })
 
+const incomingEvent = multer.diskStorage({
+    destination: function(req,file,cb){
+        cb(null, 'public/incomingEvent');
+    },
+    filename: function(req, file, cb){
+        cb(null, Date.now() + '-' + file.originalname);
+    }
+})
+
 const courseImgStore = multer.diskStorage({
     destination: function(req,file,cb){
         cb(null, 'public/courseImgs');
@@ -34,6 +43,7 @@ const fileFilter = (req,file,cb)=>{
 }
 
 const uploadFiles = multer({storage: imagesStorage, fileFilter: fileFilter}).array('eventImgs', 5);
+const IncEventUpload = multer({storage: incomingEvent, fileFilter: fileFilter}).single('eventImg');
 const uploadCourseImg = multer({storage: courseImgStore, fileFilter: fileFilter}).single('courseImg');
 
 const adminController = require('../controllers/adminCtrl');
@@ -55,9 +65,15 @@ router.post('/course/delete-testimonial', protectAuth, protectForAdmin, adminCon
 router.get('/course/edit', protectAuth, protectForAdmin, adminController.getEditCourse);
 router.post('/course/edit', protectAuth, protectForAdmin, uploadCourseImg, adminController.postEditCourse);
 
-// create event
+// create-edit-delete event
 router.get('/event', protectAuth, protectForAdmin, adminController.getCreateEvent);
+router.get('/event/edit', protectAuth, protectForAdmin, adminController.getEditEvent);
+router.post('/event/edit', protectAuth, protectForAdmin, uploadFiles, adminController.postEditEvent);
 router.post('/event', protectAuth, protectForAdmin, uploadFiles, adminController.postCreateEvent);
+router.post('/event/delete', protectAuth, protectForAdmin, adminController.postDeleteEvent);
+
+//incoming event
+router.post('/event/add-event', protectAuth, protectForAdmin, IncEventUpload, adminController.postIncomingEvent);
 
 //interact with teacher info
 router.get('/teachers-info', protectAuth, protectForAdmin, adminController.getTeachersInfo);

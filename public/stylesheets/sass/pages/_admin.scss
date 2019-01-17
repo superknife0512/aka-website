@@ -78,3 +78,35 @@
         object-position: center;
     }
 }
+
+.inc-event{
+    display: flex;    
+    align-items: center;
+
+    &__img{
+        height: 23rem;
+        width: 39rem;
+        object-fit: cover;
+        object-position: center;
+        padding-right: 2rem;
+    }
+    &__info{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    &__title{
+        font-family: $font-title;
+        font-size: 1.7rem;
+        text-transform: uppercase;
+        color: $color-secondary;
+    }
+    small{
+        margin-bottom: 2rem;
+    }
+    &__content{
+        font-size: 1.4rem;
+        margin-bottom: 1.5rem;
+    }
+}

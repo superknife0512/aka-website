@@ -1,6 +1,7 @@
 const Teacher = require('../models/Teacher');
 const Course = require('../models/Course');
-const Event = require('../models/Event');
+const Events = require('../models/Event');
+const IncomingEvent = require('../models/IncomingEvent');
 const {clearOldFile}=require('../middlewares/deleteJunk')
 const mongoose = require('mongoose');
 
@@ -18,11 +19,13 @@ exports.getAdminBoard =async (req,res,next)=>{
     try{
         const teachers = await Teacher.find({role: 'teacher'});
         const courses = await Course.find();
+        const events = await Events.find();
 
         res.render('admin/adminBoard',{
             title: 'admin board',
             path: '/',
             courses,
+            events
         })
 
     } catch (err) {
@@ -119,7 +122,7 @@ exports.postDeleteCourse =async (req,res,next)=>{
         if(course.courseImg !== 'public/courseImgs/default.jpg'){
             await clearOldFile(course.courseImg);
         }
-        await Course.findOneAndRemove(courseId);
+        await Course.findByIdAndRemove(courseId);
         res.redirect('/admin')
 
     } catch (err) {
@@ -239,6 +242,7 @@ exports.getCreateEvent = (req,res,next)=>{
     res.render('admin/createEvent',{
         path: '/admin/event',
         title: 'Create event',
+        editMode: false,
     })
 }
 
@@ -260,7 +264,7 @@ exports.postCreateEvent = async (req,res,next)=>{
         })
         const descArr = desc.split(';;');
 
-        const event = new Event({
+        const event = new Events({
             dateHappen,
             eventName,
             desc: descArr,
@@ -271,6 +275,95 @@ exports.postCreateEvent = async (req,res,next)=>{
 
     } catch (err) {
         next(err)
+    }
+}
+
+exports.getEditEvent = async (req,res,next)=>{
+    try{
+        const event =await Events.findById(req.query.eventId);
+        const incEvent = await IncomingEvent.find();
+        res.render('admin/createEvent', {
+            path: '/admin/event',
+            title: 'Edit event',
+            event,
+            incEvent: incEvent[0],
+            editMode: true,
+        })
+
+    } catch (err) {
+        next(err)
+    }
+}
+
+exports.postEditEvent = async (req,res,next)=>{
+    try{
+        const eventId = req.body.eventId;
+        const eventName = req.body.eventName;
+        const dateHappen = req.body.dateHappen;
+        const desc = req.body.desc;
+        console.log(req.files[0]);
+
+        const event = await Events.findById(eventId);
+        if(req.files[0]){
+            event.eventImgs.forEach(imgPath => {
+                clearOldFile(imgPath);
+            });
+            const filePaths = req.files.map(imgInfo=>{
+                return imgInfo.path.replace(/\\/g,'/') 
+            })
+            event.eventImgs = filePaths;
+        }
+
+        event.eventName = eventName;
+        event.dateHappen = dateHappen;
+        event.desc = desc;
+
+        await event.save();
+        res.redirect('/admin')
+
+    } catch (err) {
+        next(err);
+    }
+}
+
+exports.postDeleteEvent = async (req,res,next)=>{
+    try{
+        const eventId = req.body.eventId;
+        const event = await Events.findById(eventId);
+        event.eventImgs.forEach(imgPath=>{
+            clearOldFile(imgPath);
+        })
+        await Events.findByIdAndRemove(eventId);
+        res.redirect('/admin')
+    } catch {
+        next(err);
+    }
+}
+
+exports.postIncomingEvent =async (req,res,next)=>{
+    try{
+        const eventName = req.body.eventName;
+        const dateHappen = req.body.dateHappen;
+        const desc = req.body.desc;
+
+        await IncomingEvent.deleteMany();
+
+        const descArr= desc.split(';;');
+        const event = await Events.findById(req.body.eventId);
+        console.log(req.file);
+        
+        const incomingEvent = new IncomingEvent({
+            dateHappen,
+            eventName,
+            desc: descArr,
+            eventImg: req.file.path.replace(/\\/g, '/'),
+        })
+
+        await incomingEvent.save();
+        res.redirect(`/admin/event/edit?eventId=${event._id}`);
+
+    } catch (err) {
+
     }
 }
 

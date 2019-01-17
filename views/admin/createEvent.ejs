@@ -4,11 +4,74 @@
     <hr>
     <br>
     <div class="container">
-        <h1 class="heading-title">Create an Event</h1>
+            <% if(editMode) { %>
+                <div class="info-popup__wrapper">
+                   <div class="info-popup">
+                               <h1 class="info-popup__heading">Create Incoming Event</h1>
+                               <p class="info-popup__content">Only one incoming event will be display here!</p>
+                               <form action="/admin/event/add-event" 
+                                       method="POST"
+                                       class="testimonial__form"
+                                       enctype="multipart/form-data">
+                                   <div class="form-group">
+                                       <input type="text" 
+                                               placeholder="Enter event name" 
+                                               class="form-control"
+                                               name="eventName">
+                                   </div>
+           
+                                   <div class="form-group">
+                                       <input type="text" 
+                                               placeholder="Enter date that even takes place" 
+                                               class="form-control"
+                                               name="dateHappen">
+                                   </div>
+
+                                   <div class="form-group">
+                                       <label for="">Event images</label>
+                                        <input type="file"
+                                                name="eventImg"
+                                                class="form-control file-style"
+                                                accept="image/*">
+                                    </div>
+           
+                                   <div class="form-group">
+                                       <textarea type="text" 
+                                               placeholder="Enter Event description" 
+                                               class="form-control"
+                                               name="desc"
+                                               rows="4"></textarea>
+                                        <small>It should separate paragraph with ';;'</small>
+                                   </div>
+                                   <i class="fas fa-times popup__icon" id="popup__icon"></i>
+                                   <input type="hidden" name="eventId" value="<%= event._id %>">
+                                   <button type="submit" class="btn btn-success">Create incoming event</button>
+                               </form>
+                               <hr>
+                               <div class="inc-event">
+                                   <img src="<%= incEvent.eventImg %>" alt="<%= incEvent.eventName %>" class="inc-event__img">
+                                   <div class="inc-event__info">
+                                       <h3 class="inc-event__title"><%= incEvent.eventName %></h3>
+                                       <small><%= incEvent.dateHappen %></small>
+                                       <p class="inc-event__content"><%= incEvent.desc[0].split(' ').slice(0,20).join(' ') %>...</p>
+                                       <button class="btn btn-danger">Event Over</button>
+                                   </div>
+                               </div>
+                   </div>
+               </div>
+               <!-- popup section -->
+            <% } %>
+               <!-- form section -->
+        <div class="heading-wrap">
+            <h1 class="heading-title"><%= editMode ? 'Edit this event' : 'Create an Event' %></h1>
+            <% if(editMode) { %>
+                <button class="btn btn-primary" id="activePopup">Create Incoming event</button>
+            <% } %>
+        </div>
         <hr>
         <div class="create__form">
             <form class="signup__form create__form--width" 
-                    action="/admin/event" 
+                    action="<%= editMode ? '/admin/event/edit' : '/admin/event' %>" 
                     method="POST"
                     enctype="multipart/form-data">
 
@@ -17,7 +80,8 @@
                     <input type="text" 
                             class="form-control" 
                             name="eventName"
-                            placeholder="Enter event name">
+                            placeholder="Enter event name"
+                            value="<%= editMode ? event.eventName : '' %>">
                 </div>
 
                 <div class="form-group">
@@ -25,14 +89,15 @@
                     <input type="text" 
                             class="form-control" 
                             name="dateHappen"
-                            placeholder="Enter event date">
+                            placeholder="Enter event date"
+                            value="<%= editMode ? event.dateHappen : '' %>">
                 </div>  
                 
                 <div class="form-group">
                     <label for="desc">Event description</label>
                     <textarea name="desc" rows="7"
                             placeholder="Event description"
-                            class="form-control"></textarea>
+                            class="form-control"><%= editMode ? event.desc : '' %></textarea>
                 </div>
 
                 <div class="form-group">
@@ -45,9 +110,15 @@
                     <small  class="form-text text-muted"> Should be maximum 5 images (png,jpg,gif) </small>
                 </div>
 
+                <% if(editMode) { %>
+                    <input type="hidden" name="eventId" value="<%= event._id %>">
+                <% } %>
+
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>
     </div>
     <br><br>
+
+    <script src="public/javascripts/activePopup.js"></script>
 <%- include('../includes/footer.ejs') %>
