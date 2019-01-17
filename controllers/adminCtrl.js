@@ -367,6 +367,27 @@ exports.postIncomingEvent =async (req,res,next)=>{
     }
 }
 
+exports.postEventOver =async (req,res,next)=>{
+    try{
+        const incEventId = req.body.incEventId;
+        const incEvent = await IncomingEvent.findById(incEventId);
+        const event = new Events({
+            eventName: incEvent.eventName,
+            dateHappen: incEvent.dateHappen,
+            desc: incEvent.desc,
+            eventImgs: [incEvent.eventImg],
+        })
+
+        await event.save()
+        await IncomingEvent.deleteMany();
+        res.redirect('/admin');
+
+
+    } catch (err) {
+
+    }
+}
+
 // ************************************************
 // TEACHER PART 
 // ************************************************

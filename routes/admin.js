@@ -74,6 +74,7 @@ router.post('/event/delete', protectAuth, protectForAdmin, adminController.postD
 
 //incoming event
 router.post('/event/add-event', protectAuth, protectForAdmin, IncEventUpload, adminController.postIncomingEvent);
+router.post('/event/over', protectAuth, protectForAdmin, adminController.postEventOver);
 
 //interact with teacher info
 router.get('/teachers-info', protectAuth, protectForAdmin, adminController.getTeachersInfo);

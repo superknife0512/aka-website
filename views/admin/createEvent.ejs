@@ -48,15 +48,24 @@
                                    <button type="submit" class="btn btn-success">Create incoming event</button>
                                </form>
                                <hr>
-                               <div class="inc-event">
-                                   <img src="<%= incEvent.eventImg %>" alt="<%= incEvent.eventName %>" class="inc-event__img">
-                                   <div class="inc-event__info">
-                                       <h3 class="inc-event__title"><%= incEvent.eventName %></h3>
-                                       <small><%= incEvent.dateHappen %></small>
-                                       <p class="inc-event__content"><%= incEvent.desc[0].split(' ').slice(0,20).join(' ') %>...</p>
-                                       <button class="btn btn-danger">Event Over</button>
-                                   </div>
-                               </div>
+                               <% if(incEvent) { %>
+
+                                    <div class="inc-event">
+                                        <img src="<%= incEvent.eventImg %>" alt="<%= incEvent.eventName %>" class="inc-event__img">
+                                        <div class="inc-event__info">
+                                            <h3 class="inc-event__title"><%= incEvent.eventName %></h3>
+                                            <small><%= incEvent.dateHappen %></small>
+                                            <p class="inc-event__content"><%= incEvent.desc[0].split(' ').slice(0,20).join(' ') %>...</p>
+                                            <form action="/admin/event/over" method="POST">
+                                                <input type="hidden" name="incEventId" value="<%= incEvent._id %>">
+                                                <button type="submit" class="btn btn-danger">Event Over</button>
+                                            </form>
+                                        </div>
+                                    </div>
+
+                                <% } else { %>
+                                    <h5>No incoming event here. Add one now!</h5>
+                                <% } %>
                    </div>
                </div>
                <!-- popup section -->
