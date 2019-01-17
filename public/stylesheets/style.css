@@ -65,9 +65,9 @@ form {
   font-size: 1.5rem; }
 
 .card {
-  margin-top: 6rem; }
-  .card:not(:last-child) {
-    margin-right: 6rem; }
+  margin-top: 6rem;
+  margin-right: 3rem;
+  margin-left: 3rem; }
 
 @keyframes fadeIn {
   0% {

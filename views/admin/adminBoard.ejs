@@ -44,7 +44,9 @@
     
                     <% }) %>
                 </div>
-
+                <br>
+                
+                <div role="tablist" class="dots"></div>
 
             </div>
         </section>
@@ -54,8 +56,9 @@
         
         new Glider(document.querySelector('.glider'), {
             // Mobile-first defaults
-            slidesToShow: 1,
-            slidesToScroll: 1,
+            slidesToShow: 2,
+            slidesToScroll: 1,            
+            itemWidth: 300, 
             scrollLock: true,
             arrows: {
                 prev: '.fa-angle-left',
@@ -66,10 +69,12 @@
                 breakpoint: 1024,
                     settings: {
                         slidesToShow: 3,
-                        slidesToScroll: 1,
+                        slidesToScroll: 3,
                         // itemWidth: 150,                        
                         dragVelocity: 2,
                         duration: 2,
+                        dots:'.dots'
+                        
                     }
                 }
             ]

@@ -68,7 +68,12 @@ form{
 
 .card{
     margin-top: 6rem;
-    &:not(:last-child){
-        margin-right: 6rem;
-    }
+    // &:not(:last-child){
+    //     margin-right: 3rem;
+    // }
+    // &:not(:first-child){
+    //     margin-left: 3rem;
+    // }
+    margin-right: 3rem;
+    margin-left: 3rem;
 }
