@@ -1,5 +1,51 @@
 <%- include('../includes/html-head.ejs') %>
+    <%- include('../includes/teacher-header.ejs') %>
+    
+    <script>
+        window.fbAsyncInit = function() {
+          FB.init({
+            appId            : `Toan's first app`,
+            autoLogAppEvents : true,
+            xfbml            : true,
+            version          : 'v3.2'
+          });
+        };
+      
+        (function(d, s, id){
+           var js, fjs = d.getElementsByTagName(s)[0];
+           if (d.getElementById(id)) {return;}
+           js = d.createElement(s); js.id = id;
+           js.src = "https://connect.facebook.net/en_US/sdk.js";
+           fjs.parentNode.insertBefore(js, fjs);
+         }(document, 'script', 'facebook-jssdk'));
+      </script>
 
-    <h2>This is teacher profile</h2>
+    <div class="container">
+        <div class="teacher-detail">
+            <div class="teacher-detail__left">
+                <img src="<%= teacher.avatar %>" 
+                    alt="<%= teacher.name %>"
+                    class="teacher-detail__ava">
+                <small>Nếu bạn muốn điều chỉnh thông tin cá nhân của mình hãy thông báo điều đó với admin</small>
+            </div>
+            <div class="teacher-detail__right">
+                <h3 class="teacher-detail__name"><%= teacher.name %></h3>
+                <h4 class="teacher-detail__specialty"><%= teacher.specialty %></h4>
+                <p class="teacher-detail__story"><%= teacher.story %></p>
+            </div>
+        </div>
+        <hr>
+        <div class="teacher-detail__video">
+
+            <% if(teacher.teacherVideo[0]) { %>
+                <% teacher.teacherVideo.forEach(video=>{ %>
+                    <div class="fb-video teacher-detail__video--each" data-href="<%= video %>" data-allowfullscreen="true" data-width="700"></div>
+                <% }) %>
+            <% } else { %>
+                <h3>You have no video to display here! Ask your admin to add one!</h3>
+            <% } %>
+
+        </div>
+    </div>
 
 <%- include('../includes/footer.ejs') %>

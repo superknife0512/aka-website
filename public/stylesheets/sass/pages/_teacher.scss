@@ -1,0 +1,52 @@
+
+
+.teacher-detail{
+    display: flex;
+    margin-top: 10rem;
+    small{
+        text-align: center;
+    }
+
+    &__left{
+        width: 50%;
+        padding-right: 6rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    &__ava{
+        width: 20rem;
+        height: 20rem;
+        object-fit: cover;
+        object-position: center;
+        border-radius: 50%;
+        margin-bottom: 2rem;
+    }
+    &__right{
+        width: 85%;
+    }
+    &__name{
+        font-family: $font-title;
+        transform: skew(-15deg);
+        text-transform: uppercase;
+        color: $color-secondary;
+        font-size: 3rem;
+    }
+    &__specialty{
+        font-family: $font-primary;
+        text-transform: uppercase;
+        color: $color-primary;
+    }
+    &__story{
+
+    }
+    &__video{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 2rem;
+        &--each{
+            margin-bottom: 3rem;
+        }
+    }
+}

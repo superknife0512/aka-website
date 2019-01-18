@@ -39,7 +39,6 @@ const teacherSchema = new mongoose.Schema({
         type: String
     },
 
-
     schedule:{
         't2.1': String,
         't2.2': String,

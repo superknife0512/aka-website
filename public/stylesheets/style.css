@@ -197,6 +197,44 @@ form {
     font-size: 1.4rem;
     margin-bottom: 1.5rem; }
 
+.teacher-detail {
+  display: flex;
+  margin-top: 10rem; }
+  .teacher-detail small {
+    text-align: center; }
+  .teacher-detail__left {
+    width: 50%;
+    padding-right: 6rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center; }
+  .teacher-detail__ava {
+    width: 20rem;
+    height: 20rem;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 50%;
+    margin-bottom: 2rem; }
+  .teacher-detail__right {
+    width: 85%; }
+  .teacher-detail__name {
+    font-family: "Faustina", serif;
+    transform: skew(-15deg);
+    text-transform: uppercase;
+    color: #f5546e;
+    font-size: 3rem; }
+  .teacher-detail__specialty {
+    font-family: "Muli", sans-serif;
+    text-transform: uppercase;
+    color: #42b0ee; }
+  .teacher-detail__video {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2rem; }
+    .teacher-detail__video--each {
+      margin-bottom: 3rem; }
+
 .heading-title {
   color: #f5546e;
   font-size: 2.5rem;
