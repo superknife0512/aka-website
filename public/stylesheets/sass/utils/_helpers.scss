@@ -8,6 +8,9 @@ input.file-style{
     &:not(:last-child){
         margin-right: 1.5rem;
     }
+    &__search{
+
+    }
 }
 
 .background-gray{
@@ -76,4 +79,8 @@ form{
     // }
     margin-right: 3rem;
     margin-left: 3rem;
+}
+
+.search-wrap{
+    height: 4.5rem;
 }

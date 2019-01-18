@@ -10,7 +10,7 @@
         border-radius: 50rem;
         padding: .2rem 3rem;
         width: 33rem;
-        height: 50%;
+        height: 100%;
         transition: all .3s;
 
         &:focus{
@@ -32,7 +32,7 @@
         font-size: 2rem;
         position: absolute;
         top: 3.4rem;
-        right: 2rem;
+        right: 4rem;
         cursor: pointer;
         transition: all .3s;
 
@@ -66,10 +66,15 @@
     &__wrap{
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(20rem, 30rem));
-        grid-column-gap: 4.9rem;
         grid-row-gap: 6rem;
+        grid-column-gap: 4.6rem;
         justify-content: center;
         margin-top: 8rem;
+        & .card{
+            margin-left: 0;
+            margin-right: 0;
+            margin-top: 4rem;
+        }
     }
     &__card-img{
         height: 21rem;

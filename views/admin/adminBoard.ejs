@@ -6,20 +6,28 @@
         <div class="admin__heading">
             <h1 class="heading-title">Admin board </h1>
             <div class="admin__form">
-                <input type="text" 
-                        name="search" 
-                        class="admin__search"
-                        placeholder="Enter your search here">
-                <i class="fas fa-search admin__icon"></i>            
+                <form action="/admin/search" method="POST" class="search-wrap">                
+                    <input type="text" 
+                            name="search" 
+                            class="admin__search"
+                            placeholder="Enter your search here">
+                    <button class="btn__search" type="submit">
+                        <i class="fas fa-search admin__icon"></i>    
+                    </button>
+                </form>
             </div>
         </div>
         <hr>
         <section class="course-info">
             <h2 class="medium-title">Courses information</h2>
             <div class="glider__body" >
-                
-                <i class="fas fa-angle-left glider__icon glider__icon--left"></i>
-                <i class="fas fa-angle-right glider__icon glider__icon--right"></i>
+
+                <svg class="glider__icon glider__icon--left">
+                    <use xlink:href="public/images/arrows.svg#icon-chevron-thin-left"></use>
+                </svg>
+                <svg class="glider__icon glider__icon--right">
+                    <use xlink:href="public/images/arrows.svg#icon-chevron-thin-right"></use>
+                </svg>
 
                 <div class="glider ">
 
@@ -54,8 +62,12 @@
             <h2 class="medium-title">Events information </h2>
             <div class="glider__body" >
                 
-                <i class="fas fa-angle-left glider__icon glider__icon--left" id="arrow-left"></i>
-                <i class="fas fa-angle-right glider__icon glider__icon--right" id="arrow-right"></i>
+                <svg class="glider__icon glider__icon--left" id="arrow-left">
+                    <use xlink:href="public/images/arrows.svg#icon-chevron-thin-left"></use>
+                </svg>
+                <svg class="glider__icon glider__icon--right" id="arrow-right">
+                    <use xlink:href="public/images/arrows.svg#icon-chevron-thin-right"></use>
+                </svg>
 
                 <div class="event-glider">
 
@@ -98,8 +110,8 @@
             itemWidth: 300, 
             scrollLock: true,
             arrows: {
-                prev: '.fa-angle-left',
-                next: '.fa-angle-right'
+                prev: '.glider__icon--left',
+                next: '.glider__icon--right'
             },            
             dots:'.dots',
             responsive: [{

@@ -81,4 +81,6 @@ router.get('/teachers-info', protectAuth, protectForAdmin, adminController.getTe
 router.post('/teacher-info/edit', protectAuth, protectForAdmin, uploadImg, adminController.postTeacherEdit);
 router.get('/teacher-info/edit/:teacherId',protectAuth, protectForAdmin, adminController.getTeacherEdit );
 
+router.post('/search',protectAuth, protectForAdmin, adminController.getSearchPage );
+
 module.exports = router;

@@ -69,10 +69,15 @@ form {
   margin-right: 3rem;
   margin-left: 3rem; }
 
+.search-wrap {
+  height: 4.5rem; }
+
 @keyframes fadeIn {
   0% {
+    transform: translate(-50%, -50%), scale(0.4);
     opacity: .2; }
   100% {
+    transform: translate(-50%, -50%), scale(1);
     opacity: 1; } }
 
 .fadeInAnim {
@@ -113,7 +118,7 @@ form {
   border-radius: 50rem;
   padding: .2rem 3rem;
   width: 33rem;
-  height: 50%;
+  height: 100%;
   transition: all .3s; }
   .admin__search:focus {
     outline: none;
@@ -131,7 +136,7 @@ form {
   font-size: 2rem;
   position: absolute;
   top: 3.4rem;
-  right: 2rem;
+  right: 4rem;
   cursor: pointer;
   transition: all .3s; }
   .admin__icon:hover {
@@ -154,10 +159,14 @@ form {
   .course-info__wrap {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(20rem, 30rem));
-    grid-column-gap: 4.9rem;
     grid-row-gap: 6rem;
+    grid-column-gap: 4.6rem;
     justify-content: center;
     margin-top: 8rem; }
+    .course-info__wrap .card {
+      margin-left: 0;
+      margin-right: 0;
+      margin-top: 4rem; }
   .course-info__card-img {
     height: 21rem;
     width: 100%;
@@ -365,14 +374,15 @@ form {
   position: relative; }
 
 .glider__icon {
-  font-size: 5rem;
-  color: rgba(0, 0, 0, 0.4);
   position: absolute;
   cursor: pointer;
-  z-index: 1000; }
+  z-index: 1000;
+  height: 6.5rem;
+  width: 6.5rem;
+  fill: #b7b7b7; }
   .glider__icon--left {
     top: 21.5rem;
-    left: -4rem; }
+    left: -5rem; }
   .glider__icon--right {
     top: 21.5rem;
-    right: -4rem; }
+    right: -5rem; }

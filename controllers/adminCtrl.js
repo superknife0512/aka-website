@@ -466,5 +466,39 @@ exports.postDeleteTeacher = async (req,res,next)=>{
     }
 }
 
+// ************************************************
+// SERACH PART 
+// ************************************************
 
+exports.getSearchPage =async (req,res,next)=>{
+    try{
+        const search = req.body.search;
+        console.log(search);
+        const courses = await Course.find();
+        const events = await Events.find();
+        let courseSearch = [];
+        let eventSearch =[];
+        const searchRegex = new RegExp(search.toLowerCase(), 'g');
+
+        courses.forEach(course => {
+            if(course.title.toLowerCase().match(searchRegex)){
+                courseSearch.push(course);
+            }
+        })
+        events.forEach(event => {
+            if(event.eventName.toLowerCase().match(searchRegex)){
+                eventSearch.push(event);
+            }
+        })
+
+        res.render('admin/search',{
+            title: 'Search results',
+            path: '/admin/search',
+            courseSearch,
+            eventSearch,
+        })
+    } catch (err) {
+        next(err)
+    }
+}
 
