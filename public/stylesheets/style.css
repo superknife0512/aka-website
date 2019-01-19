@@ -72,6 +72,12 @@ form {
 .search-wrap {
   height: 4.5rem; }
 
+.change-plus {
+  transform: rotate(45deg); }
+
+.height-2000 {
+  height: 200rem; }
+
 @keyframes fadeIn {
   0% {
     transform: translate(-50%, -50%), scale(0.4);
@@ -237,12 +243,67 @@ form {
 .schedule {
   margin-top: 8rem; }
   .schedule th {
-    width: 11%; }
+    width: 3%; }
   .schedule input {
     padding: 1.5rem 2rem;
     font-size: 1.5rem; }
     .schedule input::placeholder {
       font-size: 1.3rem; }
+
+.album {
+  margin-top: 8rem; }
+  .album label {
+    font-size: 1.5rem;
+    color: #42b0ee; }
+  .album input {
+    padding: 1.5rem 2rem;
+    font-size: 1.5rem; }
+    .album input::placeholder {
+      font-size: 1.3rem; }
+  .album textarea, .album select {
+    font-size: 1.4rem; }
+
+.album-info {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem; }
+  .album-info__plus {
+    background-color: #ffc107;
+    height: 4.78rem;
+    width: 4.78rem;
+    color: #333;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all .5s; }
+  .album-info__title {
+    display: flex;
+    flex-direction: column;
+    width: 80%; }
+    .album-info__title h4 {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 2.0rem;
+      font-family: "Faustina", serif;
+      background-color: #ffc107;
+      margin-bottom: 0;
+      padding: .8rem;
+      margin-left: 1.5rem;
+      width: 100%;
+      text-transform: uppercase;
+      padding-left: 2rem; }
+  .album-info__wrap {
+    margin-bottom: 10rem; }
+  .album-info__display {
+    background-color: #f5f5f5;
+    box-shadow: 0 0.7rem 0.8rem rgba(0, 0, 0, 0.2);
+    padding: 2rem;
+    margin-left: 1.5rem;
+    display: none; }
+    .album-info__display p {
+      font-size: 1.4rem; }
 
 .heading-title {
   color: #f5546e;

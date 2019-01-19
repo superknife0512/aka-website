@@ -71,10 +71,6 @@ const teacherSchema = new mongoose.Schema({
 
     schedule: [scheduleSchema],
 
-    // albums:[
-    //     {type: mongoose.Schema.types.ObjectId, ref: 'Album'}
-    // ],
-
     token: String,
     tokenExpiration: Date,
 })

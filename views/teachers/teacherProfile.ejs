@@ -20,8 +20,8 @@
          }(document, 'script', 'facebook-jssdk'));
       </script>
 
-    <div class="container">
-        <div class="teacher-detail">
+    <div class="container height-2000">
+        <div class="teacher-detail ">
             <div class="teacher-detail__left">
                 <img src="<%= teacher.avatar %>" 
                     alt="<%= teacher.name %>"
@@ -111,7 +111,38 @@
 
         <h2 class="medium-title">Albums</h2>
         <br><br>
+        <section class="album-info__wrap">
+            <% if(albums[0]) { %>
+                <% albums.forEach(album=>{ %>
+    
+                    <div class="album-info">
+                        <i class="fas fa-plus album-info__plus"></i>
+                        <div class="album-info__title">
+                            <div class="heading-wrap">
+                                <h4><%= album.name %> 
+                                    <div class="heading-wrap">
+                                        <button class="btn btn-primary">Add more </button>
+                                        <button class="btn btn-dark">Edit </button>
+                                        <button class="btn btn-danger">Delete </button>
+                                    </div>
+                                </h4>
+                            </div>
+                            <div class="album-info__display">
+                                <p><%= album.shortDes %></p>
+                                <hr>                            
+                            </div>
+                        </div>
+                    </div>   
+        
+                <% }) %>
+            <% } else { %>
+                <h3>You have no album here! Click <a href="/teacher/album">Here</a> to add one</h3>
+            <% } %>
+           
+        </section>
         
     </div>
+    <br><br>
 
+    <script src="public/javascripts/albumOpen.js"></script>
 <%- include('../includes/footer.ejs') %>

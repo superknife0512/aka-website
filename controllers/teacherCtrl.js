@@ -1,15 +1,17 @@
 const Album = require('../models/Album');
-
+const mongoose = require('mongoose');
 
 
 exports.getTeacherProfile =async (req,res,next)=>{
     try{
         const teacher = req.teacher;
+        const albums = await Album.find({createBy: teacher._id});
 
         res.render('teachers/teacherProfile',{
             title:'Teacher Profile',
             path: '/teacher',
             teacher: teacher,
+            albums
         })
 
     } catch (err) {
@@ -170,3 +172,32 @@ exports.postScheduleEdit = async (req,res,next)=>{
 // ************************************************
 // SCHEDULE PART 
 // ************************************************
+
+exports.getCreateAlbum = (req,res,next)=>{
+    res.render('teachers/album',{
+        path: '/teacher/album',
+        title: 'Album',
+    })
+}
+
+exports.postCreateAlbum =async (req,res,next)=>{
+    try{
+        const teacherId = req.teacher._id;
+        const name = req.body.name;
+        const shortDes = req.body.shortDes;
+
+        const createBy = mongoose.Types.ObjectId(teacherId);
+
+        const album = new Album({
+            name, 
+            shortDes,
+            createBy
+        })
+
+        await album.save();
+        res.redirect('/teacher')
+
+    } catch(err){
+        next(err);
+    }
+}

@@ -14,7 +14,8 @@ router.get('/schedule/edit', protectAuth, protectForTeacher, teacherController.g
 router.post('/schedule/edit', protectAuth, protectForTeacher, teacherController.postScheduleEdit);
 
 //teacher albums
-router.post('/album', protectAuth, protectForTeacher, teacherController.getAlbum);
+router.get('/album', protectAuth, protectForTeacher, teacherController.getCreateAlbum);
+router.post('/album', protectAuth, protectForTeacher, teacherController.postCreateAlbum);
 
 
 module.exports = router;
