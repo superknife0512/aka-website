@@ -43,10 +43,26 @@
     &__video{
         display: flex;
         flex-direction: column;
-        align-items: center;
         margin-top: 2rem;
         &--each{
             margin-bottom: 3rem;
         }
     }
+}
+
+.schedule{
+    margin-top: 8rem;
+
+    th{
+        width: 3%;
+    }
+
+    input{
+        &::placeholder{
+            font-size: 1.3rem;
+        }
+        padding: 1.5rem 2rem;
+        font-size: 1.5rem;
+    }
+
 }

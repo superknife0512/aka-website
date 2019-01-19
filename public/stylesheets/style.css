@@ -230,10 +230,19 @@ form {
   .teacher-detail__video {
     display: flex;
     flex-direction: column;
-    align-items: center;
     margin-top: 2rem; }
     .teacher-detail__video--each {
       margin-bottom: 3rem; }
+
+.schedule {
+  margin-top: 8rem; }
+  .schedule th {
+    width: 11%; }
+  .schedule input {
+    padding: 1.5rem 2rem;
+    font-size: 1.5rem; }
+    .schedule input::placeholder {
+      font-size: 1.3rem; }
 
 .heading-title {
   color: #f5546e;

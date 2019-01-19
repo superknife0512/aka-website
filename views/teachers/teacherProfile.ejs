@@ -26,26 +26,92 @@
                 <img src="<%= teacher.avatar %>" 
                     alt="<%= teacher.name %>"
                     class="teacher-detail__ava">
+                <p class="teacher-detail__story text-center"><%= teacher.story %></p><br>
                 <small>Nếu bạn muốn điều chỉnh thông tin cá nhân của mình hãy thông báo điều đó với admin</small>
             </div>
             <div class="teacher-detail__right">
                 <h3 class="teacher-detail__name"><%= teacher.name %></h3>
                 <h4 class="teacher-detail__specialty"><%= teacher.specialty %></h4>
-                <p class="teacher-detail__story"><%= teacher.story %></p>
+                
+                <div class="teacher-detail__video">
+
+                    <% if(teacher.teacherVideo[0]) { %>
+                        <% teacher.teacherVideo.forEach(video=>{ %>
+                            <div class="fb-video teacher-detail__video--each" data-href="<%= video %>" data-allowfullscreen="true" data-width="600"></div>
+                        <% }) %>
+                    <% } else { %>
+                        <h3>You have no video to display here! Ask your admin to add one!</h3>
+                    <% } %>
+
+                </div>
             </div>
         </div>
         <hr>
-        <div class="teacher-detail__video">
 
-            <% if(teacher.teacherVideo[0]) { %>
-                <% teacher.teacherVideo.forEach(video=>{ %>
-                    <div class="fb-video teacher-detail__video--each" data-href="<%= video %>" data-allowfullscreen="true" data-width="700"></div>
-                <% }) %>
-            <% } else { %>
-                <h3>You have no video to display here! Ask your admin to add one!</h3>
-            <% } %>
+        <h2 class="medium-title">Teacher Schedule</h2>
+        <br><br>
+        <% if(teacher.schedule[0]) { %>
+            <table class="table table-bordered table-hover table-responsive-sm">
+                <thead>
+                    <tr class="bg-warning">
+                        <th scope="col">Giáo viên</th>
+                        <th scope="col">Buổi</th>
+                        <th scope="col">T2</th>
+                        <th scope="col">T3</th>
+                        <th scope="col">T4</th>
+                        <th scope="col">T5</th>
+                        <th scope="col">T6</th>
+                        <th scope="col">T7</th>
+                        <th scope="col">CN</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row" rowspan="3"><%= teacher.name %> - <br> <small><%= teacher.specialty %></small></th>
+                        <th>Sáng</th>
+                        <td><%= teacher.schedule[0].t21 %></td>
+                        <td><%= teacher.schedule[0].t31 %></td>
+                        <td><%= teacher.schedule[0].t41 %></td>
+                        <td><%= teacher.schedule[0].t51 %></td>
+                        <td><%= teacher.schedule[0].t61 %></td>
+                        <td><%= teacher.schedule[0].t71 %></td>
+                        <td><%= teacher.schedule[0].cn1 %></td>
+                    </tr>
+                    <tr>
+                        <th>Chiều</th>
+                        <td><%= teacher.schedule[0].t22 %></td>
+                        <td><%= teacher.schedule[0].t32 %></td>
+                        <td><%= teacher.schedule[0].t42 %></td>
+                        <td><%= teacher.schedule[0].t52 %></td>
+                        <td><%= teacher.schedule[0].t62 %></td>
+                        <td><%= teacher.schedule[0].t72 %></td>
+                        <td><%= teacher.schedule[0].cn2 %></td>
+                    </tr>
+                    <tr>
+                        <th>Tối</th>
+                        <td><%= teacher.schedule[0].t23 %></td>
+                        <td><%= teacher.schedule[0].t33 %></td>
+                        <td><%= teacher.schedule[0].t43 %></td>
+                        <td><%= teacher.schedule[0].t53 %></td>
+                        <td><%= teacher.schedule[0].t63 %></td>
+                        <td><%= teacher.schedule[0].t73 %></td>
+                        <td><%= teacher.schedule[0].cn3 %></td>
+                    </tr>
+                </tbody>
+            </table>
+            <a class="btn btn-primary" href="/teacher/schedule/edit?editMode=true">Edit your schedule</a>
+            
+        <% } else { %>
+            <div>
+                <h3>Sorry! We don't have any schedule here!</h3>
+                <a href="/teacher/schedule">Let create it now</a>
+            </div>
+        <% } %>
+        <hr>
 
-        </div>
+        <h2 class="medium-title">Albums</h2>
+        <br><br>
+        
     </div>
 
 <%- include('../includes/footer.ejs') %>
