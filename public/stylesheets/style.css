@@ -76,7 +76,7 @@ form {
   transform: rotate(45deg); }
 
 .height-2000 {
-  height: 200rem; }
+  height: 150rem; }
 
 @keyframes fadeIn {
   0% {
@@ -299,11 +299,45 @@ form {
   .album-info__display {
     background-color: #f5f5f5;
     box-shadow: 0 0.7rem 0.8rem rgba(0, 0, 0, 0.2);
-    padding: 2rem;
+    padding: 4rem;
     margin-left: 1.5rem;
     display: none; }
     .album-info__display p {
-      font-size: 1.4rem; }
+      font-size: 1.3rem; }
+
+.post {
+  display: flex;
+  margin-bottom: 2rem;
+  align-items: center; }
+  .post:not(:last-child) {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.14);
+    padding-bottom: 2rem; }
+  .post__right {
+    max-width: 45rem;
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    grid-template-rows: repeat(2, auto);
+    grid-column-gap: .5rem;
+    grid-row-gap: .5rem;
+    position: relative; }
+  .post__title {
+    font-size: 3rem;
+    color: #ffffff;
+    position: absolute;
+    top: -12px;
+    left: -7px;
+    text-transform: uppercase;
+    font-family: "Faustina", serif;
+    opacity: .7; }
+  .post__img {
+    width: 20rem;
+    height: 15rem;
+    object-fit: cover;
+    object-position: center; }
+  .post__left {
+    padding: 4rem; }
+  .post__desc {
+    font-size: 1.5rem; }
 
 .heading-title {
   color: #f5546e;

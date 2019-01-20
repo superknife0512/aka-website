@@ -1,9 +1,8 @@
 const mongoose = require('mongoose');
 
-const imgsetSchema = mongoose.Schema({
+const postSchema = mongoose.Schema({
     imgUrls: [String],
     imgDesc: {type: String, required: true},
-    imgTitle: {type: String, required: true},
 })
 
 const albumSchema = mongoose.Schema({
@@ -16,7 +15,7 @@ const albumSchema = mongoose.Schema({
         type: String,
     },
     createBy: {type: mongoose.Schema.Types.ObjectId, ref: 'Teacher'},
-    imgset:[ imgsetSchema ],
+    posts:[ postSchema ],
 },{timestamps: true})
 
 module.exports = mongoose.model('Album', albumSchema);

@@ -75,4 +75,4 @@ const teacherSchema = new mongoose.Schema({
     tokenExpiration: Date,
 })
 
-module.exports = mongoose.model('teacher', teacherSchema);
+module.exports = mongoose.model('Teacher', teacherSchema);

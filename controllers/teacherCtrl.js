@@ -36,61 +36,61 @@ exports.getTeacherSchedule = (req,res,next)=>{
 exports.postTeacherSchedule =async (req,res,next)=>{
     try{
         const teacher = req.teacher;
-    const t21 = req.body.T21;
-    const t31 = req.body.T31;
-    const t41 = req.body.T41;
-    const t51 = req.body.T51;
-    const t61 = req.body.T61;
-    const t71 = req.body.T71;
-    const cn1 = req.body.CN1;
+        const t21 = req.body.T21;
+        const t31 = req.body.T31;
+        const t41 = req.body.T41;
+        const t51 = req.body.T51;
+        const t61 = req.body.T61;
+        const t71 = req.body.T71;
+        const cn1 = req.body.CN1;
 
-    const t22 = req.body.T22;
-    const t32 = req.body.T32;
-    const t42 = req.body.T42;
-    const t52 = req.body.T52;
-    const t62 = req.body.T62;
-    const t72 = req.body.T72;
-    const cn2 = req.body.CN2;
+        const t22 = req.body.T22;
+        const t32 = req.body.T32;
+        const t42 = req.body.T42;
+        const t52 = req.body.T52;
+        const t62 = req.body.T62;
+        const t72 = req.body.T72;
+        const cn2 = req.body.CN2;
 
-    const t23 = req.body.T23;
-    const t33 = req.body.T33;
-    const t43 = req.body.T43;
-    const t53 = req.body.T53;
-    const t63 = req.body.T63;
-    const t73 = req.body.T73;
-    const cn3 = req.body.CN3;
+        const t23 = req.body.T23;
+        const t33 = req.body.T33;
+        const t43 = req.body.T43;
+        const t53 = req.body.T53;
+        const t63 = req.body.T63;
+        const t73 = req.body.T73;
+        const cn3 = req.body.CN3;
 
-    teacher.schedule.push({
-        t21,
-        t22,
-        t23,
-        
-        t31,
-        t32,
-        t33,
-        
-        t41,
-        t42,
-        t43,
-        
-        t51,
-        t52,
-        t53,
-        
-        t61,
-        t62,
-        t63,
-        
-        t71,
-        t72,
-        t73,
-        
-        cn1,
-        cn2,
-        cn3,
-    })
-    await teacher.save();
-    res.redirect('/teacher');
+        teacher.schedule.push({
+            t21,
+            t22,
+            t23,
+            
+            t31,
+            t32,
+            t33,
+            
+            t41,
+            t42,
+            t43,
+            
+            t51,
+            t52,
+            t53,
+            
+            t61,
+            t62,
+            t63,
+            
+            t71,
+            t72,
+            t73,
+            
+            cn1,
+            cn2,
+            cn3,
+        })
+        await teacher.save();
+        res.redirect('/teacher');
 
     } catch (err) {
         next(err)
@@ -199,5 +199,46 @@ exports.postCreateAlbum =async (req,res,next)=>{
 
     } catch(err){
         next(err);
+    }
+}
+
+exports.postAlbumDelete = async (req,res,next)=>{
+    try{
+        const albumId = req.body.albumId;
+
+
+    } catch (err) {
+
+    }
+}
+
+exports.postAlbumAdd = async (req,res,next)=>{
+    try{
+        let imgUrls;
+        const imgDesc = req.body.imgDesc;
+        const postImgs = req.files;
+        console.log(req.files);
+
+        if(!postImgs[0]){
+            imgUrls = 'public/posts/default.png';
+        } else {
+            imgUrls = postImgs.map(img=>{
+                return img.path.replace(/\\/g, '/');
+            })
+        }
+
+        const albumId = req.body.albumId;
+        const album = await Album.findById(albumId);
+
+        album.posts.push({
+            imgDesc,
+            imgUrls,
+        })
+        
+        await album.save();
+        res.redirect('/teacher');
+
+    } catch (err) {
+        next(err)
     }
 }
