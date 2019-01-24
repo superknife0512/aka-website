@@ -3,6 +3,11 @@
 .teacher-detail{
     display: flex;
     margin-top: 10rem;
+    @media only screen and (max-width: 980px ){
+        flex-direction: column;
+        align-items: center;
+    }
+
     small{
         text-align: center;
     }
@@ -13,6 +18,10 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        @media only screen and (max-width: 980px ){
+            padding-right: 0;
+        }
+    
     }
     &__ava{
         width: 20rem;
@@ -24,6 +33,13 @@
     }
     &__right{
         width: 85%;
+        @media only screen and (max-width: 980px ){
+            margin-top: 3rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+    
     }
     &__name{
         font-family: $font-title;
@@ -131,11 +147,60 @@
     &__display{
         background-color: #f5f5f5;
         box-shadow: 0 .7rem .8rem rgba($color: #000000, $alpha: .2);
-        padding: 2rem;
+        padding: 4rem;
         margin-left: 1.5rem;
         display: none;
         p{
-            font-size: 1.4rem;
+            font-size: 1.3rem;
         }
+    }
+}
+
+.post{
+    display: flex;
+    margin-bottom: 2rem;
+    align-items: center;
+    &:not(:last-child){
+        border-bottom: 1px solid rgba($color: #000000, $alpha: .14);
+        padding-bottom: 2rem;
+    }
+    @media only screen and (max-width: 980px ){
+        flex-direction: column;
+        // align-items: center;
+    }
+
+
+    &__right{
+        max-width: 45rem;
+        display: grid;
+        grid-template-columns: repeat(2, auto);
+        grid-template-rows: repeat(2, auto);
+        grid-column-gap: .5rem;
+        grid-row-gap: .5rem;
+        position: relative;
+    }
+    
+    &__title{
+        font-size: 3rem;
+        color: #ffffff;
+        position: absolute;
+        top: -12px;
+        left: -7px;
+        text-transform: uppercase;
+        font-family: "Faustina", serif;
+        opacity: .7;
+    }
+
+    &__img{
+        width: 20rem;
+        height: 15rem;
+        object-fit: cover;
+        object-position: center;
+    }
+    &__left{
+        padding: 4rem;
+    }
+    &__desc{
+        font-size: 1.5rem;
     }
 }

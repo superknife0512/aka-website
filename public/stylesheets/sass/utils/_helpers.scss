@@ -11,6 +11,10 @@ input.file-style{
     &__search{
 
     }
+    @media only screen and (max-width: 980px ){
+        margin-bottom: 1rem;
+    }
+
 }
 
 .background-gray{
@@ -54,6 +58,10 @@ form{
     display: flex;
     justify-content: space-between;
     align-items: center;
+    @media only screen and (max-width: 980px ){
+        flex-direction: column;
+    }
+
 }
 
 .testimonial__form{
@@ -84,5 +92,5 @@ form{
 }
 
 .height-2000{
-    height: 200rem;
+    min-height: 150rem;
 }
