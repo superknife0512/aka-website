@@ -1,7 +1,7 @@
 <%- include('../includes/html-head.ejs') %>
     <%- include('../includes/teacher-header.ejs') %>
 
-    <div class="container">
+    <div class="container height-2000">
         <form class="schedule" 
                 action="<%= editMode? '/teacher/schedule/edit' : '/teacher/schedule' %>" 
                 method="POST">
@@ -59,6 +59,8 @@
             </table>
             <button type="submit" class="btn btn-success"><%= editMode? 'Update schedule' : 'Create schedule' %></button>
         </form>
-    </div>
-
+    </div><br><br><br>
+    <%- include('../includes/admin-footer.ejs',{
+        page: 'Teacher page'
+    }) %>
 <%- include('../includes/footer.ejs') %>

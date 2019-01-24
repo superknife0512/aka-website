@@ -37,11 +37,13 @@ router.post('/schedule/edit', protectAuth, protectForTeacher, teacherController.
 //teacher albums
 router.get('/album', protectAuth, protectForTeacher, teacherController.getCreateAlbum);
 router.post('/album', protectAuth, protectForTeacher, teacherController.postCreateAlbum);
-// router.post('/album/delete', protectAuth, protectForTeacher, teacherController.postAlbumDelete);
-// router.get('/album/edit', protectAuth, protectForTeacher, teacherController.getAlbumEdit);
+router.post('/album/delete', protectAuth, protectForTeacher, teacherController.postAlbumDelete);
+router.get('/album/edit', protectAuth, protectForTeacher, teacherController.getAlbumEdit);
+router.post('/album/edit', protectAuth, protectForTeacher, teacherController.postAlbumEdit);
 
 //add to mini album
 router.post('/album/add', protectAuth, protectForTeacher, uploadPost, teacherController.postAlbumAdd);
+router.post('/album/post-delete', protectAuth, protectForTeacher, teacherController.postPostDelete);
 
 
 

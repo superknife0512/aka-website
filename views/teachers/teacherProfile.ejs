@@ -122,19 +122,17 @@
                                     <div class="heading-wrap">
                                         <button class="btn btn-primary activePopup" >Add more </button>
                                         <a href="/teacher/album/edit?albumId=<%= album._id %>" class="btn btn-dark">Edit </a>
-                                        <form action="/teacher/album/delete">
-                                            <input type="hidden" name="albumId" value="<%= album._id %>">
-                                            <button class="btn btn-danger">Delete </button>                                        
-                                        </form>
+                                        <button class="btn btn-danger btn__delete">Delete Album </button>
                                     </div>
                                 </h4>
                             </div>
                             <div class="album-info__display">
                                 <p><%= album.shortDes %></p>
-                                <hr> 
+                                <hr>
                                 
                                 <% if(album.posts[0]) { %>
                                     <% album.posts.forEach((post,i)=>{ %>
+                                        
 
                                         <div class="post">
                                             <div class="post__right">
@@ -149,21 +147,41 @@
                                                 <p class="post__desc">
                                                     <%= post.imgDesc %>
                                                 </p>
+                                                <form action="/teacher/album/post-delete"
+                                                        method="POST"
+                                                        class="album__post-del">
+                                                        <input type="hidden" value="<%= post._id %>" name="postId">
+                                                        <input type="hidden" value="<%= album._id %>" name="albumId">
+                                                        <button type="submit" class="btn btn-danger">delete post</button>
+                                                </form>
                                             </div>
                                         </div>
                                     
                                     <% }) %>
 
                                 <% } else { %>
-                                    <h5> Bạn chưa có post nào ở album này. <a href="/teacher/add">Thêm ngay</a></h5>
+                                    <h5> Bạn chưa có post nào ở album này. <a href="#" class="activePopup">Thêm ngay</a></h5>
                                 <% } %>
 
+                            </div>
+                        </div>
+                        <div class="info-popup__wrapper info-popup__wrapper--2">
+                            <div class="info-popup info-popup--2">
+                                    <h1 class="info-popup__heading">Are your sure?</h1>
+                                    <p class="info-popup__content">Click delete if you want to delete '<%= album.name %>' forever!</p>
+                                    <div class="d-flex justify-content-center btn-wrap">
+                                        <form action="/teacher/album/delete/" method="POST">
+                                            <input type="hidden" name="albumId" value="<%= album._id %>">
+                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                        </form>
+                                        <button class="btn btn-info btn__cancel" >Cancel</button>
+                                    </div>
                             </div>
                         </div>
                     </div>  
                     
                      <!-- popup section -->
-                     <div class="info-popup__wrapper">
+                     <div class="info-popup__wrapper info-popup__wrapper1">
                         <div class="info-popup">
                             <h1 class="info-popup__heading">Thêm ảnh vào album "<%= album.name %>" </h1>
                             <p class="info-popup__content">Mỗi album nên có tối đa từ 5-6 post, Mỗi post chỉ nên thêm tối đa 4 ảnh</p>
@@ -172,10 +190,11 @@
                                     class="testimonial__form"
                                     enctype="multipart/form-data">
                                 <div class="form-group">
-                                    <input type="text" 
+                                    <textarea type="text" 
                                             placeholder="Nhập vào miêu tả cho post" 
                                              class="form-control"
-                                            name="imgDesc">
+                                            name="imgDesc"
+                                            rows="3"></textarea>
                                 </div>
                     
                                 <div class="form-group">
@@ -193,6 +212,8 @@
                             </form>
                             </div>
                         </div>
+
+                        
     
                         <!-- album section -->
         
@@ -208,4 +229,7 @@
 
     <script src="public/javascripts/albumOpen.js"></script>
     <script src="public/javascripts/activePopup.js"></script>
+     <%- include('../includes/admin-footer.ejs',{
+        page: 'Teacher page'
+    }) %>
 <%- include('../includes/footer.ejs') %>

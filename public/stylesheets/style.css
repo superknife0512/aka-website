@@ -21,6 +21,9 @@ input.file-style {
   font-size: 1.5rem; }
   .btn:not(:last-child) {
     margin-right: 1.5rem; }
+  @media only screen and (max-width: 980px) {
+    .btn {
+      margin-bottom: 1rem; } }
 
 .background-gray {
   background-color: #eff5f4;
@@ -55,6 +58,9 @@ form {
   display: flex;
   justify-content: space-between;
   align-items: center; }
+  @media only screen and (max-width: 980px) {
+    .heading-wrap {
+      flex-direction: column; } }
 
 .testimonial__form input {
   font-size: 1.5rem;
@@ -76,7 +82,7 @@ form {
   transform: rotate(45deg); }
 
 .height-2000 {
-  height: 150rem; }
+  min-height: 150rem; }
 
 @keyframes fadeIn {
   0% {
@@ -206,6 +212,10 @@ form {
 .teacher-detail {
   display: flex;
   margin-top: 10rem; }
+  @media only screen and (max-width: 980px) {
+    .teacher-detail {
+      flex-direction: column;
+      align-items: center; } }
   .teacher-detail small {
     text-align: center; }
   .teacher-detail__left {
@@ -214,6 +224,9 @@ form {
     display: flex;
     flex-direction: column;
     align-items: center; }
+    @media only screen and (max-width: 980px) {
+      .teacher-detail__left {
+        padding-right: 0; } }
   .teacher-detail__ava {
     width: 20rem;
     height: 20rem;
@@ -223,6 +236,12 @@ form {
     margin-bottom: 2rem; }
   .teacher-detail__right {
     width: 85%; }
+    @media only screen and (max-width: 980px) {
+      .teacher-detail__right {
+        margin-top: 3rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center; } }
   .teacher-detail__name {
     font-family: "Faustina", serif;
     transform: skew(-15deg);
@@ -312,6 +331,9 @@ form {
   .post:not(:last-child) {
     border-bottom: 1px solid rgba(0, 0, 0, 0.14);
     padding-bottom: 2rem; }
+  @media only screen and (max-width: 980px) {
+    .post {
+      flex-direction: column; } }
   .post__right {
     max-width: 45rem;
     display: grid;
@@ -528,3 +550,48 @@ form {
   .glider__icon--right {
     top: 21.5rem;
     right: -5rem; }
+
+.footer__wrapper {
+  background-color: #333;
+  border-top: 4px solid #f5546e;
+  padding: 3rem;
+  height: 28rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; }
+
+.footer__nav {
+  display: flex;
+  margin-top: 2rem;
+  justify-content: center;
+  padding-bottom: 3rem;
+  border-bottom: 1px solid #707070; }
+
+.footer__item {
+  padding: .6rem 1.4rem;
+  transition: all .2s; }
+  .footer__item:not(:last-child) {
+    margin-right: 4rem;
+    margin-left: 4rem; }
+  .footer__item:hover {
+    border: 1px solid #42b0ee;
+    border-radius: 3px; }
+
+.footer__link:link, .footer__link:visited {
+  text-decoration: none;
+  color: #f5546e;
+  font-size: 1.7rem;
+  text-transform: uppercase;
+  transition: .2s all; }
+
+.footer__link:hover {
+  color: #42b0ee; }
+
+.footer__item:hover .footer__link {
+  color: #42b0ee; }
+
+.footer__small {
+  margin-right: 3rem;
+  margin-top: 2rem;
+  color: #dddddd; }

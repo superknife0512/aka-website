@@ -1,6 +1,6 @@
 const Album = require('../models/Album');
 const mongoose = require('mongoose');
-
+const {clearOldFile} = require('../middlewares/deleteJunk');
 
 exports.getTeacherProfile =async (req,res,next)=>{
     try{
@@ -177,6 +177,7 @@ exports.getCreateAlbum = (req,res,next)=>{
     res.render('teachers/album',{
         path: '/teacher/album',
         title: 'Album',
+        editMode: false,
     })
 }
 
@@ -202,15 +203,61 @@ exports.postCreateAlbum =async (req,res,next)=>{
     }
 }
 
+exports.postAlbumEdit = async (req,res,next)=>{
+    try{
+        const albumId = req.body.albumId;
+        const album = await Album.findById(albumId);
+        const name = req.body.name;
+        const shortDes = req.body.shortDes;
+
+        album.name = name;
+        album.shortDes = shortDes;
+
+        await album.save();
+        res.redirect('/teacher');
+
+    } catch (err) {
+        next(err);
+    }
+}
+
 exports.postAlbumDelete = async (req,res,next)=>{
     try{
         const albumId = req.body.albumId;
+        const album = await Album.findById(albumId);
 
+        album.posts.forEach(post=>{
+            if(post.imgUrls[0] !== 'public/posts/default.png'){
+                post.imgUrls.forEach(imgUrl=>{
+                    clearOldFile(imgUrl);
+                })
+            }
+        })
+
+        await Album.findByIdAndRemove(albumId);
+        res.redirect('/teacher');
 
     } catch (err) {
-
+        next(err);
     }
 }
+
+exports.getAlbumEdit = async (req,res,next)=>{
+    try{
+        const album = await Album.findById(req.query.albumId);
+        
+        res.render('teachers/album',{
+            title: 'Edit this album',
+            editMode: true,
+            path: '/teacher/album',
+            album,
+        })
+
+    } catch (err) {
+        next(err)
+    }
+}
+
 
 exports.postAlbumAdd = async (req,res,next)=>{
     try{
@@ -239,6 +286,29 @@ exports.postAlbumAdd = async (req,res,next)=>{
         res.redirect('/teacher');
 
     } catch (err) {
+        next(err)
+    }
+}
+
+exports.postPostDelete =async (req,res,next)=>{
+    try{
+        const postId = req.body.postId;
+        const albumId = req.body.albumId;
+
+        const album = await Album.findById(albumId);
+        const post = album.posts.id(postId);
+
+        if(post.imgUrls[0] !== 'public/posts/default.png'){
+            post.imgUrls.forEach(imgUrl=>{
+                clearOldFile(imgUrl);
+            })
+        }
+
+        post.remove();
+        await album.save();
+        res.redirect('/teacher')
+
+    } catch (err){
         next(err)
     }
 }
