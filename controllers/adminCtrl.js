@@ -2,7 +2,8 @@ const Teacher = require('../models/Teacher');
 const Course = require('../models/Course');
 const Events = require('../models/Event');
 const IncomingEvent = require('../models/IncomingEvent');
-const {clearOldFile}=require('../middlewares/deleteJunk')
+const {clearOldFile}=require('../middlewares/deleteJunk');
+const {deleteBlob}=require('../middlewares/deleteBlob');
 const mongoose = require('mongoose');
 
 const createErr = (msg, statusCode)=>{
@@ -256,12 +257,15 @@ exports.postCreateEvent = async (req,res,next)=>{
             return createErr('We cannot find your images, try again');
         }
 
+        console.log(req.files);
+
         // create image url
         const fileInfos = req.files;
 
         const filePaths = fileInfos.map(file=>{
-            return file.path.replace(/\\/g, '/');
+            return file.url;
         })
+        const blobNames = fileInfos.map(file=> file.blob);
         const descArr = desc.split(';;');
 
         const event = new Events({
@@ -269,6 +273,7 @@ exports.postCreateEvent = async (req,res,next)=>{
             eventName,
             desc: descArr,
             eventImgs: filePaths,
+            blobNames
         })
         await event.save();
         res.redirect('/admin/event')
@@ -301,15 +306,15 @@ exports.postEditEvent = async (req,res,next)=>{
         const eventName = req.body.eventName;
         const dateHappen = req.body.dateHappen;
         const desc = req.body.desc;
-        console.log(req.files[0]);
 
         const event = await Events.findById(eventId);
         if(req.files[0]){
-            event.eventImgs.forEach(imgPath => {
-                clearOldFile(imgPath);
+            
+            event.blobNames.forEach(blogName => {
+                deleteBlob('event-photos', blogName);
             });
             const filePaths = req.files.map(imgInfo=>{
-                return imgInfo.path.replace(/\\/g,'/') 
+                return imgInfo.url;
             })
             event.eventImgs = filePaths;
         }
@@ -330,12 +335,12 @@ exports.postDeleteEvent = async (req,res,next)=>{
     try{
         const eventId = req.body.eventId;
         const event = await Events.findById(eventId);
-        event.eventImgs.forEach(imgPath=>{
-            clearOldFile(imgPath);
+        event.blobNames.forEach(blogName=>{
+            deleteBlob('event-photos', blogName);
         })
         await Events.findByIdAndRemove(eventId);
         res.redirect('/admin')
-    } catch {
+    } catch(err) {
         next(err);
     }
 }
@@ -350,13 +355,13 @@ exports.postIncomingEvent =async (req,res,next)=>{
 
         const descArr= desc.split(';;');
         const event = await Events.findById(req.body.eventId);
-        console.log(req.file);
         
         const incomingEvent = new IncomingEvent({
             dateHappen,
             eventName,
             desc: descArr,
-            eventImg: req.file.path.replace(/\\/g, '/'),
+            eventImg: req.file.url,
+            blobName: req.file.blobName
         })
 
         await incomingEvent.save();
@@ -376,6 +381,7 @@ exports.postEventOver =async (req,res,next)=>{
             dateHappen: incEvent.dateHappen,
             desc: incEvent.desc,
             eventImgs: [incEvent.eventImg],
+            blobNames: [incEvent.blobName]
         })
 
         await event.save()

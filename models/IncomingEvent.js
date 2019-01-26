@@ -8,6 +8,7 @@ const eventSchema = mongoose.Schema({
     },
     desc:[String],
     eventImg: String,
+    blobName: String,
 }, {timestamps: true})
 
 module.exports = mongoose.model('IncomingEvent', eventSchema);
