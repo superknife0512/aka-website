@@ -98,12 +98,59 @@ form {
 
 .grid {
   display: grid;
-  grid-template-columns: [full-start] minmax(2rem, 1fr) [center-start] repeat(7, minmax(2rem, 1fr)) [center-end] minmax(2rem, 1fr) [full-end];
+  grid-template-columns: [full-start] minmax(2rem, 1fr) [center-start] repeat(7, minmax(min-content, 16.2rem)) [center-end] minmax(2rem, 1fr) [full-end];
   grid-template-rows: auto; }
   .grid__container {
     grid-column: center-start / center-end; }
   .grid__fluid {
     grid-column: full-start / full-end; }
+
+.heading {
+  font-size: 3rem;
+  text-transform: uppercase;
+  font-family: "Faustina", serif;
+  margin-bottom: 4.5rem;
+  position: relative; }
+  .heading::after {
+    content: "";
+    background-color: #f5546e;
+    height: 1.2rem;
+    width: 5rem;
+    position: absolute;
+    bottom: -30px;
+    left: 0;
+    transform-origin: left;
+    transition: all .3s; }
+  .heading--1 {
+    color: #f5546e; }
+
+.corner-btn {
+  border: solid 1px #e0e0e0;
+  border-radius: 40rem;
+  padding: 1rem 2.5rem;
+  transition: all .3s;
+  cursor: pointer; }
+  .corner-btn--trans {
+    background-color: #00000066;
+    color: white; }
+    .corner-btn--trans:hover {
+      background-color: white;
+      color: #000000e7; }
+
+.link-btn:link, .link-btn:visited {
+  border: solid 1px #f5546e;
+  border-radius: 40rem;
+  padding: 1rem 2.5rem;
+  transition: all .3s;
+  cursor: pointer;
+  background-color: white;
+  text-decoration: none;
+  color: #f5546e;
+  transition: all .3s;
+  text-transform: uppercase; }
+  .link-btn:link:hover, .link-btn:visited:hover {
+    background-color: #f5546e;
+    color: white; }
 
 .signup {
   display: flex;
@@ -392,19 +439,6 @@ form {
   display: flex;
   justify-content: center; }
 
-.corner-btn {
-  border: solid 1px #e0e0e0;
-  border-radius: 40rem;
-  padding: 1rem 2.5rem;
-  transition: all .3s;
-  cursor: pointer; }
-  .corner-btn--trans {
-    background-color: #00000066;
-    color: white; }
-    .corner-btn--trans:hover {
-      background-color: white;
-      color: #000000e7; }
-
 .active-home::after {
   transform: scaleX(1); }
 
@@ -477,6 +511,56 @@ form {
       outline: none;
       border: 1px solid #42b0ee;
       background-color: #f5f5f5; }
+    .hero__search::placeholder {
+      color: #dbdbdb; }
+    .hero__search:focus::placeholder {
+      color: #585858; }
+
+.about {
+  display: flex;
+  margin-top: 8rem;
+  margin-bottom: 16rem; }
+  .about__left p {
+    width: 80%;
+    margin-bottom: 3rem; }
+  .about__right {
+    position: relative;
+    width: 100%;
+    margin-right: 8rem; }
+  .about__images {
+    position: absolute;
+    transition: all .3s;
+    overflow: hidden;
+    box-shadow: 10px 6px 63px -12px rgba(0, 0, 0, 0.75); }
+    .about__images h5 {
+      color: #f1f1f1;
+      font-size: 1.6rem;
+      position: absolute;
+      bottom: -.5rem;
+      left: 0;
+      display: block;
+      padding: 1.5rem;
+      background-color: rgba(0, 0, 0, 0.5);
+      transform: translateY(8rem);
+      transition: all .3s .3s;
+      text-align: center; }
+    .about__images:hover {
+      transform: scale(1.1);
+      z-index: 400; }
+    .about__images:hover h5 {
+      transform: translateY(0); }
+  .about__img {
+    height: 31rem;
+    width: 48rem;
+    object-fit: cover;
+    object-position: center;
+    transition: all .3s; }
+  .about #about__img1 {
+    top: -1rem;
+    left: 9rem; }
+  .about #about__img2 {
+    top: 6rem;
+    left: 2rem; }
 
 .heading-title {
   color: #f5546e;

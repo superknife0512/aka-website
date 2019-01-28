@@ -1,7 +1,7 @@
 
 .grid{
     display: grid;
-    grid-template-columns: [full-start] minmax(2rem, 1fr) [center-start] repeat(7, minmax(2rem, 1fr)) [center-end] minmax(2rem, 1fr) [full-end]; 
+    grid-template-columns: [full-start] minmax(2rem, 1fr) [center-start] repeat(7, minmax(min-content, 16.2rem)) [center-end] minmax(2rem, 1fr) [full-end]; 
     grid-template-rows: auto;   
 
     &__container{

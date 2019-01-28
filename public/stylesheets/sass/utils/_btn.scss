@@ -1,0 +1,36 @@
+.corner-btn{
+    border: solid 1px #e0e0e0;
+    border-radius: 40rem;
+    padding: 1rem 2.5rem;
+    transition: all .3s;
+    cursor: pointer;
+    
+    &--trans{
+        background-color: #00000066;
+        color: white;
+
+        &:hover{
+            background-color: white;
+            color: #000000e7
+        }
+    }
+}
+
+.link-btn{
+    &:link, &:visited{
+        border: solid 1px $color-secondary;
+        border-radius: 40rem;
+        padding: 1rem 2.5rem;
+        transition: all .3s;
+        cursor: pointer;
+        background-color: white;
+        text-decoration: none;
+        color: $color-secondary;
+        transition: all .3s;
+        text-transform: uppercase;
+        &:hover{
+            background-color: $color-secondary;
+            color: white;
+        }
+    }
+}

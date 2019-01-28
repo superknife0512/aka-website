@@ -16,23 +16,6 @@
     justify-content: center;
 }
 
-.corner-btn{
-    border: solid 1px #e0e0e0;
-    border-radius: 40rem;
-    padding: 1rem 2.5rem;
-    transition: all .3s;
-    cursor: pointer;
-    
-    &--trans{
-        background-color: #00000066;
-        color: white;
-
-        &:hover{
-            background-color: white;
-            color: #000000e7
-        }
-    }
-}
 
 .active-home{
     &::after{
@@ -138,6 +121,78 @@
             border: 1px solid  $color-primary;
             background-color: #f5f5f5
         }
+        &::placeholder{
+            color: rgb(219, 219, 219)
+        }
+        &:focus::placeholder{
+            color: rgb(88, 88, 88)
+        }
+    }
+}
+
+.about{
+    display: flex;
+    margin-top: 8rem;
+    margin-bottom: 16rem;
+
+    &__left{
+        p{
+            width: 80%;
+            margin-bottom: 3rem;
+        }
+    }
+
+    &__right{
+        position: relative;
+        width: 100%;
+        margin-right: 8rem;
+    }
+    
+    &__images{
+        position: absolute;
+        transition: all .3s;
+        overflow: hidden;        
+        box-shadow: 10px 6px 63px -12px rgba(0,0,0,0.75);
+        
+        h5{
+            color: $color-white--2;
+            font-size: 1.6rem;
+            position: absolute;
+            bottom: -.5rem;
+            left: 0;   
+            display: block;
+            padding: 1.5rem;
+            background-color: rgba($color: #000000, $alpha: .5);   
+            transform: translateY(8rem);
+            transition: all .3s .3s;
+            text-align: center;
+        }
+
+        &:hover{
+            transform: scale(1.1);
+            z-index: 400;
+        }
+        &:hover h5{
+            transform: translateY(0);
+        }
+    }
+
+    &__img{
+        height: 31rem;
+        width: 48rem;
+        object-fit: cover;
+        object-position: center;
+        transition: all .3s;
+    }    
+
+    #about__img1{
+        top: -1rem;
+        left: 9rem;
+    }
+    
+    #about__img2{
+        top: 6rem;
+        left: 2rem;
     }
 }
 
