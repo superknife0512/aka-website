@@ -1,11 +1,70 @@
 <%- include('./includes/html-head.ejs') %>
 
-    <h1><%= title %></h1>
-    <h2>This is also a homepage</h2>
-    <a href="/teacher">Teacher Page</a>
-    <a href="/admin">Admin board</a>
-    <a href="/teacher/signup">Signup</a>
-    <a href="/teacher/login">Login</a>
-    <h3>let's begin for the game</h3>
+    <div class="grid">
+
+        <header class="grid__fluid hero">
+            <nav class="hero__nav container">
+                <div class="hero__nav--left">
+                    <h3 class="hero__logo">
+                        <a href="#" class="hero__nav-link">LOGO AK</a>
+                    </h3>
+                </div>
+                <ul class="hero__nav--right">
+                    <% navData.forEach((navItem,i)=>{ %>
+                        <li class="hero__nav-item" id="item-<%= i %>">
+                            <a href="#" class="hero__nav-link">
+                                <%= navItem %>
+                            </a>
+                        </li>
+                    <% }) %>
+                </ul>
+            </nav>
+            <div class="hero__body">
+
+                <h1 class="hero__title">
+                    Trung tâm đa ngữ AK
+                </h1>
+                <h4 class="hero__subTitle">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia, a! Magni, cum possimus commodi omnis magnam temporibus laudantium natus quo eaque. adipisicing elit
+                </h4>
+                <form class="form-inline" action="#" method="POST">
+                    <input type="text" 
+                            class="hero__search" 
+                            name="search" 
+                            placeholder="Tìm kiếm khóa học yêu thích...">
+                    <button type="submit" class="corner-btn corner-btn--trans">Tìm kiếm</button>
+                </form>
+            </div>
+        </header>
+
+        <section class="grid__container about">
+            <div class="about__left">
+                <h2 class="heading heading--1">
+                    Chúng tôi là ai
+                </h2>
+                <p class="content">
+                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Labore eos placeat maiores, obcaecati vel ut animi reiciendis tenetur aspernatur illo, aut corporis saepe dolor! Debitis perspiciatis quas dolorum voluptatem voluptatum?
+
+                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Labore eos placeat maiores, obcaecati vel ut animi reiciendis tenetur aspernatur illo, aut corporis saepe dolor! Debitis perspiciatis quas dolorum voluptatem voluptatum?
+                </p>
+            </div>
+            <div class="about__right">
+                <div class="about__images">
+                    <img src="images/..." alt="image" class="about__img">
+                    <h2>Some information about this image, about what they do in there</h2>
+                </div>
+                <div class="about__images">
+                    <img src="images/..." alt="image" class="about__img">
+                    <h2>Some information about this image, about what they do in there</h2>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        $('#item-0').addClass('active-home');
+
+    </script>
 
 <%- include('./includes/footer.ejs') %>

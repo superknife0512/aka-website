@@ -1,0 +1,6 @@
+prepare for production:
+    Change all email setting to sendgrid with key api
+    Change all image directory to azure
+    compression
+    helmet
+    

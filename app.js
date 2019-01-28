@@ -7,7 +7,7 @@ const mongoose = require('mongoose');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 
-const indexRouter = require('./routes/index');
+const clientRouter = require('./routes/client');
 const teacherRouter = require('./routes/teacher');
 const authRouter = require('./routes/auth');
 const adminRouter = require('./routes/admin');
@@ -30,6 +30,7 @@ app.use(cookieParser());
 
 //static serve setup
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/public',express.static(path.join(__dirname, 'public')));
 app.use('/teacher', express.static(path.join(__dirname, 'public')));
 app.use('/teacher/public', express.static(path.join(__dirname, 'public')));
 app.use('/teacher/reset', express.static(path.join(__dirname, 'public')));
@@ -68,7 +69,7 @@ app.use(async (req,res,next)=>{
 })
 
 //router setup
-app.use('/', indexRouter);
+app.use('/', clientRouter);
 app.use('/teacher', teacherRouter);
 app.use('/teacher', authRouter);
 app.use('/admin', adminRouter);

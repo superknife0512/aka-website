@@ -7,7 +7,7 @@ const MulterAzureStorage = require('multer-azure-storage');
 
 const {uploadImg} = require('../middlewares/uploadAvatar');
 
-const maxSize = 5*1000*1000;
+const maxSize = 3*1000*1000;
 
 //save file on azure storage
 const azureStorage =  new MulterAzureStorage({
@@ -47,7 +47,7 @@ router.post('/delete', protectAuth, protectForAdmin, adminController.postDeleteT
 // create-delete course
 router.get('/course', protectAuth, protectForAdmin, adminController.getCreateCourse);
 router.post('/course', protectAuth, protectForAdmin, uploadCourseImg, adminController.postCreateCourse);
-router.post('/course/delete', protectAuth, protectForAdmin, uploadCourseImg, adminController.postDeleteCourse);
+router.post('/course/delete', protectAuth, protectForAdmin, adminController.postDeleteCourse);
 
 // edit and interact width testimonials
 router.post('/course/add-testimonial', protectAuth, protectForAdmin, adminController.postAddTesti);

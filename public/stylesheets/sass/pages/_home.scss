@@ -1,0 +1,144 @@
+%after{
+    content: "";
+    background-color: $color-primary;
+    height: .6rem;
+    width: 5rem;
+    position: absolute;
+    bottom: -30px;
+    left: 0;
+    transform-origin: left;
+    transition: all .3s;
+}
+
+.form-inline{
+    width: 87%;
+    display: flex;
+    justify-content: center;
+}
+
+.corner-btn{
+    border: solid 1px #e0e0e0;
+    border-radius: 40rem;
+    padding: 1rem 2.5rem;
+    transition: all .3s;
+    cursor: pointer;
+    
+    &--trans{
+        background-color: #00000066;
+        color: white;
+
+        &:hover{
+            background-color: white;
+            color: #000000e7
+        }
+    }
+}
+
+.active-home{
+    &::after{
+        @extend %after;        
+        transform: scaleX(1);
+    }
+}
+
+.hero{
+    height: 95vh;
+    width: 100%;
+    background-image: linear-gradient(45deg, rgba(0,0,0,.6),rgba(0,0,0,.4) ), url('../../../images/hero.jpg');
+    background-position: center;
+    background-size: cover;
+    position: relative;
+
+    &__logo{
+        font-size: 2.6rem;
+        a:link, a:visited{
+            color: $color-primary;
+        }
+    }
+
+    &__nav{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 4rem;
+        padding-bottom: 1.5rem;   
+        border-bottom: 1px solid #696969;
+
+        &--left{
+
+        }
+        &--right{
+            display: flex;
+            list-style: none;
+
+        }
+    }
+    &__nav-item{
+        position: relative;
+        &:not(:last-child){
+            margin-right: 2.9rem;
+        }
+        &::after{
+            @extend %after;            
+            transform: scaleX(0);
+        }
+
+        &:hover::after{
+            transform: scaleX(1);
+        }
+    }
+
+    &__nav-link{
+        &:link, &:visited{
+            text-decoration: none;
+            color: rgb(241, 241, 241);
+            text-transform: capitalize;
+        }
+    }
+
+    &__nav-item:hover &__nav-link{
+        color: $color-secondary;
+    }
+
+    &__body{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    &__title{
+        color: #f0f0f0;
+        font-family: $font-title;
+        font-size: 6rem;
+        font-weight: 100;
+        margin-bottom: 2rem;
+        text-transform: uppercase
+    }
+    &__subTitle{
+        color: #f0f0f0;
+        width: 85%;
+        text-transform: uppercase;
+        text-align: center;
+        margin-bottom: 3.5rem;
+        line-height: 2.3rem;
+    }
+    &__search{
+        border: 1px solid  #e0e0e0;
+        border-radius: 500rem;
+        padding: 1rem 1.5rem;
+        width: 70%;
+        background-color: rgba(0, 0, 0, .4);
+        margin-right: 1.5rem;
+        transition: all .4s;
+        &:focus{
+            outline: none;
+            border: 1px solid  $color-primary;
+            background-color: #f5f5f5
+        }
+    }
+}
+
+

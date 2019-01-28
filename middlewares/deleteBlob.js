@@ -1,9 +1,9 @@
 const storage = require('azure-storage');
 const path = require('path');
 
-if (process.env.NODE_ENV !== 'production') {
-    require('dotenv').load();
-}
+// if (process.env.NODE_ENV !== 'production') {
+//     require('dotenv').load();
+// }
 
 const blogService = storage.createBlobService();
 

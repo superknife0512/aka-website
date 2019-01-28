@@ -172,14 +172,24 @@
 
     &__right{
         max-width: 45rem;
-        display: grid;
-        grid-template-columns: repeat(2, auto);
-        grid-template-rows: repeat(2, auto);
-        grid-column-gap: .5rem;
-        grid-row-gap: .5rem;
+        display: flex;
+        flex-wrap: wrap;
         position: relative;
     }
     
+    &__img{
+        flex: 1 0 auto;
+        width: 20rem;
+        height: 15rem;
+        object-fit: cover;
+        object-position: center;
+        margin-bottom: .5rem;
+        &:not(:last-child){
+            margin-right: .5rem;
+        }
+
+    }
+
     &__title{
         font-size: 3rem;
         color: #ffffff;
@@ -191,14 +201,14 @@
         opacity: .7;
     }
 
-    &__img{
-        width: 20rem;
-        height: 15rem;
-        object-fit: cover;
-        object-position: center;
-    }
     &__left{
-        padding: 4rem;
+        padding: 2rem;
+        width: 36%;
+        
+        @media only screen and (max-width: 900px){
+            width: 100% !important;
+
+        }
     }
     &__desc{
         font-size: 1.5rem;

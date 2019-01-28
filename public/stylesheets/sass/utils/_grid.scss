@@ -1,0 +1,15 @@
+
+.grid{
+    display: grid;
+    grid-template-columns: [full-start] minmax(2rem, 1fr) [center-start] repeat(7, minmax(2rem, 1fr)) [center-end] minmax(2rem, 1fr) [full-end]; 
+    grid-template-rows: auto;   
+
+    &__container{
+        grid-column: center-start / center-end;
+    }
+
+    &__fluid{
+        grid-column: full-start / full-end;
+    }
+}
+
