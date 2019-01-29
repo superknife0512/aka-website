@@ -11,8 +11,7 @@ body {
   color: #333;
   font-weight: 300;
   line-height: 1.5;
-  font-family: "Muli", sans-serif;
-  padding: 1.8rem; }
+  font-family: "Muli", sans-serif; }
 
 input.file-style {
   padding-top: 1rem !important;
@@ -105,24 +104,36 @@ form {
   .grid__fluid {
     grid-column: full-start / full-end; }
 
+.heading--1::after, .heading--2::after {
+  content: "";
+  background-color: #f5546e;
+  height: 1.2rem;
+  width: 5rem;
+  position: absolute;
+  transform-origin: left;
+  transition: all .3s; }
+
 .heading {
   font-size: 3rem;
   text-transform: uppercase;
   font-family: "Faustina", serif;
   margin-bottom: 4.5rem;
   position: relative; }
-  .heading::after {
-    content: "";
-    background-color: #f5546e;
-    height: 1.2rem;
-    width: 5rem;
-    position: absolute;
-    bottom: -30px;
-    left: 0;
-    transform-origin: left;
-    transition: all .3s; }
   .heading--1 {
     color: #f5546e; }
+    .heading--1::after {
+      bottom: -30px;
+      left: 0; }
+  .heading--2 {
+    color: #f5546e; }
+    .heading--2::after {
+      bottom: -30px;
+      right: 0; }
+  .heading--3 {
+    color: #f1f1f1; }
+
+.content--white {
+  color: #f1f1f1; }
 
 .corner-btn {
   border: solid 1px #e0e0e0;
@@ -440,10 +451,10 @@ form {
   justify-content: center; }
 
 .active-home::after {
-  transform: scaleX(1); }
+  transform: scaleX(1) !important; }
 
 .hero {
-  height: 95vh;
+  height: 100vh;
   width: 100%;
   background-image: linear-gradient(45deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)), url("../../../images/hero.jpg");
   background-position: center;
@@ -491,7 +502,8 @@ form {
     font-size: 6rem;
     font-weight: 100;
     margin-bottom: 2rem;
-    text-transform: uppercase; }
+    text-transform: uppercase;
+    text-align: center; }
   .hero__subTitle {
     color: #f0f0f0;
     width: 85%;
@@ -561,6 +573,103 @@ form {
   .about #about__img2 {
     top: 6rem;
     left: 2rem; }
+
+.benefit {
+  margin-top: 5rem;
+  margin-bottom: 8rem; }
+  .benefit__heading {
+    display: flex;
+    flex-direction: column;
+    align-content: flex-end;
+    align-items: flex-end;
+    padding-left: 34rem;
+    margin-bottom: 3rem; }
+    .benefit__heading p {
+      text-align: right; }
+  .benefit__body {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(25rem, 30rem));
+    grid-column-gap: 6rem;
+    grid-row-gap: 6rem;
+    justify-content: center; }
+  .benefit__card {
+    padding: 2.5rem;
+    border: solid 1px #dfdfdf;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: .5rem;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer; }
+    .benefit__card::after {
+      content: "";
+      height: 100%;
+      width: 1rem;
+      background-color: #f5546e;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      transform-origin: left center;
+      transform: scaleY(0);
+      transition: transform .3s, width .3s .3s; }
+    .benefit__card:hover::after {
+      transform: scaleX(1);
+      width: 100%; }
+  .benefit__icon {
+    fill: #42b0ee;
+    height: 6rem;
+    width: 6rem;
+    margin-bottom: 1.5rem;
+    transition: all .3s .3s; }
+  .benefit__title {
+    font-family: "Faustina", serif;
+    font-size: 2.2rem;
+    color: #f5546e;
+    margin-bottom: 1.2rem;
+    text-align: center;
+    text-transform: uppercase;
+    transition: all .3s .3s; }
+  .benefit__desc {
+    color: #696969;
+    transition: all .3s .3s; }
+  .benefit__card:hover .benefit__title {
+    color: #f1f1f1; }
+  .benefit__card:hover .benefit__icon {
+    fill: #f1f1f1; }
+  .benefit__card:hover .benefit__desc {
+    color: #f1f1f1; }
+
+.CTA {
+  height: 65vh;
+  background-image: linear-gradient(19deg, rgba(66, 176, 238, 0.6) 0%, rgba(245, 84, 110, 0.7) 100%), url("../../../images/CTA.jpg");
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+  padding: 5rem 0;
+  display: flex;
+  align-items: center;
+  margin-bottom: 7rem; }
+  .CTA__body {
+    display: flex;
+    flex-direction: column;
+    align-items: center; }
+    .CTA__body h2 {
+      font-size: 4rem;
+      font-family: "Faustina", serif;
+      color: white;
+      text-transform: uppercase;
+      text-align: center;
+      margin-bottom: 2rem;
+      padding-bottom: 2.6rem;
+      border-bottom: 1px solid white; }
+    .CTA__body p {
+      font-size: 1.8rem;
+      text-transform: uppercase;
+      color: white;
+      text-align: center;
+      margin-bottom: 1.5rem; }
 
 .heading-title {
   color: #f5546e;

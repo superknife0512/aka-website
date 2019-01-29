@@ -3,6 +3,10 @@ $font-title: 'Faustina', serif;
 
 $color-primary: #42b0ee;
 $color-secondary: #f5546e;
+
+$color-gradient1: #21D4FD;
+$color-gradient2: #B721FF;
+
 $color-white--2: #f1f1f1;
 
 html{
@@ -21,5 +25,4 @@ body{
     font-weight: 300;
     line-height: 1.5;
     font-family: $font-primary;
-    padding: 1.8rem;
 }

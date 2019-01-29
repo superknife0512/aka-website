@@ -20,12 +20,12 @@
 .active-home{
     &::after{
         @extend %after;        
-        transform: scaleX(1);
+        transform: scaleX(1) !important;
     }
 }
 
 .hero{
-    height: 95vh;
+    height: 100vh;
     width: 100%;
     background-image: linear-gradient(45deg, rgba(0,0,0,.6),rgba(0,0,0,.4) ), url('../../../images/hero.jpg');
     background-position: center;
@@ -98,7 +98,8 @@
         font-size: 6rem;
         font-weight: 100;
         margin-bottom: 2rem;
-        text-transform: uppercase
+        text-transform: uppercase;
+        text-align: center;
     }
     &__subTitle{
         color: #f0f0f0;
@@ -196,4 +197,120 @@
     }
 }
 
+.benefit{
+    margin-top: 5rem;
+    margin-bottom: 8rem;
 
+    &__heading{
+        display: flex;
+        flex-direction: column;
+        align-content: flex-end;
+        align-items: flex-end;
+        padding-left: 34rem;
+        margin-bottom: 3rem;
+        p{
+            text-align: right;
+        }
+    }
+    &__body{
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(25rem, 30rem));
+        grid-column-gap: 6rem;
+        grid-row-gap: 6rem;
+        justify-content: center;
+    }
+    &__card{
+        padding: 2.5rem;
+        border: solid 1px rgb(223, 223, 223);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border-radius: .5rem;
+        position: relative;
+        overflow: hidden;
+        cursor: pointer;
+
+        &::after{
+            content:"";
+            height: 100%;
+            width: 1rem;
+            background-color: $color-secondary;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            transform-origin: left center;
+            transform: scaleY(0);
+            transition: transform .3s, width .3s .3s;
+        }
+        &:hover::after{
+            transform: scaleX(1);
+            width: 100%;
+        }
+    }
+    &__icon{
+        fill: $color-primary;
+        height: 6rem;
+        width: 6rem;
+        margin-bottom: 1.5rem;
+        transition: all .3s .3s;
+    }
+    &__title{
+        font-family: $font-title;
+        font-size: 2.2rem;
+        color: $color-secondary;
+        margin-bottom: 1.2rem;
+        text-align: center;
+        text-transform: uppercase;
+        transition: all .3s .3s;
+    }
+    &__desc{
+        color: #696969;
+        transition: all .3s .3s;
+    }
+    &__card:hover  &__title{
+        color: $color-white--2;
+    }
+    &__card:hover  &__icon{
+        fill: $color-white--2;
+    }
+    &__card:hover  &__desc{
+        color: $color-white--2;
+    }
+}
+
+.CTA{
+    height: 65vh;
+    background-image: linear-gradient(19deg, rgba($color-primary, .6) 0%, rgba($color-secondary, .7) 100%),
+                        url('../../../images/CTA.jpg');
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+    padding: 5rem 0;
+    display: flex;
+    align-items: center;
+    margin-bottom: 7rem;
+
+    &__body{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        h2{
+            font-size: 4rem;
+            font-family: $font-title;
+            color: white;
+            text-transform: uppercase;
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 2.6rem;
+            border-bottom: 1px solid white;
+        }
+        p{
+            font-size: 1.8rem;
+            text-transform: uppercase;
+            color: white;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+    }
+}

@@ -59,6 +59,41 @@
                 </div>
             </div>
         </section>
+        <hr class="grid__container">
+
+        <section class="grid__container benefit">
+            <div class="benefit__heading">
+                <h2 class="heading heading--2">Tại sao chọn AK</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae tenetur voluptates beatae reprehenderit dicta iusto necessitatibus, nemo nobis minima. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Blanditiis non, impedit numquam rem accusantium corrupti unde expedita aut totam eligendi dolorum autem, </p>
+            </div>
+            <div class="benefit__body">
+                <% benefitData.forEach(benefit=>{ %>
+
+                    <div class="benefit__card">
+                        <svg class="benefit__icon">
+                            <use xlink:href="<%= benefit.icon %>"></use>
+                        </svg>
+                        <h4 class="benefit__title">
+                            <%= benefit.title %>
+                        </h4>
+                        <p class="benefit__desc">
+                            <%= benefit.desc %>
+                        </p>
+                    </div>
+
+                <% }) %>
+            </div>
+        </section>
+
+        <section class="CTA grid__fluid">
+            <div class="container CTA__body">
+                <h2>bạn đang cần các lợi ích như vậy?</h2>
+                <p >
+                    Đừng chần chừ nữa hãy <strong>ĐĂNG KÍ NGAY</strong> để có được các lợi ích <br> hấp dẫn từ <strong> TRUNG TÂM ĐA NGỮ AK </strong>
+                </p>
+                <a href="#" class="link-btn">Đăng kí ngay</a>
+            </div>
+        </section>
 
     </div>
 
