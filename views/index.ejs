@@ -18,6 +18,7 @@
                         </li>
                     <% }) %>
                 </ul>
+                <h4 class="hero__phone"><i class="fas fa-mobile-alt "></i> 078 275 9831</h4>
             </nav>
             <div class="hero__body">
 
@@ -95,11 +96,100 @@
             </div>
         </section>
 
+        <section class="grid__fluid course-section">           
+                
+                <div class="course-section__body container">
+                    <h1 class="heading heading--4">Các khóa học của chúng tôi</h1>
+                    <br><br>
+
+                    <svg class=" course-section__icon course-section__icon--left">
+                        <use xlink:href="images/arrows.svg#icon-chevron-thin-left"></use>
+                    </svg>
+                    <svg class=" course-section__icon course-section__icon--right">
+                        <use xlink:href="images/arrows.svg#icon-chevron-thin-right"></use>
+                    </svg>
+
+                    <div class="course-section__glider" style="overflow-x: hidden">
+
+                        <% courses.forEach((course,i)=>{ %>
+                            <div class="course-section__card">
+                                <span class="course-section__sale">
+                                    -<%= offPrices[i] %>%
+                                </span>
+                                <a href="#">
+                                    <img src="<%= course.teacher.avatar %>" 
+                                        alt="teacher" 
+                                        class="course-section__avatar">
+                                </a>
+                                <div class="course-section__card--1">
+                                    <img src="<%= course.courseImg %>" 
+                                            alt="course Imgs"
+                                            class="course-section__img">
+                                    <div class="course-section__info">
+    
+                                        <h3 class="course-section__title">
+                                            <%= course.title %>
+                                        </h3>
+                                        <hr>
+                                        <p><%= course.shortDes.split(' ').slice(0,15).join(' ') %>
+                                            <%= course.shortDes.split(' ').length > 15 ? '...' : '' %></p>
+    
+                                    </div>
+                                </div>
+                                <div class="course-section__card--2">
+                                    <h3>
+                                        kỹ năng đạt được sau khóa học
+                                    </h3>
+                                    <div class="d-flex align-items-center ">
+                                        <svg>
+                                            <use xlink:href="images/benefits.svg#icon-hourglass"></use>
+                                        </svg>
+                                        <h5><%= course.learningSchedule %></h5>
+                                    </div>
+                                    <p><%= course.courseGoals.join('. ') %>...</p>
+                                    <a href="#" class="link-btn">Xem thêm</a>
+                                </div>
+                            </div>
+                        <% }) %>   
+
+                    </div>        
+            </div>
+        </section>
+
+        <section class="events-sect">
+            
+        </section>
+
     </div>
 
     <script>
-        $('#item-0').addClass('active-home');
+            $('#item-0').addClass('active-home');
 
+            const glider1 = new Glider(document.querySelector('.course-section__glider'), {
+            // Mobile-first defaults
+            slidesToShow: 1,
+            slidesToScroll: 2,            
+            itemWidth: 300, 
+            scrollLock: true,
+            draggable: true,
+            responsive: [{
+                // screens greater than >= 1024px
+                breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 3,
+                        // itemWidth: 150,                        
+                        dragVelocity: 2,
+                        duration: 2,
+                        arrows: {
+                            prev: '.course-section__icon--left',
+                            next: '.course-section__icon--right'
+                        },
+                        
+                    }
+                }
+            ]
+        });
     </script>
 
 <%- include('./includes/footer.ejs') %>

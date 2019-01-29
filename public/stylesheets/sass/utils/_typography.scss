@@ -1,6 +1,5 @@
 %symbol{    
     content: "";
-    background-color: $color-secondary;
     height: 1.2rem;
     width: 5rem;
     position: absolute;
@@ -18,7 +17,8 @@
     &--1{
         color: $color-secondary;
         &::after{    
-            @extend %symbol;
+            @extend %symbol;            
+            background-color: $color-secondary;
             bottom: -30px;
             left: 0;
         }
@@ -27,13 +27,23 @@
     &--2{
         color: $color-secondary;        
         &::after{
-            @extend %symbol;
+            @extend %symbol;            
+            background-color: $color-secondary;
             bottom: -30px;
             right: 0;
         }
     }
     &--3{ // no symbol
         color: $color-white--2;
+    }
+    &--4{
+        color: $color-primary;        
+        &::after{
+            @extend %symbol;            
+            background-color: $color-primary;
+            bottom: -30px;
+            left: 0;
+        }
     }
 }
 

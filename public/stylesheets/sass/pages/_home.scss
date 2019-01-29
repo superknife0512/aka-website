@@ -46,6 +46,7 @@
         padding-top: 4rem;
         padding-bottom: 1.5rem;   
         border-bottom: 1px solid #696969;
+        position: relative;
 
         &--left{
 
@@ -54,6 +55,20 @@
             display: flex;
             list-style: none;
 
+        }
+    }
+    &__phone{
+        position: absolute;
+        top: 11rem;
+        right: 1rem;
+        display: flex;
+        align-items: center;
+        color: $color-white--2;
+
+        i{
+            color: $color-white--2;
+            font-size: 2.5rem;
+            margin-right: 1.5rem;
         }
     }
     &__nav-item{
@@ -313,4 +328,150 @@
             margin-bottom: 1.5rem;
         }
     }
+}
+
+.course-section{
+    padding-bottom: 7rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    &__body{
+        margin-top: 5rem;
+        margin-bottom: 5rem;
+        position: relative;
+    }
+    &__card{
+        position: relative;
+        margin-right: 3.4rem;
+        margin-left: 3.4rem;
+        margin-top: 2rem;
+        box-shadow: 2px 2px 21px -6px rgba(0,0,0,0.4);
+        border-radius: .5rem;
+        overflow: hidden;    
+        height: 40rem !important; 
+        cursor: pointer;  
+
+        &--1{
+
+        }  
+        &--2{
+            position: absolute;
+            background-color: white;
+            padding: 2.4rem;
+            z-index: 450;
+            height: 100%;
+            box-shadow: .5 .5 .5 rgba(0, 0, 0, .3);
+            transform: translateX(-35rem);
+            transition: all .7s;
+
+            top: 0;
+            left: 0;
+            display: flex;
+            flex-direction: column;
+            div{
+                margin-bottom: 2rem;
+                margin-left: .5rem;
+            }
+            h3{
+                font-size: 1.7rem;
+                text-transform: uppercase;
+                color: $color-secondary;
+                font-family: $font-title;
+                margin-bottom: 1.5rem;
+                margin-left: 6rem;
+            }
+            svg{
+                fill: $color-primary;
+                height: 3rem;
+                width: 3rem;
+                margin-right: 1rem;
+            }
+            h5{
+                color: $color-primary;
+                font-size: 1.6rem;
+                font-weight: 500;
+            }
+            p{
+                margin-bottom: 1.2rem;
+                color: #4e4e4e
+            }
+
+        }      
+    }
+
+    &__card:hover &__card--2{
+        transform: translateX(0);
+    }
+
+    &__info{
+        padding: 3rem;
+
+    }
+
+    &__img{
+        width: 100%;
+        height: 20rem;
+        object-fit: cover;
+        object-position: center;
+        filter: brightness(.7);
+    }
+
+    &__avatar{
+        height: 6.5rem;
+        width: 6.5rem;
+        object-fit: cover;
+        border-radius: 500px;
+        border: 1px solid white;  
+        position: absolute;
+        top: 1rem;
+        right: 1rem;  
+        box-sizing: content-box;  
+        z-index: 400;  
+    }
+
+    &__title{
+        font-size: 1.7rem;
+        text-transform: uppercase;
+        color: $color-primary;
+        font-family: $font-title;
+        margin-bottom: 1.5rem;
+    }
+    &__sale{
+        width: 6.9rem;
+        height: 6.9rem;
+        background-color: $color-secondary;
+        display: flex;
+        justify-content: center;
+        padding: 1.5rem;
+        clip-path: polygon(86% 0, 86% 76%, 50% 100%, 15% 76%, 15% 0);
+        position: absolute;
+        left: 1rem;
+        color: white;
+        font-weight: 700;
+        box-shadow: 2px 2px 21px -6px rgba(0,0,0,0.75);
+        z-index: 500;
+    }
+    &__icon{
+        fill: rgb(196, 196, 196);
+        height: 5rem;
+        width: 5rem;
+        position: absolute;
+        top: 33.5rem;
+        cursor: pointer;
+        transition: all .2s;
+        &:hover{
+            fill: $color-secondary;
+        }
+        &--left{
+            left: -2rem;
+        }
+        &--right{
+            right: -2rem;
+        }
+    }
+}
+
+.glider-track{
+    height: 44rem !important;
 }
