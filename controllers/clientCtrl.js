@@ -1,5 +1,5 @@
 const Course = require('../models/Course');
-const Event = require('../models/Event');
+const Events = require('../models/Event');
 
 exports.getHomePage =async (req,res,next)=>{
 
@@ -39,6 +39,8 @@ exports.getHomePage =async (req,res,next)=>{
         ];
 
         const courses = await Course.find().populate('teacher').limit(6);
+        const events = await Events.find().limit(6).sort('-createdAt');
+        
         const offPrices = courses.map(course => {
             const oldPrice = parseInt(course.oldPrice.split('.').join(''));
             const price = parseInt(course.price.split('.').join(''));
@@ -54,7 +56,8 @@ exports.getHomePage =async (req,res,next)=>{
             benefitData,
             path: '/',
             offPrices,
-            courses
+            courses,
+            events
         })
 
     } catch (err) {

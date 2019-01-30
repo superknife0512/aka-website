@@ -100,6 +100,7 @@
                 
                 <div class="course-section__body container">
                     <h1 class="heading heading--4">Các khóa học của chúng tôi</h1>
+                    <h4>Các bạn có thể tìm thấy khóa học phù hợp với thời gian biểu và học lực của mình tại đây.</h4>
                     <br><br>
 
                     <svg class=" course-section__icon course-section__icon--left">
@@ -156,8 +157,38 @@
             </div>
         </section>
 
-        <section class="events-sect">
-            
+        <section class="events-sect grid__fluid">
+            <div class="events-sect__body container">
+                <h1 class="heading heading--1">Sự kiện và tin tức</h1>
+                <h4>Tại đây các bạn có thể tìm thấy những sự kiện mới nhất diễn ra tại AK, Bạn có thể xem hoặc tham gia vào một trong các sự kiện đó</h4>
+                <svg class=" events-sect__icon events-sect__icon--left">
+                    <use xlink:href="images/arrows.svg#icon-chevron-thin-left"></use>
+                </svg>
+                <svg class=" events-sect__icon events-sect__icon--right">
+                    <use xlink:href="images/arrows.svg#icon-chevron-thin-right"></use>
+                </svg>
+                
+                <div class="events__glider container">
+
+                    <% events.forEach(event=>{ %>
+                        <div class="events-sect__card">
+                            <img src="<%= event.eventImgs[0] %>" alt="event img" class="events-sect__img">
+                            <div class="events-sect__wrap">
+                                <h3><%= event.eventName %></h3>
+                                <p><%= event.desc[0].split(' ').slice(0,12).join(' ') %>
+                                    <%= event.desc[0].split(' ').length > 12 ? '...' : '' %></p>
+                            </div>
+                            <div class="events-sect__wrap-btn">
+                                <button class="corner-btn corner-btn--trans">
+                                    <a href="#">Xem thêm</a>
+                                </button>
+                                <p><%= event.dateHappen %></p>
+                            </div>
+                        </div>
+                    <% }) %>
+
+                </div>
+            </div>
         </section>
 
     </div>
@@ -168,10 +199,37 @@
             const glider1 = new Glider(document.querySelector('.course-section__glider'), {
             // Mobile-first defaults
             slidesToShow: 1,
-            slidesToScroll: 2,            
-            itemWidth: 300, 
+            slidesToScroll: 2,     
             scrollLock: true,
-            draggable: true,
+            draggable: true,            
+            arrows: {
+                prev: '.course-section__icon--left',
+                next: '.course-section__icon--right'
+            },
+            responsive: [{
+                // screens greater than >= 1024px
+                breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 3,                     
+                        dragVelocity: 2,
+                        duration: 2,
+                        
+                     }
+                    }
+                ]
+            });
+
+            const glider2 = new Glider(document.querySelector('.events__glider'), {
+            // Mobile-first defaults
+            slidesToShow: 1,
+            slidesToScroll: 2,  
+            scrollLock: true,   
+            draggable: true,         
+            arrows: {
+                 prev: '.events-sect__icon--left',
+                 next: '.events-sect__icon--right'
+            },
             responsive: [{
                 // screens greater than >= 1024px
                 breakpoint: 1024,
@@ -181,15 +239,11 @@
                         // itemWidth: 150,                        
                         dragVelocity: 2,
                         duration: 2,
-                        arrows: {
-                            prev: '.course-section__icon--left',
-                            next: '.course-section__icon--right'
-                        },
                         
+                     }
                     }
-                }
-            ]
-        });
+                ]
+            });
     </script>
 
 <%- include('./includes/footer.ejs') %>
