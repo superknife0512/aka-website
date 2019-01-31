@@ -1,0 +1,119 @@
+%icon-rule{
+    height: 3.5rem;
+    width: 3.5rem;
+    fill: $color-secondary;
+    margin-right: 1.2rem;
+}
+
+.footer{
+    &__wrapper{
+        background-color: #333;
+        border-top: 4px solid $color-secondary;
+        padding: 3rem;
+        height: 28rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center
+    }
+    &__nav{
+        display: flex;
+        margin-top: 2rem;
+        justify-content: center;
+        padding-bottom: 3rem;
+        border-bottom: 1px solid rgb(112, 112, 112);
+    }
+    &__item{
+        padding: .6rem 1.4rem;
+        transition: all .2s;
+
+        &:not(:last-child){
+            margin-right: 4rem;
+            margin-left: 4rem;
+        }
+
+        &:hover{
+            border: 1px solid $color-primary;
+            border-radius: 3px;
+        }
+
+    }
+    &__link{
+        &:link, &:visited{
+            text-decoration: none;
+            color: $color-secondary;
+            font-size: 1.7rem;
+            text-transform: uppercase;
+            transition: .2s all;
+        }
+        &:hover{
+            color: $color-primary;
+        }
+    }
+    &__item:hover &__link{
+        color: $color-primary;
+    }
+    &__small{
+        margin-right: 3rem;
+        margin-top: 2rem;
+        color: rgb(221, 221, 221);
+    }
+}
+
+.footer-sect{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(25rem, 33rem));
+    grid-column-gap: 4rem;
+    grid-row-gap: 3rem;
+    justify-content: center;
+    justify-items: center;
+    margin-bottom: 4rem;
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    h3{
+        color: $color-primary;
+        font-size: 2rem;
+        text-transform: uppercase;
+        font-family: $font-title;
+        margin-bottom: 2.5rem;
+    }
+
+    img{
+        height: 15rem;
+    }
+    &__contact{
+        li{
+            display: flex;
+            margin-bottom: 2rem;
+            align-items: center;
+            h2{
+                color: white;
+                font-size: 1.5rem;
+            }
+        }
+        svg{
+            @extend %icon-rule;
+        }
+    }
+
+    &__social{
+        li{
+            display: flex;
+            margin-bottom: 2rem;
+            align-items: center;
+
+            h2{
+                color: white;
+                font-size: 1.5rem;
+            }
+        }
+        svg{
+            @extend %icon-rule;            
+        }
+    }
+
+    &__wrap{
+        background-color: #333;
+        padding: 5rem 0;
+    }
+}

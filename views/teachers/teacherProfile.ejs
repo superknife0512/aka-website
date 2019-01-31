@@ -1,5 +1,235 @@
 <%- include('../includes/html-head.ejs') %>
+    <%- include('../includes/teacher-header.ejs') %>
+    
+    <script>
+        window.fbAsyncInit = function() {
+          FB.init({
+            appId            : `Toan's first app`,
+            autoLogAppEvents : true,
+            xfbml            : true,
+            version          : 'v3.2'
+          });
+        };
+      
+        (function(d, s, id){
+           var js, fjs = d.getElementsByTagName(s)[0];
+           if (d.getElementById(id)) {return;}
+           js = d.createElement(s); js.id = id;
+           js.src = "https://connect.facebook.net/en_US/sdk.js";
+           fjs.parentNode.insertBefore(js, fjs);
+         }(document, 'script', 'facebook-jssdk'));
+      </script>
 
-    <h2>This is teacher profile</h2>
+    <div class="container height-2000">
+        <div class="teacher-detail ">
+            <div class="teacher-detail__left">
+                <img src="<%= teacher.avatar %>" 
+                    alt="<%= teacher.name %>"
+                    class="teacher-detail__ava">
+                <p class="teacher-detail__story text-center"><%= teacher.story %></p><br>
+                <small>Nếu bạn muốn điều chỉnh thông tin cá nhân của mình hãy thông báo điều đó với admin</small>
+            </div>
+            <div class="teacher-detail__right">
+                <h3 class="teacher-detail__name"><%= teacher.name %></h3>
+                <h4 class="teacher-detail__specialty"><%= teacher.specialty %></h4>
+                
+                <div class="teacher-detail__video">
 
+                    <% if(teacher.teacherVideo[0]) { %>
+                        <% teacher.teacherVideo.forEach(video=>{ %>
+                            <div class="fb-video teacher-detail__video--each" data-href="<%= video %>" data-allowfullscreen="true" data-width="600"></div>
+                        <% }) %>
+                    <% } else { %>
+                        <h3>Bạn không có video nào ở đây. Hãy hỏi admin để biết thêm chi tiếc.</h3>
+                    <% } %>
+
+                </div>
+            </div>
+        </div>
+        <hr>
+
+        <h2 class="medium-title">Teacher Schedule</h2>
+        <br><br>
+        <% if(teacher.schedule[0]) { %>
+            <table class="table table-bordered table-hover table-responsive-sm">
+                <thead>
+                    <tr class="bg-warning">
+                        <th scope="col">Giáo viên</th>
+                        <th scope="col">Buổi</th>
+                        <th scope="col">T2</th>
+                        <th scope="col">T3</th>
+                        <th scope="col">T4</th>
+                        <th scope="col">T5</th>
+                        <th scope="col">T6</th>
+                        <th scope="col">T7</th>
+                        <th scope="col">CN</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row" rowspan="3"><%= teacher.name %> - <br> <small><%= teacher.specialty %></small></th>
+                        <th>Sáng</th>
+                        <td><%= teacher.schedule[0].t21 %></td>
+                        <td><%= teacher.schedule[0].t31 %></td>
+                        <td><%= teacher.schedule[0].t41 %></td>
+                        <td><%= teacher.schedule[0].t51 %></td>
+                        <td><%= teacher.schedule[0].t61 %></td>
+                        <td><%= teacher.schedule[0].t71 %></td>
+                        <td><%= teacher.schedule[0].cn1 %></td>
+                    </tr>
+                    <tr>
+                        <th>Chiều</th>
+                        <td><%= teacher.schedule[0].t22 %></td>
+                        <td><%= teacher.schedule[0].t32 %></td>
+                        <td><%= teacher.schedule[0].t42 %></td>
+                        <td><%= teacher.schedule[0].t52 %></td>
+                        <td><%= teacher.schedule[0].t62 %></td>
+                        <td><%= teacher.schedule[0].t72 %></td>
+                        <td><%= teacher.schedule[0].cn2 %></td>
+                    </tr>
+                    <tr>
+                        <th>Tối</th>
+                        <td><%= teacher.schedule[0].t23 %></td>
+                        <td><%= teacher.schedule[0].t33 %></td>
+                        <td><%= teacher.schedule[0].t43 %></td>
+                        <td><%= teacher.schedule[0].t53 %></td>
+                        <td><%= teacher.schedule[0].t63 %></td>
+                        <td><%= teacher.schedule[0].t73 %></td>
+                        <td><%= teacher.schedule[0].cn3 %></td>
+                    </tr>
+                </tbody>
+            </table>
+            <a class="btn btn-primary" href="/teacher/schedule/edit?editMode=true">Chỉnh sửa TKB</a>
+            
+        <% } else { %>
+            <div>
+                <h3>Rất tiêc, bạn chưa có thời khóa biểu.</h3>
+                <a href="/teacher/schedule">Tạo một TKB ngay</a>
+            </div>
+        <% } %>
+        <hr>
+
+        <h2 class="medium-title">Albums</h2>
+        <br><br>
+        <section class="album-info__wrap">
+            <% if(albums[0]) { %>
+                <% albums.forEach(album=>{ %>                   
+                    <div class="album-info">
+                        <i class="fas fa-plus album-info__plus"></i>
+                        <div class="album-info__title">
+                            <div class="heading-wrap">
+                                <h4><%= album.name %> 
+                                    <div class="heading-wrap">
+                                        <button class="btn btn-primary activePopup" >Add more </button>
+                                        <a href="/teacher/album/edit?albumId=<%= album._id %>" class="btn btn-dark">Edit </a>
+                                        <button class="btn btn-danger btn__delete">Delete Album </button>
+                                    </div>
+                                </h4>
+                            </div>
+                            <div class="album-info__display">
+                                <p><%= album.shortDes %></p>
+                                <hr>
+                                
+                                <% if(album.posts[0]) { %>
+                                    <% album.posts.forEach((post,i)=>{ %>
+                                        
+
+                                        <div class="post">
+                                            <div class="post__right">
+
+                                                <% post.imgUrls.forEach(img=>{ %>
+                                                    <img src="<%= img %>" alt="nothing" class="post__img">
+                                                <% }) %>
+                                                <span class="post__title">post <%= i+1 %></span>
+                                                
+                                            </div>
+                                            <div class="post__left">
+                                                <p class="post__desc">
+                                                    <%= post.imgDesc %>
+                                                </p>
+                                                <form action="/teacher/album/post-delete"
+                                                        method="POST"
+                                                        class="album__post-del">
+                                                        <input type="hidden" value="<%= post._id %>" name="postId">
+                                                        <input type="hidden" value="<%= album._id %>" name="albumId">
+                                                        <button type="submit" class="btn btn-danger">delete post</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    
+                                    <% }) %>
+
+                                <% } else { %>
+                                    <h5> Bạn chưa có post nào ở album này. <a href="#" class="activePopup">Thêm ngay</a></h5>
+                                <% } %>
+
+                            </div>
+                        </div>
+                        <div class="info-popup__wrapper info-popup__wrapper--2">
+                            <div class="info-popup info-popup--2">
+                                    <h1 class="info-popup__heading">Are your sure?</h1>
+                                    <p class="info-popup__content">Click delete if you want to delete '<%= album.name %>' forever!</p>
+                                    <div class="d-flex justify-content-center btn-wrap">
+                                        <form action="/teacher/album/delete/" method="POST">
+                                            <input type="hidden" name="albumId" value="<%= album._id %>">
+                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                        </form>
+                                        <button class="btn btn-info btn__cancel" >Cancel</button>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>  
+                    
+                     <!-- popup section -->
+                     <div class="info-popup__wrapper info-popup__wrapper1">
+                        <div class="info-popup">
+                            <h1 class="info-popup__heading">Thêm ảnh vào album "<%= album.name %>" </h1>
+                            <p class="info-popup__content">Mỗi album nên có tối đa từ 5-6 post, Mỗi post chỉ nên thêm tối đa 4 ảnh</p>
+                            <form action="/teacher/album/add" 
+                                    method="POST"
+                                    class="testimonial__form"
+                                    enctype="multipart/form-data">
+                                <div class="form-group">
+                                    <textarea type="text" 
+                                            placeholder="Nhập vào miêu tả cho post" 
+                                             class="form-control"
+                                            name="imgDesc"
+                                            rows="3"></textarea>
+                                </div>
+                    
+                                <div class="form-group">
+                                    <input type="file" 
+                                            class="form-control file-style"
+                                            name="postImgs"
+                                            accept="image/*"
+                                            multiple>
+                                    <small>Thêm ảnh vào album</small>
+                                </div>
+    
+                                <i class="fas fa-times popup__icon"></i>
+                                <input type="hidden" name="albumId" value="<%= album._id %>">
+                                <button type="submit" class="btn btn-success">Add Post</button>
+                            </form>
+                            </div>
+                        </div>
+
+                        
+    
+                        <!-- album section -->
+        
+                <% }) %>
+            <% } else { %>
+                <h3>You have no album here! Click <a href="/teacher/album">Here</a> to add one</h3>
+            <% } %>
+           
+        </section>
+        
+    </div>
+    <br><br>
+
+    <script src="public/javascripts/albumOpen.js"></script>
+    <script src="public/javascripts/activePopup.js"></script>
+     <%- include('../includes/admin-footer.ejs',{
+        page: 'Teacher page'
+    }) %>
 <%- include('../includes/footer.ejs') %>

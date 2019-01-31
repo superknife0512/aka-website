@@ -3,25 +3,18 @@ const router = express.Router();
 const {protectAuth} =require('../middlewares/protectAuth');
 const {protectForAdmin} =require('../middlewares/protectRole');
 const multer = require('multer');
+const MulterAzureStorage = require('multer-azure-storage');
 
 const {uploadImg} = require('../middlewares/uploadAvatar');
 
-const imagesStorage = multer.diskStorage({
-    destination: function(req,file,cb){
-        cb(null, 'public/eventImages');
-    },
-    filename: function(req, file, cb){
-        cb(null, Date.now() + '-' + file.originalname);
-    }
-})
+const maxSize = 3*1000*1000;
 
-const incomingEvent = multer.diskStorage({
-    destination: function(req,file,cb){
-        cb(null, 'public/incomingEvent');
-    },
-    filename: function(req, file, cb){
-        cb(null, Date.now() + '-' + file.originalname);
-    }
+//save file on azure storage
+const azureStorage =  new MulterAzureStorage({
+    azureStorageConnectionString: 'DefaultEndpointsProtocol=https;AccountName=superknife0512;AccountKey=kkTaurz/1zg9MLITL5o3rdCAd+0g3bXG/QWpwXf8KiGAL/X9eVa0KSexW9hiOWf/VWkbrgAI7/woAQeRgGwrug==;EndpointSuffix=core.windows.net',
+    containerName: 'event-photos',
+    containerSecurity: 'blob',
+    
 })
 
 const courseImgStore = multer.diskStorage({
@@ -34,16 +27,15 @@ const courseImgStore = multer.diskStorage({
 })
 
 const fileFilter = (req,file,cb)=>{
-    if(file.mimetype === 'image/jpg' || file.mimetype === 'image/png' || file.mimetype === 'image/jpeg'){
+    if(file.mimetype === 'image/jpg' || file.mimetype === 'image/png' || file.mimetype === 'image/jpeg' ){
         cb(null, true)
     } else {
         cb(null, false)
-        console.log('File type is not right');
     }
 }
 
-const uploadFiles = multer({storage: imagesStorage, fileFilter: fileFilter}).array('eventImgs', 5);
-const IncEventUpload = multer({storage: incomingEvent, fileFilter: fileFilter}).single('eventImg');
+const uploadFiles = multer({storage: azureStorage, fileFilter: fileFilter, limits: {fileSize: maxSize}}).array('eventImgs', 5);
+const IncEventUpload = multer({storage: azureStorage, fileFilter: fileFilter}).single('eventImg');
 const uploadCourseImg = multer({storage: courseImgStore, fileFilter: fileFilter}).single('courseImg');
 
 const adminController = require('../controllers/adminCtrl');
@@ -55,7 +47,7 @@ router.post('/delete', protectAuth, protectForAdmin, adminController.postDeleteT
 // create-delete course
 router.get('/course', protectAuth, protectForAdmin, adminController.getCreateCourse);
 router.post('/course', protectAuth, protectForAdmin, uploadCourseImg, adminController.postCreateCourse);
-router.post('/course/delete', protectAuth, protectForAdmin, uploadCourseImg, adminController.postDeleteCourse);
+router.post('/course/delete', protectAuth, protectForAdmin, adminController.postDeleteCourse);
 
 // edit and interact width testimonials
 router.post('/course/add-testimonial', protectAuth, protectForAdmin, adminController.postAddTesti);
@@ -80,5 +72,7 @@ router.post('/event/over', protectAuth, protectForAdmin, adminController.postEve
 router.get('/teachers-info', protectAuth, protectForAdmin, adminController.getTeachersInfo);
 router.post('/teacher-info/edit', protectAuth, protectForAdmin, uploadImg, adminController.postTeacherEdit);
 router.get('/teacher-info/edit/:teacherId',protectAuth, protectForAdmin, adminController.getTeacherEdit );
+
+router.post('/search',protectAuth, protectForAdmin, adminController.getSearchPage );
 
 module.exports = router;

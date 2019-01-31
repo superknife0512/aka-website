@@ -53,6 +53,6 @@ const courseSchema =new mongoose.Schema({
     videoUrl: String,
 
     testimonials: [testimonialSchema]
-})
+},{timestamps: true})
 
 module.exports = mongoose.model('Course', courseSchema);

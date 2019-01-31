@@ -1,5 +1,35 @@
 const mongoose = require('mongoose');
 
+scheduleSchema = new mongoose.Schema({
+        t21: String,
+        t22: String,
+        t23: String,
+        
+        t31: String,
+        t32: String,
+        t33: String,
+        
+        t41: String,
+        t42: String,
+        t43: String,
+        
+        t51: String,
+        t52: String,
+        t53: String,
+        
+        t61: String,
+        t62: String,
+        t63: String,
+        
+        t71: String,
+        t72: String,
+        t73: String,
+        
+        cn1: String,
+        cn2: String,
+        cn3: String,
+})
+
 const teacherSchema = new mongoose.Schema({
     email:{
         type:String,
@@ -39,40 +69,7 @@ const teacherSchema = new mongoose.Schema({
         type: String
     },
 
-
-    schedule:{
-        't2.1': String,
-        't2.2': String,
-        't2.3': String,
-        
-        't3.1': String,
-        't3.2': String,
-        't3.3': String,
-        
-        't4.1': String,
-        't4.2': String,
-        't4.3': String,
-        
-        't5.1': String,
-        't5.2': String,
-        't5.3': String,
-        
-        't6.1': String,
-        't6.2': String,
-        't6.3': String,
-        
-        't7.1': String,
-        't7.2': String,
-        't7.3': String,
-        
-        'cn.1': String,
-        'cn.2': String,
-        'cn.3': String,
-    },
-
-    albums:[
-        {type: mongoose.Schema.Types.ObjectId, ref: 'Album'}
-    ],
+    schedule: [scheduleSchema],
 
     token: String,
     tokenExpiration: Date,

@@ -1,0 +1,68 @@
+<%- include('../includes/html-head.ejs') %>
+    <%- include('../includes/admin-header.ejs') %><br>
+
+    <div class="container">
+        <h1 class="heading-title">Search result</h1>
+        <hr>
+        <h2 class="medium-title">Courses result: <%= courseSearch.length %> results </h2>
+        <% if(courseSearch[0]) { %>
+            <div class="course-info__wrap">
+                <% courseSearch.forEach(course=> { %>
+                    <div class="card">
+                            <img src="<%= course.courseImg %>"
+                                 class="card-img-top course-info__card-img" 
+                                 alt="<%= course.title %>">
+                            <div class="card-body">
+                                <h2 class="card-title"><%= course.title %></h2>
+                                <p class="card-text"><%= course.shortDes.split(' ').slice(0,14).join(' ') %> ...</p>
+                                <div class="d-flex">
+                                    <a href="/admin/course/edit?courseId=<%= course._id %>" class="btn btn-warning mr-8">Add information</a>
+                                    <form action="/admin/course/delete" method="POST">
+                                        <input type="hidden" value="<%= course._id %>" name="courseId">
+                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>            
+                <% }) %>
+            </div>        
+        <% } else { %>
+            <br><br>
+            <h3>Nothing found here!</h3>
+        <% } %>
+        <br>
+
+        <h2 class="medium-title">Event result: <%= eventSearch.length %> results</h2>
+
+        <% if(eventSearch[0]) { %>
+            <div class="course-info__wrap">
+                <% eventSearch.forEach(event=> { %>
+                    <div class="card">
+                            <img src="<%= event.eventImgs[0] %>"
+                                 class="card-img-top course-info__card-img" 
+                                 alt="<%= event.title %>">
+                            <div class="card-body">
+                                <h2 class="card-title"><%= event.eventName %></h2>
+                                <p class="card-text"><%= event.dateHappen %></p>
+                                <p class="card-text"><%= event.desc[0].split(' ').slice(0,14).join(' ') %></p>
+                                <div class="d-flex">
+                                    <a href="/admin/event/edit?eventId=<%= event._id %>" class="btn btn-warning mr-8">Add information</a>
+                                    <form action="/admin/event/delete" method="POST">
+                                        <input type="hidden" value="<%= event._id %>" name="eventId">
+                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>        
+                <% }) %>
+            </div>        
+        <% } else { %>
+            <br><br>
+            <h3>Nothing found here!</h3>
+        <% } %>
+    </div>
+
+    <%- include('../includes/admin-footer.ejs',{
+        page: 'Course Page'
+    }) %>
+<%- include('../includes/footer.ejs') %>

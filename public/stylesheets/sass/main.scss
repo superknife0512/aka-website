@@ -1,12 +1,22 @@
 @import './utils/resets';
 @import './utils/helpers';
 @import './utils/animation';
+@import './utils/grid';
+@import './utils/typography';
+@import './utils/btn';
+
 @import './pages/signup';
 @import './pages/admin';
+@import './pages/teacher';
+@import './pages/home';
+
 @import './components/title';
 @import './components/popup';
 @import './components/adminNav';
 @import './components/teacherCard';
 @import './components/quote';
 @import './components/glider';
+@import './components/footer';
+@import './components/footer';
+
 

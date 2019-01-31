@@ -1,0 +1,66 @@
+<%- include('../includes/html-head.ejs') %>
+    <%- include('../includes/teacher-header.ejs') %>
+
+    <div class="container height-2000">
+        <form class="schedule" 
+                action="<%= editMode? '/teacher/schedule/edit' : '/teacher/schedule' %>" 
+                method="POST">
+                
+            <h1 class="heading-title">Thời khóa biểu</h1>
+            <p>Làm ơn hãy điền đầy đủ vào tất cả các ô, ngày nào không dạy thì ghi là 'nghỉ', ngày nào dạy thì ghi thời gian bắt đầu lớp học. ví dụ: '13h30' </p>
+            <hr>
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">Giáo viên</th>
+                        <th scope="col">Buổi</th>
+                        <th scope="col">T2</th>
+                        <th scope="col">T3</th>
+                        <th scope="col">T4</th>
+                        <th scope="col">T5</th>
+                        <th scope="col">T6</th>
+                        <th scope="col">T7</th>
+                        <th scope="col">CN</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row" rowspan="3"><%= teacher.name %> - <br> <small><%= teacher.specialty %></small></th>
+                        <td>Sáng</td>
+                        <td><input type="text" name="T21" value="<%= editMode? schedule.t21 : '' %>"  class="form-control"></td>
+                        <td><input type="text" name="T31" value="<%= editMode? schedule.t31 : '' %>"  class="form-control"></td>
+                        <td><input type="text" name="T41" value="<%= editMode? schedule.t41 : '' %>"  class="form-control"></td>
+                        <td><input type="text" name="T51" value="<%= editMode? schedule.t51 : '' %>"  class="form-control"></td>
+                        <td><input type="text" name="T61" value="<%= editMode? schedule.t61 : '' %>"  class="form-control"></td>
+                        <td><input type="text" name="T71" value="<%= editMode? schedule.t71 : '' %>"  class="form-control"></td>
+                        <td><input type="text" name="CN1" value="<%= editMode? schedule.cn1 : '' %>"  class="form-control"></td>
+                    </tr>
+                    <tr>
+                        <td>Chiều</td>
+                        <td><input type="text" name="T22" value="<%= editMode? schedule.t22 : '' %>" class="form-control"></td>
+                        <td><input type="text" name="T32" value="<%= editMode? schedule.t32 : '' %>" class="form-control"></td>
+                        <td><input type="text" name="T42" value="<%= editMode? schedule.t42 : '' %>" class="form-control"></td>
+                        <td><input type="text" name="T52" value="<%= editMode? schedule.t52 : '' %>" class="form-control"></td>
+                        <td><input type="text" name="T62" value="<%= editMode? schedule.t62 : '' %>" class="form-control"></td>
+                        <td><input type="text" name="T72" value="<%= editMode? schedule.t72 : '' %>" class="form-control"></td>
+                        <td><input type="text" name="CN2" value="<%= editMode? schedule.cn2 : '' %>" class="form-control"></td>
+                    </tr>
+                    <tr>
+                        <td>Tối</td>
+                        <td><input type="text" name="T23" value="<%= editMode? schedule.t23 : '' %>" class="form-control"></td>
+                        <td><input type="text" name="T33" value="<%= editMode? schedule.t33 : '' %>" class="form-control"></td>
+                        <td><input type="text" name="T43" value="<%= editMode? schedule.t43 : '' %>" class="form-control"></td>
+                        <td><input type="text" name="T53" value="<%= editMode? schedule.t53 : '' %>" class="form-control"></td>
+                        <td><input type="text" name="T63" value="<%= editMode? schedule.t63 : '' %>" class="form-control"></td>
+                        <td><input type="text" name="T73" value="<%= editMode? schedule.t73 : '' %>" class="form-control"></td>
+                        <td><input type="text" name="CN3" value="<%= editMode? schedule.cn3 : '' %>" class="form-control"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <button type="submit" class="btn btn-success"><%= editMode? 'Update schedule' : 'Create schedule' %></button>
+        </form>
+    </div><br><br><br>
+    <%- include('../includes/admin-footer.ejs',{
+        page: 'Teacher page'
+    }) %>
+<%- include('../includes/footer.ejs') %>

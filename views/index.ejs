@@ -1,10 +1,236 @@
 <%- include('./includes/html-head.ejs') %>
 
-    <h1><%= title %></h1>
-    <h2>This is also a homepage</h2>
-    <a href="/teacher">Teacher Page</a>
-    <a href="/admin">Admin board</a>
-    <a href="/teacher/signup">Signup</a>
-    <a href="/teacher/login">Login</a>
+    <div class="grid">
+
+        <header class="grid__fluid hero">
+            <nav class="hero__nav container">
+                <div class="hero__nav--left">
+                    <h3 class="hero__logo">
+                        <a href="#" class="hero__nav-link">
+                            <img src="images/logo-top.png" alt="logo">
+                        </a>
+                    </h3>
+                </div>
+                <ul class="hero__nav--right">
+                    <svg class="hero__responsive">
+                        <use xlink:href="images/arrows.svg#icon-layers"></use>
+                    </svg>
+                    <div class="hero__nav--list">
+                        <% navData.forEach((navItem,i)=>{ %>
+                            <li class="hero__nav-item" id="item-<%= i %>">
+                                <a href="#" class="hero__nav-link">
+                                    <%= navItem %>
+                                </a>
+                            </li>
+                        <% }) %>
+                    </div>
+                </ul>
+                <h4 class="hero__phone"><i class="fas fa-mobile-alt "></i> 078 275 9831</h4>
+            </nav>
+            <div class="hero__body">
+
+                <h1 class="hero__title">
+                    Trung tâm đa ngữ AK
+                </h1>
+                <h4 class="hero__subTitle">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia, a! Magni, cum possimus commodi omnis magnam temporibus laudantium natus quo eaque. adipisicing elit
+                </h4>
+                <form class="form-inline" action="#" method="POST">
+                    <input type="text" 
+                            class="hero__search" 
+                            name="search" 
+                            placeholder="Tìm kiếm khóa học yêu thích...">
+                    <button type="submit" class="corner-btn corner-btn--trans">Tìm kiếm</button>
+                </form>
+            </div>
+        </header>
+
+        <section class="grid__container about">
+            <div class="about__left">
+                <h2 class="heading heading--1">
+                    Chúng tôi là ai
+                </h2>
+                <p class="content">
+                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Labore eos placeat maiores, obcaecati vel ut animi reiciendis tenetur aspernatur illo, aut corporis saepe dolor! Debitis perspiciatis quas dolorum voluptatem voluptatum?<br>
+                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Labore eos placeat maiores, obcaecati vel ut animi reiciendis tenetur aspernatur illo, aut corporis saepe dolor! Debitis perspiciatis quas dolorum voluptatem voluptatum?
+                </p>
+                <a href="#" class="link-btn">Xem thêm</a>
+            </div>
+            <div class="about__right">
+                <div class="about__images" id="about__img1">
+                    <img src="images/about (1).jpg" alt="image" class="about__img">
+                    <h5>Some information about this image, about what they do in there</h5>
+                </div>
+                <div class="about__images" id="about__img2">
+                    <img src="images/about (2).jpg" alt="image" class="about__img">
+                    <h5>Some information about this image, about what they do in there</h5>
+                </div>
+            </div>
+        </section>
+        <hr class="grid__container">
+
+        <section class="grid__container benefit">
+            <div class="benefit__heading">
+                <h2 class="heading heading--2">Tại sao chọn AK</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae tenetur voluptates beatae reprehenderit dicta iusto necessitatibus, nemo nobis minima. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Blanditiis non, impedit numquam rem accusantium corrupti unde expedita aut totam eligendi dolorum autem, </p>
+            </div>
+            <div class="benefit__body">
+                <% benefitData.forEach(benefit=>{ %>
+
+                    <div class="benefit__card">
+                        <svg class="benefit__icon">
+                            <use xlink:href="<%= benefit.icon %>"></use>
+                        </svg>
+                        <h4 class="benefit__title">
+                            <%= benefit.title %>
+                        </h4>
+                        <p class="benefit__desc">
+                            <%= benefit.desc %>
+                        </p>
+                    </div>
+
+                <% }) %>
+            </div>
+        </section>
+
+        <section class="CTA grid__fluid">
+            <div class="container CTA__body">
+                <h2>bạn đang cần các lợi ích như vậy?</h2>
+                <p >
+                    Đừng chần chừ nữa hãy <strong>ĐĂNG KÍ NGAY</strong> để có được các lợi ích <br> hấp dẫn từ <strong> TRUNG TÂM ĐA NGỮ AK </strong>
+                </p>
+                <a href="#" class="link-btn">Đăng kí ngay</a>
+            </div>
+        </section>
+
+        <section class="grid__fluid course-section">           
+                
+                <div class="course-section__body container">
+                    <h1 class="heading heading--4">Các khóa học của chúng tôi</h1>
+                    <h4>Các bạn có thể tìm thấy khóa học phù hợp với thời gian biểu và học lực của mình tại đây.</h4>
+                    <br><br>
+
+                    <svg class=" course-section__icon course-section__icon--left">
+                        <use xlink:href="images/arrows.svg#icon-chevron-thin-left"></use>
+                    </svg>
+                    <svg class=" course-section__icon course-section__icon--right">
+                        <use xlink:href="images/arrows.svg#icon-chevron-thin-right"></use>
+                    </svg>
+
+                    <div class="course-section__glider" style="overflow-x: hidden">
+
+                        <% courses.forEach((course,i)=>{ %>
+                            <div class="course-section__card">
+                                <span class="course-section__sale">
+                                    -<%= offPrices[i] %>%
+                                </span>
+                                <a href="#">
+                                    <img src="<%= course.teacher.avatar %>" 
+                                        alt="teacher" 
+                                        class="course-section__avatar">
+                                </a>
+                                <div class="course-section__card--1">
+                                    <img src="<%= course.courseImg %>" 
+                                            alt="course Imgs"
+                                            class="course-section__img">
+                                    <div class="course-section__info">
+    
+                                        <h3 class="course-section__title">
+                                            <%= course.title %>
+                                        </h3>
+                                        <hr>
+                                        <p><%= course.shortDes.split(' ').slice(0,15).join(' ') %>
+                                            <%= course.shortDes.split(' ').length > 15 ? '...' : '' %></p>
+    
+                                    </div>
+                                </div>
+                                <div class="course-section__card--2">
+                                    <h3>
+                                        kỹ năng đạt được sau khóa học
+                                    </h3>
+                                    <div class="d-flex align-items-center ">
+                                        <svg>
+                                            <use xlink:href="images/benefits.svg#icon-hourglass"></use>
+                                        </svg>
+                                        <h5><%= course.learningSchedule %></h5>
+                                    </div>
+                                    <p><%= course.courseGoals.join('. ') %>...</p>
+                                </div>
+                            </div>
+                        <% }) %>   
+
+                    </div> 
+                    <div class="course-section__btn">
+                        <a href="#" class="link-btn">Xem toàn bộ</a>       
+                    </div>
+            </div>
+        </section>
+
+        <section class="events-sect grid__fluid">
+            <div class="events-sect__body container">
+                <h1 class="heading heading--1">Sự kiện và tin tức</h1>
+                <h4>Tại đây các bạn có thể tìm thấy những sự kiện mới nhất diễn ra tại AK, Bạn có thể xem hoặc tham gia vào một trong các sự kiện đó</h4>
+                <svg class=" events-sect__icon events-sect__icon--left">
+                    <use xlink:href="images/arrows.svg#icon-chevron-thin-left"></use>
+                </svg>
+                <svg class=" events-sect__icon events-sect__icon--right">
+                    <use xlink:href="images/arrows.svg#icon-chevron-thin-right"></use>
+                </svg>
+                
+                <div class="events__glider container">
+
+                    <% events.forEach(event=>{ %>
+                        <div class="events-sect__card">
+                            <img src="<%= event.eventImgs[0] %>" alt="event img" class="events-sect__img">
+                            <div class="events-sect__wrap">
+                                <h3><%= event.eventName %></h3>
+                                <p><%= event.desc[0].split(' ').slice(0,12).join(' ') %>
+                                    <%= event.desc[0].split(' ').length > 12 ? '...' : '' %></p>
+                            </div>
+                            <div class="events-sect__wrap-btn">
+                                <button class="corner-btn corner-btn--trans">
+                                    <a href="#">Xem thêm</a>
+                                </button>
+                                <p><%= event.dateHappen %></p>
+                            </div>
+                        </div>
+                    <% }) %>
+
+                </div>
+                <div class="course-section__btn">
+                    <a href="#" class="link-btn">Xem toàn bộ</a>       
+                </div>
+            </div>
+        </section>
+
+        <section class="grid__fluid testi">
+            <div class="container testi__body">
+                <h2 class="heading heading--3">học viên nói gì về chúng tôi</h2>
+                <% testimonials.forEach(testi=>{ %>
+                <div class="testi__display fadeInAnim">
+
+                        <div class="testi__left">
+                            <i>"<%= testi.quote %>"</i>
+                        </div>
+                        <div class="testi__right">
+                            <img src="<%= testi.img %>" alt="testimonial">
+                            <h3><%= testi.name %></h3>
+                            
+                            <h4><%= testi.course %></h4>
+                            <h4><%= testi.date %></h4>
+                        </div>
+
+                </div>
+                <% })%>
+            </div>
+        </section>
+
+        <%- include('./includes/client-footer.ejs') %>
+
+    </div>
+
+    <script src="javascripts/homePage.js">
+           
+    </script>
 
 <%- include('./includes/footer.ejs') %>

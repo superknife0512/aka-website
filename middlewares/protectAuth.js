@@ -1,7 +1,7 @@
 
 exports.protectAuth = (req,res,next)=>{
     if(req.session.isLogin !== true){
-        res.redirect('/')
+        res.redirect('/teacher/login')
     } else {
         next();
     }

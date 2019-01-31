@@ -6,19 +6,21 @@
 
     }
     &__icon{
-        font-size: 5rem;
-        color: rgba($color: #000000, $alpha: .4);
         position: absolute;
         cursor: pointer;
         z-index: 1000;
+        height: 6.5rem;
+        width: 6.5rem;
+        fill: #b7b7b7;
+
         &--left{
             top: 21.5rem;
-            left: -4rem;
+            left: -5rem;
             
         }
         &--right{
             top: 21.5rem;
-            right: -4rem;
+            right: -5rem;
             
         }
     }

@@ -1,0 +1,216 @@
+
+
+.teacher-detail{
+    display: flex;
+    margin-top: 10rem;
+    @media only screen and (max-width: 980px ){
+        flex-direction: column;
+        align-items: center;
+    }
+
+    small{
+        text-align: center;
+    }
+
+    &__left{
+        width: 50%;
+        padding-right: 6rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        @media only screen and (max-width: 980px ){
+            padding-right: 0;
+        }
+    
+    }
+    &__ava{
+        width: 20rem;
+        height: 20rem;
+        object-fit: cover;
+        object-position: center;
+        border-radius: 50%;
+        margin-bottom: 2rem;
+    }
+    &__right{
+        width: 85%;
+        @media only screen and (max-width: 980px ){
+            margin-top: 3rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+    
+    }
+    &__name{
+        font-family: $font-title;
+        transform: skew(-15deg);
+        text-transform: uppercase;
+        color: $color-secondary;
+        font-size: 3rem;
+    }
+    &__specialty{
+        font-family: $font-primary;
+        text-transform: uppercase;
+        color: $color-primary;
+    }
+    &__story{
+
+    }
+    &__video{
+        display: flex;
+        flex-direction: column;
+        margin-top: 2rem;
+        &--each{
+            margin-bottom: 3rem;
+        }
+    }
+}
+
+.schedule{
+    margin-top: 8rem;
+
+    th{
+        width: 3%;
+    }
+
+    input{
+        &::placeholder{
+            font-size: 1.3rem;
+        }
+        padding: 1.5rem 2rem;
+        font-size: 1.5rem;
+    }
+
+}
+
+.album{
+    margin-top: 8rem;
+    label{
+        font-size: 1.5rem;
+        color: $color-primary;
+    }
+
+    input{
+        &::placeholder{
+            font-size: 1.3rem;
+        }
+        padding: 1.5rem 2rem;
+        font-size: 1.5rem;
+    }
+
+    textarea, select{
+        font-size: 1.4rem;
+    }
+}
+
+.album-info{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+    
+    &__plus{
+        background-color: #ffc107;
+        height: 4.78rem;
+        width: 4.78rem;
+        color: #333;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: all .5s;
+    }
+
+    &__title{
+        display: flex;
+        // align-items: center;  
+        flex-direction: column;
+
+        width: 80%;
+        h4{ 
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 2.0rem;
+            font-family: $font-title;
+            background-color: #ffc107;
+            margin-bottom: 0;
+            padding: .8rem;
+            margin-left: 1.5rem;
+            width: 100%;
+            text-transform: uppercase;
+            padding-left: 2rem;
+        }
+    }
+    &__wrap{
+        margin-bottom: 10rem;
+    }
+    &__display{
+        background-color: #f5f5f5;
+        box-shadow: 0 .7rem .8rem rgba($color: #000000, $alpha: .2);
+        padding: 4rem;
+        margin-left: 1.5rem;
+        display: none;
+        p{
+            font-size: 1.3rem;
+        }
+    }
+}
+
+.post{
+    display: flex;
+    margin-bottom: 2rem;
+    align-items: center;
+    &:not(:last-child){
+        border-bottom: 1px solid rgba($color: #000000, $alpha: .14);
+        padding-bottom: 2rem;
+    }
+    @media only screen and (max-width: 980px ){
+        flex-direction: column;
+        // align-items: center;
+    }
+
+
+    &__right{
+        max-width: 45rem;
+        display: flex;
+        flex-wrap: wrap;
+        position: relative;
+    }
+    
+    &__img{
+        flex: 1 0 auto;
+        width: 20rem;
+        height: 15rem;
+        object-fit: cover;
+        object-position: center;
+        margin-bottom: .5rem;
+        &:not(:last-child){
+            margin-right: .5rem;
+        }
+
+    }
+
+    &__title{
+        font-size: 3rem;
+        color: #ffffff;
+        position: absolute;
+        top: -12px;
+        left: -7px;
+        text-transform: uppercase;
+        font-family: "Faustina", serif;
+        opacity: .7;
+    }
+
+    &__left{
+        padding: 2rem;
+        width: 36%;
+        
+        @media only screen and (max-width: 900px){
+            width: 100% !important;
+
+        }
+    }
+    &__desc{
+        font-size: 1.5rem;
+    }
+}

@@ -1,0 +1,38 @@
+<%- include('../includes/html-head.ejs') %>
+    <%- include('../includes/teacher-header.ejs') %>
+
+    <div class="container height-2000">
+        <form action="<%= editMode ? '/teacher/album/edit' : '/teacher/album' %>" 
+        method="POST" 
+        class="album">
+                <h1 class="heading-title"><%= editMode ? 'Edit this album' : 'Album' %></h1>
+                <hr>
+        
+                <div class="form-group">
+                    <label>Tên của album</label>
+                    <input type="text" 
+                        class="form-control" 
+                        name="name" 
+                        placeholder="Enter Album's name"
+                        value="<%= editMode ? album.name : '' %>">                    
+                </div>
+
+                <div class="form-group">
+                    <label>Miêu tả ngắn về album</label>
+                    <textarea type="text" 
+                        class="form-control" 
+                        name="shortDes" 
+                        placeholder="Enter Album's description"
+                        rows="5"><%= editMode ? album.shortDes : '' %></textarea>                 
+                </div>
+                <% if(editMode) { %>
+                    <input type="hidden" name="albumId" value="<%= album._id %>">
+                <% } %>
+                <button type="submit" class="btn btn-primary"><%= editMode ? 'Update' : 'submit' %></button>
+        </form>
+    </div><br><br><br>
+
+    <%- include('../includes/admin-footer.ejs',{
+        page: 'Teacher page'
+    }) %>
+<%- include('../includes/footer.ejs') %>

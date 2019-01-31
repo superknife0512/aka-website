@@ -8,6 +8,13 @@ input.file-style{
     &:not(:last-child){
         margin-right: 1.5rem;
     }
+    &__search{
+
+    }
+    @media only screen and (max-width: 980px ){
+        margin-bottom: 1rem;
+    }
+
 }
 
 .background-gray{
@@ -51,6 +58,10 @@ form{
     display: flex;
     justify-content: space-between;
     align-items: center;
+    @media only screen and (max-width: 980px ){
+        flex-direction: column;
+    }
+
 }
 
 .testimonial__form{
@@ -70,4 +81,16 @@ form{
     margin-top: 6rem;
     margin-right: 3rem;
     margin-left: 3rem;
+}
+
+.search-wrap{
+    height: 4.5rem;
+}
+
+.change-plus{
+    transform: rotate(45deg);
+}
+
+.height-2000{
+    min-height: 150rem;
 }
