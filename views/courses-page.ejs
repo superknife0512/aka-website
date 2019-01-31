@@ -19,7 +19,7 @@
 
                         <div class="course-page__display">
                             <% courseEng.forEach((course,i)=>{ %>
-                                <%- include('./includes/course-card.ejs', {course, i, saleOff: discountEng}) %>
+                                <%- include('./includes/course-card.ejs', {course, i, saleOff: discountEng, titleSEOs: titleSEOEng}) %>
                             <% }) %>
                         </div>
 
@@ -35,7 +35,7 @@
                     <% if(courseChi[0]) { %>
                          <div class="course-page__display">
                             <% courseChi.forEach((course,i)=>{ %>
-                                <%- include('./includes/course-card.ejs', {course, i, saleOff: discountChi}) %>
+                                <%- include('./includes/course-card.ejs', {course, i, saleOff: discountChi, titleSEOs: titleSEOChi}) %>
                             <% }) %>
                         </div>
                     <% } else { %>
@@ -51,7 +51,7 @@
                     <% if(courseJav[0]) { %>
                          <div class="course-page__display">
                             <% courseJav.forEach((course,i)=>{ %>
-                                <%- include('./includes/course-card.ejs', {course, i, saleOff: discountJav}) %>
+                                <%- include('./includes/course-card.ejs', {course, i, saleOff: discountJav, titleSEOs: titleSEOJav}) %>
                             <% }) %>
                         </div>
                     <% } else { %>

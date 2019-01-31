@@ -1,0 +1,335 @@
+%svg-rule{
+    fill: $color-primary;
+    height: 4rem;
+    width: 4rem;
+    margin-right: 1.6rem;
+}
+
+.overall{
+    margin: 10rem 0;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 4rem;
+
+    &__heading{
+        display: flex;
+    }
+    &__left{
+        flex: 6;
+    }
+    &__right{
+        flex: 4;
+        display: flex;
+        flex-direction: column;
+        p{
+            margin-bottom: 1.2rem;
+        }
+
+        h4{
+            font-size: 1.7rem;
+            color: #444;
+            .old-price{
+                text-decoration: line-through;
+                font-size: 1.9rem;
+                color: rgb(95, 95, 95);
+                font-weight: 300;
+                margin-left: 1.5rem;
+            }
+            .new-price{
+                font-size: 2.2rem;
+                color: $color-secondary;
+                font-weight: 500;
+            }
+        }
+    }
+    &__title{
+        color: $color-secondary;
+        font-size: 3rem;
+        text-transform: uppercase;
+        font-family: $font-title;
+        font-weight: 500;
+    }
+    h3{
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        font-size: 2rem;
+        color: $color-primary;
+        font-weight: 600;
+        &:not(:last-child){
+            margin-top: 3rem;
+        }
+    }
+    &__period{
+        svg{
+            @extend %svg-rule;
+        }
+    }
+    &__schedule{
+        margin-top: 1.5rem;
+        svg{
+            @extend %svg-rule;
+        }
+    }
+}
+
+.require{
+    margin: 6rem 0;
+    .overall__title{
+        margin-bottom: 6rem;
+        font-size: 2.5rem;
+    }
+
+    &__body{
+        display: flex;
+    }
+    &__left{
+        flex: 6;
+    }
+    &__right{
+        flex: 5;
+    }   
+
+    &__item{
+        display: flex;
+        align-items: center;
+        &:not(:last-child){
+            margin-bottom: 4rem;
+        }
+
+        svg{
+            fill: $color-primary;
+            height: 3.8rem;
+            width: 3.8rem;
+            margin-right: 2rem;
+        }
+
+        h4{
+            font-size: 1.95rem;
+            font-family: $font-title;
+            font-weight: 00;
+        }
+    }
+
+    &__register{
+        position: relative;
+        padding: 8rem 6rem;
+        box-shadow: -4px 1px 51px -4px rgba(0,0,0,0.52);
+        border-radius: .5rem;
+        h2{
+            font-size: 2.3rem;
+            text-transform: uppercase;
+            color: $color-secondary;
+            margin-bottom: 3rem;
+            font-family: $font-title;
+
+            &::after{
+                content: "";
+                background-color: $color-secondary;
+                width: 1rem;
+                height: 5rem;
+                position: absolute;
+                top: 6.9rem;
+                left: 0;
+            }
+        }
+        p{
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+        }
+        a.link-btn{
+            margin-top: 2rem;
+        }
+    }
+}
+
+.goal{
+    margin: 5rem 0;
+    h2{
+        font-size: 2.5rem;
+        font-family: $font-title;
+        color: $color-primary;
+        font-weight: 500;
+        margin-bottom: 2rem;
+        text-transform: uppercase;
+    }
+    p{
+        width: 90%;
+        margin-bottom: 6rem;
+
+    }
+
+    &__body{
+
+    }
+    &__item{
+        display: flex;
+        align-items: center;
+        &:not(:last-child){
+            margin-bottom: 3rem;
+        }
+        svg{
+            height: 3.7rem;
+            width: 3.7rem;
+            fill: $color-secondary;
+            margin-right: 2rem;
+        }
+        h4{
+            font-size: 1.9rem;
+            font-family: $font-title;
+            margin-bottom: 0;
+            color: #555;
+            font-weight: 400;
+        }
+    }
+}
+
+.instructor{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgb(243, 243, 243);
+    box-shadow: 2px 5px 5px -1px rgba(0,0,0,0.48);
+    padding: 8rem 0;
+    margin: 6rem 0;
+    padding-bottom: 10rem;
+
+    .overall__title{
+        margin-bottom: 7rem;
+    }
+
+    &__body{
+        display: flex;
+        align-items: center;
+    }
+    &__info{
+        display: flex;
+        flex-direction: column;
+    }
+    &__img{
+        height: 27rem;
+        width: 27rem;
+        object-fit: cover;
+        border-radius: 50%;
+        margin-right: 3rem;
+    }
+    &__name{
+        font-size: 3.4rem;
+        color: $color-primary;
+        margin-bottom: 1.3rem;
+        text-transform: uppercase;
+        flex: 2;
+    }
+    &__specialty{
+        margin-bottom: 1.3rem;
+        font-size: 1.6rem;
+    }
+    &__exp{
+        color: $color-secondary;
+        font-size: 1.7rem;
+        text-transform: uppercase;
+        margin-bottom: 1.5rem;
+        svg{
+            height: 3.7rem;
+            width: 3.7rem;
+            fill: $color-secondary;
+            margin-right: 1rem;
+        }
+        a{
+            &:link, &:visited{
+                color: $color-secondary;
+                text-decoration: none;
+                
+            }
+            &:hover{
+                color: $color-primary;
+            }
+        }
+    }
+    &__story{
+        strong{
+            font-weight: 700;
+        }
+    }
+}
+
+.course-testi{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 4.5rem 0;
+
+    .overall__title{
+        font-size: 2.5rem;
+        margin-bottom: 4.5rem;
+    }
+
+    &__body{
+        margin-top: 2rem;
+        position: relative;
+    }
+    &__each{
+        position: relative;
+        blockquote{
+            font-style: italic;
+            font-size: 1.7rem;
+            color: #444;
+            font-family: $font-title;
+            width: 85%;
+            text-align: center;
+            margin: 0 auto;
+            font-weight: 100;
+        }
+    }
+    &__stud{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 5.6rem 0;
+        position: relative;
+        h4{
+            font-family: $font-title;
+            color: $color-primary;
+            font-size: 1.8rem;
+            strong{
+                font-weight: 700;
+            }
+        }
+    }
+    a{
+        &:link, &:visited{
+            color: $color-primary;
+            font-family: $font-title;
+            font-size: 1.8rem;
+        }
+    }
+    &__quote{
+        font-size: 10rem;
+        color: #666;
+        opacity: .4;
+        position: absolute;
+        top: -6rem;
+        left: 4rem;
+        font-family: 'Times New Roman', Times, serif
+    }
+}
+
+.arrows{
+    height: 4rem;
+    width: 4rem;
+    fill: rgb(170, 170, 170);
+    position: absolute;
+    bottom: .5rem;
+    cursor: pointer;
+
+    &:hover{
+        fill: $color-secondary;
+    }
+
+    &-left{
+        left: 1rem;
+    }
+    &-right{
+        right: 1rem;
+    }
+}

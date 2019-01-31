@@ -1,0 +1,207 @@
+<%- include('./includes/html-head.ejs') %>
+    <%- include('./includes/client-header.ejs') %>
+
+        <div class="grid">
+
+            <section class="grid__container overall">
+                <div class="overall__heading">
+                    <div class="overall__left">
+                    <% if(!course.videoUrl) { %>
+                            <div class="fb-video"
+                            data-href="https://www.facebook.com/Meixuan.dn/videos/778830135799893/"
+                            data-width="600"
+                            data-allowfullscreen="true"
+                            data-autoplay="false"
+                            data-show-captions="true"></div>
+                    <% } else { %>
+                            <div class="fb-video"
+                            data-href="<%= course.videoUrl %>"
+                            data-width="600"
+                            data-allowfullscreen="true"
+                            data-autoplay="false"
+                            data-show-captions="true"></div>
+                    <% } %>
+                    </div>
+                    <div class="overall__right">
+                        <h1 class="overall__title">
+                            <%= course.title %>
+                        </h1>
+                        <hr>
+                        <p> <%= course.shortDes %> </p>
+                        <h4>Học phí: <span class="old-price"> <%= course.oldPrice %> VNĐ</span> &xrarr; 
+                            <span class="new-price"><%= course.price %> VNĐ</span>
+                        </h4>
+                    </div>
+                </div>
+                <br>
+                <h3 class="overall__period">
+                    <svg>
+                        <use xlink:href="images/course-detail.svg#icon-clock"></use>
+                    </svg>
+                    <%= course.period %>
+                </h3>
+                <h3 class="overall__schedule">
+                    <svg>
+                        <use xlink:href="images/course-detail.svg#icon-calendar"></use>
+                    </svg>
+                    <%= course.learningSchedule %>
+                </h3>
+            </section>
+            
+            <hr class="grid__container">
+
+            <section class="require grid__container">
+                <h2 class="overall__title">
+                    Các yêu cầu trước khi tham gia khóa học
+                </h2>
+                <div class="require__body">
+                    <ul class="require__left">
+                        <% course.requirements.forEach(require=>{ %>
+                            <li class="require__item">
+                                <svg>
+                                    <use xlink:href="images/course-detail.svg#icon-checkmark"></use>
+                                </svg>
+                                <h4><%= require %></h4>
+                            </li>
+                        <% }) %>
+                    </ul>
+                    <div class="require__right">
+                        <div class="require__register">
+                            <h2 class="require__title">Đăng kí khóa học này</h2>
+                            <p>Sau khi bạn nhấn nút đăng kí, trang sẽ đưa bạn đến trang đăng kí mẫu theo form của google form. Tại đây bạn hãy điền vào tất cả những trường có dấu '*'. Và chọn khóa học mình mong muốn đăng kí.</p>
+                            <hr><br>
+                            <a href="#" class="link-btn">Đăng kí ngay!</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <hr class="grid__container">
+
+            <section class="grid__container goal">
+                <h2>Bạn sẽ nhận được gì từ khóa học</h2>
+                <p>Tham gia khóa học này và thực hiện đầy đủ các yêu cầu của giảng viên, thực hiện đầy đủ các loại bài tập về nhà cũng như lên lớp đầy đủ chúng tôi cam kết bạn sẽ đạt được các mục tiêu bên dưới đây. </p>
+                <ul class="goal__body">
+                    <% course.courseGoals.forEach(goal=>{ %>
+                        <li class="goal__item">
+                            <svg>
+                                <use xlink:href="images/course-detail.svg#icon-edit"></use>
+                            </svg>
+                            <h4><%= goal %></h4>
+                        </li>
+                    <% }) %>
+                </ul>
+            </section>
+
+            <section class="grid__fluid instructor">
+                <h2 class="overall__title">Ai sẽ đồng hành cùng bạn?</h2>
+                <div class="instructor__body inner-container">
+                    <img src="<%= course.teacher.avatar %>" 
+                        alt="teacher avatar" 
+                        class="instructor__img">
+                    <div class="instructor__info">
+                        <i class="instructor__name">
+                            Mr/Mrs. <%= course.teacher.name %>
+                        </i>
+                        <i class="instructor__specialty">
+                            Chuyên môn: <%= course.teacher.specialty %>
+                        </i>
+                        <h3 class="instructor__exp">
+                            <svg>
+                                <use xlink:href="images/course-detail.svg#icon-lamp"></use>
+                            </svg>
+                            <a href="#">Tìm hiểu thêm về giảng viên này</a>
+                        </h3>
+                        <p class="instructor__story">
+                            <strong>Một chút về tiểu sử của <%= course.teacher.name %></strong>: <%= course.teacher.story %>
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="course-testi grid__container">
+                <h2 class="overall__title">
+                    Học viên nói gì về khóa học
+                </h2>
+                <div class="course-testi__body">
+                    <span class="course-testi__quote">"</span>                   
+                    <% course.testimonials.forEach((testi,i)=>{ %>
+                        <div class="course-testi__each fadeInAnim" id="<%= i %>">
+                            <blockquote><%= testi.desc %></blockquote>
+                            <div class="course-testi__stud">
+                                <h4>Học viên <strong><%= testi.name %></strong></h4>
+                                <a href="<%= testi.facebookLink %>"
+                                    target="blank">
+                                    Link facebook của học viên
+                                </a>
+                                <svg class="arrows arrows-left">
+                                    <use xlink:href="images/arrows.svg#icon-chevron-thin-left"></use>
+                                </svg>
+                                <svg class="arrows arrows-right">
+                                    <use xlink:href="images/arrows.svg#icon-chevron-thin-right"></use>
+                                </svg>
+                            </div>
+                           
+                        </div>
+                    <% }) %>
+                </div>
+            </section>
+
+        </div>
+
+
+    <%- include('./includes/client-footer.ejs') %>
+
+    <script>
+        //function display facebook video
+        window.fbAsyncInit = function() {
+            FB.init({
+            appId            : '461129931351975',
+            autoLogAppEvents : true,
+            xfbml            : true,
+            version          : 'v3.2'
+            });
+        };
+        
+        (function(d, s, id){
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {return;}
+            js = d.createElement(s); js.id = id;
+            js.src = "https://connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+
+        //function help working with tetsimonials
+        const allTestis = document.querySelectorAll('.course-testi__each');
+        let testiOrder = 1;
+
+        function displayTesti(){
+            allTestis.forEach(testi=>{
+                testi.style.display = 'none'
+            })
+            allTestis[testiOrder-1].style.display = 'block';
+            console.log(allTestis[testiOrder-1]);
+        }
+
+        displayTesti();
+
+        $('.arrows-right').click(function(){
+            if(testiOrder +1 > allTestis.length){
+                testiOrder = 1
+            } else {
+                testiOrder +=1
+            }
+            displayTesti();
+        })
+
+        $('.arrows-left').click(function(){
+            if(testiOrder-1 < 1){
+                testiOrder = allTestis.length;
+            } else {
+                testiOrder -=1;
+            }
+            displayTesti();
+        })        
+
+    </script>
+
+<%- include('./includes/footer.ejs') %>

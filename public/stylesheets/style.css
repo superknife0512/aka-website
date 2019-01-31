@@ -96,7 +96,7 @@ form {
     opacity: 1; } }
 
 .fadeInAnim {
-  animation: fadeIn .3s ease; }
+  animation: fadeIn .5s ease; }
 
 @keyframes rightIn {
   0% {
@@ -1116,6 +1116,248 @@ form {
     .course-page__display {
       justify-content: center; } }
 
+.overall__period svg, .overall__schedule svg {
+  fill: #42b0ee;
+  height: 4rem;
+  width: 4rem;
+  margin-right: 1.6rem; }
+
+.overall {
+  margin: 10rem 0;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 4rem; }
+  .overall__heading {
+    display: flex; }
+  .overall__left {
+    flex: 6; }
+  .overall__right {
+    flex: 4;
+    display: flex;
+    flex-direction: column; }
+    .overall__right p {
+      margin-bottom: 1.2rem; }
+    .overall__right h4 {
+      font-size: 1.7rem;
+      color: #444; }
+      .overall__right h4 .old-price {
+        text-decoration: line-through;
+        font-size: 1.9rem;
+        color: #5f5f5f;
+        font-weight: 300;
+        margin-left: 1.5rem; }
+      .overall__right h4 .new-price {
+        font-size: 2.2rem;
+        color: #f5546e;
+        font-weight: 500; }
+  .overall__title {
+    color: #f5546e;
+    font-size: 3rem;
+    text-transform: uppercase;
+    font-family: "Faustina", serif;
+    font-weight: 500; }
+  .overall h3 {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: 2rem;
+    color: #42b0ee;
+    font-weight: 600; }
+    .overall h3:not(:last-child) {
+      margin-top: 3rem; }
+  .overall__schedule {
+    margin-top: 1.5rem; }
+
+.require {
+  margin: 6rem 0; }
+  .require .overall__title {
+    margin-bottom: 6rem;
+    font-size: 2.5rem; }
+  .require__body {
+    display: flex; }
+  .require__left {
+    flex: 6; }
+  .require__right {
+    flex: 5; }
+  .require__item {
+    display: flex;
+    align-items: center; }
+    .require__item:not(:last-child) {
+      margin-bottom: 4rem; }
+    .require__item svg {
+      fill: #42b0ee;
+      height: 3.8rem;
+      width: 3.8rem;
+      margin-right: 2rem; }
+    .require__item h4 {
+      font-size: 1.95rem;
+      font-family: "Faustina", serif;
+      font-weight: 00; }
+  .require__register {
+    position: relative;
+    padding: 8rem 6rem;
+    box-shadow: -4px 1px 51px -4px rgba(0, 0, 0, 0.52);
+    border-radius: .5rem; }
+    .require__register h2 {
+      font-size: 2.3rem;
+      text-transform: uppercase;
+      color: #f5546e;
+      margin-bottom: 3rem;
+      font-family: "Faustina", serif; }
+      .require__register h2::after {
+        content: "";
+        background-color: #f5546e;
+        width: 1rem;
+        height: 5rem;
+        position: absolute;
+        top: 6.9rem;
+        left: 0; }
+    .require__register p {
+      font-size: 1.8rem;
+      margin-bottom: 2rem; }
+    .require__register a.link-btn {
+      margin-top: 2rem; }
+
+.goal {
+  margin: 5rem 0; }
+  .goal h2 {
+    font-size: 2.5rem;
+    font-family: "Faustina", serif;
+    color: #42b0ee;
+    font-weight: 500;
+    margin-bottom: 2rem;
+    text-transform: uppercase; }
+  .goal p {
+    width: 90%;
+    margin-bottom: 6rem; }
+  .goal__item {
+    display: flex;
+    align-items: center; }
+    .goal__item:not(:last-child) {
+      margin-bottom: 3rem; }
+    .goal__item svg {
+      height: 3.7rem;
+      width: 3.7rem;
+      fill: #f5546e;
+      margin-right: 2rem; }
+    .goal__item h4 {
+      font-size: 1.9rem;
+      font-family: "Faustina", serif;
+      margin-bottom: 0;
+      color: #555;
+      font-weight: 400; }
+
+.instructor {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f3f3f3;
+  box-shadow: 2px 5px 5px -1px rgba(0, 0, 0, 0.48);
+  padding: 8rem 0;
+  margin: 6rem 0;
+  padding-bottom: 10rem; }
+  .instructor .overall__title {
+    margin-bottom: 7rem; }
+  .instructor__body {
+    display: flex;
+    align-items: center; }
+  .instructor__info {
+    display: flex;
+    flex-direction: column; }
+  .instructor__img {
+    height: 27rem;
+    width: 27rem;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-right: 3rem; }
+  .instructor__name {
+    font-size: 3.4rem;
+    color: #42b0ee;
+    margin-bottom: 1.3rem;
+    text-transform: uppercase;
+    flex: 2; }
+  .instructor__specialty {
+    margin-bottom: 1.3rem;
+    font-size: 1.6rem; }
+  .instructor__exp {
+    color: #f5546e;
+    font-size: 1.7rem;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem; }
+    .instructor__exp svg {
+      height: 3.7rem;
+      width: 3.7rem;
+      fill: #f5546e;
+      margin-right: 1rem; }
+    .instructor__exp a:link, .instructor__exp a:visited {
+      color: #f5546e;
+      text-decoration: none; }
+    .instructor__exp a:hover {
+      color: #42b0ee; }
+  .instructor__story strong {
+    font-weight: 700; }
+
+.course-testi {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 4.5rem 0; }
+  .course-testi .overall__title {
+    font-size: 2.5rem;
+    margin-bottom: 4.5rem; }
+  .course-testi__body {
+    margin-top: 2rem;
+    position: relative; }
+  .course-testi__each {
+    position: relative; }
+    .course-testi__each blockquote {
+      font-style: italic;
+      font-size: 1.7rem;
+      color: #444;
+      font-family: "Faustina", serif;
+      width: 85%;
+      text-align: center;
+      margin: 0 auto;
+      font-weight: 100; }
+  .course-testi__stud {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 5.6rem 0;
+    position: relative; }
+    .course-testi__stud h4 {
+      font-family: "Faustina", serif;
+      color: #42b0ee;
+      font-size: 1.8rem; }
+      .course-testi__stud h4 strong {
+        font-weight: 700; }
+  .course-testi a:link, .course-testi a:visited {
+    color: #42b0ee;
+    font-family: "Faustina", serif;
+    font-size: 1.8rem; }
+  .course-testi__quote {
+    font-size: 10rem;
+    color: #666;
+    opacity: .4;
+    position: absolute;
+    top: -6rem;
+    left: 4rem;
+    font-family: 'Times New Roman', Times, serif; }
+
+.arrows {
+  height: 4rem;
+  width: 4rem;
+  fill: #aaaaaa;
+  position: absolute;
+  bottom: .5rem;
+  cursor: pointer; }
+  .arrows:hover {
+    fill: #f5546e; }
+  .arrows-left {
+    left: 1rem; }
+  .arrows-right {
+    right: 1rem; }
+
 .heading-title {
   color: #f5546e;
   font-size: 2.5rem;
@@ -1550,7 +1792,7 @@ form {
   .header__link:link, .header__link:visited {
     text-decoration: none;
     color: #333;
-    text-transform: uppercase; }
+    text-transform: capitalize; }
   .header__active {
     background-color: #f0f0f0; }
     .header__active::after {

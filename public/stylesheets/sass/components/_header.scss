@@ -88,7 +88,7 @@
         &:link, &:visited{
             text-decoration: none;
             color: #333;
-            text-transform: uppercase;
+            text-transform: capitalize;
         }
     }
     &__active{

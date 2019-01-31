@@ -4,6 +4,7 @@ const Events = require('../models/Event');
 exports.getHomePage =async (req,res,next)=>{
 
     try{
+       
         const navData = [
             {
                 page:' Trang chủ ',
@@ -11,15 +12,15 @@ exports.getHomePage =async (req,res,next)=>{
             },
             {
                 page:' khóa học ',
-                link: '/courses-page',
+                link: '/course-page',
             },
             {
                 page:' giảng viên ',
-                link: '/teachers-page',
+                link: '/teacher-page',
             },
             {
                 page:' Sự kiện ',
-                link: '/events-page',
+                link: '/event-page',
             },
             {
                 page:' Về trung tâm AK ',
@@ -119,11 +120,14 @@ exports.getHomePage =async (req,res,next)=>{
             return ((pricesMinus/oldPrice)*100).toFixed(0)
         })
 
+        const titleSEOs = courses.map(course=>{
+            return course.title.replace(/ /g, '-');
+        })
+
         console.log(offPrices);
 
         res.render('index',{
             title: 'Home Page',
-            navData: navData,
             benefitData,
             path: '/',
             offPrices,
@@ -131,7 +135,9 @@ exports.getHomePage =async (req,res,next)=>{
             events,
             testimonials,
             contacts,
-            socials
+            socials,
+            titleSEOs,
+            navData,
         })
 
     } catch (err) {
@@ -166,43 +172,26 @@ exports.getCoursesPage = async (req,res,next)=>{
             },
 
         ]
-        const navData = [
-            {
-                page:' Trang chủ ',
-                link: '/',
-            },
-            {
-                page:' khóa học ',
-                link: '/courses-page',
-            },
-            {
-                page:' giảng viên ',
-                link: '/teachers-page',
-            },
-            {
-                page:' Sự kiện ',
-                link: '/events-page',
-            },
-            {
-                page:' Về trung tâm AK ',
-                link: '/about',
-            },
-            {
-                page:' Liên hệ ',
-                link: '/contact',
-            },
-        ];
         const courseEng = [];
         const courseChi = [];
         const courseJav = [];
 
+        const titleSEOEng = [];
+        const titleSEOChi = [];
+        const titleSEOJav = [];
+
         courses.forEach(course =>{
+            let titleSEO = course.title.replace(/ /g, '-')
             if(course.title.match(/trung/gi)){
                 courseChi.push(course)
+                titleSEOChi.push(titleSEO);
             } else if (course.title.match(/anh/gi)){
                 courseEng.push(course)
+                titleSEOEng.push(titleSEO);
             } else {
                 courseJav.push(course);
+                titleSEOJav.push(titleSEO);
+
             }
         })
         const calculateDiscount = (course)=>{
@@ -226,20 +215,64 @@ exports.getCoursesPage = async (req,res,next)=>{
         })
 
         res.render('courses-page.ejs',{
-            title: 'Courses page',
-            path: '/courses-page',
+            title: 'Course page',
+            path: '/course-page',
             courseEng,
             courseChi,
             courseJav,
             contacts,
             socials,
-            navData,
+
             discountEng,
             discountChi,
-            discountJav
+            discountJav,
+
+            titleSEOEng,
+            titleSEOChi,
+            titleSEOJav,
         })
 
     } catch (err) {
         next(err)
+    }
+}
+
+exports.getCourseDetail =async (req,res,next)=>{
+    try{
+        const contacts = [
+            {
+                icon: 'images/contact.svg#icon-phone',
+                desc: '078 275 9831 - 094 942 9254',
+            },
+            {
+                icon: 'images/contact.svg#icon-map',
+                desc: '23 Thái Thị Bôi, q Thanh Khê, tp. Đà Nẵng',
+            },
+
+        ];
+
+        const socials = [
+            {
+                icon: 'images/contact.svg#icon-facebook',
+                desc: 'https://www.facebook.com/Superknife0512',
+            },
+            {
+                icon: 'images/contact.svg#icon-googleplus',
+                desc: 'https://bom.to/0vEt3',
+            },
+
+        ]
+        
+        const course = await Course.findById(req.params.courseId).populate('teacher');
+        res.render('course-detail',{
+            path:'/course-page',
+            title: course.title,
+            course,
+            contacts,
+            socials
+        })
+
+    } catch (err) {
+        next(err);
     }
 }
