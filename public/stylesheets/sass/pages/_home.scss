@@ -18,6 +18,9 @@
     display: flex;
     justify-content: center;    
     animation: upIn 1s 1.5s ease backwards;
+    @media only screen and (max-width: 1040px){
+        width: 100%;
+    }
 }
 
 
@@ -65,6 +68,7 @@
         &--list{
             display: flex;
             list-style: none;
+            align-items: flex-end;
             @media only screen and (max-width: 1040px){
                 display: none;
                 flex-direction: column;
@@ -104,6 +108,7 @@
         @media only screen and (max-width: 1040px){
             top: 85rem;
             font-size: 2.5rem !important;
+            display: none;
         }
 
         i{

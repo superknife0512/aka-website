@@ -1,0 +1,34 @@
+.course-page{
+
+    &__heading{
+        
+        margin: 0 auto;
+        margin: 7rem 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        h2{
+            margin-bottom: 6rem;
+        }
+    }
+
+    &__body {
+        margin: 5rem 0 ;
+        h2.heading{
+            font-size: 2.5rem;
+        }
+    }
+
+    &__display{
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(30rem,32rem));
+        grid-column-gap: 5.8rem;
+        grid-row-gap: 3.5rem;
+        .course-section__card{
+            margin: 0;
+        }
+        @media only screen and (max-width: 820px){
+            justify-content: center;
+        }
+    }
+}

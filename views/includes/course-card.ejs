@@ -1,0 +1,40 @@
+<div class="course-section__card">
+        <span class="course-section__sale">
+            -<%= saleOff[i] %>%
+        </span>
+        <a href="#">
+            <img src="<%= course.teacher.avatar %>" 
+                alt="teacher" 
+                class="course-section__avatar">
+        </a>
+        <div class="course-section__card--1">
+            <img src="<%= course.courseImg %>" 
+                    alt="course Imgs"
+                    class="course-section__img">
+            <div class="course-section__info">
+
+                <h3 class="course-section__title">
+                    <%= course.title %>
+                </h3>
+                <hr>
+                <p><%= course.shortDes.split(' ').slice(0,15).join(' ') %>
+                    <%= course.shortDes.split(' ').length > 15 ? '...' : '' %></p>
+
+            </div>
+        </div>
+        <div class="course-section__card--2">
+            <h3>
+                kỹ năng đạt được sau khóa học
+            </h3>
+            <div class="d-flex align-items-center ">
+                <svg>
+                    <use xlink:href="images/benefits.svg#icon-hourglass"></use>
+                </svg>
+                <h5><%= course.learningSchedule %></h5>
+            </div>
+            <p><%= course.courseGoals.join('. ') %>...</p>
+            <a href="#" class="link-btn">
+                Xem thêm
+            </a>
+        </div>
+    </div>

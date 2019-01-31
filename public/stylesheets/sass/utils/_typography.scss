@@ -14,7 +14,7 @@
     margin-bottom: 4.5rem;
     position: relative;
     
-    &--1{
+    &--1{ // left align red color
         color: $color-secondary;
         &::after{    
             @extend %symbol;            
@@ -24,7 +24,7 @@
         }
 
     }
-    &--2{
+    &--2{ // with symbol align right red color
         color: $color-secondary;        
         &::after{
             @extend %symbol;            
@@ -33,10 +33,10 @@
             right: 0;
         }
     }
-    &--3{ // no symbol
+    &--3{ // no symbol white color
         color: $color-white--2;
     }
-    &--4{
+    &--4{ // symbol and blue color
         color: $color-primary;        
         &::after{
             @extend %symbol;            
@@ -44,6 +44,9 @@
             bottom: -30px;
             left: 0;
         }
+    }
+    &--5{ // no symbol blue color
+        color: $color-primary;
     }
 }
 

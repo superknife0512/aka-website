@@ -1,0 +1,35 @@
+<header class="grid__fluid header">
+    <div class="inner-container header__body">
+        <div class="header__left">
+            <a href="/" class="header__logo">
+                <img src="images/logo-top.png" alt="logo">
+            </a>
+        </div>
+        <div class="header__right">
+            <div class="header__responsive mr-2">
+                <svg>
+                    <use xlink:href="images/arrows.svg#icon-layers"></use>
+                </svg>
+            </div>
+            <ul class="header__list">
+                <% navData.forEach(nav=>{ %>
+                    <li class="header__item <%= path === nav.link ? 'header__active' : '' %>">
+                        <a href="<%= nav.link %>" 
+                            class="header__link"><%= nav.page %>
+                        </a>
+                    </li>
+                <% }) %>
+            </ul>
+        </div>
+    </div>
+</header>
+
+<script>
+    $(document).ready(function(){
+        $('.header__responsive').click(function(){
+            const headerList = $('.header__list');
+            headerList.slideToggle(500);
+            headerList.css({'display': 'flex'} );
+        })
+    })
+</script>
