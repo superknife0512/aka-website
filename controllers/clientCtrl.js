@@ -37,10 +37,56 @@ exports.getHomePage =async (req,res,next)=>{
                 desc: 'Đảm bảo áp dụng kiến thức học vào đời sống công việc trong thời gian ngắn nhất'
             },
         ];
+        const testimonials = [
+            {
+                quote:"Lorem ipsum dolor, sit amet consectetur adipisicing elit. Error quia esse harum excepturi, illum id consequuntur eaque debitis ullam qui est, maiores incidunt sit voluptatum, natus hic autem cum nostrum? Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi, atque voluptas animi id doloremque molestiae sunt dolor debitis, magni laboriosam obcaecati totam quia aliquid inventore.",
+                img:"images/testi (1).jpg",
+                name: "David Cramer",
+                course: "Tiếng Trung giao tiếp",
+                date: "14/02/2018 - 14/03/2019"
+            },
+            {
+                quote:"The awesome course ipsum dolor, sit amet consectetur adipisicing elit. Error quia esse harum excepturi, illum id consequuntur eaque debitis ullam qui est, maiores incidunt sit voluptatum, natus hic autem cum nostrum? Modi, atque voluptas animi id doloremque molestiae sunt dolor debitis, magni laboriosam obcaecati totam quia aliquid inventore.",
+                img:"images/testi (2).jpg",
+                name: "Laviosa Leevin",
+                course: "Tiếng Nhật giao tiếp",
+                date: "14/05/2018 - 14/09/2019"
+            },
+            {
+                quote:"Perfect one. Error quia esse harum excepturi, illum id consequuntur eaque debitis ullam qui est, maiores incidunt sit voluptatum, natus hic autem cum nostrum? Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi, atque voluptas animi id doloremque molestiae sunt dolor debitis, magni laboriosam obcaecati totam quia aliquid inventore.",
+                img:"images/testi (3).jpg",
+                name: "Corino Dlavico",
+                course: "Tiếng Trung cho người đi làm",
+                date: "10/02/2018 - 10/03/2019"
+            },
+        ]
+        const contacts = [
+            {
+                icon: 'images/contact.svg#icon-phone',
+                desc: '078 275 9831 - 094 942 9254',
+            },
+            {
+                icon: 'images/contact.svg#icon-map',
+                desc: '23 Thái Thị Bôi, q Thanh Khê, tp. Đà Nẵng',
+            },
+
+        ];
+
+        const socials = [
+            {
+                icon: 'images/contact.svg#icon-facebook',
+                desc: 'https://www.facebook.com/Superknife0512',
+            },
+            {
+                icon: 'images/contact.svg#icon-googleplus',
+                desc: 'https://bom.to/0vEt3',
+            },
+
+        ]
 
         const courses = await Course.find().populate('teacher').limit(6);
         const events = await Events.find().limit(6).sort('-createdAt');
-        
+
         const offPrices = courses.map(course => {
             const oldPrice = parseInt(course.oldPrice.split('.').join(''));
             const price = parseInt(course.price.split('.').join(''));
@@ -57,7 +103,10 @@ exports.getHomePage =async (req,res,next)=>{
             path: '/',
             offPrices,
             courses,
-            events
+            events,
+            testimonials,
+            contacts,
+            socials
         })
 
     } catch (err) {

@@ -1,0 +1,32 @@
+<footer class="grid__fluid footer-sect__wrap">
+        <div class="container footer-sect">
+                <img src="images/logo-full.png" alt="logo">
+                <ul class="footer-sect__contact">
+                    <h3>Contact us!</h3>
+                    <%  contacts.forEach(contact=>{ %>
+                        <li class="footer-sect__item">
+                            <svg class="footer-sect__icon">
+                                <use xlink:href="<%= contact.icon %>"></use>
+                            </svg>
+                            <h2><%= contact.desc %></h2>
+                        </li>
+                    <% }) %>
+                </ul>
+
+                <ul class="footer-sect__social">
+                    <h3>Connect us!</h3>
+                    <%  socials.forEach(social=>{ %>
+                        <li class="footer-sect__item">
+                            <svg class="footer-sect__icon">
+                                <use xlink:href="<%= social.icon %>"></use>
+                            </svg>
+                            <h2><%= social.desc %></h2>
+                        </li>
+                    <% }) %>
+                </ul>
+        </div>
+        <div class=" container d-flex justify-content-center">
+            <a href="/admin" class="link-btn">Admin</a> 
+            <a href="/teacher" class="link-btn">Teacher</a>
+        </div>
+    </footer>

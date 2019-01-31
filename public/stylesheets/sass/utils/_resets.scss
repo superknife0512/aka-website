@@ -11,7 +11,10 @@ $color-white--2: #f1f1f1;
 $color-white--3: #f3eaec;
 
 html{
-    font-size: 62.5%
+    font-size: 62.5%;
+    @media only screen and (max-width: 1040px){
+        font-size: 55%;
+    }
 }
 
 *, *::after, *::before{

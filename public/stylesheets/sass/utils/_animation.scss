@@ -12,3 +12,36 @@
 .fadeInAnim{
     animation: fadeIn .3s ease;
 }
+
+@keyframes rightIn{
+    0%{
+        opacity: 0;
+        transform: translateX(-7rem);
+    }
+    100%{
+        opacity: 1;
+        transform: translateX(0)
+    }
+}
+
+@keyframes leftIn{
+    0%{
+        opacity: 0;
+        transform: translateX(7rem);
+    }
+    100%{
+        opacity: 1;
+        transform: translateX(0)
+    }
+}
+
+@keyframes upIn{
+    0%{
+        opacity: 0;
+        transform: translateY(7.5rem);
+    }
+    100%{
+        opacity: 1;
+        transform: translateY(0)
+    }
+}

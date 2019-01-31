@@ -1,3 +1,9 @@
+%icon-rule{
+    height: 3.5rem;
+    width: 3.5rem;
+    fill: $color-secondary;
+    margin-right: 1.2rem;
+}
 
 .footer{
     &__wrapper{
@@ -51,5 +57,63 @@
         margin-right: 3rem;
         margin-top: 2rem;
         color: rgb(221, 221, 221);
+    }
+}
+
+.footer-sect{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(25rem, 33rem));
+    grid-column-gap: 4rem;
+    grid-row-gap: 3rem;
+    justify-content: center;
+    justify-items: center;
+    margin-bottom: 4rem;
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    h3{
+        color: $color-primary;
+        font-size: 2rem;
+        text-transform: uppercase;
+        font-family: $font-title;
+        margin-bottom: 2.5rem;
+    }
+
+    img{
+        height: 15rem;
+    }
+    &__contact{
+        li{
+            display: flex;
+            margin-bottom: 2rem;
+            align-items: center;
+            h2{
+                color: white;
+                font-size: 1.5rem;
+            }
+        }
+        svg{
+            @extend %icon-rule;
+        }
+    }
+
+    &__social{
+        li{
+            display: flex;
+            margin-bottom: 2rem;
+            align-items: center;
+
+            h2{
+                color: white;
+                font-size: 1.5rem;
+            }
+        }
+        svg{
+            @extend %icon-rule;            
+        }
+    }
+
+    &__wrap{
+        background-color: #333;
+        padding: 5rem 0;
     }
 }
