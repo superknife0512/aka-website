@@ -1,0 +1,65 @@
+<%- include('./includes/html-head.ejs') %>
+    <%- include('./includes/client-header.ejs') %>
+
+        <div class="grid">
+            <div class="grid__container ">
+                <div class="course-page__heading">
+                    <h2 class="heading heading--1">
+                        Các khóa học của chúng tôi
+                    </h2>
+                    <p class="text-center">
+                        Một chút thông tin về các khóa học của AK. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Atque, hic magnam dolorem facere soluta quo! Iure, nam! Officia, veniam. Amet laboriosam quaerat vitae sed tenetur voluptas ab saepe cupiditate eligendi! Obcaecati ipsam eum fugiat ex ducimus quibusdam, laborum fugit quisquam tempore optio delectus sint consequuntur repellat ullam doloremque voluptatem reprehenderit ipsa dolorem.
+                    </p>
+                </div>
+                <div class="course-page__body">
+                    <h2 class="heading heading--5">
+                        Các khóa học tiếng Anh
+                    </h2>
+                    <% if(courseEng[0]) { %>
+
+                        <div class="course-page__display">
+                            <% courseEng.forEach((course,i)=>{ %>
+                                <%- include('./includes/course-card.ejs', {course, i, saleOff: discountEng}) %>
+                            <% }) %>
+                        </div>
+
+                    <% } else { %>
+                        <h3>Hiện chúng tôi chưa có khóa học vào về tiếng Anh!</h3>
+                    <% } %>
+                </div>
+                <hr>
+                <div class="course-page__body">
+                    <h2 class="heading heading--5">
+                        Các khóa học tiếng trung
+                    </h2>
+                    <% if(courseChi[0]) { %>
+                         <div class="course-page__display">
+                            <% courseChi.forEach((course,i)=>{ %>
+                                <%- include('./includes/course-card.ejs', {course, i, saleOff: discountChi}) %>
+                            <% }) %>
+                        </div>
+                    <% } else { %>
+                        <h3>Hiện chúng tôi chưa có khóa học vào về tiếng Trung!</h3>
+                    <% } %>
+                   
+                </div>
+                <hr>
+                <div class="course-page__body">
+                    <h2 class="heading heading--5">
+                        Các khóa học tiếng Nhật
+                    </h2>
+                    <% if(courseJav[0]) { %>
+                         <div class="course-page__display">
+                            <% courseJav.forEach((course,i)=>{ %>
+                                <%- include('./includes/course-card.ejs', {course, i, saleOff: discountJav}) %>
+                            <% }) %>
+                        </div>
+                    <% } else { %>
+                        <h3>Hiện chúng tôi chưa có khóa học vào về tiếng Nhật!</h3>
+                    <% } %>
+                   
+                </div>
+        </div>
+
+    <%- include('./includes/client-footer.ejs') %>
+<%- include('./includes/footer.ejs') %>

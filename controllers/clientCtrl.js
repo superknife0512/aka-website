@@ -4,7 +4,32 @@ const Events = require('../models/Event');
 exports.getHomePage =async (req,res,next)=>{
 
     try{
-        const navData = ['Trang chủ', 'Khóa học', 'Giảng viên', 'Sự kiện', 'Trung tâm AK', 'Liên hệ' ];
+        const navData = [
+            {
+                page:' Trang chủ ',
+                link: '/',
+            },
+            {
+                page:' khóa học ',
+                link: '/courses-page',
+            },
+            {
+                page:' giảng viên ',
+                link: '/teachers-page',
+            },
+            {
+                page:' Sự kiện ',
+                link: '/events-page',
+            },
+            {
+                page:' Về trung tâm AK ',
+                link: '/about',
+            },
+            {
+                page:' Liên hệ ',
+                link: '/contact',
+            },
+        ];
         const benefitData = [
             {
                 icon:"images/benefits.svg#icon-target",
@@ -113,4 +138,108 @@ exports.getHomePage =async (req,res,next)=>{
         next(err)
     }
     
+}
+
+exports.getCoursesPage = async (req,res,next)=>{
+    try{
+        const courses = await Course.find().populate('teacher');
+        const contacts = [
+            {
+                icon: 'images/contact.svg#icon-phone',
+                desc: '078 275 9831 - 094 942 9254',
+            },
+            {
+                icon: 'images/contact.svg#icon-map',
+                desc: '23 Thái Thị Bôi, q Thanh Khê, tp. Đà Nẵng',
+            },
+
+        ];
+
+        const socials = [
+            {
+                icon: 'images/contact.svg#icon-facebook',
+                desc: 'https://www.facebook.com/Superknife0512',
+            },
+            {
+                icon: 'images/contact.svg#icon-googleplus',
+                desc: 'https://bom.to/0vEt3',
+            },
+
+        ]
+        const navData = [
+            {
+                page:' Trang chủ ',
+                link: '/',
+            },
+            {
+                page:' khóa học ',
+                link: '/courses-page',
+            },
+            {
+                page:' giảng viên ',
+                link: '/teachers-page',
+            },
+            {
+                page:' Sự kiện ',
+                link: '/events-page',
+            },
+            {
+                page:' Về trung tâm AK ',
+                link: '/about',
+            },
+            {
+                page:' Liên hệ ',
+                link: '/contact',
+            },
+        ];
+        const courseEng = [];
+        const courseChi = [];
+        const courseJav = [];
+
+        courses.forEach(course =>{
+            if(course.title.match(/trung/gi)){
+                courseChi.push(course)
+            } else if (course.title.match(/anh/gi)){
+                courseEng.push(course)
+            } else {
+                courseJav.push(course);
+            }
+        })
+        const calculateDiscount = (course)=>{
+            const oldPrice = parseInt(course.oldPrice.split('.').join(''));
+            const price = parseInt(course.price.split('.').join(''));
+            const pricesMinus = oldPrice - price;
+            return ((pricesMinus/oldPrice)*100).toFixed(0)
+        }
+
+        const discountEng = courseEng.map(course=>{
+            return calculateDiscount(course)
+        })
+        console.log(discountEng);
+
+        const discountChi = courseChi.map(course=>{
+            return calculateDiscount(course)
+        })
+
+        const discountJav = courseJav.map(course=>{
+            return calculateDiscount(course)
+        })
+
+        res.render('courses-page.ejs',{
+            title: 'Courses page',
+            path: '/courses-page',
+            courseEng,
+            courseChi,
+            courseJav,
+            contacts,
+            socials,
+            navData,
+            discountEng,
+            discountChi,
+            discountJav
+        })
+
+    } catch (err) {
+        next(err)
+    }
 }

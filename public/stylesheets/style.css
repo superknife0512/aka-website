@@ -131,6 +131,13 @@ form {
   .grid__fluid {
     grid-column: full-start / full-end; }
 
+.inner-container {
+  max-width: 1140px;
+  margin: 0 auto; }
+  @media only screen and (max-width: 1040px) {
+    .inner-container {
+      padding: 1rem 2rem; } }
+
 .heading--1::after, .heading--2::after, .heading--4::after {
   content: "";
   height: 1.2rem;
@@ -165,6 +172,8 @@ form {
       background-color: #42b0ee;
       bottom: -30px;
       left: 0; }
+  .heading--5 {
+    color: #42b0ee; }
 
 .content--white {
   color: #f1f1f1; }
@@ -494,6 +503,9 @@ form {
   display: flex;
   justify-content: center;
   animation: upIn 1s 1.5s ease backwards; }
+  @media only screen and (max-width: 1040px) {
+    .form-inline {
+      width: 100%; } }
 
 .active-home::after {
   transform: scaleX(1) !important; }
@@ -525,7 +537,8 @@ form {
         padding-top: 2rem; } }
     .hero__nav--list {
       display: flex;
-      list-style: none; }
+      list-style: none;
+      align-items: flex-end; }
       @media only screen and (max-width: 1040px) {
         .hero__nav--list {
           display: none;
@@ -560,7 +573,8 @@ form {
     @media only screen and (max-width: 1040px) {
       .hero__phone {
         top: 85rem;
-        font-size: 2.5rem !important; } }
+        font-size: 2.5rem !important;
+        display: none; } }
     .hero__phone i {
       color: #f1f1f1;
       font-size: 2.5rem;
@@ -1077,6 +1091,31 @@ form {
       margin-bottom: 1.5rem;
       border-bottom: 1px solid #f3eaec; }
 
+.course-page__heading {
+  margin: 0 auto;
+  margin: 7rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center; }
+  .course-page__heading h2 {
+    margin-bottom: 6rem; }
+
+.course-page__body {
+  margin: 5rem 0; }
+  .course-page__body h2.heading {
+    font-size: 2.5rem; }
+
+.course-page__display {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(30rem, 32rem));
+  grid-column-gap: 5.8rem;
+  grid-row-gap: 3.5rem; }
+  .course-page__display .course-section__card {
+    margin: 0; }
+  @media only screen and (max-width: 820px) {
+    .course-page__display {
+      justify-content: center; } }
+
 .heading-title {
   color: #f5546e;
   font-size: 2.5rem;
@@ -1440,3 +1479,81 @@ form {
   .footer-sect__wrap {
     background-color: #333;
     padding: 5rem 0; }
+
+.header {
+  background-color: white;
+  border-bottom: 1px solid #e2e2e2;
+  box-shadow: -2px 6px 5px -5px rgba(0, 0, 0, 0.48); }
+  .header__body {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; }
+  .header__logo img {
+    height: 7rem; }
+  @media only screen and (max-width: 820px) {
+    .header__right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end; } }
+  @media only screen and (max-width: 820px) {
+    .header__left {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end; } }
+  .header__responsive {
+    display: none;
+    fill: #5e5e5e;
+    height: 5rem;
+    width: 5rem;
+    cursor: pointer; }
+    .header__responsive:hover {
+      fill: #f5546e; }
+    @media only screen and (max-width: 820px) {
+      .header__responsive {
+        display: flex; } }
+  .header__list {
+    list-style: none;
+    display: flex;
+    margin-bottom: 0; }
+    @media only screen and (max-width: 820px) {
+      .header__list {
+        display: none;
+        flex-direction: column;
+        align-items: flex-end;
+        margin-top: 2rem; } }
+  .header__item {
+    padding: 4rem 2.2rem;
+    transition: all .3s;
+    position: relative; }
+    @media only screen and (max-width: 820px) {
+      .header__item {
+        padding: 0;
+        margin-bottom: 1.5rem; } }
+    .header__item::after {
+      content: "";
+      background-color: #42b0ee;
+      height: 1rem;
+      width: 100%;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      z-index: 200;
+      transform: scaleX(0);
+      transition: all .3s; }
+      @media only screen and (max-width: 820px) {
+        .header__item::after {
+          display: none; } }
+    .header__item:hover {
+      background-color: #f1f1f1; }
+    .header__item:hover::after {
+      transform: scaleX(1); }
+  .header__link:link, .header__link:visited {
+    text-decoration: none;
+    color: #333;
+    text-transform: uppercase; }
+  .header__active {
+    background-color: #f0f0f0; }
+    .header__active::after {
+      transform: scaleX(1); }
+    .header__active a:link, .header__active a:visited {
+      color: #42b0ee; }

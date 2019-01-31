@@ -6,7 +6,7 @@
             <nav class="hero__nav container">
                 <div class="hero__nav--left">
                     <h3 class="hero__logo">
-                        <a href="#" class="hero__nav-link">
+                        <a href="/" class="hero__nav-link">
                             <img src="images/logo-top.png" alt="logo">
                         </a>
                     </h3>
@@ -18,8 +18,8 @@
                     <div class="hero__nav--list">
                         <% navData.forEach((navItem,i)=>{ %>
                             <li class="hero__nav-item" id="item-<%= i %>">
-                                <a href="#" class="hero__nav-link">
-                                    <%= navItem %>
+                                <a href="<%= navItem.link %>" class="hero__nav-link">
+                                    <%= navItem.page %>
                                 </a>
                             </li>
                         <% }) %>
@@ -120,43 +120,7 @@
                     <div class="course-section__glider" style="overflow-x: hidden">
 
                         <% courses.forEach((course,i)=>{ %>
-                            <div class="course-section__card">
-                                <span class="course-section__sale">
-                                    -<%= offPrices[i] %>%
-                                </span>
-                                <a href="#">
-                                    <img src="<%= course.teacher.avatar %>" 
-                                        alt="teacher" 
-                                        class="course-section__avatar">
-                                </a>
-                                <div class="course-section__card--1">
-                                    <img src="<%= course.courseImg %>" 
-                                            alt="course Imgs"
-                                            class="course-section__img">
-                                    <div class="course-section__info">
-    
-                                        <h3 class="course-section__title">
-                                            <%= course.title %>
-                                        </h3>
-                                        <hr>
-                                        <p><%= course.shortDes.split(' ').slice(0,15).join(' ') %>
-                                            <%= course.shortDes.split(' ').length > 15 ? '...' : '' %></p>
-    
-                                    </div>
-                                </div>
-                                <div class="course-section__card--2">
-                                    <h3>
-                                        kỹ năng đạt được sau khóa học
-                                    </h3>
-                                    <div class="d-flex align-items-center ">
-                                        <svg>
-                                            <use xlink:href="images/benefits.svg#icon-hourglass"></use>
-                                        </svg>
-                                        <h5><%= course.learningSchedule %></h5>
-                                    </div>
-                                    <p><%= course.courseGoals.join('. ') %>...</p>
-                                </div>
-                            </div>
+                           <%- include('./includes/course-card.ejs',{course, i, saleOff: offPrices}) %>
                         <% }) %>   
 
                     </div> 
