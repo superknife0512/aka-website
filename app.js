@@ -33,6 +33,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/public',express.static(path.join(__dirname, 'public')));
 app.use('/course-page',express.static(path.join(__dirname, 'public')));
 app.use('/course-page/public',express.static(path.join(__dirname, 'public')));
+app.use('/teacher-page',express.static(path.join(__dirname, 'public')));
+app.use('/teacher-page/public',express.static(path.join(__dirname, 'public')));
 
 
 app.use('/teacher', express.static(path.join(__dirname, 'public')));

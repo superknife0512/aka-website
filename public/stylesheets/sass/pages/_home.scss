@@ -283,8 +283,12 @@
     }
     
     #about__img2{
-        top: 15rem;
-        left: 3rem;
+        @media screen and (max-width: 1000px) {
+            top: 15rem;
+            left: 3rem;
+        }
+        top: 13rem;
+        left: 0;
     }
 }
 
@@ -422,6 +426,13 @@
         margin-top: 5rem;
         margin-bottom: 5rem;
         position: relative;
+        i{
+            display: none;
+            color: rgb(105, 105, 105);
+            @media screen and (max-width: 1060px) {
+                display: block;
+            }
+        }
     }
     &__card{
         position: relative;
@@ -718,6 +729,9 @@
         padding: 6rem 0;
         h2{
             margin-bottom: 8rem;
+            @media only screen and (max-width: 1040px){
+                margin: 2rem;
+            }
         }
     }
     &__display{

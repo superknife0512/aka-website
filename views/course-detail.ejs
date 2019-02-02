@@ -8,7 +8,7 @@
                     <div class="overall__left">
                     <% if(!course.videoUrl) { %>
                             <div class="fb-video"
-                            data-href="https://www.facebook.com/Meixuan.dn/videos/778830135799893/"
+                            data-href="<%= courseDefaultVideo %>"
                             data-width="600"
                             data-allowfullscreen="true"
                             data-autoplay="false"
@@ -54,6 +54,7 @@
                 <h2 class="overall__title">
                     Các yêu cầu trước khi tham gia khóa học
                 </h2>
+                <p class="note">Mỗi khóa học sẽ có các yêu cầu khác nhau trước khi tham gia, có những khóa học giành cho người mới bắt đầu nhưng cũng có một số giành cho những người đã có trình độ trung bình, các bạn nên đọc kĩ để tránh đăng kí nhầm khóa học.</p>
                 <div class="require__body">
                     <ul class="require__left">
                         <% course.requirements.forEach(require=>{ %>
@@ -109,7 +110,7 @@
                             <svg>
                                 <use xlink:href="images/course-detail.svg#icon-lamp"></use>
                             </svg>
-                            <a href="#">Tìm hiểu thêm về giảng viên này</a>
+                            <a href="/teacher-page/giảng-viên.<%= course.teacher._id %>">Tìm hiểu thêm về giảng viên này</a>
                         </h3>
                         <p class="instructor__story">
                             <strong>Một chút về tiểu sử của <%= course.teacher.name %></strong>: <%= course.teacher.story %>
@@ -123,26 +124,30 @@
                     Học viên nói gì về khóa học
                 </h2>
                 <div class="course-testi__body">
-                    <span class="course-testi__quote">"</span>                   
-                    <% course.testimonials.forEach((testi,i)=>{ %>
-                        <div class="course-testi__each fadeInAnim" id="<%= i %>">
-                            <blockquote><%= testi.desc %></blockquote>
-                            <div class="course-testi__stud">
-                                <h4>Học viên <strong><%= testi.name %></strong></h4>
-                                <a href="<%= testi.facebookLink %>"
-                                    target="blank">
-                                    Link facebook của học viên
-                                </a>
-                                <svg class="arrows arrows-left">
-                                    <use xlink:href="images/arrows.svg#icon-chevron-thin-left"></use>
-                                </svg>
-                                <svg class="arrows arrows-right">
-                                    <use xlink:href="images/arrows.svg#icon-chevron-thin-right"></use>
-                                </svg>
+                    <% if(course.testimonials[0]) { %>
+                        <span class="course-testi__quote">"</span>                   
+                        <% course.testimonials.forEach((testi,i)=>{ %>
+                            <div class="course-testi__each fadeInAnim" id="<%= i %>">
+                                <blockquote><%= testi.desc %></blockquote>
+                                <div class="course-testi__stud">
+                                    <h4>Học viên <strong><%= testi.name %></strong></h4>
+                                    <a href="<%= testi.facebookLink %>"
+                                        target="blank">
+                                        Link facebook của học viên
+                                    </a>
+                                    <svg class="arrows arrows-left">
+                                        <use xlink:href="images/arrows.svg#icon-chevron-thin-left"></use>
+                                    </svg>
+                                    <svg class="arrows arrows-right">
+                                        <use xlink:href="images/arrows.svg#icon-chevron-thin-right"></use>
+                                    </svg>
+                                </div>
+                               
                             </div>
-                           
-                        </div>
-                    <% }) %>
+                        <% }) %>
+                    <% } else { %>
+                        <h3>Hiện tại chưa có bình luận nào cho khóa học này!</h3>
+                    <% } %>
                 </div>
             </section>
 
@@ -151,57 +156,7 @@
 
     <%- include('./includes/client-footer.ejs') %>
 
-    <script>
-        //function display facebook video
-        window.fbAsyncInit = function() {
-            FB.init({
-            appId            : '461129931351975',
-            autoLogAppEvents : true,
-            xfbml            : true,
-            version          : 'v3.2'
-            });
-        };
-        
-        (function(d, s, id){
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) {return;}
-            js = d.createElement(s); js.id = id;
-            js.src = "https://connect.facebook.net/en_US/sdk.js";
-            fjs.parentNode.insertBefore(js, fjs);
-            }(document, 'script', 'facebook-jssdk'));
-
-        //function help working with tetsimonials
-        const allTestis = document.querySelectorAll('.course-testi__each');
-        let testiOrder = 1;
-
-        function displayTesti(){
-            allTestis.forEach(testi=>{
-                testi.style.display = 'none'
-            })
-            allTestis[testiOrder-1].style.display = 'block';
-            console.log(allTestis[testiOrder-1]);
-        }
-
-        displayTesti();
-
-        $('.arrows-right').click(function(){
-            if(testiOrder +1 > allTestis.length){
-                testiOrder = 1
-            } else {
-                testiOrder +=1
-            }
-            displayTesti();
-        })
-
-        $('.arrows-left').click(function(){
-            if(testiOrder-1 < 1){
-                testiOrder = allTestis.length;
-            } else {
-                testiOrder -=1;
-            }
-            displayTesti();
-        })        
-
+    <script src="public/javascripts/courseDetail.js">      
     </script>
 
 <%- include('./includes/footer.ejs') %>

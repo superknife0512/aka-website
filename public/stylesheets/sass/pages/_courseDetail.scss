@@ -13,9 +13,29 @@
 
     &__heading{
         display: flex;
+        
+        @media only screen and (max-width: 1060px){
+            flex-direction: column;
+            align-items: center;
+        }
     }
     &__left{
         flex: 6;
+        @media only screen and (max-width: 500px){
+            margin-bottom: 3rem;
+        }
+        .fb-video{
+    
+            @media only screen and (max-width: 1060px){
+                width: 50rem;
+                margin-bottom: 4rem;
+            }
+            @media only screen and (max-width: 500px){
+                width: 35rem;
+                margin-bottom: 4rem;
+            }
+            
+        }
     }
     &__right{
         flex: 4;
@@ -76,15 +96,25 @@
 .require{
     margin: 6rem 0;
     .overall__title{
-        margin-bottom: 6rem;
+        margin-bottom: 2rem;
         font-size: 2.5rem;
+    }
+    .note{
+        margin-bottom: 6rem;
     }
 
     &__body{
         display: flex;
+        @media only screen and (max-width: 1060px){
+            flex-direction: column;
+            align-items: center;
+        }        
     }
     &__left{
         flex: 6;
+        @media only screen and (max-width: 1060px){
+            margin-bottom: 6rem;
+        }
     }
     &__right{
         flex: 5;
@@ -113,9 +143,10 @@
 
     &__register{
         position: relative;
-        padding: 8rem 6rem;
+        padding: 6rem 6rem;
         box-shadow: -4px 1px 51px -4px rgba(0,0,0,0.52);
         border-radius: .5rem;
+        padding-bottom: 8rem;
         h2{
             font-size: 2.3rem;
             text-transform: uppercase;
@@ -129,7 +160,7 @@
                 width: 1rem;
                 height: 5rem;
                 position: absolute;
-                top: 6.9rem;
+                top: 4.9rem;
                 left: 0;
             }
         }
@@ -188,19 +219,26 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: rgb(243, 243, 243);
-    box-shadow: 2px 5px 5px -1px rgba(0,0,0,0.48);
+    background-color: #f8f8f8;
+    box-shadow: 2px 5px 5px -1px rgba(0,0,0,0.2);
     padding: 8rem 0;
     margin: 6rem 0;
     padding-bottom: 10rem;
 
     .overall__title{
         margin-bottom: 7rem;
+        @media only screen and (max-width: 1060px){
+            margin: 3rem;
+            text-align: center;
+        }
     }
 
     &__body{
         display: flex;
         align-items: center;
+        @media only screen and (max-width: 1060px){
+            flex-direction: column;
+        }
     }
     &__info{
         display: flex;
@@ -211,18 +249,22 @@
         width: 27rem;
         object-fit: cover;
         border-radius: 50%;
-        margin-right: 3rem;
+        margin-right: 4rem;
+        @media only screen and (max-width: 1060px){
+           margin-right: 0;
+           margin-bottom: 4rem;
+        }
     }
     &__name{
         font-size: 3.4rem;
         color: $color-primary;
-        margin-bottom: 1.3rem;
+        margin-bottom: 1rem;
         text-transform: uppercase;
         flex: 2;
     }
     &__specialty{
-        margin-bottom: 1.3rem;
-        font-size: 1.6rem;
+        margin-bottom: 1.1rem;
+        font-size: 1.9rem;
     }
     &__exp{
         color: $color-secondary;
@@ -333,3 +375,4 @@
         right: 1rem;
     }
 }
+

@@ -1,0 +1,187 @@
+<%- include('./includes/html-head.ejs') %>
+    <%- include('./includes/client-header.ejs') %>
+
+        <div class="grid">
+            <div class="grid__container teacher-page">
+                <h1 class="teachers__title">Thông tin giảng viên</h1>
+                <br>
+
+                <section class="instructor__body inner-container">
+                    <img src="<%= teacher.avatar %>" 
+                        alt="teacher avatar" 
+                        class="instructor__img">
+                    <div class="instructor__info">
+                        <i class="instructor__name">
+                            Mr/Mrs. <%= teacher.name %>
+                        </i>
+                        <i class="instructor__specialty">
+                            Chuyên môn: <%= teacher.specialty %>
+                        </i>
+                        <h3 class="instructor__exp">
+                            <svg>
+                                <use xlink:href="images/course-detail.svg#icon-lamp"></use>
+                            </svg>
+                            Giảng viên với nhiều năm kinh nghiệm giảng dạy
+                        </h3>
+                        <p class="instructor__story">
+                            <strong>Một chút về tiểu sử của <%= teacher.name %></strong>: <%= teacher.story %>
+                        </p>
+                    </div>
+                </section><br><br>
+                <hr>
+                <section class="teacher-page__display">
+                    <div class="teacher-page__btn-group">
+                        <button id="btn-video" class="teacher-page__btn">
+                            Video tiêu biểu
+                        </button>
+                        <button id="btn-album" class="teacher-page__btn">
+                            Album khóa học
+                        </button>                        
+                        <button id="btn-schedule" class="teacher-page__btn">
+                            Thời khóa biểu
+                        </button>
+                    </div>
+
+                    <div class="teacher-page__detail">
+                        <div class="teacher-page__body fadeInAnim" id="pane-video">
+                            <h3>Video thể hiện phong cách dạy đặt trưng của mỗi giảng viên, các bạn có thể tham khảo trước khi đăng kí học</h3>
+                            <% if(teacher.teacherVideo[0]) { %>
+                                <% teacher.teacherVideo.forEach(vid=>{ %>
+                                    <div class="fb-video"
+                                        data-href="<%= vid %>"
+                                        data-width="600"
+                                        data-allowfullscreen="true"
+                                        data-autoplay="false"
+                                        data-show-captions="true">
+                                    </div>
+                                <% }) %>
+                            <% } else { %>
+                                <div class="fb-video"
+                                    data-href="<%= teacherDefaultVideo %>"
+                                    data-width="600"
+                                    data-allowfullscreen="true"
+                                    data-autoplay="false"
+                                    data-show-captions="true">
+                                </div>
+                            <% } %>
+                        </div>
+
+                        <div class="teacher-page__body fadeInAnim" id="pane-album">
+                            <h3>Album thể hiện quá trình giảng dạy hoặc các hoạt động của một giảng viên hay một khóa học nào đó.</h3>
+                            <% if(!albums[0]) { %>
+                                <h4>Hiện tại chưa có Album nào của giáo viên này.</h4>
+                            <% } else { %>
+                                <div class="teacher-page__body-wrap">
+
+                                    <% albums.forEach((album,i)=>{ %>
+                                        <div class="teacher-page__album">
+                                            <img class="teacher-page__album-img" src="<%= album.posts[0].imgUrls[0] %>" alt="album img">
+                                            <div class="teacher-page__album-info">
+                                                <h3><%= album.name %> 
+                                                    <a href="#" class="link-btn">Xem thêm</a> 
+                                                </h3>
+                                                <h4><%= album.shortDes.split(' ').slice(0-60).join(' ') %>...</h4>
+                                                <div class="teacher-page__date">
+                                                    <h5 class="teacher-page__created">
+                                                        <svg class="teacher-page__icon">
+                                                            <use xlink:href="images/course-detail.svg#icon-calendar"></use>
+                                                        </svg>
+                                                        Ngày đăng: <%= albumsDate[i].createdDate %>
+                                                    </h5>
+                                                    <h5 class="teacher-page__updated">
+                                                        <svg class="teacher-page__icon">
+                                                            <use xlink:href="images/course-detail.svg#icon-pencil"></use>
+                                                        </svg>
+                                                        Ngày cập nhật: <%= albumsDate[i].updatedDate %>
+                                                    </h5>
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                    <% }) %>
+
+                                </div>
+                            <% } %>
+                        </div>
+                        <div class="teacher-page__body fadeInAnim" id="pane-schedule">
+                            <h3>Các giảng viên sẽ thường xuyên cập nhật thời khóa biểu dạy học của họ, về thời gian nghỉ, dạy và địa điểm,... nên các bạn có thể vào đây để xem thời gian học của mình</h3>
+                            <% if(teacher.schedule[0]) { %>
+                                <table class="table table-bordered table-hover table-responsive-sm">
+                                    <thead>
+                                        <tr class="bg-primary">
+                                            <th scope="col">Giáo viên</th>
+                                            <th scope="col">Buổi</th>
+                                            <th scope="col">T2</th>
+                                            <th scope="col">T3</th>
+                                            <th scope="col">T4</th>
+                                            <th scope="col">T5</th>
+                                            <th scope="col">T6</th>
+                                            <th scope="col">T7</th>
+                                            <th scope="col">CN</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row" rowspan="3"><%= teacher.name %> - <br> <small><%= teacher.specialty %></small></th>
+                                            <th>Sáng</th>
+                                            <td><%= teacher.schedule[0].t21 %></td>
+                                            <td><%= teacher.schedule[0].t31 %></td>
+                                            <td><%= teacher.schedule[0].t41 %></td>
+                                            <td><%= teacher.schedule[0].t51 %></td>
+                                            <td><%= teacher.schedule[0].t61 %></td>
+                                            <td><%= teacher.schedule[0].t71 %></td>
+                                            <td><%= teacher.schedule[0].cn1 %></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Chiều</th>
+                                            <td><%= teacher.schedule[0].t22 %></td>
+                                            <td><%= teacher.schedule[0].t32 %></td>
+                                            <td><%= teacher.schedule[0].t42 %></td>
+                                            <td><%= teacher.schedule[0].t52 %></td>
+                                            <td><%= teacher.schedule[0].t62 %></td>
+                                            <td><%= teacher.schedule[0].t72 %></td>
+                                            <td><%= teacher.schedule[0].cn2 %></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Tối</th>
+                                            <td><%= teacher.schedule[0].t23 %></td>
+                                            <td><%= teacher.schedule[0].t33 %></td>
+                                            <td><%= teacher.schedule[0].t43 %></td>
+                                            <td><%= teacher.schedule[0].t53 %></td>
+                                            <td><%= teacher.schedule[0].t63 %></td>
+                                            <td><%= teacher.schedule[0].t73 %></td>
+                                            <td><%= teacher.schedule[0].cn3 %></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                
+                            <% } else { %>
+                                <div>
+                                    <i>Giáo viên hiện tại chưa cập nhật thời khóa biểu của mình</i>
+                                </div>
+                            <% } %>
+                        </div>
+                    </div>
+                </section>
+                <hr>
+                <section class="more-courses">
+                    <h2 class="more-courses__title">Một số khóa học của giảng viên này</h2>
+                    <br>
+                    <% if(courses[0]) { %>
+
+                        <div class="course-page__display">
+                            <% courses.forEach((course,i)=>{ %>
+                                <%- include('./includes/course-card.ejs', {course, i, saleOff: offPrices, titleSEOs,}) %>
+                            <% }) %>
+                        </div>
+
+                    <% } else { %>
+                        <h3>Hiện tại giảng viên này chưa có khóa học nào!</h3>
+                    <% } %>
+                </section>
+            </div>
+        </div>
+        
+        <script src="public/javascripts/teacherDetail.js"></script>
+    <%- include('./includes/client-footer.ejs') %>
+<%- include('./includes/footer.ejs') %>

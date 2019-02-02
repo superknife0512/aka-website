@@ -1,8 +1,14 @@
 const Course = require('../models/Course');
 const Events = require('../models/Event');
+const Teacher = require('../models/Teacher');
+const Album = require('../models/Album');
+const mongoose = require('mongoose');
+
+// *********************************************
+// HOME PAGE 
+// *********************************************
 
 exports.getHomePage =async (req,res,next)=>{
-
     try{
        
         const navData = [
@@ -146,6 +152,10 @@ exports.getHomePage =async (req,res,next)=>{
     
 }
 
+// *********************************************
+// COURSE PAGE 
+// *********************************************
+
 exports.getCoursesPage = async (req,res,next)=>{
     try{
         const courses = await Course.find().populate('teacher');
@@ -269,7 +279,130 @@ exports.getCourseDetail =async (req,res,next)=>{
             title: course.title,
             course,
             contacts,
-            socials
+            socials,            
+            courseDefaultVideo: process.env.COURSE_DEFAULT_VIDEO
+        })
+
+    } catch (err) {
+        next(err);
+    }
+}
+
+// *********************************************
+// TEACHER PAGE 
+// *********************************************
+
+exports.getTeachersPage =async (req,res,next)=>{
+    try{
+        const contacts = [
+            {
+                icon: 'images/contact.svg#icon-phone',
+                desc: '078 275 9831 - 094 942 9254',
+            },
+            {
+                icon: 'images/contact.svg#icon-map',
+                desc: '23 Thái Thị Bôi, q Thanh Khê, tp. Đà Nẵng',
+            },
+
+        ];
+
+        const socials = [
+            {
+                icon: 'images/contact.svg#icon-facebook',
+                desc: 'https://www.facebook.com/Superknife0512',
+            },
+            {
+                icon: 'images/contact.svg#icon-googleplus',
+                desc: 'https://bom.to/0vEt3',
+            },
+
+        ]
+        
+        const teachers =await Teacher.find({role: 'teacher'});
+        const seoName = teachers.map(teacher=>{
+            return teacher.name.replace(/[ .]/g, '-');
+        })
+        res.render('teachers-page',{
+            title: 'Giảng viên',
+            path: '/teacher-page',
+            contacts,
+            socials,
+            seoName,
+            teachers,
+        })
+
+    } catch (err) {
+        next(err)
+    }
+}
+
+exports.getTeacherDetail = async (req,res,next)=>{
+    try{
+        const contacts = [
+            {
+                icon: 'images/contact.svg#icon-phone',
+                desc: '078 275 9831 - 094 942 9254',
+            },
+            {
+                icon: 'images/contact.svg#icon-map',
+                desc: '23 Thái Thị Bôi, q Thanh Khê, tp. Đà Nẵng',
+            },
+
+        ];
+
+        const socials = [
+            {
+                icon: 'images/contact.svg#icon-facebook',
+                desc: 'https://www.facebook.com/Superknife0512',
+            },
+            {
+                icon: 'images/contact.svg#icon-googleplus',
+                desc: 'https://bom.to/0vEt3',
+            },
+
+        ]
+        
+        const teacher = await Teacher.findById(req.params.teacherId);
+        const teacherId = mongoose.Types.ObjectId(teacher._id)
+        const albums = await Album.find({createBy: teacherId});
+        const courses = await Course.find({teacher: teacherId}).populate('teacher');
+        
+        function changeDate(date){
+            return date.toISOString().split('T')[0].split('-').reverse().join('-');
+        }
+
+        const albumsDate = albums.map(album=>{
+            const createdDate = changeDate(album.createdAt);
+            const updatedDate = changeDate(album.updatedAt);
+            return {
+                createdDate,
+                updatedDate,
+            }
+        })
+
+        const offPrices = courses.map(course => {
+            const oldPrice = parseInt(course.oldPrice.split('.').join(''));
+            const price = parseInt(course.price.split('.').join(''));
+            const pricesMinus = oldPrice - price;
+            return ((pricesMinus/oldPrice)*100).toFixed(0)
+        })
+
+        const titleSEOs = courses.map(course=>{
+            return course.title.replace(/ /g, '-');
+        })
+
+        res.render('teacher-detail',{
+            socials,
+            contacts,
+            teacher,
+            title: teacher.name,
+            path: '/teacher-page',
+            teacherDefaultVideo: process.env.TEACHER_DEFAULT_VIDEO,
+            albums,
+            albumsDate,
+            offPrices,
+            courses,
+            titleSEOs
         })
 
     } catch (err) {

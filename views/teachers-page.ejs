@@ -1,0 +1,30 @@
+<%- include('./includes/html-head.ejs') %>
+    <%- include('./includes/client-header.ejs') %>
+    <div class="grid">
+        <div class="grid__container teachers__body">
+
+            <div class="teachers__heading">
+                <h1 class="teachers__title">Những giảng viên của chúng tôi</h1>
+                <h2>Họ là ai ?</h2>
+                <p class="text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus in ante lobortis, varius tellus auctor, tincidunt ex. Aliquam facilisis risus vel odio dictum, ac fringilla leo scelerisque. Mauris dictum finibus pulvinar. Integer eget vulputate sem. Nunc volutpat lacus sed orci fringilla fermentum. Nulla ac elit accumsan, feugiat risus eget, rutrum nunc. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam finibus feugiat risus eu varius.</p>
+            </div>
+            <div class="teachers__display">
+                <% teachers.forEach((teacher, i)=>{ %>
+                    <div class="teachers__card">
+                        <img src="<%= teacher.avatar %>" alt="teacher avatar" class="teachers__avatar">
+                        <a href="/teacher-page/<%= seoName[i] %>.<%= teacher._id %>" class="teachers__name"><%= teacher.name %></a>
+                        <p class="teachers__shortDes">
+                            <%= teacher.story.split(' ').slice(0,14).join(' ') %>...
+                        </p>
+                        <a href="/teacher-page/<%= seoName[i] %>.<%= teacher._id %>">
+                            <svg class="teachers__icon">
+                                <use xlink:href="images/benefits.svg#icon-magnifier"></use>
+                            </svg>
+                        </a>
+                    </div>
+                <% }) %>
+            </div>
+        </div>
+    </div>
+    <%- include('./includes/client-footer.ejs') %>
+<%- include('./includes/footer.ejs') %>

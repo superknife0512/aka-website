@@ -1,5 +1,7 @@
 {
     "env":{        
-        "AZURE_STORAGE_CONNECTION_STRING": "DefaultEndpointsProtocol=https;AccountName=superknife0512;AccountKey=kkTaurz/1zg9MLITL5o3rdCAd+0g3bXG/QWpwXf8KiGAL/X9eVa0KSexW9hiOWf/VWkbrgAI7/woAQeRgGwrug==;EndpointSuffix=core.windows.net"
+        "AZURE_STORAGE_CONNECTION_STRING": "DefaultEndpointsProtocol=https;AccountName=superknife0512;AccountKey=kkTaurz/1zg9MLITL5o3rdCAd+0g3bXG/QWpwXf8KiGAL/X9eVa0KSexW9hiOWf/VWkbrgAI7/woAQeRgGwrug==;EndpointSuffix=core.windows.net",
+        "COURSE_DEFAULT_VIDEO":"https://www.facebook.com/sinhhocphantu.org/videos/1155936857897501/",
+        "TEACHER_DEFAULT_VIDEO":"https://www.facebook.com/sbcscientific/videos/811992775662520/"
     }
 }

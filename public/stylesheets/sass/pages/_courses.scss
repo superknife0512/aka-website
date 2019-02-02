@@ -32,3 +32,14 @@
         }
     }
 }
+
+.more-courses{
+
+    &__title{
+        font-size: 2rem;
+        color: $color-secondary;
+        text-transform: uppercase;
+        margin: 3rem 0;
+        font-family: $font-title;
+    }
+}
