@@ -78,7 +78,7 @@
                                             <img class="teacher-page__album-img" src="<%= album.posts[0].imgUrls[0] %>" alt="album img">
                                             <div class="teacher-page__album-info">
                                                 <h3><%= album.name %> 
-                                                    <a href="#" class="link-btn">Xem thêm</a> 
+                                                    <a href="/album/<%= album._id %>?teacherId=<%= teacher._id %>" class="link-btn">Xem thêm</a> 
                                                 </h3>
                                                 <h4><%= album.shortDes.split(' ').slice(0-60).join(' ') %>...</h4>
                                                 <div class="teacher-page__date">

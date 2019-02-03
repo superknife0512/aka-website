@@ -1,0 +1,60 @@
+<%- include('./includes/html-head.ejs') %>
+    <%- include('./includes/client-header.ejs') %>
+        
+    <div class="grid">
+        <div class="grid__container album__body">
+            <div class="album__heading">
+                <h1 class="heading heading--1">
+                    <%= album.name %>
+                </h1>
+                <h4 class="album__create-by">
+                    <svg>
+                        <use xlink:href="public/images/course-detail.svg#icon-edit"></use>
+                    </svg>
+                    Album được tạo bởi <%= teacher.name %>
+                </h4>
+                <h5><%= album.shortDes %></h5>
+            </div>
+            <div class="album__posts">
+                <% album.posts.forEach((post,i)=>{ %>
+
+                    <section class="album__post">
+                        <div class="album__imgs">
+                            <% post.imgUrls.forEach(img=>{ %>
+                                <img src="<%= img %>" alt="images" class="album__img">
+                            <% }) %>
+                        </div>
+                        <div class="album__imgs-desc">
+                            <h2 class="album__imgs-title">
+                                <svg>
+                                    <use xlink:href="public/images/course-detail.svg#icon-bubble"></use>
+                                </svg>
+                                Post #<%= i+1 %>
+                            </h2>                         
+                            <h3><%= post.imgDesc %></h3> 
+                            <% if(postCreatedDate[0]) { %>
+                                <p class="album__imgs-more">
+                                    <svg>
+                                        <use xlink:href="public/images/course-detail.svg#icon-pencil"></use>
+                                    </svg>
+                                    Ngày tạo: <%= postCreatedDate[i] %>
+                                </p>
+                            <% } else { %>
+                                <p class="album__imgs-more">
+                                    <svg>
+                                        <use xlink:href="public/images/course-detail.svg#icon-pencil"></use>
+                                    </svg>
+                                    Ngày tạo: 10-6-2018
+                                </p>
+                            <% } %>
+                            
+                        </div>
+                    </section>
+
+                <% }) %>
+            </div>
+        </div>
+    </div>
+
+    <%- include('./includes/client-footer.ejs') %>
+<%- include('./includes/footer.ejs') %>

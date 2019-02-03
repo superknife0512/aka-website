@@ -409,3 +409,57 @@ exports.getTeacherDetail = async (req,res,next)=>{
         next(err);
     }
 }
+
+// *********************************************
+// ALBUM PAGE 
+// *********************************************
+
+exports.getAlbumPage = async (req,res,next)=>{
+    try{
+        const contacts = [
+            {
+                icon: 'images/contact.svg#icon-phone',
+                desc: '078 275 9831 - 094 942 9254',
+            },
+            {
+                icon: 'images/contact.svg#icon-map',
+                desc: '23 Thái Thị Bôi, q Thanh Khê, tp. Đà Nẵng',
+            },
+
+        ];
+
+        const socials = [
+            {
+                icon: 'images/contact.svg#icon-facebook',
+                desc: 'https://www.facebook.com/Superknife0512',
+            },
+            {
+                icon: 'images/contact.svg#icon-googleplus',
+                desc: 'https://bom.to/0vEt3',
+            },
+
+        ]
+        
+        const album =await Album.findById(req.params.albumId);
+        const teacher = await Teacher.findById(req.query.teacherId);
+        const postCreatedDate = album.posts.map(post=>{
+            if(post.createdAt){
+                return post.createdAt.toISOString().split('T')[0].split('-').reverse().join('-');
+            } else {
+                return null
+            }
+        })
+        res.render('album-page',{
+            title: album.name,
+            contacts,
+            socials,
+            path: '/album',
+            album,
+            postCreatedDate,
+            teacher
+        })
+
+    } catch (err) {
+        next(err);
+    }
+}

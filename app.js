@@ -35,6 +35,8 @@ app.use('/course-page',express.static(path.join(__dirname, 'public')));
 app.use('/course-page/public',express.static(path.join(__dirname, 'public')));
 app.use('/teacher-page',express.static(path.join(__dirname, 'public')));
 app.use('/teacher-page/public',express.static(path.join(__dirname, 'public')));
+app.use('/album',express.static(path.join(__dirname, 'public')));
+app.use('/album/public',express.static(path.join(__dirname, 'public')));
 
 
 app.use('/teacher', express.static(path.join(__dirname, 'public')));
@@ -93,7 +95,34 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.render('error',{
+    path: 'Error',
+    title: 'Error',
+    contacts: [
+      {
+          icon: 'images/contact.svg#icon-phone',
+          desc: '078 275 9831 - 094 942 9254',
+      },
+      {
+          icon: 'images/contact.svg#icon-map',
+          desc: '23 Thái Thị Bôi, q Thanh Khê, tp. Đà Nẵng',
+      },
+
+    ],
+
+    socials: [
+        {
+            icon: 'images/contact.svg#icon-facebook',
+            desc: 'https://www.facebook.com/Superknife0512',
+        },
+        {
+            icon: 'images/contact.svg#icon-googleplus',
+            desc: 'https://bom.to/0vEt3',
+        },
+
+    ]
+  
+  });
 });
 
 mongoose.connect(URI, (err)=>{

@@ -5,6 +5,10 @@
     position: absolute;
     transform-origin: left;
     transition: all .3s;
+
+    @media screen and (max-width: 500px){
+        display: none;
+    }
 }
 
 .heading{
@@ -13,6 +17,11 @@
     font-family: $font-title;
     margin-bottom: 4.5rem;
     position: relative;
+    @media screen and (max-width: 500px){
+        margin: 2rem;
+        margin-bottom: 4rem;
+        text-align: center;
+    }
     
     &--1{ // left align red color
         color: $color-secondary;

@@ -1,3 +1,17 @@
-<h1><%= message %></h1>
-<h2><%= error.status %></h2>
-<pre><%= error.stack %></pre>
+
+<%- include('./includes/html-head.ejs') %>
+    <%- include('./includes/client-header.ejs') %>
+    <br><br><br>
+    <div class="grid">
+        <div class="grid__container">
+
+            <h1 class="heading heading--1"><%= message %></h1>
+            <h2 style="font-size: 4rem"><%= error.status %></h2>
+            <pre><%= error.stack %></pre>
+
+        </div>
+    </div>
+    
+    <br><br><hr>
+    <%- include('./includes/client-footer.ejs') %>
+<%- include('./includes/footer.ejs') %>
