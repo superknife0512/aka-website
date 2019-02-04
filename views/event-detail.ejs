@@ -1,7 +1,47 @@
 <%- include('./includes/html-head.ejs') %>
     <%- include('./includes/client-header.ejs') %>
 
-    <h1>Event detail here</h1>
+    <div class="grid">
+        <div class="event-left">
+            <h1 class="heading heading--1"><%= event.eventName %></h1>
+            <h4 class="event-left__date">
+                <svg>
+                    <use xlink:href="images/course-detail.svg#icon-clock"></use>
+                </svg>
+                <%= event.dateHappen %>
+            </h4>
+
+            <div class="event-left__body">
+                <% event.desc.forEach(des=>{ %>
+                    <p class="event-left__content"><%= des %></p>
+                <% }) %>
+                <br>
+                <% event.eventImgs.forEach(img=>{ %>
+                    <img src="<%= img %>" alt="image" class="event-left__img">
+                <% }) %>
+            </div>
+        </div>
+        <div class="event-right">
+            <h2 class="event-right__title">
+                Một số tin tức khác
+            </h2>
+            <div class="event-right__body">
+                <% events.forEach(e=>{ %>
+                    <div class="event-right__card">
+                        <img src="<%= e.eventImgs[0] %>" alt="image" class="event-right__img">
+                        <div class="event-right__detail">
+                            <a href="/event-page/tin-tức.<%= e._id %>">
+                                <h3><%= e.eventName %></h3>
+                                <p><%= e.desc[0].split(' ').slice(0,13).join(' ') %>...</p>
+                            </a>
+                        </div>
+                    </div>
+                <% }) %>
+                
+            </div> 
+           
+        </div>
+    </div>
 
     <%- include('./includes/client-footer.ejs') %>
 <%- include('./includes/footer.ejs') %>

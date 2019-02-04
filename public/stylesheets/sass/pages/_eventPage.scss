@@ -72,6 +72,7 @@
 
     &__more{
         margin: 3rem 0;
+        margin-top: 6rem;
         h2{
             @extend %event-title;
         }
@@ -81,7 +82,7 @@
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(28rem, 31rem));
         grid-template-rows: 40rem;
-        grid-column-gap: 5.7rem;
+        grid-column-gap: 8rem;
         grid-row-gap: 4.5rem;
         margin-top: 5rem;
 
@@ -122,6 +123,7 @@
     &>h2{
         @extend %event-title;
         margin: 4rem 0;
+        margin-top: -1rem;
     }    
     &__body{
         display: flex;
@@ -160,5 +162,128 @@
             text-align: center;
         }
 
+    }
+    
+    
+}
+// this is for event detail 
+
+.event-left{
+    grid-column: 2/7;
+    padding: 0 3.5rem;
+    margin: 15rem 0;
+    margin-top: 10rem;
+    @media only screen and (max-width: 830px){
+        grid-column: 2/9;
+        margin-bottom: 2rem;
+    }
+
+    .heading{
+    }
+    &__body{
+
+    }
+    &__date{
+        color: #555;
+        margin-bottom: 5rem;
+        display: flex;
+        align-items: center;
+
+        svg{
+            fill: rgb(107, 107, 107);
+            height: 3rem;
+            width: 3rem;
+            margin-right: 1.5rem;
+        }
+    }
+    &__content{
+
+    }
+    &__img{
+        height: 43rem;
+        width: 100%;
+        object-fit: cover;
+        &:not(:last-child){
+            margin-bottom: 2rem;
+        }
+        @media only screen and (max-width: 830px){
+            height: 30rem;
+        }
+    }
+    &__right{
+        grid-column: 7/9;
+        padding: 0 2.5rem;
+    }
+}
+
+.event-right{
+    padding: 0 2.5rem;
+    grid-column: 7/9;
+    margin: 10rem 0;
+    margin-bottom: 15rem;
+    @media only screen and (max-width: 830px){
+        grid-column: 2/9
+    }
+    &__title{
+        @extend %event-title;
+        padding-bottom: 2rem;
+        margin-bottom: 2rem;
+        @media only screen and (max-width: 575px){
+            text-align: center;
+        }
+    }
+    &__body{
+        @media only screen and (max-width: 830px){
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+    }
+
+    &__card{
+        position: relative;
+        margin-bottom: 4rem;
+        &::after{
+            content:"";
+            height: 100%;
+            width: 100%;
+            background-image: linear-gradient(45deg, #181818 0%, #f1ecdc81 100%);
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: .48;
+            z-index: 500;
+        }
+        @media only screen and (max-width: 825px){
+            margin-right: 2rem;
+        }
+        @media only screen and (max-width: 555px){
+            margin-right: 0;
+        }
+    }
+    &__img{
+        width: 100%;
+        height: 18rem;
+        object-fit: cover;
+    }
+    &__detail{
+        position: absolute;
+        left: 1rem;
+        bottom: 0rem;
+        color: white;
+        z-index: 610;
+        a{
+            &:link, &:visited{
+                color: $color-white--3;
+            }
+        }
+
+        h3{
+            font-size: 1.4rem;
+            text-transform: uppercase;
+        }
+        p{
+            font-size: 1.3rem;
+        }
     }
 }

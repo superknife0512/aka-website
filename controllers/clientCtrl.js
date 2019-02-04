@@ -517,3 +517,45 @@ exports.getEventPage = async (req,res,next)=>{
         next(err);
     }
 }
+
+exports.getEventDetail = async (req,res,next)=>{
+    const contacts = [
+        {
+            icon: 'images/contact.svg#icon-phone',
+            desc: '078 275 9831 - 094 942 9254',
+        },
+        {
+            icon: 'images/contact.svg#icon-map',
+            desc: '23 Thái Thị Bôi, q Thanh Khê, tp. Đà Nẵng',
+        },
+
+    ];
+
+    const socials = [
+        {
+            icon: 'images/contact.svg#icon-facebook',
+            desc: 'https://www.facebook.com/Superknife0512',
+        },
+        {
+            icon: 'images/contact.svg#icon-googleplus',
+            desc: 'https://bom.to/0vEt3',
+        },
+
+    ]
+    
+    try{
+        const event = await Events.findById(req.params.eventId);
+        const events = await Events.find().limit(5);
+        res.render('event-detail',{
+            title: event.eventName,
+            path: '/event-page',
+            event,
+            socials,
+            contacts,
+            events
+        })
+        
+    } catch (err) {
+        next(err);
+    }
+}

@@ -14,6 +14,6 @@ router.get('/teacher-page/*.:teacherId', clientController.getTeacherDetail);
 router.get('/album/:albumId', clientController.getAlbumPage);
 
 router.get('/event-page', clientController.getEventPage);
-// router.get('/event-page/*.:eventId', clientController.getEventDetail);
+router.get('/event-page/*.:eventId', clientController.getEventDetail);
 
 module.exports = router;
