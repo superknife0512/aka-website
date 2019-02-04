@@ -5,6 +5,11 @@
         grid-template-columns: repeat(3, 20rem);
         grid-column-gap: 2.2rem;
         grid-row-gap: 2.5rem;
+
+        @media screen and (max-width: 900px){
+            justify-content: center;
+            grid-template-columns: repeat(auto-fit, 20rem)
+        }
     }
 
     &__card{

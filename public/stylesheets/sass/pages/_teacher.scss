@@ -64,6 +64,16 @@
         &--each{
             margin-bottom: 3rem;
         }
+        @media screen and (max-width: 600px){
+            .fb-video{
+                width: 45rem;
+            }
+        }
+        @media screen and (max-width: 415px){
+            .fb-video{
+                width: 35rem;
+            }
+        }
     }
 }
 

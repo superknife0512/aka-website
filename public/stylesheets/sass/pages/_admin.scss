@@ -13,6 +13,10 @@
         height: 100%;
         transition: all .3s;
 
+        @media screen and (max-width: 430px){
+            width: 20rem;
+        }
+
         &:focus{
             outline: none;
             border: solid 1px $color-primary;
@@ -87,6 +91,9 @@
 .inc-event{
     display: flex;    
     align-items: center;
+    @media screen and (max-width: 650px){
+        flex-direction: column;
+    }
 
     &__img{
         height: 23rem;
@@ -94,6 +101,9 @@
         object-fit: cover;
         object-position: center;
         padding-right: 2rem;
+        @media screen and (max-width: 900px){
+            margin-bottom: 1.5rem;
+        }
     }
     &__info{
         display: flex;
@@ -118,4 +128,14 @@
 
 .glider{
     overflow: hidden;
+}
+
+#price-form{
+    @media screen and (max-width: 525px){
+        display: flex;
+        flex-direction: column;
+        input{
+            margin-bottom: 1.5rem;
+        }
+    }
 }

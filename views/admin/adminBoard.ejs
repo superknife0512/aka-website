@@ -22,10 +22,10 @@
             <h2 class="medium-title">Courses information</h2>
             <div class="glider__body" >
 
-                <svg class="glider__icon glider__icon--left">
+                <svg class="glider__icon glider__icon--left d-none d-sm-block">
                     <use xlink:href="public/images/arrows.svg#icon-chevron-thin-left"></use>
                 </svg>
-                <svg class="glider__icon glider__icon--right">
+                <svg class="glider__icon glider__icon--right d-none d-sm-block">
                     <use xlink:href="public/images/arrows.svg#icon-chevron-thin-right"></use>
                 </svg>
 
@@ -39,7 +39,7 @@
                                  alt="<%= course.title %>">
                             <div class="card-body">
                                 <h2 class="card-title"><%= course.title %></h2>
-                                <p class="card-text"><%= course.shortDes.split(' ').slice(0,14).join(' ') %> ...</p>
+                                <p class="card-text"><%= course.shortDes.split(' ').slice(0,10).join(' ') %> ...</p>
                                 <div class="d-flex">
                                     <a href="/admin/course/edit?courseId=<%= course._id %>" class="btn btn-warning mr-8">Add information</a>
                                     <form action="/admin/course/delete" method="POST">
@@ -62,10 +62,10 @@
             <h2 class="medium-title">Events information </h2>
             <div class="glider__body" >
                 
-                <svg class="glider__icon glider__icon--left" id="arrow-left">
+                <svg class="glider__icon glider__icon--left d-none d-sm-block " id="arrow-left">
                     <use xlink:href="public/images/arrows.svg#icon-chevron-thin-left"></use>
                 </svg>
-                <svg class="glider__icon glider__icon--right" id="arrow-right">
+                <svg class="glider__icon glider__icon--right d-none d-sm-block " id="arrow-right">
                     <use xlink:href="public/images/arrows.svg#icon-chevron-thin-right"></use>
                 </svg>
 
@@ -80,7 +80,7 @@
                             <div class="card-body">
                                 <h2 class="card-title"><%= event.eventName %></h2>
                                 <p class="card-text"><%= event.dateHappen %></p>
-                                <p class="card-text"><%= event.desc[0].split(' ').slice(0,14).join(' ') %></p>
+                                <p class="card-text"><%= event.desc[0].split(' ').slice(0,10).join(' ') %></p>
                                 <div class="d-flex">
                                     <a href="/admin/event/edit?eventId=<%= event._id %>" class="btn btn-warning mr-8">Add information</a>
                                     <form action="/admin/event/delete" method="POST">
@@ -110,11 +110,8 @@
             slidesToShow: 1,
             slidesToScroll: 1,            
             itemWidth: 300, 
-            scrollLock: true,
-            arrows: {
-                prev: '.glider__icon--left',
-                next: '.glider__icon--right'
-            },            
+            scrollLock: true,    
+            draggable: true,
             dots:'.dots',
             responsive: [{
                 // screens greater than >= 1024px
@@ -125,7 +122,12 @@
                         // itemWidth: 150,                        
                         dragVelocity: 2,
                         duration: 2,
-                        dots:'.dots'
+                        dots:'.dots',
+                        
+                        arrows: {
+                            prev: '.glider__icon--left',
+                            next: '.glider__icon--right'
+                        }, 
                         
                     }
                 }
@@ -137,11 +139,8 @@
             slidesToShow: 1,
             slidesToScroll: 1,            
             itemWidth: 300, 
-            scrollLock: true,
-            arrows: {
-                prev: '#arrow-left',
-                next: '#arrow-right'
-            },            
+            scrollLock: true, 
+            draggable: true,          
             dots:'.dots',
             responsive: [{
                 // screens greater than >= 1024px
@@ -152,7 +151,12 @@
                         // itemWidth: 150,                        
                         dragVelocity: 2,
                         duration: 2,
-                        dots:'.dots'
+                        dots:'.dots',
+                        
+                        arrows: {
+                            prev: '#arrow-left',
+                            next: '#arrow-right'
+                        }, 
                         
                     }
                 }

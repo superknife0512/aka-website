@@ -2,6 +2,7 @@ const Course = require('../models/Course');
 const Events = require('../models/Event');
 const Teacher = require('../models/Teacher');
 const Album = require('../models/Album');
+const incEvent = require('../models/IncomingEvent');
 const mongoose = require('mongoose');
 
 // *********************************************
@@ -457,6 +458,59 @@ exports.getAlbumPage = async (req,res,next)=>{
             album,
             postCreatedDate,
             teacher
+        })
+
+    } catch (err) {
+        next(err);
+    }
+}
+
+// *********************************************
+// EVENT PAGE 
+// *********************************************
+
+exports.getEventPage = async (req,res,next)=>{
+    try{
+        const contacts = [
+            {
+                icon: 'images/contact.svg#icon-phone',
+                desc: '078 275 9831 - 094 942 9254',
+            },
+            {
+                icon: 'images/contact.svg#icon-map',
+                desc: '23 Thái Thị Bôi, q Thanh Khê, tp. Đà Nẵng',
+            },
+
+        ];
+
+        const socials = [
+            {
+                icon: 'images/contact.svg#icon-facebook',
+                desc: 'https://www.facebook.com/Superknife0512',
+            },
+            {
+                icon: 'images/contact.svg#icon-googleplus',
+                desc: 'https://bom.to/0vEt3',
+            },
+
+        ]
+        
+        const events = await Events.find().limit(3).sort('-createdAt');
+        const remainingEvent = await Events.find().skip(3).limit(6).sort('-createdAt');
+        const eventsDate = events.map(event=>{
+            return event.createdAt.toISOString().split('T')[0].split('-').reverse().join('-');
+        })
+        const incomingEvent = await incEvent.findOne();
+
+        res.render('event-page',{
+            title: 'AK event - news',
+            path: '/event-page',
+            contacts,
+            socials,
+            events,
+            eventsDate,
+            remainingEvent,
+            incomingEvent
         })
 
     } catch (err) {

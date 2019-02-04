@@ -1,0 +1,96 @@
+<%- include('./includes/html-head.ejs') %>
+    <%- include('./includes/client-header.ejs') %>
+
+    <div class="grid">
+        <div class="grid__container event-page">
+            <h1 class="heading heading--1">
+                Tin tức và sự kiện tại AK
+            </h1>
+            <br>
+            <div class="event-page__heading">
+
+                <a href="/event-page/tin-tức.<%= events[0]._id %>" class="event-page__group" id="event-1">
+                    <img src="<%= events[0].eventImgs[0] %>" alt="event img" class="event-page__group--img">
+                    <div class="event-page__group--info">
+                        <h2> <%= events[0].eventName %> </h2>
+                        <p><%= events[0].desc[0].split(' ').slice(0,30).join(' ') %>...</p>
+                    </div>
+                    <span class="event-page__date"><%=eventsDate[0] %></span>
+                </a>
+
+                <a href="/event-page/tin-tức.<%= events[1]._id %>" class="event-page__group" id="event-2">
+                    <img src="<%= events[1].eventImgs[0] %>" alt="event img" class="event-page__group--img">
+                    <div class="event-page__group--info">
+                        <h2> <%= events[1].eventName %> </h2>
+                        <p><%= events[1].desc[0].split(' ').slice(0,20).join(' ') %>...</p>
+                    </div>
+                    <span class="event-page__date"><%=eventsDate[0] %></span>
+                </a>
+
+                <a href="/event-page/tin-tức.<%= events[2]._id %>" class="event-page__group" id="event-3">
+                    <img src="<%= events[2].eventImgs[0] %>" alt="event img" class="event-page__group--img">
+                    <div class="event-page__group--info">
+                        <h2> <%= events[2].eventName %> </h2>
+                        <p><%= events[2].desc[0].split(' ').slice(0,30).join(' ') %>...</p>
+                    </div>
+                    <span class="event-page__date"><%=eventsDate[0] %></span>
+                </a>
+            </div>
+            <br><br>
+            <div class="event-page__more">
+                <h2>
+                    Các sự kiện và tin tức khác của AK
+                </h2>
+                <div class="event-page__body">
+                        <% remainingEvent.forEach(event=>{ %>
+                            <div class="events-sect__card">
+                                <img src="<%= event.eventImgs[0] %>" alt="event img" class="events-sect__img">
+                                <div class="events-sect__wrap">
+                                    <h3><%= event.eventName %></h3>
+                                    <p><%= event.desc[0].split(' ').slice(0,12).join(' ') %>
+                                        <%= event.desc[0].split(' ').length > 12 ? '...' : '' %></p>
+                                </div>
+                                <div class="events-sect__wrap-btn">
+                                    <button class="corner-btn corner-btn--trans">
+                                        <a href="#">Xem thêm</a>
+                                    </button>
+                                    <p><%= event.dateHappen %></p>
+                                </div>
+                            </div>
+                        <% }) %>
+                </div>
+            </div>
+            <hr>
+            <div class="incEvent">
+                <h2>Sự kiện sắp diễn ra</h2>
+                <% if(!incomingEvent) { %>
+                    <i>Chưa có sự kiện nào sắp được tổ chức</i>
+                <% } else { %>
+                    <div class="incEvent__body">
+                        <div class="incEvent__left">
+                            <div href="#" class="event-page__group" id="event-1">
+                                <img src="<%= incomingEvent.eventImg %>" alt="event img" class="event-page__group--img">
+                                <div class="event-page__group--info">
+                                    <h2> <%= incomingEvent.eventName %> </h2>
+                                    <p><%= incomingEvent.desc[0].split(' ').slice(0,20).join(' ') %>...</p>
+                                    <p><%= incomingEvent.dateHappen %></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="incEvent__right">
+                            <h1>Tham gia ngay!!!</h1>
+
+                            <% incomingEvent.desc.forEach(des=>{ %>
+                                <p><%= des %></p>
+                            <% }) %>
+
+                            <a href="#" class="link-btn">Tham gia</a>
+                        </div>
+                    </div>
+                <% } %>
+            </div>
+        </div>
+    </div>
+
+    <%- include('./includes/client-footer.ejs') %>
+<%- include('./includes/footer.ejs') %>
