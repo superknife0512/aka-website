@@ -1,0 +1,83 @@
+<%- include('./includes/html-head.ejs') %>
+    <%- include('./includes/client-header.ejs') %>
+
+    <div class="grid">
+        <div class="grid__container contact__heading">
+            <h1 class="heading heading--1">Liên hệ với chúng tôi</h1>            
+        </div>
+        <div class="contact__form">
+            <h2 class="contact__form-title">
+                gửi thư<br>
+                <span>cho chúng tôi</span>
+            </h2>
+            
+            <form action="/contact" method="POST" class="contact__form-body">
+                <% if(err) { %>
+                    <p class="alert alert-primary"><%= err %></p>
+                <% } %>
+                <input type="text" name="name" class="contact__form-input" placeholder="Tên của bạn">
+                <input type="text" name="phone" class="contact__form-input" placeholder="Số điện thoại của bạn">
+                <input type="email" name="email" class="contact__form-input" placeholder="Email của bạn">
+                <textarea type="text" 
+                        name="msg" class="contact__form-input" 
+                        placeholder="Tin nhắn của bạn" 
+                        rows="6" id="input-msg"></textarea>                
+
+                <button type="submit" class="corner-btn">
+                    Gửi thư
+                </button> 
+            </form>
+        </div>
+
+        <div class="contact__info">
+            <div class="contact__info-heading">
+                <h2>Thông tin</h2>
+                <h3>Liên hệ</h3>
+            </div>
+            <p>
+                Dưới đây là một chút thông tin của công ty. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatem distinctio rem dicta quisquam et eveniet in recusandae saepe, velit est ad aspernatur deleniti illum officiis beatae esse.
+            </p>
+            <div class="contact__info-detail">
+                <svg class="contact__info-icon">
+                    <use xlink:href="images/contact-icon.svg#icon-home2"></use>
+                </svg>
+                <h4 class="contact__info-more">
+                    Địa chỉ 24 Thái Thị Bôi, q, Thanh Khê, tp. Đà Nẵng, ngay tại Trung tâm thành phố Đà Nẵng
+                </h4>
+            </div>
+            <div class="contact__info-detail">
+                <svg class="contact__info-icon">
+                    <use xlink:href="images/contact-icon.svg#icon-mail3"></use>
+                </svg>
+                <h4 class="contact__info-more">
+                    TrungtamdanguAK@gmail.com
+                </h4>
+            </div>
+            <div class="contact__info-detail">
+                <svg class="contact__info-icon">
+                    <use xlink:href="images/contact-icon.svg#icon-phone"></use>
+                </svg>
+                <h4 class="contact__info-more">
+                    078 275 9831
+                </h4>
+            </div>
+            <div class="contact__social">      
+                <a href="#">
+                    <svg class="contact__info-ggplus contact__social-icon">
+                        <use xlink:href="images/contact-icon.svg#icon-google-plus3"></use>
+                    </svg>
+                </a>   
+                <a href="#">
+                    <svg class="contact__info-fb contact__social-icon">
+                        <use xlink:href="images/contact-icon.svg#icon-facebook2"></use>
+                    </svg>
+                </a>   
+                <svg class="contact__twitter contact__social-icon">
+                    <use xlink:href="images/contact-icon.svg#icon-twitter"></use>
+                </svg>
+            </div>
+        </div>
+    </div>
+
+    <%- include('./includes/client-footer.ejs') %>
+<%- include('./includes/footer.ejs') %>

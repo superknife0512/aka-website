@@ -3,6 +3,8 @@ const Events = require('../models/Event');
 const Teacher = require('../models/Teacher');
 const Album = require('../models/Album');
 const incEvent = require('../models/IncomingEvent');
+const Message = require('../models/Message');
+
 const mongoose = require('mongoose');
 
 // *********************************************
@@ -553,6 +555,156 @@ exports.getEventDetail = async (req,res,next)=>{
             socials,
             contacts,
             events
+        })
+        
+    } catch (err) {
+        next(err);
+    }
+}
+
+// *********************************************
+// ABOUT PAGE 
+// *********************************************
+
+exports.getAboutPage = async (req,res,next)=>{
+    const contacts = [
+        {
+            icon: 'images/contact.svg#icon-phone',
+            desc: '078 275 9831 - 094 942 9254',
+        },
+        {
+            icon: 'images/contact.svg#icon-map',
+            desc: '23 Thái Thị Bôi, q Thanh Khê, tp. Đà Nẵng',
+        },
+
+    ];
+
+    const socials = [
+        {
+            icon: 'images/contact.svg#icon-facebook',
+            desc: 'https://www.facebook.com/Superknife0512',
+        },
+        {
+            icon: 'images/contact.svg#icon-googleplus',
+            desc: 'https://bom.to/0vEt3',
+        },
+
+    ]
+    
+    try{
+
+        res.render('about',{
+            title: 'Về trung tâm AK',
+            path: '/about',
+            socials,
+            contacts,
+        })
+        
+    } catch (err) {
+        next(err);
+    }
+}
+
+// *********************************************
+// CONTACT PAGE 
+// *********************************************
+
+exports.getContactPage = async (req,res,next)=>{
+    const contacts = [
+        {
+            icon: 'images/contact.svg#icon-phone',
+            desc: '078 275 9831 - 094 942 9254',
+        },
+        {
+            icon: 'images/contact.svg#icon-map',
+            desc: '23 Thái Thị Bôi, q Thanh Khê, tp. Đà Nẵng',
+        },
+
+    ];
+
+    const socials = [
+        {
+            icon: 'images/contact.svg#icon-facebook',
+            desc: 'https://www.facebook.com/Superknife0512',
+        },
+        {
+            icon: 'images/contact.svg#icon-googleplus',
+            desc: 'https://bom.to/0vEt3',
+        },
+
+    ]
+    
+    try{
+
+        res.render('contact',{
+            title: 'Về trung tâm AK',
+            path: '/contact',
+            socials,
+            contacts,
+            err: false,
+        })
+        
+    } catch (err) {
+        next(err);
+    }
+}
+
+exports.postContact = async (req,res,next)=>{
+    const contacts = [
+        {
+            icon: 'images/contact.svg#icon-phone',
+            desc: '078 275 9831 - 094 942 9254',
+        },
+        {
+            icon: 'images/contact.svg#icon-map',
+            desc: '23 Thái Thị Bôi, q Thanh Khê, tp. Đà Nẵng',
+        },
+
+    ];
+
+    const socials = [
+        {
+            icon: 'images/contact.svg#icon-facebook',
+            desc: 'https://www.facebook.com/Superknife0512',
+        },
+        {
+            icon: 'images/contact.svg#icon-googleplus',
+            desc: 'https://bom.to/0vEt3',
+        },
+
+    ]
+    
+    try{
+        const name = req.body.name;
+        const phone = req.body.phone;
+        const email = req.body.email;
+        const msg = req.body.msg;
+
+        if(!name || !phone || !email || !msg){
+            return res.render('contact',{
+                title: 'Về trung tâm AK',
+                path: '/contact',
+                socials,
+                contacts,
+                err: 'Bạn phải nhập đầy đủ các trường trước khi gửi'
+            })
+        }
+
+        const message = new Message({
+            name,
+            phone,
+            email,
+            message: msg,
+        })
+
+        await message.save();
+               
+        res.render('contact',{
+            title: 'Về trung tâm AK',
+            path: '/contact',
+            socials,
+            contacts,
+            err: 'Cảm ơn bạn đã gửi thư cho chúng tôi!'
         })
         
     } catch (err) {

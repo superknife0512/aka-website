@@ -1,0 +1,154 @@
+.contact{
+    &__heading{
+        margin-top: 9rem;
+    }
+    // form section
+    &__form{
+        margin-bottom: 34rem;
+        margin-top: 5rem;
+        padding: 7rem;
+        grid-column: 2/7;
+        grid-row: 2/3;
+        background-color: white;
+        box-shadow: 0px 0px 58px 0px rgba(0,0,0,0.39);
+        border-radius: 1.2rem;
+        @media only screen and (max-width: 830px){
+            grid-column: 2/9;
+            margin-bottom: 5rem;
+            padding: 3rem;
+        }
+        
+    }
+    &__form-body{        
+        display: flex;
+        flex-direction: column;
+
+        .corner-btn{
+            align-self: flex-start;
+            text-transform: uppercase;
+            color: $color-secondary;
+            border: 1px solid $color-secondary;
+            background-color: none;
+            padding: .8rem 2.5rem;
+            background-color: white;
+            transition: all .2s;
+            &:hover{
+                color: white;
+                background-color: $color-secondary
+            }
+        }
+    }
+    &__form-title{
+        font-size: 3.8rem;
+        text-transform: uppercase;
+        color: $color-primary;
+        font-family: $font-title;
+        margin-bottom: 3.5rem;
+        line-height: 2.5rem;
+        span{
+            font-size: 2rem;
+        }
+    }
+    &__form-input{
+        border-radius: 500px;
+        background-color: #f6f6f6;
+        border: solid 1px rgb(207, 207, 207);
+        padding: 1rem 1.5rem;
+        width: 78%;
+
+        &:not(:last-child){
+            margin-bottom: 3rem;
+        }
+        &:focus{
+            border: 1px solid $color-secondary;
+        }
+        @media only screen and (max-width: 550px){
+            width: 100%;
+        }
+    }
+    // more info section**********************************************
+
+    &__info{
+        grid-column: 6/9;
+        grid-row: 2/3;
+        margin: 8rem 1rem;
+        padding: 10rem 6rem;
+        color: white;
+        background-color: $color-secondary;
+        border-radius: 1.2rem;
+        height: 69%;
+        transform: translateY(10rem);
+        position: relative;
+        box-shadow: 0px 0px 58px 0px rgba(0,0,0,0.39);
+        @media only screen and (max-width: 830px){
+            grid-column: 2/9;
+            grid-row: 3/4;
+            margin-top: 0;
+            transform: translateY(-7rem);
+            height: auto;
+        }
+
+        p{
+            margin-bottom: 2rem;
+        }
+        &-heading{
+            font-family: $font-title;
+            margin-bottom: 2.5rem;
+            &::after{
+                content:"";
+                height: 6.5rem;
+                width: 1.2rem;
+                background-color: $color-white--2;
+                position: absolute;
+                top: 10rem;
+                left: 0;
+            }
+            h2{
+                font-size: 2.8rem;
+                line-height: 2rem;
+            }
+            h3{
+                font-size: 3.8rem
+            }
+        }
+    }
+
+    &__info-detail{
+        display: flex;
+        align-items: center;
+
+        &:not(:last-child){
+            margin-bottom: 4rem;
+        }
+    }
+    &__info-icon{
+        margin-right: 2rem;
+        height: 3rem;
+        width: 3rem;
+        fill: $color-white--2;
+        flex: 1;
+    }
+    &__info-more{
+        flex: 6;
+        font-size: 1.4rem;
+        margin-bottom: 0;
+    }
+    &__social{
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 2rem;
+        padding-top: 2rem;
+        border-top: 1px solid rgba(255, 255, 255,.3);
+
+        &-icon{
+            height: 3.4rem;
+            width: 3.4rem;
+            margin-left: 2rem;
+            fill: $color-white--2
+        }
+    }
+}
+
+#input-msg{
+    border-radius: 2rem;
+}

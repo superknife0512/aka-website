@@ -16,4 +16,9 @@ router.get('/album/:albumId', clientController.getAlbumPage);
 router.get('/event-page', clientController.getEventPage);
 router.get('/event-page/*.:eventId', clientController.getEventDetail);
 
+router.get('/about', clientController.getAboutPage);
+
+router.get('/contact', clientController.getContactPage);
+router.post('/contact', clientController.postContact);
+
 module.exports = router;
