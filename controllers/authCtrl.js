@@ -1,18 +1,11 @@
 const Teacher = require('../models/Teacher');
 const bcrypt = require('bcryptjs');
-const nodemailer = require('nodemailer');
 const crypto = require('crypto');
+const sgMail = require('@sendgrid/mail');
 
-const transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth:{
-        user: 'trungtamaka@gmail.com',
-        pass: 'Toan1234'
-    }
-})
+const defaultEmail = process.env.DEFAULT_EMAIL
 
-const defautEmail = 'Superknife0512@gmail.com'
-
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 const createErr = (msg, statusCode)=>{
     const err = new Error(msg);
@@ -159,11 +152,11 @@ exports.postSignup =async (req,res,next)=>{
 exports.sendCode =async (req,res,next)=>{
     const role = req.body.role;
     try{
-        console.log(role);
+
         const roleCode = await bcrypt.hash(role, 15);    
-        const mailOption = {
-            from: 'TrungtamdanguAK@gmail.com',
-            to: defautEmail,
+        const msg = {
+            from: 'admin@danguAK.com',
+            to: defaultEmail,
             subject: 'Your role code!',
             html: ` 
                 <h3>This is your ${role} code</h3>
@@ -172,17 +165,18 @@ exports.sendCode =async (req,res,next)=>{
                 <p>-------------------------------------------------------------</p>
                 <p>Enter to the code field</p>`
         }
-    
-        transporter.sendMail(mailOption, function(error, info){
-            if (error) {
-              console.log(error);              
+
+        sgMail.send(msg, (err, resonse)=>{
+            if(err){
+                throw err
             } else {
-              console.log('Email sent: ' + info.response);
+                console.log('Sent role code');
                 res.json({
                     msg: 'Your mail has been send!'
                 })
             }
-          });
+        })        
+    
 
     } catch (err) { 
         next(err);
@@ -252,8 +246,8 @@ exports.postResetPass = async (req, res, next)=>{
 
         await person.save();
 
-        const mailOption = {
-            from: 'TrungtamdanguAK@gmail.com',
+        const msg = {
+            from: 'admin@danguAK.com',
             to: email,
             subject: 'Reset your password',
             html: ` 
@@ -264,7 +258,7 @@ exports.postResetPass = async (req, res, next)=>{
                 <p>Enter to the code field</p>`
         }
 
-        transporter.sendMail(mailOption, function(error, info){
+        sgMail.send(msg, function(error, info){
             if (error) {
               console.log(error);              
             } else {

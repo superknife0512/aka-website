@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
@@ -17,7 +19,7 @@ const Teacher = require('./models/Teacher');
 const app = express();
 
 //setup URI
-const URI = 'mongodb+srv://superknife0512:Toan1234@node-app-oqduu.gcp.mongodb.net/Aka?retryWrites=true'
+const URI = process.env.MONGODB_CONNECTION_STRING
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

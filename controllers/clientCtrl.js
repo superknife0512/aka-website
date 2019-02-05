@@ -4,6 +4,9 @@ const Teacher = require('../models/Teacher');
 const Album = require('../models/Album');
 const incEvent = require('../models/IncomingEvent');
 const Message = require('../models/Message');
+const sgMail = require('@sendgrid/mail');
+
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 const mongoose = require('mongoose');
 
@@ -689,6 +692,19 @@ exports.postContact = async (req,res,next)=>{
                 err: 'Bạn phải nhập đầy đủ các trường trước khi gửi'
             })
         }
+            
+        
+        const msgSendGrid = {
+            to: process.env.DEFAULT_EMAIL,
+            from: 'Guest@ak.com',
+            subject: 'Thư khách gửi cho trung tâm',
+            html:
+             `
+            <h3>Họ và tên: ${name}</h3>
+            <h4>Số điện thoại: ${phone}</h4>
+            <h4 style="color: red">Email học viên: ${email}</h4>            
+            <p>${msg}</p>`,
+          };
 
         const message = new Message({
             name,
@@ -696,6 +712,15 @@ exports.postContact = async (req,res,next)=>{
             email,
             message: msg,
         })
+
+        
+        await sgMail.send(msgSendGrid, (err, result)=>{
+            if(err){
+                throw err
+            } else {
+                console.log('Has send');
+            }
+        });
 
         await message.save();
                
@@ -705,7 +730,7 @@ exports.postContact = async (req,res,next)=>{
             socials,
             contacts,
             err: 'Cảm ơn bạn đã gửi thư cho chúng tôi!'
-        })
+        })    
         
     } catch (err) {
         next(err);
@@ -740,6 +765,7 @@ exports.postSearch = async (req,res,next)=>{
         },
 
     ]
+    
     
     try{
         const search = req.body.search;
