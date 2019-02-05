@@ -94,3 +94,11 @@ form{
 .height-2000{
     min-height: 150rem;
 }
+
+.search{
+    &__body{
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(30rem, 38rem));
+        grid-row-gap: 4.9rem;
+    }
+}

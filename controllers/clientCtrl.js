@@ -711,3 +711,68 @@ exports.postContact = async (req,res,next)=>{
         next(err);
     }
 }
+
+// *********************************************
+// ABOUT PAGE 
+// *********************************************
+
+exports.postSearch = async (req,res,next)=>{
+    const contacts = [
+        {
+            icon: 'images/contact.svg#icon-phone',
+            desc: '078 275 9831 - 094 942 9254',
+        },
+        {
+            icon: 'images/contact.svg#icon-map',
+            desc: '23 Thái Thị Bôi, q Thanh Khê, tp. Đà Nẵng',
+        },
+
+    ];
+
+    const socials = [
+        {
+            icon: 'images/contact.svg#icon-facebook',
+            desc: 'https://www.facebook.com/Superknife0512',
+        },
+        {
+            icon: 'images/contact.svg#icon-googleplus',
+            desc: 'https://bom.to/0vEt3',
+        },
+
+    ]
+    
+    try{
+        const search = req.body.search;
+        const courses = await Course.find().populate('teacher');
+
+        const searchPattern = new RegExp(search, "ig");
+        const results = [];
+        
+        courses.forEach(course=>{
+            if(course.title.match(searchPattern)){
+                results.push(course)
+            }
+        })
+        const offPrices = courses.map(course => {
+            const oldPrice = parseInt(course.oldPrice.split('.').join(''));
+            const price = parseInt(course.price.split('.').join(''));
+            const pricesMinus = oldPrice - price;
+            return ((pricesMinus/oldPrice)*100).toFixed(0)
+        })
+        const titleSEOs = courses.map(course=>{
+            return course.title.replace(/ /g, '-');
+        })
+        res.render('search',{
+            title: 'Kết quả tìm kiếm của bạn',
+            path: '/search',
+            socials,
+            contacts,
+            results,
+            offPrices,
+            titleSEOs
+        })
+        
+    } catch (err) {
+        next(err);
+    }
+}

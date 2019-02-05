@@ -21,4 +21,6 @@ router.get('/about', clientController.getAboutPage);
 router.get('/contact', clientController.getContactPage);
 router.post('/contact', clientController.postContact);
 
+router.post('/search', clientController.postSearch)
+
 module.exports = router;

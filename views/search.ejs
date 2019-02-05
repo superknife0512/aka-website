@@ -1,0 +1,25 @@
+<%- include('./includes/html-head.ejs') %>
+    <%- include('./includes/client-header.ejs') %>
+    <br><br><br>
+    <div class="grid">
+        <div class="grid__container search height-2000">
+
+            <h1 class="heading heading--1">Đây là kết quả tìm kiếm của chúng thôi</h1>
+            <br>
+            <div class="search__body">
+
+                <% if(results[0]) { %>
+                    <% results.forEach((course,i)=>{ %>
+                        <%- include('./includes/course-card.ejs',{course, i, saleOff: offPrices, titleSEOs}) %>
+                    <% }) %>
+                <% } else { %>
+                    <h3>Chúng tôi không tìm được kết quả nào cả.</h3>
+                <% } %>
+            </div>
+            
+        </div>
+    </div>
+    
+    <br><br><hr>
+    <%- include('./includes/client-footer.ejs') %>
+<%- include('./includes/footer.ejs') %>

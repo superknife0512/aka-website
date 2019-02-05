@@ -87,6 +87,11 @@ form {
 .height-2000 {
   min-height: 150rem; }
 
+.search__body {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(30rem, 38rem));
+  grid-row-gap: 4.9rem; }
+
 @keyframes fadeIn {
   0% {
     transform: translate(-50%, -50%), scale(0.4);
