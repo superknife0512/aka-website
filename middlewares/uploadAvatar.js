@@ -1,15 +1,12 @@
 const multer = require('multer');
+const MulterAzureStorage = require('multer-azure-storage');
 
-const teacherStorage = multer.diskStorage({
-    destination: function(req,file,cb){
-        //we still in root folder
-        cb(null, './public/teacherData')
-    },
+const teacherStorage = new MulterAzureStorage({
+      azureStorageConnectionString: process.env.AZURE_STORAGE_CONNECTION_STRING,
+      containerName: 'teacher-photo',
+      containerSecurity: 'blob'
+    })
 
-    filename: function(req,file,cb){
-        cb(null, Date.now() + '-' + file.originalname)
-    }
-})
 
 //create multer filter 
 const teacherFilter = (req,file,cb)=>{

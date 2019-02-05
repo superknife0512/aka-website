@@ -10,20 +10,16 @@ const {uploadImg} = require('../middlewares/uploadAvatar');
 const maxSize = 3*1000*1000;
 
 //save file on azure storage
-const azureStorage =  new MulterAzureStorage({
-    azureStorageConnectionString: 'DefaultEndpointsProtocol=https;AccountName=superknife0512;AccountKey=kkTaurz/1zg9MLITL5o3rdCAd+0g3bXG/QWpwXf8KiGAL/X9eVa0KSexW9hiOWf/VWkbrgAI7/woAQeRgGwrug==;EndpointSuffix=core.windows.net',
+const eventStorage =  new MulterAzureStorage({
+    azureStorageConnectionString: process.env.AZURE_STORAGE_CONNECTION_STRING,
     containerName: 'event-photos',
-    containerSecurity: 'blob',
-    
+    containerSecurity: 'blob',    
 })
 
-const courseImgStore = multer.diskStorage({
-    destination: function(req,file,cb){
-        cb(null, 'public/courseImgs');
-    },
-    filename: function(req, file, cb){
-        cb(null, Date.now() + '-' + file.originalname);
-    }
+const courseImgStore = new MulterAzureStorage({
+    azureStorageConnectionString: process.env.AZURE_STORAGE_CONNECTION_STRING,
+    containerName: 'course-photo',
+    containerSecurity: 'blob',    
 })
 
 const fileFilter = (req,file,cb)=>{
@@ -34,8 +30,8 @@ const fileFilter = (req,file,cb)=>{
     }
 }
 
-const uploadFiles = multer({storage: azureStorage, fileFilter: fileFilter, limits: {fileSize: maxSize}}).array('eventImgs', 5);
-const IncEventUpload = multer({storage: azureStorage, fileFilter: fileFilter}).single('eventImg');
+const uploadFiles = multer({storage: eventStorage, fileFilter: fileFilter, limits: {fileSize: maxSize}}).array('eventImgs', 5);
+const IncEventUpload = multer({storage: eventStorage, fileFilter: fileFilter}).single('eventImg');
 const uploadCourseImg = multer({storage: courseImgStore, fileFilter: fileFilter}).single('courseImg');
 
 const adminController = require('../controllers/adminCtrl');

@@ -1,8 +1,8 @@
 const Teacher = require('../models/Teacher');
+const album = require('../models/Album')
 const Course = require('../models/Course');
 const Events = require('../models/Event');
 const IncomingEvent = require('../models/IncomingEvent');
-const {clearOldFile}=require('../middlewares/deleteJunk');
 const {deleteBlob}=require('../middlewares/deleteBlob');
 const mongoose = require('mongoose');
 
@@ -82,14 +82,13 @@ exports.postCreateCourse = async (req,res,next)=>{
         }
 
         if(req.file){
-            courseImgPath = req.file.path.replace(/\\/g, '/');
+            courseImgPath = req.file.url;
         } else {
             courseImgPath = 'public/courseImgs/default.jpeg';
         }        
 
         const requirementsArr = requirements.split(';;');
         const courseGoalsArr = courseGoals.split(';;');
-        console.log(requirementsArr, courseGoalsArr);
 
         const teacher = await Teacher.findOne({name: teacherName});
         const teacherId = mongoose.Types.ObjectId(teacher._id);        
@@ -105,6 +104,7 @@ exports.postCreateCourse = async (req,res,next)=>{
             courseGoals: courseGoalsArr,
             teacher: teacherId,
             courseImg: courseImgPath,
+            blobName: req.file.blob,
         })
 
         await course.save();
@@ -121,7 +121,7 @@ exports.postDeleteCourse =async (req,res,next)=>{
     try{
         const course = await Course.findById(courseId);
         if(course.courseImg !== 'public/courseImgs/default.jpg'){
-            await clearOldFile(course.courseImg);
+            deleteBlob('course-photo', course.blobName);
         }
         await Course.findByIdAndRemove(courseId);
         res.redirect('/admin')
@@ -173,9 +173,10 @@ exports.postEditCourse =async (req,res,next)=>{
 
         if(req.file){
             if(course.courseImg !== 'public/courseImgs/default.jpg'){
-                clearOldFile(course.courseImg);
+                deleteBlob('course-photo', course.blobName);
             }
-            course.courseImg = req.file.path.replace(/\\/g, '/');
+            course.courseImg = req.file.url;
+            course.blobName = req.file.blob;
         }
 
         course.title = title;
@@ -463,8 +464,21 @@ exports.postTeacherEdit = async (req,res,next)=>{
 exports.postDeleteTeacher = async (req,res,next)=>{
     try{
         const teacherId = req.body.teacherId;
+        const album = await Album.find({createBy: teacherId});
+        const courses = await Course.find({teacher: teacherId});
         await Teacher.findByIdAndRemove(teacherId);
         console.log('Delete a teacher');
+        album.posts.forEach(post=>{
+            post.blobNames.forEach(blobName=>{
+                deleteBlob('post-photos', blobName)
+            })
+        })
+        courses.forEach(course=>{
+            deleteBlob('course-photo', course.blobName);
+        })
+        Album.deleteMany({createBy: teacherId});
+        Course.deleteMany({teacher: teacherId});
+
         res.redirect('/admin/teachers-info');
 
     } catch (err) {

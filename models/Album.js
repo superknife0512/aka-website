@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const postSchema = mongoose.Schema({
     imgUrls: [String],
     imgDesc: {type: String, required: true},
+    blobNames: [String],
 }, {timestamps: true});
 
 const albumSchema = mongoose.Schema({

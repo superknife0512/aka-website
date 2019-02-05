@@ -52,6 +52,8 @@ const courseSchema =new mongoose.Schema({
     },
     videoUrl: String,
 
+    blobName: String,
+
     testimonials: [testimonialSchema]
 },{timestamps: true})
 

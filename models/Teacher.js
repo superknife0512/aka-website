@@ -73,6 +73,7 @@ const teacherSchema = new mongoose.Schema({
 
     token: String,
     tokenExpiration: Date,
+    blobName: String,
 })
 
 module.exports = mongoose.model('Teacher', teacherSchema);

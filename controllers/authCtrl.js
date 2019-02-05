@@ -123,7 +123,7 @@ exports.postSignup =async (req,res,next)=>{
         
         let avatarUrl;
         if(req.file){
-            avatarUrl = req.file.path;
+            avatarUrl = req.file.url;
         } else {
             avatarUrl = 'public/teacherData/avatar/default.png';
         }

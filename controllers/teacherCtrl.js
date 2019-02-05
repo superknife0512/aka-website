@@ -1,6 +1,7 @@
 const Album = require('../models/Album');
 const mongoose = require('mongoose');
 const {clearOldFile} = require('../middlewares/deleteJunk');
+const {deleteBlob} = require('../middlewares/deleteBlob');
 
 exports.getTeacherProfile =async (req,res,next)=>{
     try{
@@ -262,15 +263,18 @@ exports.getAlbumEdit = async (req,res,next)=>{
 exports.postAlbumAdd = async (req,res,next)=>{
     try{
         let imgUrls;
+        let blobNames;
         const imgDesc = req.body.imgDesc;
         const postImgs = req.files;
-        console.log(req.files);
 
         if(!postImgs[0]){
             imgUrls = 'public/posts/default.png';
         } else {
             imgUrls = postImgs.map(img=>{
-                return img.path.replace(/\\/g, '/');
+                return img.url;
+            })
+            blobNames = postImgs.map(img=>{
+                return img.blob;
             })
         }
 
@@ -280,6 +284,7 @@ exports.postAlbumAdd = async (req,res,next)=>{
         album.posts.push({
             imgDesc,
             imgUrls,
+            blobNames,
         })
         
         await album.save();
@@ -299,8 +304,8 @@ exports.postPostDelete =async (req,res,next)=>{
         const post = album.posts.id(postId);
 
         if(post.imgUrls[0] !== 'public/posts/default.png'){
-            post.imgUrls.forEach(imgUrl=>{
-                clearOldFile(imgUrl);
+            post.blobNames.forEach(blobName=>{
+                deleteBlob('post-photos', blobName )
             })
         }
 

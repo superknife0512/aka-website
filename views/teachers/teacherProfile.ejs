@@ -54,7 +54,7 @@
             <table class="table table-bordered table-hover table-responsive-sm">
                 <thead>
                     <tr class="bg-warning">
-                        <th scope="col">Giáo viên</th>
+                        <th scope="col" >Giáo viên</th>
                         <th scope="col">Buổi</th>
                         <th scope="col">T2</th>
                         <th scope="col">T3</th>
@@ -67,7 +67,7 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <th scope="row" rowspan="3"><%= teacher.name %> - <br> <small><%= teacher.specialty %></small></th>
+                        <th scope="row" rowspan="3" id="teacher-title"><%= teacher.name %> - <br> <small><%= teacher.specialty %></small></th>
                         <th>Sáng</th>
                         <td><%= teacher.schedule[0].t21 %></td>
                         <td><%= teacher.schedule[0].t31 %></td>

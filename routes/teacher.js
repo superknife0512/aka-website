@@ -1,19 +1,17 @@
 const express = require('express');
 const router = express.Router();
 const multer = require('multer');
+const MulterAzureStorage = require('multer-azure-storage');
 
 const teacherController = require('../controllers/teacherCtrl');
 const {protectAuth} =require('../middlewares/protectAuth');
 const {protectForTeacher} =require('../middlewares/protectRole');
 
-const postImgStorage = multer.diskStorage({
-    destination: function(req,file,cb){
-        cb(null, 'public/posts')
-    },
-    filename: function(req,file,cb){
-        cb(null, Date.now() + '-' + file.originalname);
-    }
-})
+const postImgStorage = new MulterAzureStorage({
+    azureStorageConnectionString: process.env.AZURE_STORAGE_CONNECTION_STRING,
+    containerName: 'post-photos',
+    containerSecurity: 'blob'
+  })
 
 const fileFilter = (req,file,cb)=>{
     if(file.mimetype === 'image/jpg' || file.mimetype === 'image/png' || file.mimetype === 'image/jpeg'){

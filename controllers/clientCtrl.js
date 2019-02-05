@@ -123,6 +123,7 @@ exports.getHomePage =async (req,res,next)=>{
         ]
 
         const courses = await Course.find().populate('teacher').limit(6);
+        console.log(courses);
         const events = await Events.find().limit(6).sort('-createdAt');
 
         const offPrices = courses.map(course => {
