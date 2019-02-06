@@ -236,6 +236,9 @@ form {
     padding: 3rem;
     background-color: white;
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2); }
+    @media only screen and (max-width: 500px) {
+      .signup__wrapper {
+        width: 95%; } }
   .signup__form label {
     font-size: 1.5rem;
     color: #42b0ee; }
@@ -2321,6 +2324,10 @@ form {
   justify-content: center;
   padding-bottom: 3rem;
   border-bottom: 1px solid #707070; }
+  @media only screen and (max-width: 600px) {
+    .footer__nav {
+      flex-direction: column;
+      align-items: center; } }
 
 .footer__item {
   padding: .6rem 1.4rem;
@@ -2408,6 +2415,10 @@ form {
   justify-content: center;
   padding-bottom: 3rem;
   border-bottom: 1px solid #707070; }
+  @media only screen and (max-width: 600px) {
+    .footer__nav {
+      flex-direction: column;
+      align-items: center; } }
 
 .footer__item {
   padding: .6rem 1.4rem;
