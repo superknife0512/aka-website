@@ -6,7 +6,7 @@
     "start:dev": "nodemon  ./bin/www",
     "watch:sass": "node-sass ./public/stylesheets/sass/main.scss ./public/stylesheets/style.css -w",
     "serve": "npm-run-all start watch:sass --parallel",
-    "start": "node ./www"
+    "start": "node ./bin/www"
   },
   "dependencies": {
     "@sendgrid/mail": "^6.3.1",
