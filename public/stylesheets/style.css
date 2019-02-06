@@ -353,7 +353,7 @@ form {
     margin-bottom: 1.5rem; }
 
 .glider {
-  overflow: hidden; }
+  overflow-y: hidden; }
 
 @media screen and (max-width: 525px) {
   #price-form {
@@ -1386,7 +1386,8 @@ form {
   fill: #42b0ee;
   height: 4rem;
   width: 4rem;
-  margin-right: 1.6rem; }
+  margin-right: 1.6rem;
+  flex: 1; }
 
 .overall {
   margin: 10rem 0;
@@ -1446,6 +1447,11 @@ form {
     font-weight: 600; }
     .overall h3:not(:last-child) {
       margin-top: 3rem; }
+  .overall__period, .overall__schedule {
+    display: flex;
+    align-items: center; }
+    .overall__period span, .overall__schedule span {
+      flex: 8; }
   .overall__schedule {
     margin-top: 1.5rem; }
 
@@ -1478,11 +1484,13 @@ form {
       fill: #42b0ee;
       height: 3.8rem;
       width: 3.8rem;
-      margin-right: 2rem; }
+      margin-right: 2rem;
+      flex: 1; }
     .require__item h4 {
       font-size: 1.95rem;
       font-family: "Faustina", serif;
-      font-weight: 00; }
+      font-weight: 500;
+      flex: 8; }
   .require__register {
     position: relative;
     padding: 6rem 6rem;
@@ -1530,13 +1538,15 @@ form {
       height: 3.7rem;
       width: 3.7rem;
       fill: #f5546e;
-      margin-right: 2rem; }
+      margin-right: 2rem;
+      flex: 1; }
     .goal__item h4 {
       font-size: 1.9rem;
       font-family: "Faustina", serif;
       margin-bottom: 0;
       color: #555;
-      font-weight: 400; }
+      font-weight: 400;
+      flex: 8; }
 
 .instructor {
   display: flex;

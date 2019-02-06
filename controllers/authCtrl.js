@@ -138,6 +138,7 @@ exports.postSignup =async (req,res,next)=>{
             avatar: avatarUrl,
             role,
             roleCode,
+            blobName: req.file.blob
         })
 
         await teacher.save();

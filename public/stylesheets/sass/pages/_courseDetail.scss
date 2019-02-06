@@ -3,6 +3,7 @@
     height: 4rem;
     width: 4rem;
     margin-right: 1.6rem;
+    flex: 1
 }
 
 .overall{
@@ -80,9 +81,14 @@
             margin-top: 3rem;
         }
     }
-    &__period{
+    &__period, &__schedule{
+        display: flex;
+        align-items: center;
         svg{
             @extend %svg-rule;
+        }
+        span{
+            flex: 8;
         }
     }
     &__schedule{
@@ -132,12 +138,14 @@
             height: 3.8rem;
             width: 3.8rem;
             margin-right: 2rem;
+            flex: 1;
         }
 
         h4{
             font-size: 1.95rem;
             font-family: $font-title;
-            font-weight: 00;
+            font-weight: 500;
+            flex: 8;
         }
     }
 
@@ -204,6 +212,7 @@
             width: 3.7rem;
             fill: $color-secondary;
             margin-right: 2rem;
+            flex: 1;
         }
         h4{
             font-size: 1.9rem;
@@ -211,6 +220,7 @@
             margin-bottom: 0;
             color: #555;
             font-weight: 400;
+            flex: 8;
         }
     }
 }

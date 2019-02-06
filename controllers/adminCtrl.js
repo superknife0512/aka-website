@@ -443,9 +443,10 @@ exports.postTeacherEdit = async (req,res,next)=>{
             console.log('No file has been sent here');           
         } else {
             if(teacher.avatar !== 'public/teacherData/avatar/default.png'){
-                await clearOldFile(teacher.avatar);
+                deleteBlob('teacher-photo', teacher.blobName);
+                teacher.blobName = req.file.blob;
             }
-            avatarUrl = req.file.path.replace(/\\/g, '/');
+            avatarUrl = req.file.url;
             teacher.avatar = avatarUrl;
         }
 
