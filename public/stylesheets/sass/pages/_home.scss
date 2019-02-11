@@ -793,3 +793,34 @@
     }
 }
 
+#scroll-top{
+    height: 7.5rem;
+    width: 7.5rem;
+    background-color: $color-primary;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    bottom: 2.5rem;
+    right: 2.5rem;
+    cursor: pointer;
+    z-index: 1000;
+
+    @media only screen and (max-width:450px){
+        bottom: 1rem;
+        right: 1rem;
+        height: 6rem;
+        width: 6rem;
+    }
+
+    svg{
+        height: 4rem;
+        width: 4rem;
+        fill: $color-white--2;
+        @media only screen and (max-width:450px){
+            height: 3.5rem;
+            width: 3.5rem;
+        }
+    }
+}

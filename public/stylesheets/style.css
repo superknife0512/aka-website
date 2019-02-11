@@ -1146,6 +1146,34 @@ form {
       margin-bottom: 1.5rem;
       border-bottom: 1px solid #f3eaec; }
 
+#scroll-top {
+  height: 7.5rem;
+  width: 7.5rem;
+  background-color: #42b0ee;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  bottom: 2.5rem;
+  right: 2.5rem;
+  cursor: pointer;
+  z-index: 1000; }
+  @media only screen and (max-width: 450px) {
+    #scroll-top {
+      bottom: 1rem;
+      right: 1rem;
+      height: 6rem;
+      width: 6rem; } }
+  #scroll-top svg {
+    height: 4rem;
+    width: 4rem;
+    fill: #f1f1f1; }
+    @media only screen and (max-width: 450px) {
+      #scroll-top svg {
+        height: 3.5rem;
+        width: 3.5rem; } }
+
 .course-page__heading {
   margin: 0 auto;
   margin: 7rem 0;

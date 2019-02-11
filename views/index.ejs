@@ -117,7 +117,7 @@
                         <use xlink:href="images/arrows.svg#icon-chevron-thin-right"></use>
                     </svg>
 
-                    <div class="course-section__glider" style="overflow-x: hidden">
+                    <div class="course-section__glider">
 
                         <% courses.forEach((course,i)=>{ %>
                            <%- include('./includes/course-card.ejs',{course, i, saleOff: offPrices, titleSEOs}) %>
