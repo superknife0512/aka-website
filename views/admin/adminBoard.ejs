@@ -2,7 +2,7 @@
     <%- include('../includes/admin-header.ejs') %><br>
     <hr>
     <br>
-    <div class="container">
+    <div class="container" id="admin-board">
         <div class="admin__heading">
             <h1 class="heading-title">Admin board </h1>
             <div class="admin__form">
@@ -124,15 +124,30 @@
                                 <p class="card-text">Created by: <%= course.teacher.name %></p>
                                 <div class="d-flex">
                                     <a href="/admin/online-course/edit?onCourseId=<%= course._id %>" class="btn btn-warning mr-8">Add course</a>
-                                    <form action="/admin/online-course/delete" method="POST">
-                                        <input type="hidden" value="<%= course._id %>" name="onCourseId">
-                                        <button type="submit" class="btn btn-danger">Delete</button>
-                                    </form>
-                                </div>
+                                    <button class="btn btn-danger delete-btn" 
+                                            @click="deleteCourse()">Delete</button>
+                                    <input type="hidden" ref="courseId" value="<%= course._id %>" name="onCourseId">
+                                 
+                                </div>                               
                             </div>
                         </div>
+                        
     
                     <% }) %>
+                </div>
+                <div v-if="isActive" class="info-popup__wrapper fadeInAnim">
+                    <div class="info-popup text-center">
+                            <h1 class="info-popup__heading">Are your sure?</h1>
+                            <p class="info-popup__content">Click delete if you want to delete this course forever!</p>
+                            <div class="d-flex justify-content-center btn-wrap">
+                                <form action="/admin/online-course/delete" method="POST" class="mr-4">
+                                    <input type="hidden" :value="onCourseId" name="onCourseId">
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                </form>
+                                <button class="btn btn-info btn__cancel" 
+                                        @click="isActive = false">Cancel</button>
+                            </div>
+                    </div>
                 </div>
                 <br>
                 
@@ -144,93 +159,8 @@
         <br><br><br>
     </div>
 
-    <script>
+    <script src="public/javascripts/adminBoard.js">
         
-        const glider1 = new Glider(document.querySelector('.glider'), {
-            // Mobile-first defaults
-            slidesToShow: 1,
-            slidesToScroll: 1,            
-            itemWidth: 300, 
-            scrollLock: true,    
-            // draggable: true,
-            dots:'.dots',
-            responsive: [{
-                // screens greater than >= 1024px
-                breakpoint: 1024,
-                    settings: {
-                        slidesToShow: 3,
-                        slidesToScroll: 3,
-                        // itemWidth: 150,                        
-                        dragVelocity: 2,
-                        duration: 2,
-                        dots:'.dots',
-                        
-                        arrows: {
-                            prev: '.glider__icon--left',
-                            next: '.glider__icon--right'
-                        }, 
-                        
-                    }
-                }
-            ]
-        });
-
-        const glider2 = new Glider(document.querySelector('.event-glider'), {
-            // Mobile-first defaults
-            slidesToShow: 1,
-            slidesToScroll: 1,            
-            itemWidth: 300, 
-            scrollLock: true, 
-            draggable: true,          
-            dots:'.dots',
-            responsive: [{
-                // screens greater than >= 1024px
-                breakpoint: 1024,
-                    settings: {
-                        slidesToShow: 3,
-                        slidesToScroll: 3,
-                        // itemWidth: 150,                        
-                        dragVelocity: 2,
-                        duration: 2,
-                        dots:'.dots',
-                        
-                        arrows: {
-                            prev: '#arrow-left',
-                            next: '#arrow-right'
-                        }, 
-                        
-                    }
-                }
-            ]
-        });
-        const glider3 = new Glider(document.querySelector('.online-course-glider'), {
-            // Mobile-first defaults
-            slidesToShow: 1,
-            slidesToScroll: 1,            
-            itemWidth: 300, 
-            scrollLock: true, 
-            draggable: true,          
-            dots:'.dots',
-            responsive: [{
-                // screens greater than >= 1024px
-                breakpoint: 1024,
-                    settings: {
-                        slidesToShow: 3,
-                        slidesToScroll: 3,
-                        // itemWidth: 150,                        
-                        dragVelocity: 2,
-                        duration: 2,
-                        dots:'.dots',
-                        
-                        arrows: {
-                            prev: '#on-arrow-left',
-                            next: '#on-arrow-right'
-                        }, 
-                        
-                    }
-                }
-            ]
-        });
     </script>
 
     <%- include('../includes/admin-footer.ejs',{

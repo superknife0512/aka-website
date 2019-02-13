@@ -35,13 +35,13 @@
                                     id="popup__icon"
                                     @click="deactivePop()"></i>
                                 <!-- <input type="hidden" ref="onCourseId" value="<%= onCourse._id %>"> -->
+                                <button class="btn btn-info"
+                                        @click.preventDefault="putVideo()"
+                                        v-if="editVidMode">Edit Video</button>
                                 <button class="btn btn-success"
                                         @click.preventDefault="postVideo()"
                                         v-if="!editVidMode">Add Video</button>
 
-                                <button class="btn btn-info"
-                                        @click.preventDefault="putVideo()"
-                                        v-if="editVidMode">Edit Video</button>
                             </div>
                             <hr>
                             
@@ -108,14 +108,15 @@
             <use xlink:href="public/images/arrows.svg#icon-spinner"></use>
         </svg>
         <br>
-            <div class="onCourse__display" v-if="!isLoading">
+        <div class="onCourse__display" v-if="!isLoading">
+                <h4 v-if="!videos[0]">You don't have any lecture video here!</h4>
                 <div class="onCourse__vid" v-for="video in videos" >
                     <iframe class="onCourse__video" :src="`https://www.facebook.com/video/embed?video_id=${ video.videoId }`" width="300" height="200" frameborder="0" ></iframe>
                     <h4>{{ video.title  }}</h4>
                     <p>{{ video.time }}</p>
                     <div class="d-flex">
-                        <button class="btn btn-danger mr-4" @click="deleteVid(video._id)">Delete</button>
                         <button class="btn btn-warning" @click="editVid(video._id)">Edit Video</button>
+                        <button class="btn btn-danger mr-4" @click="deleteVid(video._id)">Delete</button>
                     </div>
                 </div>
             </div>

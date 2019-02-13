@@ -26,7 +26,7 @@
                             <h1 class="info-popup__heading">Are your sure?</h1>
                             <p class="info-popup__content">Click delete if you want to delete <%= teacher.name %> forever!</p>
                             <div class="d-flex justify-content-center btn-wrap">
-                                <form action="/admin/delete/" method="POST">
+                                <form action="/admin/delete/" method="POST" class="mr-4">
                                     <input type="hidden" name="teacherId" value="<%= teacher._id %>">
                                     <button type="submit" class="btn btn-danger">Delete</button>
                                 </form>

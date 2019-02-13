@@ -83,3 +83,14 @@
         z-index: 1000;
     }
 }
+
+#admin-board {
+    .info-popup__wrapper{
+        display: block;
+        z-index: 2000;
+    }
+    .info-popup{
+        display: block;
+        z-index: 1000;
+    }
+}

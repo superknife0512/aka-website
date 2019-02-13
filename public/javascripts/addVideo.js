@@ -34,7 +34,7 @@ const app = new Vue({
                     throw new Error('Can not fetch post form server', err)
                 })
         
-            },2000)
+            },500)
         },
 
         resetForm(){
