@@ -653,7 +653,7 @@ exports.postAddVideo = async (req,res,next) =>{
         const onCourseId = req.body.onCourseId;
 
         const onCourse = await OnCourse.findById(onCourseId);
-        const videoId = videoUrl.match(/\d{5,20}/gi)[0];
+        const videoId = videoUrl.match(/\d{7,20}/gi)[0];
 
         if(!title || !videoUrl || !time){
             res.status(422).json({
@@ -695,5 +695,31 @@ exports.deleteVideo = async (req, res, next)=>{
 
     } catch(err){
         next(err);
+    }
+}
+
+exports.editVideo = async (req,res,next)=>{
+    try{
+        const title = req.body.title;
+        const time = req.body.time;
+        const videoUrl = req.body.videoUrl;
+
+        const onCourse =await OnCourse.findById(req.body.onCourseId);
+        const video = onCourse.courses.id(req.body.videoId);
+
+        const videoId = videoUrl.match(/\d{7,20}/gi)[0];
+
+        video.title = title;
+        video.time = time;
+        video.videoUrl = videoUrl;
+        video.videoId = videoId;
+
+        await onCourse.save();
+        res.status(200).json({
+            message: 'update course sucessfully'
+        })
+
+    } catch (err){
+        next(err)
     }
 }

@@ -5,7 +5,9 @@
         <% if(editMode) { %>
             <div class="info-popup__wrapper" v-if="activePop">
                 <div class="info-popup" v-if="activePop">
-                            <h1 class="info-popup__heading">Add Video</h1>
+                            <h1 class="info-popup__heading">
+                                {{ editVidMode ? 'Edit Video' : 'Add Video'}}
+                            </h1>
                             <p class="info-popup__content">Each video is represented for each lecture you teach (should be 10-20 minnute)</p>
                             <div class="testimonial__form">
                                 <div class="form-group">
@@ -31,10 +33,15 @@
         
                                 <i class="fas fa-times popup__icon" 
                                     id="popup__icon"
-                                    @click="activePop = false"></i>
+                                    @click="deactivePop()"></i>
                                 <!-- <input type="hidden" ref="onCourseId" value="<%= onCourse._id %>"> -->
                                 <button class="btn btn-success"
-                                        @click.preventDefault="postVideo()">Add Video</button>
+                                        @click.preventDefault="postVideo()"
+                                        v-if="!editVidMode">Add Video</button>
+
+                                <button class="btn btn-info"
+                                        @click.preventDefault="putVideo()"
+                                        v-if="editVidMode">Edit Video</button>
                             </div>
                             <hr>
                             
@@ -97,14 +104,19 @@
             Video you add
         </h2>
         <br><br>
-        <h4 v-if="isLoading">Loading...</h4>
+        <svg  class="load-spin" v-if="isLoading">
+            <use xlink:href="public/images/arrows.svg#icon-spinner"></use>
+        </svg>
         <br>
             <div class="onCourse__display" v-if="!isLoading">
                 <div class="onCourse__vid" v-for="video in videos" >
                     <iframe class="onCourse__video" :src="`https://www.facebook.com/video/embed?video_id=${ video.videoId }`" width="300" height="200" frameborder="0" ></iframe>
                     <h4>{{ video.title  }}</h4>
                     <p>{{ video.time }}</p>
-                    <button class="btn btn-danger" @click="deleteVid(video._id)">Delete</button>
+                    <div class="d-flex">
+                        <button class="btn btn-danger mr-4" @click="deleteVid(video._id)">Delete</button>
+                        <button class="btn btn-warning" @click="editVid(video._id)">Edit Video</button>
+                    </div>
                 </div>
             </div>
     <% } %>

@@ -130,6 +130,12 @@ form {
     opacity: 1;
     transform: translateY(0); } }
 
+@keyframes spinning {
+  0% {
+    transform: rotate(0deg); }
+  100% {
+    transform: rotate(360deg); } }
+
 .grid {
   display: grid;
   grid-template-columns: [full-start] minmax(2rem, 1fr) [center-start] repeat(7, minmax(min-content, 16.2rem)) [center-end] minmax(2rem, 1fr) [full-end];
@@ -364,8 +370,7 @@ form {
 
 .onCourse__display {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center; }
+  flex-wrap: wrap; }
 
 .onCourse .fb-video {
   margin-right: 4rem; }
@@ -385,6 +390,15 @@ form {
   .onCourse__vid p {
     color: #666;
     font-size: 1.6rem; }
+
+.onCourse__video {
+  border: 1px solid rgba(0, 0, 0, 0.2); }
+
+.load-spin {
+  fill: #f5546e;
+  height: 7rem;
+  width: 7rem;
+  animation: spinning 2s linear infinite; }
 
 .teacher-detail {
   display: flex;

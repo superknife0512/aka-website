@@ -83,5 +83,5 @@ router.post('/online-course/delete',protectAuth, protectForAdmin, adminControlle
 router.post('/online-course/addVideo', protectAuth, protectForAdmin, adminController.postAddVideo );
 router.get('/online-course/allVideo', protectAuth, protectForAdmin, adminController.getAllVideo );
 router.delete('/online-course/video', protectAuth, protectForAdmin, adminController.deleteVideo );
-
+router.put('/online-course/video', protectAuth, protectForAdmin, adminController.editVideo)
 module.exports = router;

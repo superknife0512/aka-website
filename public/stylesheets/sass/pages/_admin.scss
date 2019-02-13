@@ -144,7 +144,6 @@
     &__display{
         display: flex;
         flex-wrap: wrap;
-        justify-content: center
     }
     .fb-video{
         margin-right: 4rem;
@@ -168,4 +167,14 @@
             font-size: 1.6rem;
         }
     }
+    &__video{
+        border: 1px solid rgba($color: #000000, $alpha: .2)
+    }
+}
+
+.load-spin{
+    fill: $color-secondary;
+    height: 7rem;
+    width: 7rem;
+    animation: spinning 2s linear infinite;
 }

@@ -9,26 +9,46 @@ const app = new Vue({
         time: '',
         videoUrl: '',
         isLoading: true,
+        editVidMode: false,
+        videoId: ''
     },
     created(){
-        setTimeout(()=>{
-            this.isLoading = true;
-            fetch('/admin/online-course/allVideo?onCourseId='+this.$refs.onCourseId.value)
-            .then(res=>{
-                return res.json()
-            }                
-            ).then(resData=>{
-                console.log(resData);
-                this.videos = [...resData.videos]
-                this.isLoading =false;
-            }).catch(err=>{
-                alert('Some thing went wrong');
-                throw new Error('Can not fetch post form server', err)
-            })
-    
-        },2000)
+        this.initVideo();
     },
     methods:{
+
+        initVideo(){
+            setTimeout(()=>{
+                this.videos = [];
+                this.isLoading = true;
+                fetch('/admin/online-course/allVideo?onCourseId='+this.$refs.onCourseId.value)
+                .then(res=>{
+                    return res.json()
+                }                
+                ).then(resData=>{
+                    console.log(resData);
+                    this.videos = [...resData.videos]
+                    this.isLoading =false;
+                }).catch(err=>{
+                    alert('Some thing went wrong');
+                    throw new Error('Can not fetch post form server', err)
+                })
+        
+            },2000)
+        },
+
+        resetForm(){
+            this.title = '';
+            this.time = '';
+            this.videoUrl = '';
+        },
+
+        deactivePop(){
+            this.activePop = false;
+            this.editVidMode = false;
+            this.resetForm();
+        },
+
         postVideo(){
             console.log(this.$refs.onCourseId);
             fetch('/admin/online-course/addVideo',{
@@ -48,9 +68,7 @@ const app = new Vue({
             }).then(resData=>{
                 console.log(resData);
                 this.videos.push(resData.lecture);
-                this.time = '';
-                this.videoUrl = '';
-                this.title = '';
+                this.resetForm();
                 alert('Has been add a course');
                 this.activePop = false;
             }).catch(err=>{
@@ -62,23 +80,68 @@ const app = new Vue({
         },
 
         deleteVid(videoId){
+            if(window.confirm('You really want to delete it?')){
+
+                fetch('/admin/online-course/video',{
+                    method:'DELETE',
+                    headers:{
+                        'Content-Type': 'Application/json'
+                    },
+                    body: JSON.stringify({
+                        videoId,
+                        onCourseId: this.$refs.onCourseId.value
+                    })
+                }).then(res=>{
+                    return res.json()
+                }).then(resData=>{
+                    const videoIndex = this.videos.findIndex(vid=> vid._id === videoId);
+                    this.videos.splice(videoIndex, 1);
+                    alert(resData.message);
+                }).catch(err=>{
+                    alert('Can not delete this video');
+                    throw new Error(err)
+                })
+            } else {
+                return false;
+            }
+        },
+
+        editVid(videoId){
+            this.activePop = true;
+            const video = this.videos.find(vid=>{
+                return vid._id === videoId;
+            })
+            this.videoId = videoId;
+            this.title = video.title;
+            this.time = video.time;
+            this.videoUrl = video.videoUrl;
+            this.editVidMode = true;
+        },
+
+        putVideo(){            
+            const onCourseId = this.$refs.onCourseId.value;
             fetch('/admin/online-course/video',{
-                method:'DELETE',
+                method: 'PUT',
                 headers:{
                     'Content-Type': 'Application/json'
                 },
-                body: JSON.stringify({
-                    videoId,
-                    onCourseId: this.$refs.onCourseId.value
+                body:JSON.stringify({
+                    onCourseId,
+                    videoId: this.videoId,
+                    title: this.title,
+                    time: this.time,
+                    videoUrl: this.videoUrl,
                 })
             }).then(res=>{
                 return res.json()
             }).then(resData=>{
-                const videoIndex = this.videos.findIndex(vid=> vid._id === videoId);
-                this.videos.splice(videoIndex, 1);
                 alert(resData.message);
+                this.activePop = false;
+                this.initVideo();
+                this.deactivePop();
+                
             }).catch(err=>{
-                alert('Can not delete this video');
+                alert('Something went wrong');
                 throw new Error(err)
             })
         }

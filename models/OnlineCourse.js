@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const courseSchema = new mongoose.Schema({
     title: String,
     videoId: String,
+    videoUrl: String,
     time: String,
 }, {timestamps:true})
 
