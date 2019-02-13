@@ -72,3 +72,14 @@
         display: none;
     }
 }
+
+#onCourse {
+    .info-popup__wrapper{
+        display: block;
+        z-index: 2000;
+    }
+    .info-popup{
+        display: block;
+        z-index: 1000;
+    }
+}

@@ -18,8 +18,12 @@
                     </a>
                     <a class="nav-item nav-link <%= path === '/admin/teachers-info' ? 'active' : '' %>" 
                         href="/admin/teachers-info">
-                        Thông tin giảng viên
+                        Thông tin  giảng viên
                     </a>  
+                    <a class="nav-item nav-link <%= path === '/admin/online-course' ? 'active' : '' %>" 
+                        href="/admin/online-course">
+                        Tạo khóa học online
+                    </a> 
                 </div>
                 <form action="/teacher/logout" method="POST">
                     <button href="#" class="btn btn-warning">Log out</button>               

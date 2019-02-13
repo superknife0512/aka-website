@@ -59,6 +59,23 @@
                     <% } %>
                    
                 </div>
+                <hr>
+
+                <div class="course-page__body">
+                    <h2 class="heading heading--5">
+                        Các khóa học tiếng Hàn
+                    </h2>
+                    <% if(courseKor[0]) { %>
+                         <div class="course-page__display">
+                            <% courseKor.forEach((course,i)=>{ %>
+                                <%- include('./includes/course-card.ejs', {course, i, saleOff: discountKor, titleSEOs: titleSEOKor}) %>
+                            <% }) %>
+                        </div>
+                    <% } else { %>
+                        <h3>Hiện chúng tôi chưa có khóa học vào về tiếng Hàn!</h3>
+                    <% } %>
+                   
+                </div>
         </div>
 
     <%- include('./includes/client-footer.ejs') %>

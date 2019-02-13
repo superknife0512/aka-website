@@ -1,0 +1,121 @@
+<%- include('../includes/html-head.ejs') %>
+    <%- include('../includes/admin-header.ejs') %><br><br><br>
+
+    <div class="on-course container height-2000" id="onCourse">
+        <% if(editMode) { %>
+            <div class="info-popup__wrapper" v-if="activePop">
+                <div class="info-popup" v-if="activePop">
+                            <h1 class="info-popup__heading">Add Video</h1>
+                            <p class="info-popup__content">Each video is represented for each lecture you teach (should be 10-20 minnute)</p>
+                            <div class="testimonial__form">
+                                <div class="form-group">
+                                    <input type="text" 
+                                            placeholder="Enter video Title" 
+                                            class="form-control"
+                                            v-model="title">
+                                </div>
+        
+                                <div class="form-group">
+                                    <input type="text" 
+                                            placeholder="Enter Video link" 
+                                            class="form-control"
+                                            v-model="videoUrl">
+                                </div>
+
+                                <div class="form-group">
+                                    <input type="text" 
+                                            placeholder="Enter Video Time" 
+                                            class="form-control"
+                                            v-model="time">
+                                </div>
+        
+                                <i class="fas fa-times popup__icon" 
+                                    id="popup__icon"
+                                    @click="activePop = false"></i>
+                                <!-- <input type="hidden" ref="onCourseId" value="<%= onCourse._id %>"> -->
+                                <button class="btn btn-success"
+                                        @click.preventDefault="postVideo()">Add Video</button>
+                            </div>
+                            <hr>
+                            
+                </div>
+            </div>
+            <!-- popup section -->
+        <% } %>
+        <div class="heading-wrap">
+            <h1 class="heading-title"><%= editMode ? 'Edit this course ' : 'Create a course' %></h1>
+            <% if(editMode) { %>
+                <button class="btn btn-primary" 
+                        id="addVideo"
+                        @click="activePop = !activePop">Add video</button>
+            <% } %>
+        </div>
+        <hr>
+        <form class="signup__form create__form--width" 
+            action="<%= editMode ? '/admin/online-course/edit' : '/admin/online-course' %>" 
+            method="POST"
+            enctype="multipart/form-data">
+
+            <div class="form-group">
+                <label for="eventName">Course title</label>
+                <input type="text" 
+                        class="form-control" 
+                        name="title"
+                        placeholder="Enter course title"
+                        value="<%= editMode ? onCourse.title : '' %>">
+            </div>
+            <div class="form-group">
+                <label for="eventName">Course image</label>
+                <input type="file" 
+                        class="form-control file-style" 
+                        name="onCourseImg">
+            </div>
+
+            <div class="form-group">
+                <label for="title">Who teach this course</label>
+                <select name="teacherName" class="form-control">
+
+                    <% teachers.forEach(teacher=>{ %>
+                        <option value="<%= teacher.name %>" <%= editMode && onCourse.teacher.name === teacher.name ? 'selected' : '' %> ><%= teacher.name %></option>
+                    <% }) %>
+
+                </select>
+                <small class="form-text text-muted">Chọn tên giáo viên dạy khóa học này</small>
+            </div>
+
+            <% if(editMode) { %>
+                <input type="hidden" ref="onCourseId" name="onCourseId" value="<%= onCourse._id %>" >
+            <% } %>
+
+            <button class="btn btn-primary" type="submit"><%= editMode ? 'Update course' : 'Create course' %></button>
+        </form>
+        
+    <hr>
+    <% if(editMode) { %>
+        
+        <h2 class="medium-title">
+            Video you add
+        </h2>
+        <br><br>
+        <h4 v-if="isLoading">Loading...</h4>
+        <br>
+            <div class="onCourse__display" v-if="!isLoading">
+                <div class="onCourse__vid" v-for="video in videos" >
+                    <iframe class="onCourse__video" :src="`https://www.facebook.com/video/embed?video_id=${ video.videoId }`" width="300" height="200" frameborder="0" ></iframe>
+                    <h4>{{ video.title  }}</h4>
+                    <p>{{ video.time }}</p>
+                    <button class="btn btn-danger" @click="deleteVid(video._id)">Delete</button>
+                </div>
+            </div>
+    <% } %>
+    </div>
+
+    <script src="public/javascripts/addVideo.js" defer></script>
+
+    <br>
+    <%- include('../includes/admin-footer.ejs',{
+        page: 'Course Page'
+    }) %>
+
+
+<%- include('../includes/footer.ejs') %>

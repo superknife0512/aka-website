@@ -19,7 +19,7 @@ const eventStorage =  new MulterAzureStorage({
 const courseImgStore = new MulterAzureStorage({
     azureStorageConnectionString: process.env.AZURE_STORAGE_CONNECTION_STRING,
     containerName: 'course-photo',
-    containerSecurity: 'blob',    
+    containerSecurity: 'blob',  
 })
 
 const fileFilter = (req,file,cb)=>{
@@ -33,6 +33,7 @@ const fileFilter = (req,file,cb)=>{
 const uploadFiles = multer({storage: eventStorage, fileFilter: fileFilter, limits: {fileSize: maxSize}}).array('eventImgs', 5);
 const IncEventUpload = multer({storage: eventStorage, fileFilter: fileFilter}).single('eventImg');
 const uploadCourseImg = multer({storage: courseImgStore, fileFilter: fileFilter}).single('courseImg');
+const uploadOnCourseImg = multer({storage: courseImgStore, fileFilter: fileFilter}).single('onCourseImg');
 
 const adminController = require('../controllers/adminCtrl');
 
@@ -70,5 +71,17 @@ router.post('/teacher-info/edit', protectAuth, protectForAdmin, uploadImg, admin
 router.get('/teacher-info/edit/:teacherId',protectAuth, protectForAdmin, adminController.getTeacherEdit );
 
 router.post('/search',protectAuth, protectForAdmin, adminController.getSearchPage );
+
+//interact with Online course 
+router.get('/online-course',protectAuth, protectForAdmin, adminController.getCreateOnlineCourse );
+router.post('/online-course',protectAuth, protectForAdmin, uploadOnCourseImg, adminController.postCreateOnlineCourse );
+router.get('/online-course/edit',protectAuth, protectForAdmin, adminController.getEditOnlineCourse );
+router.post('/online-course/edit',protectAuth, protectForAdmin, uploadOnCourseImg, adminController.postEditOnlineCourse );
+router.post('/online-course/delete',protectAuth, protectForAdmin, adminController.postDeleteOnlineCourse );
+
+// interact with addvideo function
+router.post('/online-course/addVideo', protectAuth, protectForAdmin, adminController.postAddVideo );
+router.get('/online-course/allVideo', protectAuth, protectForAdmin, adminController.getAllVideo );
+router.delete('/online-course/video', protectAuth, protectForAdmin, adminController.deleteVideo );
 
 module.exports = router;

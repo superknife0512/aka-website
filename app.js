@@ -57,6 +57,9 @@ app.use('/admin/public', express.static(path.join(__dirname, 'public')));
 app.use('/admin/course/public', express.static(path.join(__dirname, 'public')));
 app.use('/admin/event/public', express.static(path.join(__dirname, 'public')));
 app.use('/admin/teacher-info/edit/public', express.static(path.join(__dirname, 'public')));
+app.use('/admin/online-course/public', express.static(path.join(__dirname, 'public')));
+app.use('/admin/online-course', express.static(path.join(__dirname, 'public')));
+
 
 //session setup
 app.use(session({

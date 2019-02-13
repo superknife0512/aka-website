@@ -1,8 +1,8 @@
 const Teacher = require('../models/Teacher');
-const album = require('../models/Album')
 const Course = require('../models/Course');
 const Events = require('../models/Event');
 const IncomingEvent = require('../models/IncomingEvent');
+const OnCourse = require('../models/OnlineCourse');
 const {deleteBlob}=require('../middlewares/deleteBlob');
 const mongoose = require('mongoose');
 
@@ -18,15 +18,16 @@ const createErr = (msg, statusCode)=>{
 
 exports.getAdminBoard =async (req,res,next)=>{
     try{
-        const teachers = await Teacher.find({role: 'teacher'});
         const courses = await Course.find();
         const events = await Events.find();
+        const onCourses = await OnCourse.find().populate('teacher');
 
         res.render('admin/adminBoard',{
             title: 'admin board',
             path: '/',
             courses,
-            events
+            events,
+            onCourses
         })
 
     } catch (err) {
@@ -523,3 +524,176 @@ exports.getSearchPage =async (req,res,next)=>{
     }
 }
 
+// ************************************************
+// ONLINE COURSE PART 
+// ************************************************
+
+exports.getCreateOnlineCourse =async (req,res,next)=>{
+    try{ 
+        const teachers = await Teacher.find({role: 'teacher'});
+        res.render('admin/createOnlineCourse',{
+            title: 'Online course',
+            path: '/admin/online-course',
+            teachers,
+            editMode: false,
+        })
+    } catch (err) {
+        next(err)
+    }
+}
+
+exports.postCreateOnlineCourse = async (req,res,next)=>{
+    try{
+
+        const title = req.body.title;
+        const teacherName = req.body.teacherName;
+        console.log(title);
+
+        if( !title || !teacherName){
+            throw new Error('Please enter all fields');
+        }
+
+        if(!req.file){
+            throw new Error('The image cannot found')
+        }
+
+        const teacher = await Teacher.findOne({name: teacherName});
+        const teacherObjectId = mongoose.Types.ObjectId(teacher._id);
+
+        const onCourse = new OnCourse({
+            title,
+            teacher: teacherObjectId,
+            imageUrl: req.file.url,
+            blobName: req.file.blob
+        })
+
+        await onCourse.save();
+        res.redirect('/admin/online-course');
+
+    } catch (err){
+        next(err)
+    }
+}
+
+exports.getEditOnlineCourse =async (req,res,next)=>{
+    try{ 
+        const teachers = await Teacher.find({role: 'teacher'});
+        const onCourse = await OnCourse.findById(req.query.onCourseId).populate('teacher');
+        res.render('admin/createOnlineCourse',{
+            title: 'Online course',
+            path: '/admin/online-course',
+            editMode: true,
+            onCourse,
+            teachers
+        })
+    } catch (err) {
+        next(err)
+    }
+}
+
+exports.postEditOnlineCourse = async (req,res,next)=>{
+    try{
+        const title = req.body.title;
+        const teacherName = req.body.teacherName;
+        const onCourse = await OnCourse.findById(req.body.onCourseId);
+        console.log(onCourse);
+        const teacher = await Teacher.findOne({name: teacherName});
+
+        const teacherId = mongoose.Types.ObjectId(teacher._id);
+
+        if(req.file){
+            deleteBlob('course-photo', onCourse.blobName);
+            onCourse.imageUrl = req.file.url;
+            onCourse.blobName = req.file.blob;
+        }
+
+        onCourse.title = title;
+        onCourse.teacher = teacherId;
+
+        await onCourse.save();
+        res.redirect('/admin')
+
+    } catch (err) {
+        next(err)
+    }
+}
+
+exports.postDeleteOnlineCourse = async (req, res, next)=>{
+    try{
+        const onCourseId = req.body.onCourseId;
+        const onCourse = await OnCourse.findById(onCourseId);
+        deleteBlob('course-photo', onCourse.blobName);
+        await OnCourse.findByIdAndRemove(onCourseId);
+        console.log('has delete an online course');
+        res.redirect('/admin')
+
+    } catch(err){
+        next(err);
+    }
+}
+
+// add video here **************************************
+exports.getAllVideo = async (req, res, next)=>{
+    try{
+        const onCourse = await OnCourse.findById(req.query.onCourseId);
+        res.status(200).json({
+            videos: onCourse.courses
+        })
+
+    } catch(err){
+        next(err);
+    }
+}
+
+exports.postAddVideo = async (req,res,next) =>{
+    try{
+        const title = req.body.title;
+        const videoUrl = req.body.videoUrl;
+        const time = req.body.time;
+        const onCourseId = req.body.onCourseId;
+
+        const onCourse = await OnCourse.findById(onCourseId);
+        const videoId = videoUrl.match(/\d{5,20}/gi)[0];
+
+        if(!title || !videoUrl || !time){
+            res.status(422).json({
+                message: 'You should enter all the fields'
+            })
+        }
+
+        onCourse.courses.push({
+            title,
+            videoUrl,
+            time,
+            videoId
+        })
+
+        await onCourse.save()
+        res.status(201).json({
+            lecture:{
+                title,
+                videoUrl,
+                time,   
+                videoId             
+            },
+            message: 'create lecture sucessfully'
+        })
+
+    } catch(err){
+        next(err);
+    }
+}
+
+exports.deleteVideo = async (req, res, next)=>{
+    try{
+        const onCourse = await OnCourse.findById(req.body.onCourseId);
+        onCourse.courses.pull(req.body.videoId);
+        await onCourse.save();
+        res.status(200).json({
+            message: 'Has been deleted a video'
+        })
+
+    } catch(err){
+        next(err);
+    }
+}

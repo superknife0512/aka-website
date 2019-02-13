@@ -192,23 +192,27 @@ exports.getCoursesPage = async (req,res,next)=>{
         const courseEng = [];
         const courseChi = [];
         const courseJav = [];
+        const courseKor = [];
 
         const titleSEOEng = [];
         const titleSEOChi = [];
         const titleSEOJav = [];
+        const titleSEOKor = [];
 
         courses.forEach(course =>{
             let titleSEO = course.title.replace(/ /g, '-')
-            if(course.title.match(/trung/gi)){
+            if(course.title.match(/tiếng trung/gi)){
                 courseChi.push(course)
                 titleSEOChi.push(titleSEO);
-            } else if (course.title.match(/anh/gi)){
+            } else if (course.title.match(/tiếng anh/gi)){
                 courseEng.push(course)
                 titleSEOEng.push(titleSEO);
-            } else {
+            } else if(course.title.match(/tiếng Nhật/gi)) {
                 courseJav.push(course);
                 titleSEOJav.push(titleSEO);
-
+            } else if(course.title.match(/tiếng Hàn/gi)){
+                courseKor.push(course);
+                titleSEOKor.push(titleSEO)
             }
         })
         const calculateDiscount = (course)=>{
@@ -221,7 +225,6 @@ exports.getCoursesPage = async (req,res,next)=>{
         const discountEng = courseEng.map(course=>{
             return calculateDiscount(course)
         })
-        console.log(discountEng);
 
         const discountChi = courseChi.map(course=>{
             return calculateDiscount(course)
@@ -231,22 +234,30 @@ exports.getCoursesPage = async (req,res,next)=>{
             return calculateDiscount(course)
         })
 
+        const discountKor = courseKor.map(course=>{
+            return calculateDiscount(course)
+        })
+
         res.render('courses-page.ejs',{
             title: 'Course page',
             path: '/course-page',
             courseEng,
             courseChi,
             courseJav,
+            courseKor,
+
             contacts,
             socials,
 
             discountEng,
             discountChi,
             discountJav,
+            discountKor,
 
             titleSEOEng,
             titleSEOChi,
             titleSEOJav,
+            titleSEOKor
         })
 
     } catch (err) {

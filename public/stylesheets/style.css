@@ -362,6 +362,30 @@ form {
     #price-form input {
       margin-bottom: 1.5rem; } }
 
+.onCourse__display {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; }
+
+.onCourse .fb-video {
+  margin-right: 4rem; }
+
+.onCourse__vid {
+  margin-right: 6rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center; }
+  .onCourse__vid h4 {
+    text-transform: uppercase;
+    font-size: 1.7rem;
+    margin-top: 1.3rem;
+    color: #f5546e;
+    font-family: "Faustina", serif;
+    font-weight: 400; }
+  .onCourse__vid p {
+    color: #666;
+    font-size: 1.6rem; }
+
 .teacher-detail {
   display: flex;
   margin-top: 10rem; }
@@ -1158,7 +1182,8 @@ form {
   bottom: 2.5rem;
   right: 2.5rem;
   cursor: pointer;
-  z-index: 1000; }
+  z-index: 1000;
+  display: none; }
   @media only screen and (max-width: 450px) {
     #scroll-top {
       bottom: 1rem;
@@ -1173,6 +1198,9 @@ form {
       #scroll-top svg {
         height: 3.5rem;
         width: 3.5rem; } }
+
+form {
+  margin-right: 0 !important; }
 
 .course-page__heading {
   margin: 0 auto;
@@ -2221,6 +2249,14 @@ form {
     margin-bottom: 1.5rem; }
   .info-popup__wrapper {
     display: none; }
+
+#onCourse .info-popup__wrapper {
+  display: block;
+  z-index: 2000; }
+
+#onCourse .info-popup {
+  display: block;
+  z-index: 1000; }
 
 .navbar__style {
   padding: 2rem 2rem; }

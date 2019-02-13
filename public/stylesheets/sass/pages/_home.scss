@@ -806,6 +806,7 @@
     right: 2.5rem;
     cursor: pointer;
     z-index: 1000;
+    display: none;
 
     @media only screen and (max-width:450px){
         bottom: 1rem;
@@ -823,4 +824,8 @@
             width: 3.5rem;
         }
     }
+}
+
+form{
+    margin-right: 0 !important;
 }

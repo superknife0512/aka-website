@@ -99,6 +99,47 @@
             </div>
         </section>
 
+        <section class="event-info">
+            <h2 class="medium-title">Online Courses information </h2>
+            <div class="glider__body" >
+                
+                <svg class="glider__icon glider__icon--left d-none d-sm-block " id="on-arrow-left">
+                    <use xlink:href="public/images/arrows.svg#icon-chevron-thin-left"></use>
+                </svg>
+                <svg class="glider__icon glider__icon--right d-none d-sm-block " id="on-arrow-right">
+                    <use xlink:href="public/images/arrows.svg#icon-chevron-thin-right"></use>
+                </svg>
+
+                <div class="online-course-glider container">
+
+                    <% onCourses.forEach(course=>{ %>
+    
+                        <div class="card">
+                            <img src="<%= course.imageUrl %>"
+                                 class="card-img-top course-info__card-img" 
+                                 alt="<%= course.title %>">
+                            <div class="card-body">
+                                <h2 class="card-title"><%= course.title %></h2>
+                                <p class="card-text">Last update: <%= course.updatedAt.toISOString().split('T')[0] %></p>
+                                <p class="card-text">Created by: <%= course.teacher.name %></p>
+                                <div class="d-flex">
+                                    <a href="/admin/online-course/edit?onCourseId=<%= course._id %>" class="btn btn-warning mr-8">Add course</a>
+                                    <form action="/admin/online-course/delete" method="POST">
+                                        <input type="hidden" value="<%= course._id %>" name="onCourseId">
+                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+    
+                    <% }) %>
+                </div>
+                <br>
+                
+                <div role="tablist" class="dots"></div>
+            </div>
+        </section>
+
         
         <br><br><br>
     </div>
@@ -156,6 +197,34 @@
                         arrows: {
                             prev: '#arrow-left',
                             next: '#arrow-right'
+                        }, 
+                        
+                    }
+                }
+            ]
+        });
+        const glider3 = new Glider(document.querySelector('.online-course-glider'), {
+            // Mobile-first defaults
+            slidesToShow: 1,
+            slidesToScroll: 1,            
+            itemWidth: 300, 
+            scrollLock: true, 
+            draggable: true,          
+            dots:'.dots',
+            responsive: [{
+                // screens greater than >= 1024px
+                breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 3,
+                        // itemWidth: 150,                        
+                        dragVelocity: 2,
+                        duration: 2,
+                        dots:'.dots',
+                        
+                        arrows: {
+                            prev: '#on-arrow-left',
+                            next: '#on-arrow-right'
                         }, 
                         
                     }
