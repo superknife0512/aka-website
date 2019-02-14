@@ -24,6 +24,12 @@
                         Khóa học
                     </a>
                 </li>
+                <li class="header__item <%= path === '/course-online' ? 'header__active' : '' %>">
+                    <a href="/course-online" 
+                        class="header__link">
+                        Học online
+                    </a>
+                </li>
                 <li class="header__item <%= path === '/teacher-page' ? 'header__active' : '' %>">
                     <a href="/teacher-page" 
                         class="header__link">
@@ -34,12 +40,6 @@
                     <a href="/event-page" 
                         class="header__link">
                         Sự kiện
-                    </a>
-                </li>
-                <li class="header__item <%= path === '/about' ? 'header__active' : '' %>">
-                    <a href="/about" 
-                        class="header__link">
-                        Về Trung Tâm Ak
                     </a>
                 </li>
                 <li class="header__item <%= path === '/contact' ? 'header__active' : '' %>">

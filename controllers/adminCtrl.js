@@ -547,6 +547,7 @@ exports.postCreateOnlineCourse = async (req,res,next)=>{
 
         const title = req.body.title;
         const teacherName = req.body.teacherName;
+        const documentLink = req.body.documentLink;
         console.log(title);
 
         if( !title || !teacherName){
@@ -564,7 +565,8 @@ exports.postCreateOnlineCourse = async (req,res,next)=>{
             title,
             teacher: teacherObjectId,
             imageUrl: req.file.url,
-            blobName: req.file.blob
+            blobName: req.file.blob,
+            documentLink
         })
 
         await onCourse.save();
@@ -595,6 +597,8 @@ exports.postEditOnlineCourse = async (req,res,next)=>{
     try{
         const title = req.body.title;
         const teacherName = req.body.teacherName;
+        const documentLink = req.body.documentLink;
+
         const onCourse = await OnCourse.findById(req.body.onCourseId);
         console.log(onCourse);
         const teacher = await Teacher.findOne({name: teacherName});
@@ -609,6 +613,7 @@ exports.postEditOnlineCourse = async (req,res,next)=>{
 
         onCourse.title = title;
         onCourse.teacher = teacherId;
+        onCourse.documentLink = documentLink;
 
         await onCourse.save();
         res.redirect('/admin')
@@ -650,6 +655,7 @@ exports.postAddVideo = async (req,res,next) =>{
         const title = req.body.title;
         const videoUrl = req.body.videoUrl;
         const time = req.body.time;
+        const documentLink = req.body.documentLink;
         const onCourseId = req.body.onCourseId;
 
         const onCourse = await OnCourse.findById(onCourseId);
@@ -665,7 +671,8 @@ exports.postAddVideo = async (req,res,next) =>{
             title,
             videoUrl,
             time,
-            videoId
+            videoId,
+            documentLink
         })
 
         await onCourse.save()
@@ -674,7 +681,8 @@ exports.postAddVideo = async (req,res,next) =>{
                 title,
                 videoUrl,
                 time,   
-                videoId             
+                videoId,
+                documentLink            
             },
             message: 'create lecture sucessfully'
         })
@@ -703,6 +711,7 @@ exports.editVideo = async (req,res,next)=>{
         const title = req.body.title;
         const time = req.body.time;
         const videoUrl = req.body.videoUrl;
+        const documentLink = req.body.documentLink;
 
         const onCourse =await OnCourse.findById(req.body.onCourseId);
         const video = onCourse.courses.id(req.body.videoId);
@@ -713,6 +722,7 @@ exports.editVideo = async (req,res,next)=>{
         video.time = time;
         video.videoUrl = videoUrl;
         video.videoId = videoId;
+        video.documentLink = documentLink;
 
         await onCourse.save();
         res.status(200).json({

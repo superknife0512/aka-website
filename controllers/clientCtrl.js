@@ -2,6 +2,7 @@ const Course = require('../models/Course');
 const Events = require('../models/Event');
 const Teacher = require('../models/Teacher');
 const Album = require('../models/Album');
+const OnlineCourse = require('../models/OnlineCourse');
 const incEvent = require('../models/IncomingEvent');
 const Message = require('../models/Message');
 const sgMail = require('@sendgrid/mail');
@@ -27,16 +28,16 @@ exports.getHomePage =async (req,res,next)=>{
                 link: '/course-page',
             },
             {
+                page:' Học online ',
+                link: '/course-online',
+            },
+            {
                 page:' giảng viên ',
                 link: '/teacher-page',
             },
             {
                 page:' Sự kiện ',
                 link: '/event-page',
-            },
-            {
-                page:' Về trung tâm AK ',
-                link: '/about',
             },
             {
                 page:' Liên hệ ',
@@ -812,5 +813,120 @@ exports.postSearch = async (req,res,next)=>{
         
     } catch (err) {
         next(err);
+    }
+}
+
+// *********************************************
+// ONLINE COURSE
+// *********************************************
+
+exports.getCourseOnline = async (req,res,next)=>{
+    const contacts = [
+        {
+            icon: 'images/contact.svg#icon-phone',
+            desc: '078 275 9831 - 094 942 9254',
+        },
+        {
+            icon: 'images/contact.svg#icon-map',
+            desc: '23 Thái Thị Bôi, q Thanh Khê, tp. Đà Nẵng',
+        },
+
+    ];
+
+    const socials = [
+        {
+            icon: 'images/contact.svg#icon-facebook',
+            desc: 'https://www.facebook.com/Superknife0512',
+        },
+        {
+            icon: 'images/contact.svg#icon-googleplus',
+            desc: 'https://bom.to/0vEt3',
+        },
+
+    ]
+    
+    try{
+        const onCourses = await OnlineCourse.find().populate('teacher').sort('-updatedAt');
+        const date = onCourses.map(course=>{
+            const create = course.createdAt.toISOString().split('T')[0].split('-').reverse().join('-');
+            const update = course.updatedAt.toISOString().split('T')[0].split('-').reverse().join('-');
+            return {
+                create,
+                update
+            }
+        })
+
+        res.render('onlineCourses', {
+            title: 'Học trực tuyến miễn phí',
+            path: '/course-online',
+            contacts,
+            socials,
+            onCourses,
+            date,
+        })
+
+    } catch (err){
+        next(err)
+    }
+}
+
+exports.getCourseOnlineDetail = async (req,res,next)=>{
+    const contacts = [
+        {
+            icon: 'images/contact.svg#icon-phone',
+            desc: '078 275 9831 - 094 942 9254',
+        },
+        {
+            icon: 'images/contact.svg#icon-map',
+            desc: '23 Thái Thị Bôi, q Thanh Khê, tp. Đà Nẵng',
+        },
+
+    ];
+
+    const socials = [
+        {
+            icon: 'images/contact.svg#icon-facebook',
+            desc: 'https://www.facebook.com/Superknife0512',
+        },
+        {
+            icon: 'images/contact.svg#icon-googleplus',
+            desc: 'https://bom.to/0vEt3',
+        },
+
+    ]
+    
+    try{
+        const onCourse = await OnlineCourse.findById(req.params.onCourseId);                
+
+        res.render('onlineCourseDetail', {
+            title: 'Học trực tuyến miễn phí',
+            path: '/course-online',
+            contacts,
+            socials,
+            onCourse,
+        })
+
+    } catch (err){
+        next(err)
+    }
+}
+
+// api service 
+
+exports.getVideo = async (req,res,next)=>{
+    try{
+        const onCourseId = req.params.onCourseId;
+        const onCourse = await OnlineCourse.findById(onCourseId).populate('teacher');
+
+        res.status(200).json({
+            message: 'Get videos sucessfully',
+            onCourse,
+        })
+
+    } catch(err){
+        res.status(500).json({
+            message: 'Server error',
+            err,
+        })
     }
 }

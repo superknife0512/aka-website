@@ -21,6 +21,12 @@ router.get('/about', clientController.getAboutPage);
 router.get('/contact', clientController.getContactPage);
 router.post('/contact', clientController.postContact);
 
-router.post('/search', clientController.postSearch)
+router.post('/search', clientController.postSearch);
+
+router.get('/course-online', clientController.getCourseOnline)
+router.get('/course-online/*.:onCourseId', clientController.getCourseOnlineDetail)
+
+// api service 
+router.get('/course-online/video/:onCourseId', clientController.getVideo)
 
 module.exports = router;

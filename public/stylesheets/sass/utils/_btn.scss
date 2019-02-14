@@ -28,6 +28,7 @@
         color: $color-secondary;
         transition: all .3s;
         text-transform: uppercase;
+        display: inline-block;
         &:hover{
             background-color: $color-secondary;
             color: white;

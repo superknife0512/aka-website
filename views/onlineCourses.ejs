@@ -1,0 +1,49 @@
+<%- include('./includes/html-head.ejs') %>
+    <%- include('./includes/client-header.ejs') %>
+    <br><br><br>
+    <div class="grid">
+        <div class="grid__container search height-2000">
+
+            <h1 class="heading heading--1 onl-course__title">
+                Học trực tuyến miễn phí !!!
+            </h1>
+            <h3 class="onl-course__sub">Các khóa học ở đây được AK biên soạn vô cùng kĩ lưỡng và cẩn thận, 
+                hỗ trợ các bạn trong quá trình học tập và được cung cấp hoàn toàn 
+                <strong> MIỄN PHÍ </strong> cho người học. Chúc các bạn học tập vui vẻ
+            </h3>
+            
+            <div class="onl-course">
+                <% onCourses.forEach((course, i)=>{ %>
+                    <div class="teacher-page__album">
+                        <img class="teacher-page__album-img" src="<%= course.imageUrl %>" alt="course img">
+                        <div class="teacher-page__album-info">
+                            <h3><%= course.title %> 
+                                <a href="/course-online/học-online.<%= course._id %>" class="link-btn">Xem thêm</a> 
+                            </h3>
+                            <h4>Dạy bởi: <%= course.teacher.name %></h4>
+                            <div class="teacher-page__date">
+                                <h5 class="teacher-page__created">
+                                    <svg class="teacher-page__icon">
+                                        <use xlink:href="images/course-detail.svg#icon-calendar"></use>
+                                    </svg>
+                                    Ngày đăng: <%= date[i].create %> 
+                                </h5>
+                                <h5 class="teacher-page__updated">
+                                    <svg class="teacher-page__icon">
+                                        <use xlink:href="images/course-detail.svg#icon-pencil"></use>
+                                    </svg>
+                                    Cập nhật: <%= date[i].update %> 
+                                </h5>
+                            </div>
+                            
+                        </div>
+                    </div>
+                <% }) %>
+            </div>
+            
+        </div>
+    </div>
+    
+    <br><br><hr>
+    <%- include('./includes/client-footer.ejs') %>
+<%- include('./includes/footer.ejs') %>

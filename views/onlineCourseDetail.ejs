@@ -1,0 +1,70 @@
+<%- include('./includes/html-head.ejs') %>
+    <%- include('./includes/client-header.ejs') %>
+    <br><br><br>
+    <div class="grid " id="video-app">
+        <div class="grid__container contact__heading">
+            <h1 class="heading heading--1">Học trực tuyến miễn phí</h1>  
+            <p>Các bài học ở đây được cung cấp <strong>HOÀN TOÀN MIỄN PHÍ</strong>
+            bởi trung tâm đa ngữ AK, giúp các bạn cũng cố thêm các kiến thức mà mình 
+            đã học ơ trên lớp. Chúc các bạn học vui vẻ</p>
+            <input type="hidden" value="<%= onCourse._id %>" ref="onCourseId">          
+        </div>
+
+        <svg class="loading-icon" v-if="isLoading">
+            <use xlink:href="images/online-course.svg#icon-spinner7"></use>
+        </svg>
+        
+        <div v-if="!isLoading" class="onVideo-list">
+            <div class="onVideo-list__badge"                
+                v-for="video in videos"
+                @click="chooseVideo(video._id)"
+                :class="{ 'onVideo-list__badge--active' : video.videoUrl ===  videoUrl}">
+
+                <svg class="onVideo-list__icon">
+                    <use xlink:href="images/online-course.svg#icon-play2"></use>
+                </svg>
+                <div class="onVideo-list__info">
+                    <h3>{{ video.title }}</h3>
+                    <p>{{ video.time }}</p>
+                </div>
+
+            </div>
+        </div>
+        <div v-if="!isLoading" class="onVideo-player">
+            
+            <iframe class="onVideo-player__adjust" :src="`https://www.facebook.com/video/embed?video_id=${videoId}`" width="730" height="400"  frameborder="0"></iframe>
+            <div class="d-flex justify-content-between align-center onVideo-player__wrapper">
+                <div class="onVideo-player__title">
+                    <h2>
+                        {{ curTitle }}
+                    </h2>
+                    <p>
+                        <svg class="onVideo-list__icon">
+                            <use xlink:href="images/online-course.svg#icon-alarmclock"></use>
+                        </svg>
+                        {{ curTime }}
+                    </p>
+                    <a href="#" @click.preventDefault="popFull()" class="link-btn">Full màn hình</a>
+                </div>
+                <div v-if="documentLink" class="download-icon">
+                    <p> Download tài liệu</p> 
+                    <a :href="documentLink" target="blank">
+                        <svg >
+                            <use xlink:href="images/online-course.svg#icon-folder-download"></use>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div v-if="isFull" class="onVideo-player__full-body">
+            <iframe class="onVideo-player__full" 
+                    :src="`https://www.facebook.com/video/embed?video_id=${videoId}`"   frameborder="0"></iframe>
+            <i class="fas fa-times popup__icon" id="popup__icon"
+                @click="isFull = false"></i>
+        </div>
+    </div>
+    
+    <br><br><hr>
+    <script src="javascripts/video-watcher.js" defer></script>
+    <%- include('./includes/client-footer.ejs') %>
+<%- include('./includes/footer.ejs') %>

@@ -26,6 +26,13 @@
 
                                 <div class="form-group">
                                     <input type="text" 
+                                            placeholder="Enter Document link" 
+                                            class="form-control"
+                                            v-model="documentLink">
+                                </div>
+
+                                <div class="form-group">
+                                    <input type="text" 
                                             placeholder="Enter Video Time" 
                                             class="form-control"
                                             v-model="time">
@@ -71,6 +78,16 @@
                         placeholder="Enter course title"
                         value="<%= editMode ? onCourse.title : '' %>">
             </div>
+            
+            <div class="form-group">
+                <label for="eventName">Document link</label>
+                <input type="text" 
+                        class="form-control" 
+                        name="documentLink"
+                        placeholder="Enter document link"
+                        value="<%= editMode ? onCourse.documentLink : '' %>">
+            </div>
+
             <div class="form-group">
                 <label for="eventName">Course image</label>
                 <input type="file" 

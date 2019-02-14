@@ -5,6 +5,9 @@ const courseSchema = new mongoose.Schema({
     videoId: String,
     videoUrl: String,
     time: String,
+    documentLink:{
+        type: String
+    },
 }, {timestamps:true})
 
 const onlineCourseSchema = new mongoose.Schema({
@@ -19,6 +22,9 @@ const onlineCourseSchema = new mongoose.Schema({
     },
     imageUrl:{
         required: true,
+        type: String
+    },
+    documentLink:{
         type: String
     },
     videoId: String,

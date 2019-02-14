@@ -8,6 +8,7 @@ const app = new Vue({
         title: '',
         time: '',
         videoUrl: '',
+        documentLink: '',
         isLoading: true,
         editVidMode: false,
         videoId: ''
@@ -60,6 +61,7 @@ const app = new Vue({
                     title: this.title,
                     time: this.time,
                     videoUrl: this.videoUrl,
+                    documentLink: this.documentLink,
                     onCourseId: this.$refs.onCourseId.value,
                 })
             }).then(res=>{
@@ -115,6 +117,8 @@ const app = new Vue({
             this.title = video.title;
             this.time = video.time;
             this.videoUrl = video.videoUrl;
+            this.documentLink = video.documentLink;
+
             this.editVidMode = true;
         },
 
@@ -131,6 +135,7 @@ const app = new Vue({
                     title: this.title,
                     time: this.time,
                     videoUrl: this.videoUrl,
+                    documentLink: this.documentLink,
                 })
             }).then(res=>{
                 return res.json()
