@@ -42,8 +42,13 @@
         grid-template-columns: repeat(auto-fit, 31rem);
         grid-template-rows: min-content;
         grid-gap: 4rem;
-        width: 90rem;
         justify-content: center;
+        width: 80rem;
+        grid-column: 2/9;
+    }
+    @media only screen and (max-width: 723px){
+        width: auto;
+        margin: 0 auto;
     }
     &__badge{
         height: 40rem;
@@ -116,6 +121,12 @@
     height: 70rem;
     @media only screen and (max-width: 1080px){
         grid-column: 2/9;
+        height: auto;
+    }
+    @media only screen and (max-width: 600px){
+        padding: 1rem;
+        margin: 2rem 0;
+        height: auto;
     }
     &__wrapper{
         margin-top: 3rem;
@@ -132,6 +143,9 @@
             color: $color-secondary;
             text-transform: uppercase;
             font-family: $font-title;
+            @media only screen and (max-width: 600px){
+                font-size: 2rem;
+            }
         }
         p{
             color: #555;
@@ -168,6 +182,14 @@
             align-items: center;
             justify-content: center;
             background: black;
+            @media only screen and (max-width: 600px){
+                top: 2rem;
+                right: 2rem;
+                font-size: 1.5rem;
+                height: 2.5rem;
+                width: 2.5rem;
+                border: 2px solid;
+            }
         }
     }
     &__full{
@@ -193,8 +215,15 @@
         grid-column: 2/9;
         
     }
-    
+    .contact__heading{
+        @media only screen and (max-width: 600px){
+            margin-top: 2rem;
+        }
+    }
     margin-bottom: 11rem;
+    @media only screen and (max-width: 600px){        
+        margin-bottom: 2rem;
+    }
 }
 
 .download-icon{
@@ -219,3 +248,19 @@
     margin: 4rem auto;
 
 }
+
+.video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+
+    iframe{
+        position: absolute;
+        top:0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+}
+

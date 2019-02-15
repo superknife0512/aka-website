@@ -2223,8 +2223,13 @@ form {
       grid-template-columns: repeat(auto-fit, 31rem);
       grid-template-rows: min-content;
       grid-gap: 4rem;
-      width: 90rem;
-      justify-content: center; } }
+      justify-content: center;
+      width: 80rem;
+      grid-column: 2/9; } }
+  @media only screen and (max-width: 723px) {
+    .onVideo-list {
+      width: auto;
+      margin: 0 auto; } }
   .onVideo-list__badge {
     height: 40rem;
     width: 95%;
@@ -2281,7 +2286,13 @@ form {
   height: 70rem; }
   @media only screen and (max-width: 1080px) {
     .onVideo-player {
-      grid-column: 2/9; } }
+      grid-column: 2/9;
+      height: auto; } }
+  @media only screen and (max-width: 600px) {
+    .onVideo-player {
+      padding: 1rem;
+      margin: 2rem 0;
+      height: auto; } }
   .onVideo-player__wrapper {
     margin-top: 3rem; }
     @media only screen and (max-width: 1080px) {
@@ -2295,6 +2306,9 @@ form {
     color: #f5546e;
     text-transform: uppercase;
     font-family: "Faustina", serif; }
+    @media only screen and (max-width: 600px) {
+      .onVideo-player__title h2 {
+        font-size: 2rem; } }
   .onVideo-player__title p {
     color: #555;
     font-size: 1.7rem; }
@@ -2326,6 +2340,14 @@ form {
       align-items: center;
       justify-content: center;
       background: black; }
+      @media only screen and (max-width: 600px) {
+        .onVideo-player__full-body #popup__icon {
+          top: 2rem;
+          right: 2rem;
+          font-size: 1.5rem;
+          height: 2.5rem;
+          width: 2.5rem;
+          border: 2px solid; } }
   .onVideo-player__full {
     height: 90vh;
     width: 90vw;
@@ -2343,6 +2365,12 @@ form {
   margin-bottom: 11rem; }
   #video-app .grid__center {
     grid-column: 2/9; }
+  @media only screen and (max-width: 600px) {
+    #video-app .contact__heading {
+      margin-top: 2rem; } }
+  @media only screen and (max-width: 600px) {
+    #video-app {
+      margin-bottom: 2rem; } }
 
 .download-icon {
   display: flex;
@@ -2362,6 +2390,18 @@ form {
   animation: spinning 2s linear infinite;
   grid-column: 2/9;
   margin: 4rem auto; }
+
+.video-wrapper {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden; }
+  .video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; }
 
 .heading-title {
   color: #f5546e;

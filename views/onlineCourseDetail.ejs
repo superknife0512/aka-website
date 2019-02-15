@@ -32,10 +32,13 @@
         </div>
         <div v-if="!isLoading" class="onVideo-player">
             
-            <iframe class="onVideo-player__adjust" :src="`https://www.facebook.com/video/embed?video_id=${videoId}`" width="730" height="400"  frameborder="0"></iframe>
+            <div class="video-wrapper">
+                <iframe :src="`https://www.facebook.com/video/embed?video_id=${videoId}`" width="730" height="400"  frameborder="0"></iframe>
+            </div>
             <div class="d-flex justify-content-between align-center onVideo-player__wrapper">
+
                 <div class="onVideo-player__title">
-                    <h2>
+                    <h2 class="mb-3">
                         {{ curTitle }}
                     </h2>
                     <p>
@@ -44,8 +47,9 @@
                         </svg>
                         {{ curTime }}
                     </p>
-                    <a href="#" @click.preventDefault="popFull()" class="link-btn">Full màn hình</a>
+                    <a href="#" @click.prevent="popFull()" class="link-btn">Full màn hình</a>
                 </div>
+
                 <div v-if="documentLink" class="download-icon">
                     <p> Download tài liệu</p> 
                     <a :href="documentLink" target="blank">
@@ -54,13 +58,14 @@
                         </svg>
                     </a>
                 </div>
+
             </div>
         </div>
         <div v-if="isFull" class="onVideo-player__full-body">
             <iframe class="onVideo-player__full" 
                     :src="`https://www.facebook.com/video/embed?video_id=${videoId}`"   frameborder="0"></iframe>
             <i class="fas fa-times popup__icon" id="popup__icon"
-                @click="isFull = false"></i>
+                @click.prevent="isFull = false"></i>
         </div>
     </div>
     
