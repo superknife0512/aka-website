@@ -2206,6 +2206,11 @@ form {
       .onl-course .teacher-page__album-info h3 {
         flex-direction: column;
         align-items: flex-start; } }
+    @media screen and (max-width: 600px) {
+      .onl-course .teacher-page__album-info h3 .link-btn {
+        align-self: flex-start;
+        margin-top: 1rem;
+        margin-left: 0; } }
 
 .onVideo-list {
   grid-column: 2/4;
