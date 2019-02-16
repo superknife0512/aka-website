@@ -849,6 +849,7 @@ form{
         display: flex;
         flex-direction: column;
         align-items: center;
+        transform-origin: top;
         h2{
             margin-bottom: 4rem !important;
         }
@@ -859,7 +860,11 @@ form{
             width: 90%;
         }
         button{
-            margin-right: 0 !important;
+            font-size: 1.7rem;
+            @media only screen and (max-width: 600px){
+                flex-direction: column;
+                margin-right: 0 !important;
+            }
         }
     }
     &__btn-group{

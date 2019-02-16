@@ -54,3 +54,19 @@
         transform: rotate(360deg)
     }
 }
+
+@keyframes flapIn{
+    0%{
+        transform: translate(-50%, -50%) skewX(10deg) rotateX(50deg);
+        opacity: .4;
+    }
+    100%{
+        opacity: 1;
+        transform: translate(-50%, -50%) skewX(0) rotateX(0);
+    }
+
+}
+
+.flapInAnim{
+    animation: flapIn .5s cubic-bezier(.25,.96,.72,1.49) forwards;
+}

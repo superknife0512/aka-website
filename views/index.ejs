@@ -1,7 +1,7 @@
 <%- include('./includes/html-head.ejs') %>
 
-    <div class="homepage-popup" v-if="isActive">
-        <div class="homepage-popup__body">
+    <div class="homepage-popup " v-if="isActive">
+        <div class="homepage-popup__body flapInAnim">
 
             <h2 class="heading heading--5 text-center">
                 Đọc trước khi vào website!!!
@@ -12,7 +12,7 @@
                 nhất để có những trải nghiệm tốt nhất tại website của AK. Xin cảm ơn.
             </p>
             <div class="d-flex justify-content-center mt-4 homepage-popup__btn-group">
-                <button class="btn btn-primary" 
+                <button class="btn btn-primary mr-4" 
                         @click="isActive = false">Không, cảm ơn.</button>
                 <a href="https://browser-update.org/update-browser.html"
                     target="blank" 

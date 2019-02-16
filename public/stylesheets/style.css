@@ -136,6 +136,17 @@ form {
   100% {
     transform: rotate(360deg); } }
 
+@keyframes flapIn {
+  0% {
+    transform: translate(-50%, -50%) skewX(10deg) rotateX(50deg);
+    opacity: .4; }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) skewX(0) rotateX(0); } }
+
+.flapInAnim {
+  animation: flapIn 0.5s cubic-bezier(0.25, 0.96, 0.72, 1.49) forwards; }
+
 .grid {
   display: grid;
   grid-template-columns: [full-start] minmax(2rem, 1fr) [center-start] repeat(7, minmax(min-content, 16.2rem)) [center-end] minmax(2rem, 1fr) [full-end];
@@ -1236,7 +1247,8 @@ form {
     transform: translate(-50%, -50%);
     display: flex;
     flex-direction: column;
-    align-items: center; }
+    align-items: center;
+    transform-origin: top; }
     .homepage-popup__body h2 {
       margin-bottom: 4rem !important; }
     .homepage-popup__body p {
@@ -1245,7 +1257,11 @@ form {
       .homepage-popup__body {
         width: 90%; } }
     .homepage-popup__body button {
-      margin-right: 0 !important; }
+      font-size: 1.7rem; }
+      @media only screen and (max-width: 600px) {
+        .homepage-popup__body button {
+          flex-direction: column;
+          margin-right: 0 !important; } }
   .homepage-popup__btn-group {
     align-items: center; }
     @media only screen and (max-width: 800px) {
