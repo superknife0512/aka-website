@@ -1,5 +1,26 @@
 <%- include('./includes/html-head.ejs') %>
 
+    <div class="homepage-popup" v-if="isActive">
+        <div class="homepage-popup__body">
+
+            <h2 class="heading heading--5 text-center">
+                Đọc trước khi vào website!!!
+            </h2>
+            <p>Trang web có sử dụng những công nghệ mới nhất trong hiển thị giao
+                diện, do đó có khả năng sẽ không hiển thị được tốt trên các trình 
+                duyệt cũ. Các bạn nên update trình duyệt của mình lên phiên bản mới 
+                nhất để có những trải nghiệm tốt nhất tại website của AK. Xin cảm ơn.
+            </p>
+            <div class="d-flex justify-content-center mt-4 homepage-popup__btn-group">
+                <button class="btn btn-primary" 
+                        @click="isActive = false">Không, cảm ơn.</button>
+                <a href="https://browser-update.org/update-browser.html"
+                    target="blank" 
+                    class="link-btn">Giúp tôi cập nhật </a>
+            </div>
+        </div>
+
+    </div>
     <div class="grid">
 
         <header class="grid__fluid hero">
@@ -25,7 +46,7 @@
                         <% }) %>
                     </div>
                 </ul>
-                <h4 class="hero__phone"><i class="fas fa-mobile-alt "></i> 078 275 9831</h4>
+                <h4 class="hero__phone"><i class="fas fa-mobile-alt "></i>0905.674.528 - 0868.126.734</h4>
             </nav>
             <div class="hero__body">
 
@@ -33,7 +54,7 @@
                     Trung tâm đa ngữ AK
                 </h1>
                 <h4 class="hero__subTitle">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia, a! Magni, cum possimus commodi omnis magnam temporibus laudantium natus quo eaque. adipisicing elit
+                    Dự Án Hỗ Trợ Đào Tạo Ngôn Ngữ Chất Lượng Cao <br> dành cho sinh viên và người đi làm tại Đà Nẵng
                 </h4>
                 <form class="form-inline" action="/search" method="POST">
                     <input type="text" 

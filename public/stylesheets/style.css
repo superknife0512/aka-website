@@ -1218,6 +1218,40 @@ form {
 form {
   margin-right: 0 !important; }
 
+.homepage-popup {
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.7);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 5000; }
+  .homepage-popup__body {
+    max-width: 80rem;
+    background-color: white;
+    padding: 4rem 5rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center; }
+    .homepage-popup__body h2 {
+      margin-bottom: 4rem !important; }
+    .homepage-popup__body p {
+      text-align: center; }
+    @media only screen and (max-width: 800px) {
+      .homepage-popup__body {
+        width: 90%; } }
+    .homepage-popup__body button {
+      margin-right: 0 !important; }
+  .homepage-popup__btn-group {
+    align-items: center; }
+    @media only screen and (max-width: 800px) {
+      .homepage-popup__btn-group {
+        flex-direction: column; } }
+
 .course-page__heading {
   margin: 0 auto;
   margin: 7rem 0;
@@ -2236,7 +2270,7 @@ form {
       width: auto;
       margin: 0 auto; } }
   .onVideo-list__badge {
-    height: 40rem;
+    height: auto;
     width: 95%;
     display: flex;
     padding: 4.5rem 3rem;

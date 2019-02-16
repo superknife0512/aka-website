@@ -1,3 +1,4 @@
+
     $('#item-0').addClass('active-home');
 
     const glider1 = new Glider(document.querySelector('.course-section__glider'), {
@@ -71,3 +72,15 @@
     })
 
     $('.glider').css('overflow-x: visible')
+
+const app = new Vue({
+    el: '.homepage-popup',
+    data:{
+        isActive:false
+    },
+    created(){
+        setTimeout(()=>{
+            this.isActive = true;
+        }, 2800)
+    }
+})
