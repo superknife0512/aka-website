@@ -435,6 +435,7 @@ exports.postTeacherEdit = async (req,res,next)=>{
         const specialty = req.body.specialty;
         const story = req.body.story;
         const videoLinks = req.body.videoLinks;
+        const archivements = req.body.archivements;
         let avatarUrl = undefined;
 
         const teacher =await Teacher.findById(req.body.teacherId);
@@ -455,6 +456,7 @@ exports.postTeacherEdit = async (req,res,next)=>{
         teacher.specialty = specialty;
         teacher.story = story;
         teacher.teacherVideo = videoLinks.split(';;');
+        teacher.archivements = archivements.split(';;');
 
         await teacher.save();
         res.redirect('/admin/teachers-info');

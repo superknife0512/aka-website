@@ -33,6 +33,12 @@
                 </div>
 
                 <div class="form-group">
+                    <label for="eventName">Teacher's archivements</label>
+                    <textarea name="archivements" rows="5" class="form-control"><%= teacher.archivements.join(';;') %></textarea>
+                    <small>Mỗi link phân cách bởi dấu ';;' - không nhiều hơn 2 đường link</small>
+                </div>
+
+                <div class="form-group">
                     <label for="eventName">Teacher's videos link (from facebook)</label>
                     <textarea name="videoLinks" rows="4" class="form-control"><%= teacher.teacherVideo.join(';;') %></textarea>
                     

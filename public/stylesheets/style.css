@@ -1510,6 +1510,25 @@ form {
   #pane-schedule .table-responsive-sm {
     width: 39rem; } }
 
+.instructor__archivements {
+  margin-top: 2rem;
+  justify-content: center; }
+
+.instructor__archive {
+  display: flex;
+  margin-bottom: 3rem;
+  align-items: center; }
+  .instructor__archive svg {
+    margin-right: 2rem;
+    fill: #42b0ee;
+    height: 4rem;
+    width: 4rem;
+    flex: 1; }
+  .instructor__archive h4 {
+    color: #333;
+    font-size: 1.7rem;
+    flex: 12; }
+
 .overall__period svg, .overall__schedule svg {
   fill: #42b0ee;
   height: 4rem;

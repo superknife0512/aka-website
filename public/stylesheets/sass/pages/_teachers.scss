@@ -251,3 +251,27 @@
         } 
     }
 }
+
+.instructor{
+    &__archivements{
+        margin-top: 2rem;
+        justify-content: center;
+    }
+    &__archive{
+        display: flex;
+        margin-bottom: 3rem;
+        align-items: center;
+        svg{
+            margin-right: 2rem;
+            fill: $color-primary;
+            height: 4rem;
+            width: 4rem;
+            flex: 1;
+        }
+        h4{
+            color: #333;
+            font-size: 1.7rem;
+            flex: 12
+        }
+    }
+}

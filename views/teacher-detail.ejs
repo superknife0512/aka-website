@@ -12,7 +12,7 @@
                         class="instructor__img">
                     <div class="instructor__info">
                         <i class="instructor__name">
-                            Mr/Mrs. <%= teacher.name %>
+                           <%= teacher.name %>
                         </i>
                         <i class="instructor__specialty">
                             Chuyên môn: <%= teacher.specialty %>
@@ -27,7 +27,17 @@
                             <strong>Một chút về tiểu sử của <%= teacher.name %></strong>: <%= teacher.story %>
                         </p>
                     </div>
-                </section><br><br>
+                </section><br>
+                <section class="instructor__archivements">
+                    <% teacher.archivements.forEach(archi=>{ %>
+                        <div class="instructor__archive">
+                            <svg>
+                                <use xlink:href="images/benefits.svg#icon-medal"></use>
+                            </svg>
+                            <h4><%= archi %></h4>
+                        </div>
+                    <% }) %>
+                </section>
                 <hr>
                 <section class="teacher-page__display">
                     <div class="teacher-page__btn-group">

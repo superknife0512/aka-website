@@ -71,6 +71,8 @@ const teacherSchema = new mongoose.Schema({
 
     schedule: [scheduleSchema],
 
+    archivements: [String],
+
     token: String,
     tokenExpiration: Date,
     blobName: String,
