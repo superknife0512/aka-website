@@ -11,6 +11,30 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 const mongoose = require('mongoose');
 
+const contacts = [
+    {
+        icon: 'images/contact.svg#icon-phone',
+        desc: '0905.674.528 - 0868.126.734',
+    },
+    {
+        icon: 'images/contact.svg#icon-map',
+        desc: '222 Ngũ Hành Sơn - Tp. Đà Nẵng ( Đối Diện ĐHKT Đà Nẵng )',
+    },
+
+];
+
+const socials = [
+    {
+        icon: 'images/contact.svg#icon-facebook',
+        desc: 'https://www.facebook.com/Meixuan.dn/',
+    },
+    {
+        icon: 'images/contact.svg#icon-googleplus',
+        desc: 'https://bom.to/0vEt3',
+    },
+
+]
+
 // *********************************************
 // HOME PAGE 
 // *********************************************
@@ -48,32 +72,32 @@ exports.getHomePage =async (req,res,next)=>{
             {
                 icon:"images/benefits.svg#icon-target",
                 title: "Lộ trình học hiệu quả",
-                desc: 'Lộ trình học hướng dẫn người học đi đúng mục tiêu,...'
+                desc: 'Đào tạo theo nhu cầu cá nhân từng học viên '
             },
             {
                 icon:"images/benefits.svg#icon-hourglass",
-                title: "Tiết kiệm thời gian tối ưu",
-                desc: 'Với các khóa học của chúng tôi, bạn có thể tự mình sắp xếp thời gian hiệu quả, ....'
+                title: "Tối ưu hóa thời gian học",
+                desc: 'Rút gọn thời gian học, thông qua các phương pháp mới nhưng vẫn đảm bảo kiến thức đầu ra '
             },
             {
                 icon:"images/benefits.svg#icon-wallet",
                 title: "Giảm thiểu tối đa chi phí",
-                desc: 'Các khóa học của chúng tôi sẽ giúp các bạn tiết kiệm được một khoảng không nhỏ so với việc đến các trung tâm lớn'
+                desc: 'Chi phí học liên tục được tài trợ để hỗ trợ những bạn có hoàn cảnh khó khăn'
             },
             {
                 icon:"images/benefits.svg#icon-genius",
                 title: "Phù hợp với mọi đối tượng",
-                desc: 'Các khóa học với phong cách giảng dạy phù hợp với cả những người dù đã đi làm hay còn đi học...'
+                desc: 'Hệ thống các khóa học được thiết kế để mọi độ tuổi đều có thể tham gia'
             },
             {
                 icon:"images/benefits.svg#icon-linegraph",
                 title: "Nguồn giảng viên chất lượng cao",
-                desc: 'Giảng viên được lựa chọn một cách kỹ càng tăng hiệu quả tối đa,...'
+                desc: 'Các giảng viên được kiểm tra đầu vào gắt gao nhằm nâng cao chất lượng giảng dạy.'
             },
             {
                 icon:"images/benefits.svg#icon-trophy",
                 title: "Áp dụng kiến thức nhanh chóng",
-                desc: 'Đảm bảo áp dụng kiến thức học vào đời sống công việc trong thời gian ngắn nhất'
+                desc: 'Thuần thục sử dụng các kiến thức đã học vào đời sống, công việc hàng ngày chỉ sau vài tháng học'
             },
         ];
         const testimonials = [
@@ -99,30 +123,7 @@ exports.getHomePage =async (req,res,next)=>{
                 date: "10/02/2018 - 10/03/2019"
             },
         ]
-        const contacts = [
-            {
-                icon: 'images/contact.svg#icon-phone',
-                desc: '078 275 9831 - 094 942 9254',
-            },
-            {
-                icon: 'images/contact.svg#icon-map',
-                desc: '23 Thái Thị Bôi, q Thanh Khê, tp. Đà Nẵng',
-            },
-
-        ];
-
-        const socials = [
-            {
-                icon: 'images/contact.svg#icon-facebook',
-                desc: 'https://www.facebook.com/Superknife0512',
-            },
-            {
-                icon: 'images/contact.svg#icon-googleplus',
-                desc: 'https://bom.to/0vEt3',
-            },
-
-        ]
-
+        
         const courses = await Course.find().populate('teacher').limit(6);
         console.log(courses);
         const events = await Events.find().limit(6).sort('-createdAt');
@@ -167,29 +168,7 @@ exports.getHomePage =async (req,res,next)=>{
 exports.getCoursesPage = async (req,res,next)=>{
     try{
         const courses = await Course.find().populate('teacher');
-        const contacts = [
-            {
-                icon: 'images/contact.svg#icon-phone',
-                desc: '078 275 9831 - 094 942 9254',
-            },
-            {
-                icon: 'images/contact.svg#icon-map',
-                desc: '23 Thái Thị Bôi, q Thanh Khê, tp. Đà Nẵng',
-            },
-
-        ];
-
-        const socials = [
-            {
-                icon: 'images/contact.svg#icon-facebook',
-                desc: 'https://www.facebook.com/Superknife0512',
-            },
-            {
-                icon: 'images/contact.svg#icon-googleplus',
-                desc: 'https://bom.to/0vEt3',
-            },
-
-        ]
+       
         const courseEng = [];
         const courseChi = [];
         const courseJav = [];
@@ -268,29 +247,7 @@ exports.getCoursesPage = async (req,res,next)=>{
 
 exports.getCourseDetail =async (req,res,next)=>{
     try{
-        const contacts = [
-            {
-                icon: 'images/contact.svg#icon-phone',
-                desc: '078 275 9831 - 094 942 9254',
-            },
-            {
-                icon: 'images/contact.svg#icon-map',
-                desc: '23 Thái Thị Bôi, q Thanh Khê, tp. Đà Nẵng',
-            },
-
-        ];
-
-        const socials = [
-            {
-                icon: 'images/contact.svg#icon-facebook',
-                desc: 'https://www.facebook.com/Superknife0512',
-            },
-            {
-                icon: 'images/contact.svg#icon-googleplus',
-                desc: 'https://bom.to/0vEt3',
-            },
-
-        ]
+       
         
         const course = await Course.findById(req.params.courseId).populate('teacher');
         res.render('course-detail',{
@@ -313,29 +270,7 @@ exports.getCourseDetail =async (req,res,next)=>{
 
 exports.getTeachersPage =async (req,res,next)=>{
     try{
-        const contacts = [
-            {
-                icon: 'images/contact.svg#icon-phone',
-                desc: '078 275 9831 - 094 942 9254',
-            },
-            {
-                icon: 'images/contact.svg#icon-map',
-                desc: '23 Thái Thị Bôi, q Thanh Khê, tp. Đà Nẵng',
-            },
-
-        ];
-
-        const socials = [
-            {
-                icon: 'images/contact.svg#icon-facebook',
-                desc: 'https://www.facebook.com/Superknife0512',
-            },
-            {
-                icon: 'images/contact.svg#icon-googleplus',
-                desc: 'https://bom.to/0vEt3',
-            },
-
-        ]
+        
         
         const teachers =await Teacher.find({role: 'teacher'});
         const seoName = teachers.map(teacher=>{
@@ -357,29 +292,7 @@ exports.getTeachersPage =async (req,res,next)=>{
 
 exports.getTeacherDetail = async (req,res,next)=>{
     try{
-        const contacts = [
-            {
-                icon: 'images/contact.svg#icon-phone',
-                desc: '078 275 9831 - 094 942 9254',
-            },
-            {
-                icon: 'images/contact.svg#icon-map',
-                desc: '23 Thái Thị Bôi, q Thanh Khê, tp. Đà Nẵng',
-            },
-
-        ];
-
-        const socials = [
-            {
-                icon: 'images/contact.svg#icon-facebook',
-                desc: 'https://www.facebook.com/Superknife0512',
-            },
-            {
-                icon: 'images/contact.svg#icon-googleplus',
-                desc: 'https://bom.to/0vEt3',
-            },
-
-        ]
+        
         
         const teacher = await Teacher.findById(req.params.teacherId);
         const teacherId = mongoose.Types.ObjectId(teacher._id)
@@ -435,29 +348,7 @@ exports.getTeacherDetail = async (req,res,next)=>{
 
 exports.getAlbumPage = async (req,res,next)=>{
     try{
-        const contacts = [
-            {
-                icon: 'images/contact.svg#icon-phone',
-                desc: '078 275 9831 - 094 942 9254',
-            },
-            {
-                icon: 'images/contact.svg#icon-map',
-                desc: '23 Thái Thị Bôi, q Thanh Khê, tp. Đà Nẵng',
-            },
-
-        ];
-
-        const socials = [
-            {
-                icon: 'images/contact.svg#icon-facebook',
-                desc: 'https://www.facebook.com/Superknife0512',
-            },
-            {
-                icon: 'images/contact.svg#icon-googleplus',
-                desc: 'https://bom.to/0vEt3',
-            },
-
-        ]
+        
         
         const album =await Album.findById(req.params.albumId);
         const teacher = await Teacher.findById(req.query.teacherId);
@@ -489,29 +380,7 @@ exports.getAlbumPage = async (req,res,next)=>{
 
 exports.getEventPage = async (req,res,next)=>{
     try{
-        const contacts = [
-            {
-                icon: 'images/contact.svg#icon-phone',
-                desc: '078 275 9831 - 094 942 9254',
-            },
-            {
-                icon: 'images/contact.svg#icon-map',
-                desc: '23 Thái Thị Bôi, q Thanh Khê, tp. Đà Nẵng',
-            },
-
-        ];
-
-        const socials = [
-            {
-                icon: 'images/contact.svg#icon-facebook',
-                desc: 'https://www.facebook.com/Superknife0512',
-            },
-            {
-                icon: 'images/contact.svg#icon-googleplus',
-                desc: 'https://bom.to/0vEt3',
-            },
-
-        ]
+        
         
         const events = await Events.find().limit(3).sort('-createdAt');
         const remainingEvent = await Events.find().skip(3).limit(6).sort('-createdAt');
@@ -537,30 +406,7 @@ exports.getEventPage = async (req,res,next)=>{
 }
 
 exports.getEventDetail = async (req,res,next)=>{
-    const contacts = [
-        {
-            icon: 'images/contact.svg#icon-phone',
-            desc: '078 275 9831 - 094 942 9254',
-        },
-        {
-            icon: 'images/contact.svg#icon-map',
-            desc: '23 Thái Thị Bôi, q Thanh Khê, tp. Đà Nẵng',
-        },
-
-    ];
-
-    const socials = [
-        {
-            icon: 'images/contact.svg#icon-facebook',
-            desc: 'https://www.facebook.com/Superknife0512',
-        },
-        {
-            icon: 'images/contact.svg#icon-googleplus',
-            desc: 'https://bom.to/0vEt3',
-        },
-
-    ]
-    
+        
     try{
         const event = await Events.findById(req.params.eventId);
         const events = await Events.find().limit(5);
@@ -583,29 +429,7 @@ exports.getEventDetail = async (req,res,next)=>{
 // *********************************************
 
 exports.getAboutPage = async (req,res,next)=>{
-    const contacts = [
-        {
-            icon: 'images/contact.svg#icon-phone',
-            desc: '078 275 9831 - 094 942 9254',
-        },
-        {
-            icon: 'images/contact.svg#icon-map',
-            desc: '23 Thái Thị Bôi, q Thanh Khê, tp. Đà Nẵng',
-        },
-
-    ];
-
-    const socials = [
-        {
-            icon: 'images/contact.svg#icon-facebook',
-            desc: 'https://www.facebook.com/Superknife0512',
-        },
-        {
-            icon: 'images/contact.svg#icon-googleplus',
-            desc: 'https://bom.to/0vEt3',
-        },
-
-    ]
+    
     
     try{
 
@@ -626,29 +450,7 @@ exports.getAboutPage = async (req,res,next)=>{
 // *********************************************
 
 exports.getContactPage = async (req,res,next)=>{
-    const contacts = [
-        {
-            icon: 'images/contact.svg#icon-phone',
-            desc: '078 275 9831 - 094 942 9254',
-        },
-        {
-            icon: 'images/contact.svg#icon-map',
-            desc: '23 Thái Thị Bôi, q Thanh Khê, tp. Đà Nẵng',
-        },
-
-    ];
-
-    const socials = [
-        {
-            icon: 'images/contact.svg#icon-facebook',
-            desc: 'https://www.facebook.com/Superknife0512',
-        },
-        {
-            icon: 'images/contact.svg#icon-googleplus',
-            desc: 'https://bom.to/0vEt3',
-        },
-
-    ]
+    
     
     try{
 
@@ -666,29 +468,7 @@ exports.getContactPage = async (req,res,next)=>{
 }
 
 exports.postContact = async (req,res,next)=>{
-    const contacts = [
-        {
-            icon: 'images/contact.svg#icon-phone',
-            desc: '078 275 9831 - 094 942 9254',
-        },
-        {
-            icon: 'images/contact.svg#icon-map',
-            desc: '23 Thái Thị Bôi, q Thanh Khê, tp. Đà Nẵng',
-        },
-
-    ];
-
-    const socials = [
-        {
-            icon: 'images/contact.svg#icon-facebook',
-            desc: 'https://www.facebook.com/Superknife0512',
-        },
-        {
-            icon: 'images/contact.svg#icon-googleplus',
-            desc: 'https://bom.to/0vEt3',
-        },
-
-    ]
+    
     
     try{
         const name = req.body.name;
@@ -755,29 +535,7 @@ exports.postContact = async (req,res,next)=>{
 // *********************************************
 
 exports.postSearch = async (req,res,next)=>{
-    const contacts = [
-        {
-            icon: 'images/contact.svg#icon-phone',
-            desc: '078 275 9831 - 094 942 9254',
-        },
-        {
-            icon: 'images/contact.svg#icon-map',
-            desc: '23 Thái Thị Bôi, q Thanh Khê, tp. Đà Nẵng',
-        },
-
-    ];
-
-    const socials = [
-        {
-            icon: 'images/contact.svg#icon-facebook',
-            desc: 'https://www.facebook.com/Superknife0512',
-        },
-        {
-            icon: 'images/contact.svg#icon-googleplus',
-            desc: 'https://bom.to/0vEt3',
-        },
-
-    ]
+    
     
     
     try{
@@ -821,29 +579,6 @@ exports.postSearch = async (req,res,next)=>{
 // *********************************************
 
 exports.getCourseOnline = async (req,res,next)=>{
-    const contacts = [
-        {
-            icon: 'images/contact.svg#icon-phone',
-            desc: '078 275 9831 - 094 942 9254',
-        },
-        {
-            icon: 'images/contact.svg#icon-map',
-            desc: '23 Thái Thị Bôi, q Thanh Khê, tp. Đà Nẵng',
-        },
-
-    ];
-
-    const socials = [
-        {
-            icon: 'images/contact.svg#icon-facebook',
-            desc: 'https://www.facebook.com/Superknife0512',
-        },
-        {
-            icon: 'images/contact.svg#icon-googleplus',
-            desc: 'https://bom.to/0vEt3',
-        },
-
-    ]
     
     try{
         const onCourses = await OnlineCourse.find().populate('teacher').sort('-updatedAt');
@@ -871,29 +606,6 @@ exports.getCourseOnline = async (req,res,next)=>{
 }
 
 exports.getCourseOnlineDetail = async (req,res,next)=>{
-    const contacts = [
-        {
-            icon: 'images/contact.svg#icon-phone',
-            desc: '078 275 9831 - 094 942 9254',
-        },
-        {
-            icon: 'images/contact.svg#icon-map',
-            desc: '23 Thái Thị Bôi, q Thanh Khê, tp. Đà Nẵng',
-        },
-
-    ];
-
-    const socials = [
-        {
-            icon: 'images/contact.svg#icon-facebook',
-            desc: 'https://www.facebook.com/Superknife0512',
-        },
-        {
-            icon: 'images/contact.svg#icon-googleplus',
-            desc: 'https://bom.to/0vEt3',
-        },
-
-    ]
     
     try{
         const onCourse = await OnlineCourse.findById(req.params.onCourseId);                
@@ -904,6 +616,7 @@ exports.getCourseOnlineDetail = async (req,res,next)=>{
             contacts,
             socials,
             onCourse,
+            courseTitle: onCourse.title
         })
 
     } catch (err){

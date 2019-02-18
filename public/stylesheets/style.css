@@ -717,7 +717,9 @@ form {
     text-align: center;
     margin-bottom: 3.5rem;
     line-height: 2.3rem;
-    animation: rightIn 1s .7s ease backwards; }
+    animation: rightIn 1s .7s ease backwards;
+    font-size: 1.8rem;
+    line-height: 1.6; }
   .hero__search {
     border: 1px solid  #e0e0e0;
     border-radius: 500rem;
@@ -748,10 +750,13 @@ form {
     .about {
       flex-direction: column;
       align-items: center; } }
-  .about__left p {
-    width: 80%;
-    margin-bottom: 3rem; }
+  .about__left {
+    flex: 3; }
+    .about__left p {
+      width: 80%;
+      margin-bottom: 3rem; }
   .about__right {
+    flex: 2;
     position: relative;
     width: 100%;
     margin-right: 8rem; }
@@ -2457,6 +2462,34 @@ form {
     left: 0;
     width: 100%;
     height: 100%; }
+
+.about-page {
+  margin: 11rem auto; }
+  .about-page__body {
+    display: flex;
+    margin-top: 8rem; }
+  .about-page__section {
+    margin-bottom: 4rem; }
+  .about-page__left {
+    flex: 3;
+    margin: 0 2rem;
+    padding: 2rem;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: 73.6rem; }
+  .about-page__right {
+    flex: 2; }
+  .about-page__title {
+    font-size: 1.9rem;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: #42b0ee;
+    margin-bottom: 1.5rem; }
+  .about-page__img {
+    object-fit: cover;
+    object-position: top;
+    width: 53rem; }
 
 .heading-title {
   color: #f5546e;

@@ -1,0 +1,35 @@
+.about-page{
+    margin: 11rem auto;
+
+    &__body{
+        display: flex;
+        margin-top: 8rem;
+    }
+    &__section{
+        margin-bottom: 4rem;
+    }
+    &__left{
+        flex: 3;
+        margin: 0 2rem;
+        padding: 2rem;
+        border: 1px solid rgba(0,0,0,.2);
+        overflow-x: hidden;
+        overflow-y: auto;
+        height: 73.6rem;
+    }
+    &__right{
+        flex: 2;
+    }
+    &__title{
+        font-size: 1.9rem;
+        text-transform: uppercase;
+        font-weight: 600;
+        color: $color-primary;
+        margin-bottom: 1.5rem;
+    }
+    &__img{
+        object-fit: cover;
+        object-position: top;
+        width: 53rem;
+    }
+}
