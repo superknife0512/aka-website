@@ -23,6 +23,10 @@
             margin: 0;
             margin-bottom: 2rem;
         }
+
+        @media screen and (max-width: 600px){
+            height: auto;
+        }
     }
     &__right{
         flex: 2;

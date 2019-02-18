@@ -2487,6 +2487,9 @@ form {
       .about-page__left {
         margin: 0;
         margin-bottom: 2rem; } }
+    @media screen and (max-width: 600px) {
+      .about-page__left {
+        height: auto; } }
   .about-page__right {
     flex: 2; }
     @media screen and (max-width: 600px) {
