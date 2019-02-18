@@ -1511,22 +1511,38 @@ form {
     width: 39rem; } }
 
 .instructor__archivements {
-  margin-top: 2rem;
-  justify-content: center; }
+  margin-top: 4rem;
+  justify-content: center;
+  flex-direction: column;
+  display: flex;
+  flex-wrap: wrap;
+  height: 40rem;
+  justify-content: flex-start; }
+  @media only screen and (max-width: 750px) {
+    .instructor__archivements {
+      height: auto;
+      flex-wrap: nowrap; } }
 
 .instructor__archive {
   display: flex;
-  margin-bottom: 3rem;
-  align-items: center; }
+  margin-bottom: 2rem;
+  align-items: center;
+  width: 45%; }
+  @media only screen and (max-width: 750px) {
+    .instructor__archive {
+      width: 90%; } }
   .instructor__archive svg {
     margin-right: 2rem;
     fill: #42b0ee;
-    height: 4rem;
-    width: 4rem;
+    height: 4.5rem;
+    width: 4.5rem;
     flex: 1; }
+    @media only screen and (max-width: 750px) {
+      .instructor__archive svg {
+        flex: 2; } }
   .instructor__archive h4 {
     color: #333;
-    font-size: 1.7rem;
+    font-size: 1.8rem;
     flex: 12; }
 
 .overall__period svg, .overall__schedule svg {
