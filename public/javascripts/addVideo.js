@@ -73,6 +73,7 @@ const app = new Vue({
                 this.resetForm();
                 alert('Has been add a course');
                 this.activePop = false;
+                this.initVideo();
             }).catch(err=>{
                 alert('something went wrong')
                 console.log(err);

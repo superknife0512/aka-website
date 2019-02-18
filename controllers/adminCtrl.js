@@ -661,7 +661,7 @@ exports.postAddVideo = async (req,res,next) =>{
         const onCourseId = req.body.onCourseId;
 
         const onCourse = await OnCourse.findById(onCourseId);
-        const videoId = videoUrl.match(/\d{7,20}/gi)[0];
+        const videoEmebed = videoUrl.replace(/watch\?v=/, 'embed/');
 
         if(!title || !videoUrl || !time){
             res.status(422).json({
@@ -671,9 +671,8 @@ exports.postAddVideo = async (req,res,next) =>{
 
         onCourse.courses.push({
             title,
-            videoUrl,
+            videoUrl: videoEmebed,
             time,
-            videoId,
             documentLink
         })
 
@@ -683,7 +682,6 @@ exports.postAddVideo = async (req,res,next) =>{
                 title,
                 videoUrl,
                 time,   
-                videoId,
                 documentLink            
             },
             message: 'create lecture sucessfully'
@@ -718,12 +716,11 @@ exports.editVideo = async (req,res,next)=>{
         const onCourse =await OnCourse.findById(req.body.onCourseId);
         const video = onCourse.courses.id(req.body.videoId);
 
-        const videoId = videoUrl.match(/\d{7,20}/gi)[0];
+        const videoEmebed = videoUrl.replace(/watch\?v=/, 'embed/');
 
         video.title = title;
         video.time = time;
-        video.videoUrl = videoUrl;
-        video.videoId = videoId;
+        video.videoUrl = videoEmebed;
         video.documentLink = documentLink;
 
         await onCourse.save();

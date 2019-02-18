@@ -33,7 +33,7 @@
         <div v-if="!isLoading" class="onVideo-player">
             
             <div class="video-wrapper">
-                <iframe :src="`https://www.facebook.com/video/embed?video_id=${videoId}`" width="730" height="400"  frameborder="0"></iframe>
+                <iframe :src="videoUrl" width="730" height="400"  frameborder="0" allowfullscreen></iframe>
             </div>
             <div class="d-flex justify-content-between align-center onVideo-player__wrapper">
 
@@ -47,7 +47,7 @@
                         </svg>
                         {{ curTime }}
                     </p>
-                    <a href="#" @click.prevent="popFull()" class="link-btn">Full màn hình</a>
+                    <!-- <a href="#" @click.prevent="popFull()" class="link-btn">Full màn hình</a> -->
                 </div>
 
                 <div v-if="documentLink" class="download-icon">
@@ -61,12 +61,12 @@
 
             </div>
         </div>
-        <div v-if="isFull" class="onVideo-player__full-body">
+        <!-- <div v-if="isFull" class="onVideo-player__full-body">
             <iframe class="onVideo-player__full" 
-                    :src="`https://www.facebook.com/video/embed?video_id=${videoId}`"   frameborder="0"></iframe>
+                    :src="videoUrl" allowfullscreen  frameborder="0"></iframe>
             <i class="fas fa-times popup__icon" id="popup__icon"
                 @click.prevent="isFull = false"></i>
-        </div>
+        </div> -->
     </div>
     
     <br><br><hr>

@@ -128,7 +128,7 @@
         <div class="onCourse__display" v-if="!isLoading">
                 <h4 v-if="!videos[0]">You don't have any lecture video here!</h4>
                 <div class="onCourse__vid" v-for="video in videos" >
-                    <iframe class="onCourse__video" :src="`https://www.facebook.com/video/embed?video_id=${ video.videoId }`" width="300" height="200" frameborder="0" ></iframe>
+                    <iframe class="onCourse__video" :src="video.videoUrl" width="300" height="200" allowfullscreen ></iframe>
                     <h4>{{ video.title  }}</h4>
                     <p>{{ video.time }}</p>
                     <div class="d-flex">

@@ -8,7 +8,6 @@ const app = new Vue({
         videos:[],
         onCourseId: '',
         videoUrl: '',
-        videoId:'',
         curTitle: '',
         curTime: '',
         documentLink: '',
@@ -32,8 +31,7 @@ const app = new Vue({
                     this.isLoading = false
                     this.onCourse = resData.onCourse;
                     this.videos = resData.onCourse.courses;
-                    this.videoUrl = this.videos[0].videoUrl;                           
-                    this.videoId = this.videos[0].videoId;                           
+                    this.videoUrl = this.videos[0].videoUrl;                         
                     this.curTime = this.videos[0].time;                           
                     this.curTitle = this.videos[0].title;                           
                     this.documentLink = this.videos[0].documentLink;                           
@@ -67,15 +65,14 @@ const app = new Vue({
             const video = this.videos.find(vid=> videoId === vid._id);
             this.videoUrl = '';
             this.videoUrl = video.videoUrl;
-            this.videoId = video.videoId;
             this.curTitle = video.title;
             this.curTime = video.time;
             this.documentLink = video.documentLink;
             this.initFacebook();
         },
-        popFull(){
-            this.isFull = true;
-        }
+        // popFull(){
+        //     this.isFull = true;
+        // }
     },
 }) 
 

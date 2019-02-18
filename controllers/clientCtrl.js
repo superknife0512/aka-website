@@ -552,6 +552,8 @@ exports.postSearch = async (req,res,next)=>{
         courses.forEach(course=>{
             if(course.title.match(searchPattern)){
                 results.push(course)
+            } else if (course.teacher.name.match(searchPattern)){
+                results.push(course)
             }
         })
         const offPrices = courses.map(course => {
