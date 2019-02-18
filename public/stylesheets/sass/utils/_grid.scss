@@ -3,6 +3,7 @@
     display: grid;
     grid-template-columns: [full-start] minmax(2rem, 1fr) [center-start] repeat(7, minmax(min-content, 16.2rem)) [center-end] minmax(2rem, 1fr) [full-end]; 
     grid-template-rows: auto;   
+    justify-content: center;
 
     &__container{
         grid-column: center-start / center-end;
