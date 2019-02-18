@@ -2468,6 +2468,9 @@ form {
   .about-page__body {
     display: flex;
     margin-top: 8rem; }
+    @media screen and (max-width: 900px) {
+      .about-page__body {
+        flex-direction: column; } }
   .about-page__section {
     margin-bottom: 4rem; }
   .about-page__left {
@@ -2478,8 +2481,15 @@ form {
     overflow-x: hidden;
     overflow-y: auto;
     height: 73.6rem; }
+    @media screen and (max-width: 900px) {
+      .about-page__left {
+        margin: 0;
+        margin-bottom: 2rem; } }
   .about-page__right {
     flex: 2; }
+    @media screen and (max-width: 600px) {
+      .about-page__right {
+        display: none; } }
   .about-page__title {
     font-size: 1.9rem;
     text-transform: uppercase;
@@ -2489,7 +2499,16 @@ form {
   .about-page__img {
     object-fit: cover;
     object-position: top;
-    width: 53rem; }
+    width: 53rem;
+    animation: fadeIn .5s ease backwards; }
+  .about-page__final {
+    font-style: italic;
+    font-family: "Faustina", serif;
+    color: #f5546e; }
+  .about-page__hidden {
+    display: none !important; }
+  .about-page__display {
+    display: block; }
 
 .heading-title {
   color: #f5546e;

@@ -64,6 +64,10 @@ exports.getHomePage =async (req,res,next)=>{
                 link: '/event-page',
             },
             {
+                page:' về AK ',
+                link: '/about',
+            },
+            {
                 page:' Liên hệ ',
                 link: '/contact',
             },

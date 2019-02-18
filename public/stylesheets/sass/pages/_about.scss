@@ -4,6 +4,9 @@
     &__body{
         display: flex;
         margin-top: 8rem;
+        @media screen and (max-width: 900px){
+            flex-direction: column;
+        }
     }
     &__section{
         margin-bottom: 4rem;
@@ -16,9 +19,17 @@
         overflow-x: hidden;
         overflow-y: auto;
         height: 73.6rem;
+        @media screen and (max-width: 900px){
+            margin: 0;
+            margin-bottom: 2rem;
+        }
     }
     &__right{
         flex: 2;
+        
+        @media screen and (max-width: 600px){
+            display: none;
+         }
     }
     &__title{
         font-size: 1.9rem;
@@ -31,5 +42,20 @@
         object-fit: cover;
         object-position: top;
         width: 53rem;
+        animation: fadeIn .5s ease backwards;
+    }
+    &__final{
+        font-style: italic;
+        font-family: $font-title;
+        color: $color-secondary;
+    }
+    &__hidden{
+        display: none !important;
+    }
+    
+    &__display{
+        display: block ;
     }
 }
+
+
