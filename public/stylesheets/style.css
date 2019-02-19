@@ -359,7 +359,8 @@ form {
   .inc-event__info {
     display: flex;
     flex-direction: column;
-    align-items: center; }
+    align-items: center;
+    max-width: 0 auto; }
   .inc-event__title {
     font-family: "Faustina", serif;
     font-size: 1.7rem;
@@ -1312,7 +1313,14 @@ form {
   box-shadow: -1px 0px 17px 0px rgba(0, 0, 0, 0.2);
   padding: 3rem;
   width: 32rem;
-  height: 61.5rem; }
+  height: 61.5rem;
+  border-left: 7px solid #42b0ee; }
+  @media only screen and (max-width: 720px) {
+    .assistant__body {
+      grid-column: 2/9;
+      height: auto;
+      width: auto;
+      padding: 3rem 1.5rem; } }
 
 .assistant__title {
   font-family: "Faustina", serif;
@@ -1324,13 +1332,16 @@ form {
 .assistant__team {
   display: flex;
   flex-direction: column;
-  transform: translateX(-8.5rem); }
+  transform: translateX(-9.4rem); }
+  @media only screen and (max-width: 720px) {
+    .assistant__team {
+      transform: translateX(0); } }
 
 .assistant__img {
   height: 12rem;
   width: 12rem;
   border-radius: 50%;
-  border: .8rem solid #FFF;
+  border: 0.8rem solid #42b0ee;
   margin-right: 1rem;
   transition: all .3s;
   object-fit: cover; }
@@ -1353,6 +1364,10 @@ form {
 .teachers__body {
   margin: 10rem 2rem;
   grid-column: 2/7; }
+  @media only screen and (max-width: 720px) {
+    .teachers__body {
+      grid-column: 2/9;
+      margin-bottom: 0; } }
 
 .teachers__heading {
   margin: 0 auto;
@@ -1775,6 +1790,8 @@ form {
   .instructor__body {
     display: flex;
     align-items: center; }
+    .instructor__body:not(:last-child) {
+      margin-bottom: 5rem; }
     @media only screen and (max-width: 1060px) {
       .instructor__body {
         flex-direction: column; } }
@@ -1783,8 +1800,8 @@ form {
     flex-direction: column;
     flex: 3; }
   .instructor__img {
-    height: 27rem;
-    width: 27rem;
+    height: 24rem;
+    width: 24rem;
     object-fit: cover;
     border-radius: 50%;
     margin-right: 4rem; }
@@ -1793,7 +1810,7 @@ form {
         margin-right: 0;
         margin-bottom: 4rem; } }
   .instructor__name {
-    font-size: 3.4rem;
+    font-size: 3.1rem;
     color: #42b0ee;
     margin-bottom: 1rem;
     text-transform: uppercase;
@@ -2058,6 +2075,11 @@ form {
     @media screen and (max-width: 600px) {
       .event-page__body {
         justify-content: center; } }
+  .event-page .pagination__body {
+    margin-top: 3.5rem; }
+  .event-page .page-link {
+    padding: 1rem 1.4rem;
+    font-size: 1.5rem; }
 
 #event-1 {
   grid-column: 1/4;
@@ -2899,6 +2921,9 @@ form {
     .footer-sect__social li h2 {
       color: white;
       font-size: 1.5rem; }
+      .footer-sect__social li h2 a:link, .footer-sect__social li h2 a:visited {
+        color: white;
+        text-decoration: none; }
   .footer-sect__wrap {
     background-color: #333;
     padding: 5rem 0; }
@@ -2990,6 +3015,9 @@ form {
     .footer-sect__social li h2 {
       color: white;
       font-size: 1.5rem; }
+      .footer-sect__social li h2 a:link, .footer-sect__social li h2 a:visited {
+        color: white;
+        text-decoration: none; }
   .footer-sect__wrap {
     background-color: #333;
     padding: 5rem 0; }

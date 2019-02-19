@@ -20,7 +20,9 @@
                             <svg class="footer-sect__icon">
                                 <use xlink:href="<%= social.icon %>"></use>
                             </svg>
-                            <h2><%= social.desc %></h2>
+                            <h2><a href="<%= social.desc %>" target="blank">
+                                <%= social.desc %>
+                            </a></h2>
                         </li>
                     <% }) %>
                 </ul>

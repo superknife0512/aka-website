@@ -6,6 +6,13 @@
         padding: 3rem;
         width: 32rem;
         height: 61.5rem;
+        border-left: 7px solid $color-primary;
+        @media only screen and (max-width: 720px){
+            grid-column: 2/9;
+            height: auto;
+            width: auto;
+            padding: 3rem 1.5rem;
+        }
     }
     &__title{
         font-family: $font-title;
@@ -17,14 +24,16 @@
     &__team{
         display: flex;
         flex-direction: column;
-        transform: translateX(-8.5rem);
-
+        transform: translateX(-9.4rem);
+        @media only screen and (max-width: 720px){
+            transform: translateX(0);
+        }
     }
     &__img{
         height: 12rem;
         width: 12rem;
         border-radius: 50%;
-        border: .8rem solid #FFF;
+        border: .8rem solid $color-primary;
         margin-right: 1rem;
         transition: all .3s;
         object-fit: cover;
@@ -56,6 +65,10 @@
     &__body{
         margin: 10rem 2rem;
         grid-column: 2/7;
+        @media only screen and (max-width: 720px){
+            grid-column: 2/9;
+            margin-bottom: 0;
+        }
     }
     &__heading{
         margin: 0 auto;

@@ -96,6 +96,15 @@
             justify-content: center;
         }
     }
+    .pagination{
+        &__body{
+            margin-top: 3.5rem;
+        }
+    }
+    .page-link{
+        padding: 1rem 1.4rem;
+        font-size: 1.5rem ;
+    }
 }
 
 #event-1{

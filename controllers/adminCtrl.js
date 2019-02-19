@@ -2,6 +2,7 @@ const Teacher = require('../models/Teacher');
 const Course = require('../models/Course');
 const Events = require('../models/Event');
 const IncomingEvent = require('../models/IncomingEvent');
+const AdminData = require('../models/AdminData');
 const OnCourse = require('../models/OnlineCourse');
 const {deleteBlob}=require('../middlewares/deleteBlob');
 const mongoose = require('mongoose');
@@ -16,19 +17,59 @@ const createErr = (msg, statusCode)=>{
 // ADMIN PART 
 // ************************************************
 
-exports.getAdminBoard =async (req,res,next)=>{
+exports.getAdminBoard = async (req,res,next)=>{
     try{
         const courses = await Course.find();
         const events = await Events.find();
         const onCourses = await OnCourse.find().populate('teacher');
+        const link = await AdminData.findById('5c6c0f9cc49b3956383be1ce');
 
         res.render('admin/adminBoard',{
             title: 'admin board',
             path: '/',
             courses,
             events,
-            onCourses
+            onCourses,
+            link
         })
+
+    } catch (err) {
+        next(err)
+    }
+    
+}
+
+// exports.postEditLink = async (req,res,next)=>{
+//     try{
+//         const courseLink = req.body.courseLink;
+//         const eventLink = req.body.eventLink;
+
+//         const adminData = new AdminData({
+//             courseLink,
+//             eventLink,
+//         })
+
+//         await adminData.save()
+//         res.redirect('/admin')
+
+//     } catch (err) {
+//         next(err)
+//     }
+    
+// }
+
+exports.postEditLink = async (req,res,next)=>{
+    try{
+        const courseLink = req.body.courseLink;
+        const eventLink = req.body.eventLink;
+
+        const link = await AdminData.findById('5c6c0f9cc49b3956383be1ce');
+
+        link.courseLink = courseLink;
+        link.eventLink = eventLink;
+
+        await link.save()
+        res.redirect('/admin')
 
     } catch (err) {
         next(err)
@@ -43,10 +84,13 @@ exports.getAdminBoard =async (req,res,next)=>{
 exports.getCreateCourse =async (req, res, next)=>{
     try{
         const teachers = await Teacher.find({role: 'teacher'}).select('name');
+        const assistants = await Teacher.find({role: 'assistant'}).select('name');
+        // console.log(assistants);
         res.render('admin/createCourse',{
             title: 'Create course',
             path:'/admin/course',
             teachers,
+            assistants,
             error: false,
             editMode: false,
         })
@@ -65,6 +109,8 @@ exports.postCreateCourse = async (req,res,next)=>{
     const requirements = req.body.requirements;
     const courseGoals = req.body.courseGoals;
     const teacherName = req.body.teacherName;
+    const assistName = req.body.assistName; 
+
     let courseImgPath;
     // refactor code 
     const renderCreateCourse = (res, error)=>{
@@ -90,10 +136,23 @@ exports.postCreateCourse = async (req,res,next)=>{
 
         const requirementsArr = requirements.split(';;');
         const courseGoalsArr = courseGoals.split(';;');
+        let teacherId, assistId;
+        
+        if(teacherName === 'none'){
+            teacherId = undefined;
+        } else {
+            teacher = await Teacher.findOne({name: teacherName});
+            teacherId = teacher._id;
+        }
 
-        const teacher = await Teacher.findOne({name: teacherName});
-        const teacherId = mongoose.Types.ObjectId(teacher._id);        
+        if(assistName === 'none'){
+            assistId = undefined;
+        } else {
+            assistant = await Teacher.findOne({name: assistName});
+            assistId = assistant._id;
+        }
 
+        console.log(teacherId, assistId);
         const course = new Course({
             title,
             shortDes,
@@ -104,6 +163,7 @@ exports.postCreateCourse = async (req,res,next)=>{
             requirements: requirementsArr,
             courseGoals: courseGoalsArr,
             teacher: teacherId,
+            assistant: assistId,
             courseImg: courseImgPath,
             blobName: req.file.blob,
         })
@@ -136,11 +196,14 @@ exports.getEditCourse = async (req,res,next)=>{
     const courseId = req.query.courseId;
     try{
         const teachers = await Teacher.find({role: 'teacher'});
-        const course = await Course.findById(courseId).populate('teacher');
+        const assistants = await Teacher.find({role: 'assistant'});
+        const course = await Course.findById(courseId).populate('teacher assistant');
+        // console.log(course);
         res.render('admin/createCourse',{
             title: 'Create course',
             path:'/admin/course',
             course,
+            assistants,
             error: false,
             editMode: true,
             teachers,
@@ -165,12 +228,26 @@ exports.postEditCourse =async (req,res,next)=>{
         const requirements = req.body.requirements;
         const courseGoals = req.body.courseGoals;
         const teacherName = req.body.teacherName;
+        const assistName = req.body.assistName;
         const videoUrl = req.body.videoUrl;
 
         const course = await Course.findById(courseId);
-        const teacher = await Teacher.findOne({name: teacherName}).select('name');
 
-        const teacherId = mongoose.Types.ObjectId(teacher._id);
+        let assistId, teacherId;
+
+        if(teacherName === 'none' || teacherName === undefined){
+            teacherId = undefined;
+        } else {
+            teacher = await Teacher.findOne({name: teacherName});
+            teacherId = teacher._id;
+        }
+
+        if(assistName === 'none' || assistName === undefined){
+            assistId = undefined;
+        } else {
+            assistant = await Teacher.findOne({name: assistName});
+            assistId = assistant._id;
+        }
 
         if(req.file){
             if(course.courseImg !== 'public/courseImgs/default.jpg'){
@@ -190,6 +267,7 @@ exports.postEditCourse =async (req,res,next)=>{
         course.courseGoals = courseGoals.split(';;');
         course.videoUrl = videoUrl;
         course.teacher = teacherId;
+        course.assistant = assistId;
 
         await course.save();
         res.redirect('/admin');
@@ -352,7 +430,6 @@ exports.postIncomingEvent =async (req,res,next)=>{
         const eventName = req.body.eventName;
         const dateHappen = req.body.dateHappen;
         const desc = req.body.desc;
-
         await IncomingEvent.deleteMany();
 
         const descArr= desc.split(';;');
@@ -547,11 +624,15 @@ exports.getSearchPage =async (req,res,next)=>{
 
 exports.getCreateOnlineCourse =async (req,res,next)=>{
     try{ 
-        const teachers = await Teacher.find({role: 'teacher'});
+        let allTeachers = [];
+        const teachers = await Teacher.find({role: 'teacher'}).select('name');
+        const assistants = await Teacher.find({role: 'assistant'}).select('name');
+
+        allTeachers = [...teachers, ...assistants],
         res.render('admin/createOnlineCourse',{
             title: 'Online course',
             path: '/admin/online-course',
-            teachers,
+            teachers: allTeachers,
             editMode: false,
         })
     } catch (err) {
@@ -576,11 +657,10 @@ exports.postCreateOnlineCourse = async (req,res,next)=>{
         }
 
         const teacher = await Teacher.findOne({name: teacherName});
-        const teacherObjectId = mongoose.Types.ObjectId(teacher._id);
 
         const onCourse = new OnCourse({
             title,
-            teacher: teacherObjectId,
+            teacher: teacher._id,
             imageUrl: req.file.url,
             blobName: req.file.blob,
             documentLink
@@ -596,14 +676,18 @@ exports.postCreateOnlineCourse = async (req,res,next)=>{
 
 exports.getEditOnlineCourse =async (req,res,next)=>{
     try{ 
-        const teachers = await Teacher.find({role: 'teacher'});
+        let allTeachers = [];
+        const teachers = await Teacher.find({role: 'teacher'}).select('name');
+        const assistants = await Teacher.find({role: 'assistant'}).select('name');
+
+        allTeachers = [...teachers, ...assistants];
         const onCourse = await OnCourse.findById(req.query.onCourseId).populate('teacher');
         res.render('admin/createOnlineCourse',{
             title: 'Online course',
             path: '/admin/online-course',
             editMode: true,
             onCourse,
-            teachers
+            teachers: allTeachers,
         })
     } catch (err) {
         next(err)

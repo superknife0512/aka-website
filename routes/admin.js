@@ -38,6 +38,7 @@ const uploadOnCourseImg = multer({storage: courseImgStore, fileFilter: fileFilte
 const adminController = require('../controllers/adminCtrl');
 
 router.get('/', protectAuth, protectForAdmin, adminController.getAdminBoard);
+router.post('/link', protectAuth, protectForAdmin, adminController.postEditLink);
 
 router.post('/delete', protectAuth, protectForAdmin, adminController.postDeleteTeacher);
 

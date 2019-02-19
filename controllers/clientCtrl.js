@@ -128,7 +128,7 @@ exports.getHomePage =async (req,res,next)=>{
             },
         ]
         
-        const courses = await Course.find().populate('teacher').limit(6);
+        const courses = await Course.find().limit(6).sort('createdAt').populate('teacher assistant');
         console.log(courses);
         const events = await Events.find().limit(6).sort('-createdAt');
 
@@ -171,7 +171,7 @@ exports.getHomePage =async (req,res,next)=>{
 
 exports.getCoursesPage = async (req,res,next)=>{
     try{
-        const courses = await Course.find().populate('teacher');
+        const courses = await Course.find().populate('teacher assistant');
        
         const courseEng = [];
         const courseChi = [];
@@ -253,7 +253,7 @@ exports.getCourseDetail =async (req,res,next)=>{
     try{
        
         
-        const course = await Course.findById(req.params.courseId).populate('teacher');
+        const course = await Course.findById(req.params.courseId).populate('teacher assistant');
         res.render('course-detail',{
             path:'/course-page',
             title: course.title,
@@ -387,10 +387,17 @@ exports.getAlbumPage = async (req,res,next)=>{
 
 exports.getEventPage = async (req,res,next)=>{
     try{
-        
+        const page = req.query.page || 1;
+        const PER_PAGE = 6;
         
         const events = await Events.find().limit(3).sort('-createdAt');
-        const remainingEvent = await Events.find().skip(3).limit(6).sort('-createdAt');
+        const numDocs = await Events.find().skip(3).countDocuments();
+
+        const remainingEvent = await Events.find()
+                                        .sort('-createdAt')
+                                        .skip((page-1)*PER_PAGE+3)
+                                        .limit(PER_PAGE);
+
         const eventsDate = events.map(event=>{
             return event.createdAt.toISOString().split('T')[0].split('-').reverse().join('-');
         })
@@ -404,7 +411,9 @@ exports.getEventPage = async (req,res,next)=>{
             events,
             eventsDate,
             remainingEvent,
-            incomingEvent
+            incomingEvent,
+            numDocs: Math.ceil(numDocs/PER_PAGE),
+            curPage: page,
         })
 
     } catch (err) {

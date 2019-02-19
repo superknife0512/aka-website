@@ -65,6 +65,28 @@
                             </div>
                         <% }) %>
                 </div>
+
+                <nav aria-label="Page navigation example" class=" pagination__body">
+                    <ul class="pagination">
+                        <li class="page-item">
+                            <a class="page-link" href="/event-page?page=<%= 1 %>" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        
+                    <% for(let i=0; i < numDocs; i++) { %>
+                        <li class="page-item <%= curPage == (i+1) ? 'active' : '' %>">
+                            <a class="page-link" 
+                                href="/event-page?page=<%= i+1 %>"><%= i+1 %></a>
+                        </li>
+                    <% } %>
+
+                        <a class="page-link" href="/event-page?page=<%= numDocs %>" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                        </li>
+                    </ul>
+                </nav>
             </div>
             <hr>
             <div class="incEvent">

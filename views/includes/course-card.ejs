@@ -3,9 +3,16 @@
             -<%= saleOff[i] %>%
         </span>
         <a href="#">
-            <img src="<%= course.teacher.avatar %>" 
-                alt="teacher" 
-                class="course-section__avatar">
+            <% if(course.teacher) { %>
+                <img src="<%= course.teacher.avatar %>" 
+                    alt="teacher" 
+                    class="course-section__avatar">
+            <% } else { %>
+                <img src="<%= course.assistant.avatar %>" 
+                    alt="teacher" 
+                    class="course-section__avatar">
+            <% } %>
+           
         </a>
         <div class="course-section__card--1">
             <img src="<%= course.courseImg %>" 

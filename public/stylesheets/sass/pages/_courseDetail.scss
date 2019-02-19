@@ -246,6 +246,9 @@
     &__body{
         display: flex;
         align-items: center;
+        &:not(:last-child){
+            margin-bottom: 5rem;
+        } 
         @media only screen and (max-width: 1060px){
             flex-direction: column;
         }
@@ -256,8 +259,8 @@
         flex: 3;
     }
     &__img{
-        height: 27rem;
-        width: 27rem;
+        height: 24rem;
+        width: 24rem;
         object-fit: cover;
         border-radius: 50%;
         margin-right: 4rem;
@@ -268,7 +271,7 @@
         }
     }
     &__name{
-        font-size: 3.4rem;
+        font-size: 3.1rem;
         color: $color-primary;
         margin-bottom: 1rem;
         text-transform: uppercase;

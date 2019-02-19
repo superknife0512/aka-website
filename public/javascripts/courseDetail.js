@@ -30,13 +30,17 @@ function displayTesti(){
 
 displayTesti();
 
-$('.arrows-right').click(function(){
+function forward(){
     if(testiOrder +1 > allTestis.length){
         testiOrder = 1
     } else {
         testiOrder +=1
     }
     displayTesti();
+}
+
+$('.arrows-right').click(function(){
+    forward()
 })
 
 $('.arrows-left').click(function(){
@@ -47,3 +51,7 @@ $('.arrows-left').click(function(){
     }
     displayTesti();
 })        
+
+setInterval(()=>{
+    forward()
+}, 4000)

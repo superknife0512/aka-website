@@ -21,7 +21,16 @@
                             <svg>
                                 <use xlink:href="images/course-detail.svg#icon-lamp"></use>
                             </svg>
-                            Giảng viên với nhiều năm kinh nghiệm giảng dạy
+                            <% if(teacher.name.match(/Mỹ Huyền/gi)) { %>
+                                <a href="https://www.facebook.com/myhuyen68"
+                                    target="blank">Xem Facebook của giảng viên</a>
+                            <% } else { %>
+                                <% if(teacher.role === 'assistant') { %>
+                                    Trợ giảng có kinh nghiệm trong việc giảng dạy
+                                <% } else { %>
+                                    Giảng viên với nhiều năm kinh nghiệm giảng dạy
+                                <% } %>
+                            <% } %>
                         </h3>
                         <p class="instructor__story">
                             <strong>Một chút về tiểu sử của <%= teacher.name %></strong>: <%= teacher.story %>

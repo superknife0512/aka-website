@@ -7,52 +7,52 @@
      <% if(editMode) { %>
         <div class="info-popup__wrapper">
            <div class="info-popup">
-                       <h1 class="info-popup__heading">Add student testimonial</h1>
-                       <p class="info-popup__content">we should display maximum 3 student testimonials.</p>
-                       <form action="/admin/course/add-testimonial" 
-                               method="POST"
-                               class="testimonial__form">
-                           <div class="form-group">
-                               <input type="text" 
-                                       placeholder="Enter student facebook's link" 
-                                       class="form-control"
-                                       name="facebookLink">
-                           </div>
-   
-                           <div class="form-group">
-                               <input type="text" 
-                                       placeholder="Enter student 's name" 
-                                       class="form-control"
-                                       name="name">
-                           </div>
-   
-                           <div class="form-group">
-                               <textarea type="text" 
-                                       placeholder="Enter student description" 
-                                       class="form-control"
-                                       name="desc"
-                                       rows="4"></textarea>
-                           </div>
-                           <i class="fas fa-times popup__icon" id="popup__icon"></i>
-                           <input type="hidden" name="courseId" value="<%= course._id %>">
-                           <button type="submit" class="btn btn-success">Add testimonial</button>
-                       </form>
-                       <hr>
-                       <div class="quote__wrapper">
-                           <% course.testimonials.forEach(testi=>{ %>
-                           <blockquote class="quote__card">
-                               <p class="quote__card-content">
-                                   "<%=  testi.desc.split(' ').slice(0,15).join(' ') %>..."
-                               </p>
-                               <a href="<%= testi.facebookLink %>" 
-                                   class="quote__card-link"
-                                   target="blank">-<%= testi.name %>-</a>
-                                <i class="fas fa-times popup__icon deleteTesti"></i>
-                                 <input type="hidden" name="courseId" value="<%= course._id %>">
-                                <input type="hidden" class="testiId" name="testiId" value="<%= testi._id %>">
-                           </blockquote>
-                           <% }) %>
-                    </div>
+                    <h1 class="info-popup__heading">Add student testimonial</h1>
+                    <p class="info-popup__content">we should display maximum 3 student testimonials.</p>
+                    <form action="/admin/course/add-testimonial" 
+                            method="POST"
+                            class="testimonial__form">
+                        <div class="form-group">
+                            <input type="text" 
+                                    placeholder="Enter student facebook's link" 
+                                    class="form-control"
+                                    name="facebookLink">
+                        </div>
+
+                        <div class="form-group">
+                            <input type="text" 
+                                    placeholder="Enter student 's name" 
+                                    class="form-control"
+                                    name="name">
+                        </div>
+
+                        <div class="form-group">
+                            <textarea type="text" 
+                                    placeholder="Enter student description" 
+                                    class="form-control"
+                                    name="desc"
+                                    rows="4"></textarea>
+                        </div>
+                        <i class="fas fa-times popup__icon" id="popup__icon"></i>
+                        <input type="hidden" name="courseId" value="<%= course._id %>">
+                        <button type="submit" class="btn btn-success">Add testimonial</button>
+                    </form>
+                    <hr>
+                    <div class="quote__wrapper">
+                        <% course.testimonials.forEach(testi=>{ %>
+                        <blockquote class="quote__card">
+                            <p class="quote__card-content">
+                                "<%=  testi.desc.split(' ').slice(0,15).join(' ') %>..."
+                            </p>
+                            <a href="<%= testi.facebookLink %>" 
+                                class="quote__card-link"
+                                target="blank">-<%= testi.name %>-</a>
+                            <i class="fas fa-times popup__icon deleteTesti"></i>
+                                <input type="hidden" name="courseId" value="<%= course._id %>">
+                            <input type="hidden" class="testiId" name="testiId" value="<%= testi._id %>">
+                        </blockquote>
+                        <% }) %>
+                </div>
            </div>
        </div>
        <!-- popup section -->
@@ -173,18 +173,31 @@
                             value="<%= editMode? course.price : '' %>">
                     </div>                        
                 </div>
-
-                <div class="form-group">
-                    <label for="title">Who teach this course</label>
-                    <select name="teacherName" class="form-control">
-
-                        <% teachers.forEach(teacher=>{ %>
-                            <option value="<%= teacher.name %>" <%= editMode && course.teacher.name === teacher.name ? 'selected' : ''  %> ><%= teacher.name %></option>
-                        <% }) %>
-
-                    </select>
-                    <small class="form-text text-muted">Chọn tên giáo viên dạy khóa học này</small>
-                </div>
+                <% if(editMode && course.teacher) {%>
+                    <div class="form-group">
+                        <label for="title">Who teach this course</label>
+                        <select name="teacherName" class="form-control">
+                                <option value="none">none</option>
+                            <% teachers.forEach(teacher=>{ %>
+                                <option value="<%= teacher.name %>" <%= editMode && course.teacher.name === teacher.name ? 'selected' : ''  %> ><%= teacher.name %></option>
+                            <% }) %>
+                        </select>
+                        <small class="form-text text-muted">Chọn tên giáo viên dạy khóa học này</small>
+                    </div>
+                <% } %>
+                <% if(editMode && course.assistant) {  %>
+                    <div class="form-group">
+                        <label for="title">Assistants</label>
+                        <select name="assistName" class="form-control">
+                                <option value="none">none</option>
+                            <% assistants.forEach(teacher=>{ %>
+                                <option value="<%= teacher.name %>" <%= editMode && course.assistant.name === teacher.name ? 'selected' : ''  %> ><%= teacher.name %></option>
+                            <% }) %>
+                        </select>
+                        <small class="form-text text-muted">Chọn trợ giảng cho khóa học</small>
+                    </div>
+                <% } %>
+                
 
                 <% if(editMode) { %>
                     <input type="hidden" name="courseId" value="<%= course._id %>">

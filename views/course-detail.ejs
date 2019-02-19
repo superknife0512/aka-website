@@ -95,28 +95,55 @@
 
             <section class="grid__fluid instructor">
                 <h2 class="overall__title">Ai sẽ đồng hành cùng bạn?</h2>
-                <div class="instructor__body inner-container">
-                    <img src="<%= course.teacher.avatar %>" 
-                        alt="teacher avatar" 
-                        class="instructor__img">
-                    <div class="instructor__info">
-                        <i class="instructor__name">
-                            Mr/Mrs. <%= course.teacher.name %>
-                        </i>
-                        <i class="instructor__specialty">
-                            Chuyên môn: <%= course.teacher.specialty %>
-                        </i>
-                        <h3 class="instructor__exp">
-                            <svg>
-                                <use xlink:href="images/course-detail.svg#icon-lamp"></use>
-                            </svg>
-                            <a href="/teacher-page/giảng-viên.<%= course.teacher._id %>">Tìm hiểu thêm về giảng viên này</a>
-                        </h3>
-                        <p class="instructor__story">
-                            <strong>Một chút về tiểu sử của <%= course.teacher.name %></strong>: <%= course.teacher.story %>
-                        </p>
+                <% if(course.teacher) { %>
+                    <div class="instructor__body inner-container">
+                        <img src="<%= course.teacher.avatar %>" 
+                            alt="teacher avatar" 
+                            class="instructor__img">
+                        <div class="instructor__info">
+                            <i class="instructor__name">
+                                 <%= course.teacher.name %>
+                            </i>
+                            <i class="instructor__specialty">
+                                Chuyên môn: <%= course.teacher.specialty %>
+                            </i>
+                            <h3 class="instructor__exp">
+                                <svg>
+                                    <use xlink:href="images/course-detail.svg#icon-lamp"></use>
+                                </svg>
+                                <a href="/teacher-page/giảng-viên.<%= course.teacher._id %>">Tìm hiểu thêm về giảng viên này</a>
+                            </h3>
+                            <p class="instructor__story">
+                                <strong>Một chút về tiểu sử của <%= course.teacher.name %></strong>: <%= course.teacher.story %>
+                            </p>
+                        </div>
                     </div>
-                </div>
+                <% } %>
+                <% if(course.assistant) { %>
+
+                    <div class="instructor__body inner-container">
+                        <img src="<%= course.assistant.avatar %>" 
+                            alt="teacher avatar" 
+                            class="instructor__img">
+                        <div class="instructor__info">
+                            <i class="instructor__name">
+                                 <%= course.assistant.name %>
+                            </i>
+                            <i class="instructor__specialty">
+                                Chuyên môn: <%= course.assistant.specialty %>
+                            </i>
+                            <h3 class="instructor__exp">
+                                <svg>
+                                    <use xlink:href="images/course-detail.svg#icon-lamp"></use>
+                                </svg>
+                                <a href="/teacher-page/giảng-viên.<%= course.assistant._id %>">Tìm hiểu thêm về giảng viên này</a>
+                            </h3>
+                            <p class="instructor__story">
+                                <strong>Một chút về tiểu sử của <%= course.assistant.name %></strong>: <%= course.assistant.story %>
+                            </p>
+                        </div>
+                    </div>
+                <% } %>
             </section>
 
             <section class="course-testi grid__container">

@@ -18,6 +18,30 @@
             </div>
         </div>
         <hr>
+        <form class="link-control signup__form" method="POST" action="/admin/link">
+            <div class="form-group">
+                <label for="link">Course register link</label>
+                <input type="text" 
+                        name="courseLink" 
+                        class="form-control"
+                        value="<%= link.courseLink %>">
+            </div>
+
+            <div class="form-group">
+                <label for="link">Event register link</label>
+                <input type="text" 
+                        name="eventLink" 
+                        class="form-control"
+                        value="<%= link.eventLink %>">
+                        
+            </div>
+
+
+                <button class="btn btn-primary" type="submit">
+                    Update 
+                </button>
+            </form>
+        
         <section class="course-info">
             <h2 class="medium-title">Courses information</h2>
             <div class="glider__body" >

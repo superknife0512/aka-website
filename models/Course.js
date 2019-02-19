@@ -50,6 +50,10 @@ const courseSchema =new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref:'Teacher',
     },
+    assistant:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref:'Teacher',
+    },
     videoUrl: String,
 
     blobName: String,
