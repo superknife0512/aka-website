@@ -67,6 +67,7 @@ router.post('/event/over', protectAuth, protectForAdmin, adminController.postEve
 
 //interact with teacher info
 router.get('/teachers-info', protectAuth, protectForAdmin, adminController.getTeachersInfo);
+router.post('/teacher-info/upgrade',protectAuth, protectForAdmin, adminController.postUpgrade );
 router.post('/teacher-info/edit', protectAuth, protectForAdmin, uploadImg, adminController.postTeacherEdit);
 router.get('/teacher-info/edit/:teacherId',protectAuth, protectForAdmin, adminController.getTeacherEdit );
 

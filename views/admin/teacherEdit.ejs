@@ -4,6 +4,13 @@
     <div class="container" id="teacher">
         <br>
         <h1 class="heading-title"> Edit <%= teacher.name %> information </h1>
+        <% if(teacher.role === 'assistant') { %>
+            <form action="/admin/teacher-info/upgrade" 
+                    method="POST">
+                <input type="hidden" name="teacherId" value="<%= teacher._id %>">
+                <button type="submit" class="btn btn-danger">Upgrade to teacher </button>
+            </form>
+        <% } %>
         <hr>
         <div class="create__form">
             <form class="signup__form create__form--width" 

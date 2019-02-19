@@ -492,6 +492,19 @@ exports.postDeleteTeacher = async (req,res,next)=>{
     }
 }
 
+exports.postUpgrade = async (req,res,next)=>{
+    try{
+        const teacherId = req.body.teacherId;
+        const teacher = await Teacher.findById(teacherId);
+        teacher.role = 'teacher';
+        await teacher.save();
+        res.redirect('/admin/teachers-info')
+
+    } catch (err) {
+        next(err)
+    }
+}
+
 // ************************************************
 // SERACH PART 
 // ************************************************
