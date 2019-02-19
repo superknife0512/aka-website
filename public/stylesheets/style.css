@@ -1332,7 +1332,8 @@ form {
   border-radius: 50%;
   border: .8rem solid #FFF;
   margin-right: 1rem;
-  transition: all .3s; }
+  transition: all .3s;
+  object-fit: cover; }
   .assistant__img:hover {
     border: 0.8rem solid #f5546e; }
 

@@ -27,6 +27,7 @@
         border: .8rem solid #FFF;
         margin-right: 1rem;
         transition: all .3s;
+        object-fit: cover;
         &:hover{
             border: .8rem solid $color-secondary;
         }
