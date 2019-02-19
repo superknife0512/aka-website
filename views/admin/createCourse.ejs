@@ -184,6 +184,17 @@
                         </select>
                         <small class="form-text text-muted">Chọn tên giáo viên dạy khóa học này</small>
                     </div>
+                <% } else { %>
+                    <div class="form-group">
+                        <label for="title">Who teach this course</label>
+                        <select name="teacherName" class="form-control">
+                                <option value="none">none</option>
+                            <% teachers.forEach(teacher=>{ %>
+                                <option value="<%= teacher.name %>" ><%= teacher.name %></option>
+                            <% }) %>
+                        </select>
+                        <small class="form-text text-muted">Chọn tên giáo viên dạy khóa học này</small>
+                    </div>
                 <% } %>
                 <% if(editMode && course.assistant) {  %>
                     <div class="form-group">
@@ -192,6 +203,17 @@
                                 <option value="none">none</option>
                             <% assistants.forEach(teacher=>{ %>
                                 <option value="<%= teacher.name %>" <%= editMode && course.assistant.name === teacher.name ? 'selected' : ''  %> ><%= teacher.name %></option>
+                            <% }) %>
+                        </select>
+                        <small class="form-text text-muted">Chọn trợ giảng cho khóa học</small>
+                    </div>
+                <% } else { %>
+                    <div class="form-group">
+                        <label for="title">Assistants</label>
+                        <select name="assistName" class="form-control">
+                                <option value="none">none</option>
+                            <% assistants.forEach(teacher=>{ %>
+                                <option value="<%= teacher.name %>" ><%= teacher.name %></option>
                             <% }) %>
                         </select>
                         <small class="form-text text-muted">Chọn trợ giảng cho khóa học</small>

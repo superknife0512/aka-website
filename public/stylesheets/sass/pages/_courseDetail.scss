@@ -113,11 +113,11 @@
         display: flex;
         @media only screen and (max-width: 1060px){
             flex-direction: column;
-            align-items: center;
+            align-items: flex-start;
         }        
     }
     &__left{
-        flex: 6;
+        flex: 3;
         @media only screen and (max-width: 1060px){
             margin-bottom: 6rem;
         }
@@ -145,7 +145,7 @@
             font-size: 1.95rem;
             font-family: $font-title;
             font-weight: 500;
-            flex: 8;
+            flex: 4;
         }
     }
 
@@ -251,6 +251,7 @@
         } 
         @media only screen and (max-width: 1060px){
             flex-direction: column;
+            margin-bottom: 2rem !important;
         }
     }
     &__info{

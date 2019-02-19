@@ -331,8 +331,10 @@
         justify-content: flex-start;
 
         @media only screen and (max-width: 750px){
+            max-height: none;
             height: auto;
             flex-wrap: nowrap;
+            margin-top: 0;
         }
     }
     &__archive{

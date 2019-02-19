@@ -1581,8 +1581,10 @@ form {
   justify-content: flex-start; }
   @media only screen and (max-width: 750px) {
     .instructor__archivements {
+      max-height: none;
       height: auto;
-      flex-wrap: nowrap; } }
+      flex-wrap: nowrap;
+      margin-top: 0; } }
 
 .instructor__archive {
   display: flex;
@@ -1691,9 +1693,9 @@ form {
     @media only screen and (max-width: 1060px) {
       .require__body {
         flex-direction: column;
-        align-items: center; } }
+        align-items: flex-start; } }
   .require__left {
-    flex: 6; }
+    flex: 3; }
     @media only screen and (max-width: 1060px) {
       .require__left {
         margin-bottom: 6rem; } }
@@ -1714,7 +1716,7 @@ form {
       font-size: 1.95rem;
       font-family: "Faustina", serif;
       font-weight: 500;
-      flex: 8; }
+      flex: 4; }
   .require__register {
     position: relative;
     padding: 6rem 6rem;
@@ -1794,7 +1796,8 @@ form {
       margin-bottom: 5rem; }
     @media only screen and (max-width: 1060px) {
       .instructor__body {
-        flex-direction: column; } }
+        flex-direction: column;
+        margin-bottom: 2rem !important; } }
   .instructor__info {
     display: flex;
     flex-direction: column;
