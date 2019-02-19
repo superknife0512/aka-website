@@ -13,6 +13,22 @@
                 </div>
                 <div class="course-page__body">
                     <h2 class="heading heading--5">
+                        Các khóa học tiếng trung
+                    </h2>
+                    <% if(courseChi[0]) { %>
+                            <div class="course-page__display">
+                            <% courseChi.forEach((course,i)=>{ %>
+                                <%- include('./includes/course-card.ejs', {course, i, saleOff: discountChi, titleSEOs: titleSEOChi}) %>
+                            <% }) %>
+                        </div>
+                    <% } else { %>
+                        <h3>Hiện chúng tôi chưa có khóa học vào về tiếng Trung!</h3>
+                    <% } %>
+                    
+                </div>
+                <hr>
+                <div class="course-page__body">
+                    <h2 class="heading heading--5">
                         Các khóa học tiếng Anh
                     </h2>
                     <% if(courseEng[0]) { %>
@@ -26,22 +42,6 @@
                     <% } else { %>
                         <h3>Hiện chúng tôi chưa có khóa học vào về tiếng Anh!</h3>
                     <% } %>
-                </div>
-                <hr>
-                <div class="course-page__body">
-                    <h2 class="heading heading--5">
-                        Các khóa học tiếng trung
-                    </h2>
-                    <% if(courseChi[0]) { %>
-                         <div class="course-page__display">
-                            <% courseChi.forEach((course,i)=>{ %>
-                                <%- include('./includes/course-card.ejs', {course, i, saleOff: discountChi, titleSEOs: titleSEOChi}) %>
-                            <% }) %>
-                        </div>
-                    <% } else { %>
-                        <h3>Hiện chúng tôi chưa có khóa học vào về tiếng Trung!</h3>
-                    <% } %>
-                   
                 </div>
                 <hr>
                 <div class="course-page__body">

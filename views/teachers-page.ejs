@@ -1,7 +1,7 @@
 <%- include('./includes/html-head.ejs') %>
     <%- include('./includes/client-header.ejs') %>
     <div class="grid">
-        <div class="grid__container teachers__body">
+        <div class="teachers__body">
 
             <div class="teachers__heading">
                 <h1 class="teachers__title">Những giảng viên của chúng tôi</h1>
@@ -24,6 +24,24 @@
                     </div>
                 <% }) %>
             </div>
+        </div>
+        <div class="assistant__body">
+            <h2 class="assistant__title">Đội ngũ trợ giảng</h2>
+            <div class="assistant__team">
+                <% assistants.forEach(assist=>{ %>
+                    <div class="assistant__person">
+                        <a href="/teacher-page/ho-tro.<%= assist._id %>">
+                            <img src="<%= assist.avatar %>" alt="Assistant" class="assistant__img">
+                        </a>
+                        <div class="assistant__info">
+                            <a href="/teacher-page/ho-tro.<%= assist._id %>" class="assistant__name"><%= assist.name %></a>
+                            <p class="assistant__desc"><%= assist.story.split(' ').slice(0,10).join(' ') %>...</p>
+                        </div>
+                    </div>
+                <% }) %>
+
+            </div>
+
         </div>
     </div>
     <%- include('./includes/client-footer.ejs') %>

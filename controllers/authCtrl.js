@@ -51,7 +51,7 @@ exports.postLogin = async (req,res,next)=>{
 
             if(teacher.role === 'admin'){
                 res.redirect('/admin')
-            } else if (teacher.role === 'teacher'){
+            } else if (teacher.role === 'teacher' || teacher.role === 'assistant'){
                 res.redirect('/teacher')
             }
 
@@ -65,6 +65,8 @@ exports.getSignup = (req,res,next)=>{
         title: 'Signup'
     })
 }
+
+//API service 
 
 exports.emailCheck= async (req,res,next) => {
     const email = req.body.email;
@@ -106,6 +108,7 @@ exports.postSignup =async (req,res,next)=>{
         //check role code 
         const teacherRole = await bcrypt.compare('teacher', roleCode);
         const adminRole = await bcrypt.compare('admin', roleCode);
+        const assistRole = await bcrypt.compare('assistant', roleCode);
 
         //check duplicate code 
         const dupCode = await Teacher.findOne({roleCode: roleCode});
@@ -117,7 +120,10 @@ exports.postSignup =async (req,res,next)=>{
             role = 'teacher';
         } else if(adminRole){
             role = 'admin';
-        } else {
+        } else if(assistRole){
+            role = 'assistant'
+        }
+        else {
             return createErr('Your code is invalid, please try another!')
         }
         
@@ -198,6 +204,7 @@ exports.codeCheck =async (req,res,next)=>{
         // check role of the code
         const teacher =await bcrypt.compare('teacher', code);
         const admin = await bcrypt.compare('admin', code);
+        const assistant = await bcrypt.compare('assistant', code);
 
         if(teacher){
             return res.json({
@@ -206,6 +213,10 @@ exports.codeCheck =async (req,res,next)=>{
         } else if (admin){
             return res.json({
                 msg: 'This is admin code'
+            })
+        } else if (assistant) {
+            return res.json({
+                msg: 'This is assistant code'
             })
         } else {
             return res.json({

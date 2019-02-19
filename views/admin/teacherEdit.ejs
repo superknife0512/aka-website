@@ -12,7 +12,7 @@
                     enctype="multipart/form-data">
 
                 <div class="form-group">
-                    <label for="eventName">Teacher's name</label>
+                    <label for="eventName"><%= teacher.role === 'teacher'  ? 'Teacher' : 'Assistant' %>'s name</label>
                     <input type="text" 
                             class="form-control" 
                             name="name"
@@ -20,7 +20,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="eventName">Teacher's specialty</label>
+                    <label for="eventName"><%= teacher.role === 'teacher'  ? 'Teacher' : 'Assistant' %>'s specialty</label>
                     <input type="text" 
                             class="form-control" 
                             name="specialty"
@@ -28,25 +28,25 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="eventName">Teacher's story</label>
+                    <label for="eventName"><%= teacher.role === 'teacher'  ? 'Teacher' : 'Assistant' %>'s story</label>
                     <textarea name="story" rows="5" class="form-control"><%= teacher.story %></textarea>
                 </div>
 
                 <div class="form-group">
-                    <label for="eventName">Teacher's archivements</label>
+                    <label for="eventName"><%= teacher.role === 'teacher'  ? 'Teacher' : 'Assistant' %>'s archivements</label>
                     <textarea name="archivements" rows="5" class="form-control"><%= teacher.archivements.join(';;') %></textarea>
                     <small>Mỗi link phân cách bởi dấu ';;' - không nhiều hơn 2 đường link</small>
                 </div>
 
                 <div class="form-group">
-                    <label for="eventName">Teacher's videos link (from facebook)</label>
+                    <label for="eventName"><%= teacher.role === 'teacher'  ? 'Teacher' : 'Assistant' %>'s videos link (from facebook)</label>
                     <textarea name="videoLinks" rows="4" class="form-control"><%= teacher.teacherVideo.join(';;') %></textarea>
                     
                     <small>Mỗi link phân cách bởi dấu ';;' - không nhiều hơn 2 đường link</small>
                 </div>
 
                 <div class="form-group">
-                    <label for="eventName">Teacher's avatar</label>
+                    <label for="eventName"><%= teacher.role === 'teacher'  ? 'Teacher' : 'Assistant' %>'s avatar</label>
                     <input type="file" 
                             class="form-control file-style" 
                             name="avatar">

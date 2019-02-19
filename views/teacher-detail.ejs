@@ -3,7 +3,7 @@
 
         <div class="grid">
             <div class="grid__container teacher-page">
-                <h1 class="teachers__title">Thông tin giảng viên</h1>
+                <h1 class="teachers__title">Thông tin <%= teacher.role === 'teacher' ? 'giảng viên' : 'Trợ giảng' %></h1>
                 <br>
 
                 <section class="instructor__body inner-container">
@@ -44,12 +44,14 @@
                         <button id="btn-video" class="teacher-page__btn">
                             Video tiêu biểu
                         </button>
-                        <button id="btn-album" class="teacher-page__btn">
-                            Album khóa học
-                        </button>                        
-                        <button id="btn-schedule" class="teacher-page__btn">
-                            Thời khóa biểu
-                        </button>
+                        <% if(teacher.role === 'teacher') { %>
+                            <button id="btn-album" class="teacher-page__btn">
+                                Album khóa học
+                            </button>                        
+                            <button id="btn-schedule" class="teacher-page__btn">
+                                Thời khóa biểu
+                            </button>
+                        <% } %>
                     </div>
 
                     <div class="teacher-page__detail">

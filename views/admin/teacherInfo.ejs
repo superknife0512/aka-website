@@ -3,8 +3,9 @@
 
     <div class="container" id="teacher">
         <br>
-        <h1 class="heading-title"> Teachers Info </h1>
+        <h1 class="heading-title"> Teachers/Assistants Info </h1>
         <hr>
+        <h2 class="medium-title mb-6">Teacher</h2><br>
         <div class="teacher-info">
             <% teachers.forEach(teacher=>{ %>
             <div class="teacher-info__card">
@@ -37,8 +38,43 @@
             </div>
             <% }) %>
         </div>
+        <br><br><br>
+        <h2 class="medium-title mb-6">Assistant</h2><br>
+        <div class="teacher-info">
+            <% assistants.forEach(assist=>{ %>
+            <div class="teacher-info__card">
+                <a href="/admin/teacher-info/edit/<%= assist._id %>" class="wrap-link"  
+                    data-toggle="tooltip"
+                        data-placement="top" 
+                        data-html="true"
+                        title="<p>Click to edit this teacher info</p>">
+                    <img src="<%= assist.avatar %>" 
+                        alt="teacher.name"
+                        class="teacher-info__avatar">
+                    <h3 class="teacher-info__name"><%= assist.name %></h3>
+                    <p class="teacher-info__story"><%= assist.story.split(' ').slice(0,15).join(' ') %>...</p>
+                </a>
+                <i class="fas fa-times teacher-info__icon"></i>
+                <!-- popuo display here -->
+                <div class="info-popup__wrapper">
+                    <div class="info-popup">
+                            <h1 class="info-popup__heading">Are your sure?</h1>
+                            <p class="info-popup__content">Click delete if you want to delete <%= assist.name %> forever!</p>
+                            <div class="d-flex justify-content-center btn-wrap">
+                                <form action="/admin/delete/" method="POST" class="mr-4">
+                                    <input type="hidden" name="teacherId" value="<%= assist._id %>">
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                </form>
+                                <button class="btn btn-info btn__cancel" >Cancel</button>
+                            </div>
+                    </div>
+                </div>
+            </div>
+            <% }) %>
+
        
     </div><br><br><br>
+    </div>
 
     <script>
         $(document).ready(function(){

@@ -403,10 +403,12 @@ exports.postEventOver =async (req,res,next)=>{
 exports.getTeachersInfo =async (req, res, next)=>{
     try{
         const teachers = await Teacher.find({role: 'teacher'});
+        const assistants = await Teacher.find({role: 'assistant'});
         res.render('admin/teacherInfo', {
             title: ' Teacher Info ',
             path: '/admin/teachers-info',
             teachers,
+            assistants,
         })
 
     } catch (err) {

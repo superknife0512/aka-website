@@ -1,6 +1,6 @@
 
 exports.protectForTeacher = (req,res,next)=>{
-    if(req.session.teacher.role !== 'teacher'){
+    if(req.session.teacher.role !== 'teacher' && req.session.teacher.role !== 'assistant'){
         res.redirect('/teacher/login')
     } else {
         next();

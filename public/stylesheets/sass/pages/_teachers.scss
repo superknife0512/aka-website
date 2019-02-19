@@ -1,7 +1,60 @@
+.assistant{
+    &__body{
+        grid-column: 7/9;
+        margin: 10rem 2rem;
+        box-shadow: -1px 0px 17px 0px rgba(0,0,0,0.2);
+        padding: 3rem;
+        width: 32rem;
+        height: 61.5rem;
+    }
+    &__title{
+        font-family: $font-title;
+        color: $color-primary;
+        text-transform: uppercase;
+        margin-bottom: 4rem;
+        font-size: 2.3rem;
+    }
+    &__team{
+        display: flex;
+        flex-direction: column;
+        transform: translateX(-8.5rem);
 
+    }
+    &__img{
+        height: 12rem;
+        width: 12rem;
+        border-radius: 50%;
+        border: .8rem solid #FFF;
+        margin-right: 1rem;
+        transition: all .3s;
+        &:hover{
+            border: .8rem solid $color-secondary;
+        }
+    }
+    &__person{
+        display: flex;
+        align-items: center;
+    }
+    &__info{
+
+    }
+    &__name{
+        &:link, &:visited{
+            text-transform: uppercase;
+            color: $color-secondary;
+            font-family: $font-title;
+            font-size: 1.7rem;
+        }
+    }
+    &__desc{
+        width: 22rem;
+    }
+
+}
 .teachers{
     &__body{
-        margin: 10rem 0;
+        margin: 10rem 2rem;
+        grid-column: 2/7;
     }
     &__heading{
         margin: 0 auto;
@@ -43,8 +96,8 @@
         position: relative;
     }
     &__avatar{
-        height: 21rem;
-        width: 21rem;
+        height: 19rem;
+        width: 19rem;
         object-fit: cover;
         border-radius: 50%;
         margin-bottom: 1.4rem;
@@ -53,7 +106,7 @@
     }
     &__name{
         &:link,&:visited{
-            font-size: 3.4rem;
+            font-size: 2.9rem;
             text-transform: capitalize;
             text-decoration: none;
             color: $color-primary;
@@ -64,6 +117,7 @@
     &__shortDes{
         color: #444;
         text-align: center;
+        width: 80%;
     }
     &__icon{
         height: 5rem;
@@ -259,7 +313,7 @@
         flex-direction: column;
         display: flex;
         flex-wrap: wrap;
-        height: 40rem;
+        max-height: 40rem;
         justify-content: flex-start;
 
         @media only screen and (max-width: 750px){

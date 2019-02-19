@@ -277,9 +277,11 @@ exports.getTeachersPage =async (req,res,next)=>{
         
         
         const teachers =await Teacher.find({role: 'teacher'});
+        const assistants =await Teacher.find({role: 'assistant'});
         const seoName = teachers.map(teacher=>{
             return teacher.name.replace(/[ .]/g, '-');
         })
+        
         res.render('teachers-page',{
             title: 'Giảng viên',
             path: '/teacher-page',
@@ -287,6 +289,7 @@ exports.getTeachersPage =async (req,res,next)=>{
             socials,
             seoName,
             teachers,
+            assistants
         })
 
     } catch (err) {
@@ -551,9 +554,9 @@ exports.postSearch = async (req,res,next)=>{
         
         courses.forEach(course=>{
             if(course.title.match(searchPattern)){
-                results.push(course)
+                results.unshift(course)
             } else if (course.teacher.name.match(searchPattern)){
-                results.push(course)
+                results.unshift(course)
             }
         })
         const offPrices = courses.map(course => {

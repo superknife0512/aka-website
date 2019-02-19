@@ -1306,8 +1306,52 @@ form {
   margin: 3rem 0;
   font-family: "Faustina", serif; }
 
+.assistant__body {
+  grid-column: 7/9;
+  margin: 10rem 2rem;
+  box-shadow: -1px 0px 17px 0px rgba(0, 0, 0, 0.2);
+  padding: 3rem;
+  width: 32rem;
+  height: 61.5rem; }
+
+.assistant__title {
+  font-family: "Faustina", serif;
+  color: #42b0ee;
+  text-transform: uppercase;
+  margin-bottom: 4rem;
+  font-size: 2.3rem; }
+
+.assistant__team {
+  display: flex;
+  flex-direction: column;
+  transform: translateX(-8.5rem); }
+
+.assistant__img {
+  height: 12rem;
+  width: 12rem;
+  border-radius: 50%;
+  border: .8rem solid #FFF;
+  margin-right: 1rem;
+  transition: all .3s; }
+  .assistant__img:hover {
+    border: 0.8rem solid #f5546e; }
+
+.assistant__person {
+  display: flex;
+  align-items: center; }
+
+.assistant__name:link, .assistant__name:visited {
+  text-transform: uppercase;
+  color: #f5546e;
+  font-family: "Faustina", serif;
+  font-size: 1.7rem; }
+
+.assistant__desc {
+  width: 22rem; }
+
 .teachers__body {
-  margin: 10rem 0; }
+  margin: 10rem 2rem;
+  grid-column: 2/7; }
 
 .teachers__heading {
   margin: 0 auto;
@@ -1346,8 +1390,8 @@ form {
   position: relative; }
 
 .teachers__avatar {
-  height: 21rem;
-  width: 21rem;
+  height: 19rem;
+  width: 19rem;
   object-fit: cover;
   border-radius: 50%;
   margin-bottom: 1.4rem;
@@ -1355,7 +1399,7 @@ form {
   overflow: hidden; }
 
 .teachers__name:link, .teachers__name:visited {
-  font-size: 3.4rem;
+  font-size: 2.9rem;
   text-transform: capitalize;
   text-decoration: none;
   color: #42b0ee;
@@ -1364,7 +1408,8 @@ form {
 
 .teachers__shortDes {
   color: #444;
-  text-align: center; }
+  text-align: center;
+  width: 80%; }
 
 .teachers__icon {
   height: 5rem;
@@ -1516,7 +1561,7 @@ form {
   flex-direction: column;
   display: flex;
   flex-wrap: wrap;
-  height: 40rem;
+  max-height: 40rem;
   justify-content: flex-start; }
   @media only screen and (max-width: 750px) {
     .instructor__archivements {
@@ -1734,7 +1779,8 @@ form {
         flex-direction: column; } }
   .instructor__info {
     display: flex;
-    flex-direction: column; }
+    flex-direction: column;
+    flex: 3; }
   .instructor__img {
     height: 27rem;
     width: 27rem;
