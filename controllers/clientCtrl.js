@@ -3,6 +3,7 @@ const Events = require('../models/Event');
 const Teacher = require('../models/Teacher');
 const Album = require('../models/Album');
 const OnlineCourse = require('../models/OnlineCourse');
+const AdminData = require('../models/AdminData')
 const incEvent = require('../models/IncomingEvent');
 const Message = require('../models/Message');
 const sgMail = require('@sendgrid/mail');
@@ -131,6 +132,7 @@ exports.getHomePage =async (req,res,next)=>{
         const courses = await Course.find().limit(6).sort('createdAt').populate('teacher assistant');
         console.log(courses);
         const events = await Events.find().limit(6).sort('-createdAt');
+        const adminData = await AdminData.find();
 
         const offPrices = courses.map(course => {
             const oldPrice = parseInt(course.oldPrice.split('.').join(''));
@@ -157,6 +159,7 @@ exports.getHomePage =async (req,res,next)=>{
             socials,
             titleSEOs,
             navData,
+            adminData
         })
 
     } catch (err) {
@@ -254,13 +257,15 @@ exports.getCourseDetail =async (req,res,next)=>{
        
         
         const course = await Course.findById(req.params.courseId).populate('teacher assistant');
+        const adminData = await AdminData.find();
         res.render('course-detail',{
             path:'/course-page',
             title: course.title,
             course,
             contacts,
             socials,            
-            courseDefaultVideo: process.env.COURSE_DEFAULT_VIDEO
+            courseDefaultVideo: process.env.COURSE_DEFAULT_VIDEO,
+            adminData
         })
 
     } catch (err) {
@@ -402,6 +407,7 @@ exports.getEventPage = async (req,res,next)=>{
             return event.createdAt.toISOString().split('T')[0].split('-').reverse().join('-');
         })
         const incomingEvent = await incEvent.findOne();
+        const adminData = await AdminData.find();
 
         res.render('event-page',{
             title: 'AK event - news',
@@ -414,6 +420,7 @@ exports.getEventPage = async (req,res,next)=>{
             incomingEvent,
             numDocs: Math.ceil(numDocs/PER_PAGE),
             curPage: page,
+            adminData,
         })
 
     } catch (err) {
