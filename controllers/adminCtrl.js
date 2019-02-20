@@ -401,7 +401,7 @@ exports.postEditEvent = async (req,res,next)=>{
 
         event.eventName = eventName;
         event.dateHappen = dateHappen;
-        event.desc = desc;
+        event.desc = desc.split(';;');
 
         await event.save();
         res.redirect('/admin')
