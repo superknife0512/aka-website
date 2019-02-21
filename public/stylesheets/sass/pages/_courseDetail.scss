@@ -120,6 +120,7 @@
         flex: 3;
         @media only screen and (max-width: 1060px){
             margin-bottom: 6rem;
+            flex: 5;
         }
     }
     &__right{
@@ -152,9 +153,15 @@
     &__register{
         position: relative;
         padding: 6rem 6rem;
-        box-shadow: -4px 1px 51px -4px rgba(0,0,0,0.52);
+        box-shadow: -4px 1px 51px -4px rgba(0, 0, 0, 0.52);
         border-radius: .5rem;
         padding-bottom: 8rem;
+        width: 69%;
+        margin-left: auto;
+        @media (max-width:1000px){
+            width: 100%;
+            margin-left: 0;
+        }
         h2{
             font-size: 2.3rem;
             text-transform: uppercase;

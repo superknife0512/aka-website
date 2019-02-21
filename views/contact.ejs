@@ -42,7 +42,7 @@
                     <use xlink:href="images/contact-icon.svg#icon-home2"></use>
                 </svg>
                 <h4 class="contact__info-more">
-                    Địa chỉ 24 Thái Thị Bôi, q, Thanh Khê, tp. Đà Nẵng, ngay tại Trung tâm thành phố Đà Nẵng
+                        222 Ngũ Hành Sơn - Tp. Đà Nẵng ( Đối Diện ĐHKT Đà Nẵng )
                 </h4>
             </div>
             <div class="contact__info-detail">
@@ -58,7 +58,7 @@
                     <use xlink:href="images/contact-icon.svg#icon-phone"></use>
                 </svg>
                 <h4 class="contact__info-more">
-                    078 275 9831
+                    0905.674.528 - 0868.126.734
                 </h4>
             </div>
             <div class="contact__social">      
@@ -77,7 +77,25 @@
                 </svg>
             </div>
         </div>
+
+        <div class="grid__fluid">
+            <div id="map"></div>
+        </div>
     </div>
+    <script>
+        // <span class="metadata-marker" style="display: none;" data-region_tag="script-body"></span>// Initialize and add the map
+        function initMap() {
+            const AK1 = {lat: 16.045880, lng: 108.238860};
+            // The map, centered at AK
+            const map = new google.maps.Map(
+                document.getElementById('map'), {zoom: 15, center: AK1});
+            // The marker, positioned at Uluru
+            const marker = new google.maps.Marker({position: AK1, map: map});
+        }
+    </script>
+     <script async defer
+     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBS5eVEZ4sctcHOuBuOZhO70g0Xp7z9MOE&callback=initMap">
+     </script>
 
     <%- include('./includes/client-footer.ejs') %>
 <%- include('./includes/footer.ejs') %>

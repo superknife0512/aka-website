@@ -1698,7 +1698,8 @@ form {
     flex: 3; }
     @media only screen and (max-width: 1060px) {
       .require__left {
-        margin-bottom: 6rem; } }
+        margin-bottom: 6rem;
+        flex: 5; } }
   .require__right {
     flex: 5; }
   .require__item {
@@ -1722,7 +1723,13 @@ form {
     padding: 6rem 6rem;
     box-shadow: -4px 1px 51px -4px rgba(0, 0, 0, 0.52);
     border-radius: .5rem;
-    padding-bottom: 8rem; }
+    padding-bottom: 8rem;
+    width: 69%;
+    margin-left: auto; }
+    @media (max-width: 1000px) {
+      .require__register {
+        width: 100%;
+        margin-left: 0; } }
     .require__register h2 {
       font-size: 2.3rem;
       text-transform: uppercase;
@@ -2283,6 +2290,7 @@ form {
   grid-row: 2/3;
   margin: 8rem 1rem;
   padding: 10rem 6rem;
+  margin-bottom: 7rem;
   color: white;
   background-color: #f5546e;
   border-radius: 1.2rem;
@@ -2295,6 +2303,7 @@ form {
       grid-column: 2/9;
       grid-row: 3/4;
       margin-top: 0;
+      margin-bottom: 3rem;
       transform: translateY(-7rem);
       height: auto; } }
   .contact__info p {
@@ -2348,6 +2357,11 @@ form {
 
 #input-msg {
   border-radius: 2rem; }
+
+#map {
+  width: 100%;
+  height: 40rem;
+  background-color: #42b0ee; }
 
 .onl-course {
   margin-top: 5rem; }
