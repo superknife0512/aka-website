@@ -257,6 +257,7 @@ exports.postEditCourse =async (req,res,next)=>{
             course.blobName = req.file.blob;
         }
 
+
         course.title = title;
         course.shortDes = shortDes;
         course.price = price;

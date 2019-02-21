@@ -6,20 +6,15 @@
             <section class="grid__container overall">
                 <div class="overall__heading">
                     <div class="overall__left">
-                    <% if(!course.videoUrl) { %>
-                            <div class="fb-video"
-                            data-href="<%= courseDefaultVideo %>"
-                            data-width="600"
-                            data-allowfullscreen="true"
-                            data-autoplay="false"
-                            data-show-captions="true"></div>
-                    <% } else { %>
+                    <% if(course.videoUrl) { %>
                             <div class="fb-video"
                             data-href="<%= course.videoUrl %>"
                             data-width="600"
                             data-allowfullscreen="true"
                             data-autoplay="false"
                             data-show-captions="true"></div>
+                    <% } else { %>
+                            <img src="<%= course.courseImg %>" alt="courseImg" class="overall__img">
                     <% } %>
                     </div>
                     <div class="overall__right">
