@@ -396,6 +396,8 @@ exports.postEditEvent = async (req,res,next)=>{
         const eventName = req.body.eventName;
         const dateHappen = req.body.dateHappen;
         const desc = req.body.desc;
+        const delta = req.body.delta;
+        console.log(delta);
 
         const event = await Events.findById(eventId);
         if(req.files[0]){
@@ -411,7 +413,8 @@ exports.postEditEvent = async (req,res,next)=>{
 
         event.eventName = eventName;
         event.dateHappen = dateHappen;
-        event.desc = desc.split(';;');
+        event.desc = desc;
+        event.delta = delta;
 
         await event.save();
         res.redirect('/admin')

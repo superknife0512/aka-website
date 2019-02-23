@@ -137,10 +137,13 @@
                         </button>       -->
                     </div>
 
-                    <input type="hidden" ref="deltaEdit" name="delta" value="<%= event.delta %>">
+                    <input type="hidden" ref="deltaEdit" name="deltaEdit" value="<%= event.delta %>">
                     <textarea name="desc" 
                                 class="form-control mt-4" 
                                 rows=5>{{ transData }}</textarea>
+
+                     <input type="hidden" :value="delta" name="delta">
+                    
                 <% } %>
             </div>
 
@@ -154,7 +157,7 @@
             <input type="hidden" name="eventId" value="<%= event._id %>">
             <% } %>
 
-            <button type="submit"  class="btn btn-primary">Submit</button>
+            <button type="submit" :disabled="transData === ''"  class="btn btn-primary">Submit</button>
         </form>
     </div>
     

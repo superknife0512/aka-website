@@ -6,56 +6,15 @@
             <h1 class="heading heading--1">
                 Tin tức và sự kiện tại AK
             </h1>
-            <br>
-            <div class="event-page__heading">
-
-                <% if(events[2]) { %>
-                    <a href="/event-page/tin-tức.<%= events[0]._id %>" class="event-page__group" id="event-1">
-                        <img src="<%= events[0].eventImgs[0] %>" alt="event img" class="event-page__group--img">
-                        <div class="event-page__group--info">
-                            <h2> <%= events[0].eventName %> </h2>
-                            <p><%= events[0].desc[0].split(' ').slice(0,30).join(' ') %>...</p>
-                        </div>
-                        <span class="event-page__date"><%=eventsDate[0] %></span>
-                    </a>
-    
-                    <a href="/event-page/tin-tức.<%= events[1]._id %>" class="event-page__group" id="event-2">
-                        <img src="<%= events[1].eventImgs[0] %>" alt="event img" class="event-page__group--img">
-                        <div class="event-page__group--info">
-                            <h2> <%= events[1].eventName %> </h2>
-                            <p><%= events[1].desc[0].split(' ').slice(0,20).join(' ') %>...</p>
-                        </div>
-                        <span class="event-page__date"><%=eventsDate[0] %></span>
-                    </a>
-    
-                    <a href="/event-page/tin-tức.<%= events[2]._id %>" class="event-page__group" id="event-3">
-                        <img src="<%= events[2].eventImgs[0] %>" alt="event img" class="event-page__group--img">
-                        <div class="event-page__group--info">
-                            <h2> <%= events[2].eventName %> </h2>
-                            <p><%= events[2].desc[0].split(' ').slice(0,30).join(' ') %>...</p>
-                        </div>
-                        <span class="event-page__date"><%=eventsDate[0] %></span>
-                    </a>
-                <% } else { %>
-                    <h2>Hiện AK chưa có sự kiện nào </h2>
-                <% } %>
-
-                
-            </div>
-            <br><br>
             <div class="event-page__more">
                 <h2>
-                    Các sự kiện và tin tức khác của AK
+                    Các sự kiện AK
                 </h2>
                 <div class="event-page__body">
-                        <% remainingEvent.forEach(event=>{ %>
+                        <% events.forEach(event=>{ %>
                             <div class="events-sect__card">
                                 <img src="<%= event.eventImgs[0] %>" alt="event img" class="events-sect__img">
-                                <div class="events-sect__wrap">
-                                    <h3><%= event.eventName %></h3>
-                                    <p><%= event.desc[0].split(' ').slice(0,12).join(' ') %>
-                                        <%= event.desc[0].split(' ').length > 12 ? '...' : '' %></p>
-                                </div>
+                                
                                 <div class="events-sect__wrap-btn">
                                     <button class="corner-btn corner-btn--trans">
                                         <a href="/event-page/tin-tức.<%= event._id %>">Xem thêm</a>
@@ -69,19 +28,19 @@
                 <nav aria-label="Page navigation example" class=" pagination__body">
                     <ul class="pagination">
                         <li class="page-item">
-                            <a class="page-link" href="/event-page?page=<%= 1 %>" aria-label="Previous">
+                            <a class="page-link" href="/event-page?pageEvent=<%= 1 %>&pageNews=<%= curPageNews %>" aria-label="Previous">
                                 <span aria-hidden="true">&laquo;</span>
                             </a>
                         </li>
                         
-                    <% for(let i=0; i < numDocs; i++) { %>
-                        <li class="page-item <%= curPage == (i+1) ? 'active' : '' %>">
+                    <% for(let i=0; i < numDocsEvent; i++) { %>
+                        <li class="page-item <%= curPageNews == (i+1) ? 'active' : '' %>">
                             <a class="page-link" 
-                                href="/event-page?page=<%= i+1 %>"><%= i+1 %></a>
+                                href="/event-page?pageEvent=<%= i+1 %>&pageNews=<%= curPageNews %>"><%= i+1 %></a>
                         </li>
                     <% } %>
 
-                        <a class="page-link" href="/event-page?page=<%= numDocs %>" aria-label="Next">
+                        <a class="page-link" href="/event-page?pageEvent=<%= numDocsEvent %>&pageNews=<%= curPageNews %>" aria-label="Next">
                             <span aria-hidden="true">&raquo;</span>
                         </a>
                         </li>
@@ -119,6 +78,48 @@
                     </div>
                 <% } %>
             </div>
+            <hr>
+            <div class="event-page__more">
+                    <h2>
+                        Các Tin tức nóng hổi tại AK
+                    </h2>
+                    <div class="event-page__body">
+                            <% news.forEach(article =>{ %>
+                                <div class="events-sect__card">
+                                    <img src="<%= article.eventImgs[0] %>" alt="event img" class="events-sect__img">
+                                    
+                                    <div class="events-sect__wrap-btn">
+                                        <button class="corner-btn corner-btn--trans">
+                                            <a href="/event-page/tin-tức.<%= article._id %>">Xem thêm</a>
+                                        </button>
+                                        <p><%= article.dateHappen %></p>
+                                    </div>
+                                </div>
+                            <% }) %>
+                    </div>
+                    <!-- for news section -->
+                    <nav aria-label="Page navigation example" class=" pagination__body">
+                        <ul class="pagination">
+                            <li class="page-item">
+                                <a class="page-link" href="/event-page?pageEvent=<%= curPageEvent %>&pageNews=<%= 1 %>" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            
+                        <% for(let i=0; i < numDocsNews; i++) { %>
+                            <li class="page-item <%= curPageNews == (i+1) ? 'active' : '' %>">
+                                <a class="page-link" 
+                                    href="/event-page?pageNews=<%= i+1 %>&pageEvent=<%= curPageEvent %>"><%= i+1 %></a>
+                            </li>
+                        <% } %>
+    
+                            <a class="page-link" href="/event-page?pageEvent=<%= numDocsNews %>&pageEvent=<%= curPageEvent %>" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
         </div>
     </div>
 
