@@ -333,6 +333,7 @@ exports.postCreateEvent = async (req,res,next)=>{
         const dateHappen = req.body.dateHappen;
         const eventName = req.body.eventName;
         const desc = req.body.desc;
+        const videoUrl = req.body.videoUrl;
         
         if(!req.files){
             return createErr('We cannot find your images, try again');
@@ -354,6 +355,7 @@ exports.postCreateEvent = async (req,res,next)=>{
             eventName,
             desc: descArr,
             eventImgs: filePaths,
+            videoUrl,
             blobNames
         })
         await event.save();
@@ -387,6 +389,7 @@ exports.postEditEvent = async (req,res,next)=>{
         const eventName = req.body.eventName;
         const dateHappen = req.body.dateHappen;
         const desc = req.body.desc;
+        const videoUrl = req.body.videoUrl;
 
         const event = await Events.findById(eventId);
         if(req.files[0]){
@@ -402,6 +405,7 @@ exports.postEditEvent = async (req,res,next)=>{
 
         event.eventName = eventName;
         event.dateHappen = dateHappen;
+        event.videoUrl = videoUrl;
         event.desc = desc.split(';;');
 
         await event.save();

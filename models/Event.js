@@ -7,6 +7,7 @@ const eventSchema = mongoose.Schema({
         required: true,
     },
     desc:[String],
+    videoUrl: String,
     eventImgs: [String],
     blobNames:[String],
 }, {timestamps: true})

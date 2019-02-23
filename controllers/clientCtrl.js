@@ -257,7 +257,18 @@ exports.getCourseDetail =async (req,res,next)=>{
        
         
         const course = await Course.findById(req.params.courseId).populate('teacher assistant');
+        const remainingCourse = await Course.find().sort('-updatedAt').populate('teacher');
         const adminData = await AdminData.find();
+        const scheduleArr = course.learningSchedule.split(';;');
+        const offPrices = remainingCourse.map(course => {
+            const oldPrice = parseInt(course.oldPrice.split('.').join(''));
+            const price = parseInt(course.price.split('.').join(''));
+            const pricesMinus = oldPrice - price;
+            return ((pricesMinus/oldPrice)*100).toFixed(0)
+        })
+        const titleSEOs = remainingCourse.map(course=>{
+            return course.title.replace(/ /, '-');
+        });
         res.render('course-detail',{
             path:'/course-page',
             title: course.title,
@@ -265,7 +276,11 @@ exports.getCourseDetail =async (req,res,next)=>{
             contacts,
             socials,            
             courseDefaultVideo: process.env.COURSE_DEFAULT_VIDEO,
-            adminData
+            adminData,
+            scheduleArr,
+            remainingCourse,
+            offPrices,
+            titleSEOs
         })
 
     } catch (err) {
