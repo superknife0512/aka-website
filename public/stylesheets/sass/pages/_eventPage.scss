@@ -190,7 +190,12 @@
     .heading{
     }
     &__body{
-
+        width: 70rem;
+        img{
+            width: 100%;
+            height: 45rem;
+            object-fit: cover;
+        }
     }
     &__date{
         color: #555;

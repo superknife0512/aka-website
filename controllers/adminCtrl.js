@@ -110,6 +110,7 @@ exports.postCreateCourse = async (req,res,next)=>{
     const courseGoals = req.body.courseGoals;
     const teacherName = req.body.teacherName;
     const assistName = req.body.assistName; 
+    const views = Math.floor(Math.random() * 100) + 500;
 
     let courseImgPath;
     // refactor code 
@@ -166,6 +167,7 @@ exports.postCreateCourse = async (req,res,next)=>{
             assistant: assistId,
             courseImg: courseImgPath,
             blobName: req.file.blob,
+            views
         })
 
         await course.save();
@@ -332,7 +334,12 @@ exports.postCreateEvent = async (req,res,next)=>{
     try{
         const dateHappen = req.body.dateHappen;
         const eventName = req.body.eventName;
-        const desc = req.body.desc;
+        const desc = req.body.desc.toString();
+        const delta = req.body.delta;
+        const views = Math.floor(Math.random() * 600) + 500;
+        const category = req.body.category;
+        
+        console.log(delta);
         
         if(!req.files){
             return createErr('We cannot find your images, try again');
@@ -347,14 +354,16 @@ exports.postCreateEvent = async (req,res,next)=>{
             return file.url;
         })
         const blobNames = fileInfos.map(file=> file.blob);
-        const descArr = desc.split(';;');
 
         const event = new Events({
             dateHappen,
             eventName,
-            desc: descArr,
+            delta,
+            desc,
             eventImgs: filePaths,
-            blobNames
+            blobNames,
+            views,
+            category
         })
         await event.save();
         res.redirect('/admin/event')
@@ -454,17 +463,17 @@ exports.postIncomingEvent =async (req,res,next)=>{
 
 exports.postEventOver =async (req,res,next)=>{
     try{
-        const incEventId = req.body.incEventId;
-        const incEvent = await IncomingEvent.findById(incEventId);
-        const event = new Events({
-            eventName: incEvent.eventName,
-            dateHappen: incEvent.dateHappen,
-            desc: incEvent.desc,
-            eventImgs: [incEvent.eventImg],
-            blobNames: [incEvent.blobName]
-        })
+        // const incEventId = req.body.incEventId;
+        // const incEvent = await IncomingEvent.findById(incEventId);
+        // const event = new Events({
+        //     eventName: incEvent.eventName,
+        //     dateHappen: incEvent.dateHappen,
+        //     desc: incEvent.desc,
+        //     eventImgs: [incEvent.eventImg],
+        //     blobNames: [incEvent.blobName]
+        // })
 
-        await event.save()
+        // await event.save()
         await IncomingEvent.deleteMany();
         res.redirect('/admin');
 

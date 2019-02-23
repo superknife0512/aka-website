@@ -104,7 +104,7 @@
                             <div class="card-body">
                                 <h2 class="card-title"><%= event.eventName %></h2>
                                 <p class="card-text"><%= event.dateHappen %></p>
-                                <p class="card-text"><%= event.desc[0].split(' ').slice(0,5).join(' ') %></p>
+                                <p class="card-text">Click chỉnh sửa để xem thêm </p>
                                 <div class="d-flex">
                                     <a href="/admin/event/edit?eventId=<%= event._id %>" class="btn btn-warning mr-8">Add information</a>
                                     <form action="/admin/event/delete" method="POST">

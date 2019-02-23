@@ -257,6 +257,10 @@ exports.getCourseDetail =async (req,res,next)=>{
        
         
         const course = await Course.findById(req.params.courseId).populate('teacher assistant');
+        let courseView = course.views + 1;
+        course.views = courseView;
+
+        await course.save()
         const adminData = await AdminData.find();
         res.render('course-detail',{
             path:'/course-page',
