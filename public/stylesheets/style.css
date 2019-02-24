@@ -2189,7 +2189,7 @@ form {
       object-fit: cover; }
       @media (max-width: 600px) {
         .event-left__body img {
-          height: 25  rem; } }
+          height: 25rem; } }
   .event-left__date {
     color: #555;
     display: flex;
