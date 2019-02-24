@@ -45,7 +45,11 @@
                     <svg>
                         <use xlink:href="images/course-detail.svg#icon-calendar"></use>
                     </svg>
-                    <span><%= course.learningSchedule %></span>
+                    <span>
+                        <% course.learningSchedule.split(';;').forEach(sche=>{ %>
+                            <%= sche %> <br>
+                        <% }) %>
+                    </span>
                 </h3>
             </section>
             
@@ -179,7 +183,22 @@
                         <h3>Hiện tại chưa có bình luận nào cho khóa học này!</h3>
                     <% } %>
                 </div>
+                
             </section>
+            <hr class="grid__container">
+
+            <section class="more-courses grid__container" style="margin-bottom: 5rem">
+                <h2 class="more-courses__title">Một số khóa học khác</h2>
+                <br>
+
+                    <div class="course-page__display">
+                        <% remainingCourse.forEach((course,i)=>{ %>
+                            <%- include('./includes/course-card.ejs', {course, i, saleOff: offPrices, titleSEOs,}) %>
+                        <% }) %>
+                    </div>
+
+            </section>
+
 
         </div>
 

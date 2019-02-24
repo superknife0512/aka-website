@@ -364,6 +364,7 @@ exports.postCreateEvent = async (req,res,next)=>{
             blobNames,
             views,
             category
+
         })
         await event.save();
         res.redirect('/admin/event')

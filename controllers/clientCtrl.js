@@ -261,7 +261,18 @@ exports.getCourseDetail =async (req,res,next)=>{
         course.views = courseView;
 
         await course.save()
+
         const adminData = await AdminData.find();
+        const scheduleArr = course.learningSchedule.split(';;');
+        const offPrices = remainingCourse.map(course => {
+            const oldPrice = parseInt(course.oldPrice.split('.').join(''));
+            const price = parseInt(course.price.split('.').join(''));
+            const pricesMinus = oldPrice - price;
+            return ((pricesMinus/oldPrice)*100).toFixed(0)
+        })
+        const titleSEOs = remainingCourse.map(course=>{
+            return course.title.replace(/ /, '-');
+        });
         res.render('course-detail',{
             path:'/course-page',
             title: course.title,
@@ -269,7 +280,11 @@ exports.getCourseDetail =async (req,res,next)=>{
             contacts,
             socials,            
             courseDefaultVideo: process.env.COURSE_DEFAULT_VIDEO,
-            adminData
+            adminData,
+            scheduleArr,
+            remainingCourse,
+            offPrices,
+            titleSEOs
         })
 
     } catch (err) {
