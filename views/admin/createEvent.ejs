@@ -1,145 +1,173 @@
 <%- include('../includes/html-head.ejs') %>
-    <%- include('../includes/admin-header.ejs') %><br>
+<%- include('../includes/admin-header.ejs') %><br>
 
-    <hr>
-    <br>
-    <div class="container">
-            <% if(editMode) { %>
-                <div class="info-popup__wrapper">
-                   <div class="info-popup">
-                               <h1 class="info-popup__heading">Create Incoming Event</h1>
-                               <p class="info-popup__content">Only one incoming event will be display here!</p>
-                               <form action="/admin/event/add-event" 
-                                       method="POST"
-                                       class="testimonial__form"
-                                       enctype="multipart/form-data">
-                                   <div class="form-group">
-                                       <input type="text" 
-                                               placeholder="Enter event name" 
-                                               class="form-control"
-                                               name="eventName">
-                                   </div>
-           
-                                   <div class="form-group">
-                                       <input type="text" 
-                                               placeholder="Enter date that even takes place" 
-                                               class="form-control"
-                                               name="dateHappen">
-                                   </div>
-
-                                   <div class="form-group">
-                                       <label for="">Event images</label>
-                                        <input type="file"
-                                                name="eventImg"
-                                                class="form-control file-style"
-                                                accept="image/*">
-                                    </div>
-           
-                                   <div class="form-group">
-                                       <textarea type="text" 
-                                               placeholder="Enter Event description" 
-                                               class="form-control"
-                                               name="desc"
-                                               rows="4"></textarea>
-                                        <small>It should separate paragraph with ';;'</small>
-                                   </div>
-                                   <i class="fas fa-times popup__icon" id="popup__icon"></i>
-                                   <input type="hidden" name="eventId" value="<%= event._id %>">
-                                   <button type="submit" class="btn btn-success">Create incoming event</button>
-                               </form>
-                               <hr>
-                               <% if(incEvent) { %>
-
-                                    <div class="inc-event">
-                                        <img src="<%= incEvent.eventImg %>" alt="<%= incEvent.eventName %>" class="inc-event__img">
-                                        <div class="inc-event__info">
-                                            <h3 class="inc-event__title"><%= incEvent.eventName %></h3>
-                                            <small><%= incEvent.dateHappen %></small>
-                                            <p class="inc-event__content"><%= incEvent.desc[0].split(' ').slice(0,20).join(' ') %>...</p>
-                                            <form action="/admin/event/over" method="POST">
-                                                <input type="hidden" name="incEventId" value="<%= incEvent._id %>">
-                                                <button type="submit" class="btn btn-danger">Event Over</button>
-                                            </form>
-                                        </div>
-                                    </div>
-
-                                <% } else { %>
-                                    <h5>No incoming event here. Add one now!</h5>
-                                <% } %>
-                   </div>
-               </div>
-               <!-- popup section -->
-            <% } %>
-               <!-- form section -->
-        <div class="heading-wrap">
-            <h1 class="heading-title"><%= editMode ? 'Edit this event' : 'Create an Event' %></h1>
-            <% if(editMode) { %>
-                <button class="btn btn-primary" id="activePopup">Create Incoming event</button>
-            <% } %>
-        </div>
-        <hr>
-        <div class="create__form">
-            <form class="signup__form create__form--width" 
-                    action="<%= editMode ? '/admin/event/edit' : '/admin/event' %>" 
-                    method="POST"
-                    enctype="multipart/form-data">
-
+<hr>
+<br>
+<div class="container" id="createPost">
+    <% if(editMode) { %>
+    <div class="info-popup__wrapper">
+        <div class="info-popup">
+            <h1 class="info-popup__heading">Create Incoming Event</h1>
+            <p class="info-popup__content">Only one incoming event will be display here!</p>
+            <form action="/admin/event/add-event" method="POST" class="testimonial__form" enctype="multipart/form-data">
                 <div class="form-group">
-                    <label for="eventName">Event name</label>
-                    <input type="text" 
-                            class="form-control" 
-                            name="eventName"
-                            placeholder="Enter event name"
-                            value="<%= editMode ? event.eventName : '' %>">
+                    <input type="text" placeholder="Enter event name" class="form-control" name="eventName">
                 </div>
 
                 <div class="form-group">
-                    <label for="eventName">Event name</label>
-                    <input type="text" 
-                            class="form-control" 
-                            name="videoUrl"
-                            placeholder="Enter video url "
-                            value="<%= editMode ? event.videoUrl : '' %>">
+                    <input type="text" placeholder="Enter date that even takes place" class="form-control" name="dateHappen">
                 </div>
 
                 <div class="form-group">
-                    <label for="eventName">Date happen</label>
-                    <input type="text" 
-                            class="form-control" 
-                            name="dateHappen"
-                            placeholder="Enter event date"
-                            value="<%= editMode ? event.dateHappen : '' %>">
-                </div>  
-                
-                <div class="form-group">
-                    <label for="desc">Event description</label>
-                    <textarea name="desc" rows="7"
-                            placeholder="Event description"
-                            class="form-control"><%= editMode ? event.desc.join(';;') : '' %></textarea>
+                   <label for="">Event images</label>
+                    <input type="file" name="eventImg" class="form-control file-style" accept="image/*">
                 </div>
 
                 <div class="form-group">
-                    <label for="eventName">Event Images</label>
-                    <input type="file" 
-                            class="form-control file-style" 
-                            name="eventImgs"
-                            multiple
-                            accept="image/*">
-                    <small  class="form-text text-muted"> Should be maximum 5 images (png,jpg,gif) </small>
+                    <textarea type="text" placeholder="Enter Event description" class="form-control" name="desc" rows="4"></textarea>
+                    <small>It should separate paragraph with ';;'</small>
                 </div>
-
-                <% if(editMode) { %>
-                    <input type="hidden" name="eventId" value="<%= event._id %>">
-                <% } %>
-
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <i class="fas fa-times popup__icon" id="popup__icon"></i>
+                <input type="hidden" name="eventId" value="<%= event._id %>">
+                <button type="submit" class="btn btn-success">Create incoming event</button>
             </form>
+            <hr>
+            <% if(incEvent) { %>
+
+            <div class="inc-event">
+                <img src="<%= incEvent.eventImg %>" alt="<%= incEvent.eventName %>" class="inc-event__img">
+                <div class="inc-event__info">
+                    <h3 class="inc-event__title">
+                        <%= incEvent.eventName %>
+                    </h3>
+                    <small>
+                        <%= incEvent.dateHappen %></small>
+                    <p class="inc-event__content">
+                        <%= incEvent.desc[0].split(' ').slice(0,20).join(' ') %>...</p>
+                    <form action="/admin/event/over" method="POST">
+                        <input type="hidden" name="incEventId" value="<%= incEvent._id %>">
+                        <button type="submit" class="btn btn-danger">Event Over</button>
+                    </form>
+                </div>
+            </div>
+
+            <% } else { %>
+            <h5>No incoming event here. Add one now!</h5>
+            <% } %>
         </div>
     </div>
-    <br><br>
+    <!-- popup section -->
+    <% } %>
+    <!-- form section -->
+    <div class="heading-wrap">
+        <h1 class="heading-title">
+            <%= editMode ? 'Edit this event' : 'Create an Event' %>
+        </h1>
+        <% if(editMode) { %>
+        <button class="btn btn-primary" id="activePopup">Create Incoming event</button>
+        <% } %>
+    </div>
+    <hr>
+    <div class="create__form" id="event">
+        <form class="signup__form create__form--width" action="<%= editMode ? '/admin/event/edit' : '/admin/event' %>"
+            method="POST" enctype="multipart/form-data">
 
-    <script src="public/javascripts/activePopup.js"></script>
-    <%- include('../includes/admin-footer.ejs',{
+            <div class="form-group">
+                <label for="eventName">Event name</label>
+                <input type="text" 
+                        class="form-control" 
+                        name="eventName" 
+                        placeholder="Enter event name" 
+                        value="<%= editMode ? event.eventName : '' %>">
+            </div>
+
+            <div class="form-group">
+                <label for="eventName">Date happen</label>
+                <input 
+                    type="text" 
+                    class="form-control" 
+                    name="dateHappen" 
+                    placeholder="Enter event date" 
+                    value="<%= editMode ? event.dateHappen : '' %>">
+            </div>
+
+            <% if(!editMode) { %>
+                <div class="form-group">
+                    <label for="category">Category</label>
+                    <select class="form-control" name="category">
+                        <option value="news">News</option>
+                        <option value="event">Event</option>
+                    </select>
+                </div>
+            <% } %>
+
+            <div class="form-group" style="height: 40rem">
+                <label for="Text">Content description</label>
+                <% if(!editMode) {  %>
+                    <div id="toolbar"></div>
+                    <div class="editor" id="editor"></div>
+                    <div class="d-flex mt-4">
+                        
+                        <button class="btn btn-danger " @click.prevent="translate()">
+                            Translate data
+                        </button>
+                        
+                        <!-- <button class="btn btn-warning " @click.prevent="setData()">
+                            Set Data
+                        </button>       -->
+                    </div>
+
+                    <input type="hidden" :value="delta" name="delta">
+                    <textarea name="desc" 
+                            class="form-control mt-4" 
+                            rows=5>
+                            {{ transData }}
+                    </textarea>
+                <% } else { %>
+                    <div id="toolbar"></div>
+                    <div class="editor" id="editor"></div>
+                    <div class="d-flex mt-4">
+                        
+                        <button class="btn btn-danger " @click.prevent="translate()">
+                            Translate data
+                        </button>
+                        
+                        <!-- <button class="btn btn-warning " @click.prevent="setData()">
+                            Set Data
+                        </button>       -->
+                    </div>
+
+                    <input type="hidden" ref="deltaEdit" name="deltaEdit" value="<%= event.delta %>">
+                    <textarea name="desc" 
+                                class="form-control mt-4" 
+                                rows=5>{{ transData }}</textarea>
+
+                     <input type="hidden" :value="delta" name="delta">
+                    
+                <% } %>
+            </div>
+
+            <div class="form-group" style="margin-top: 28rem">
+                <label for="eventName">Event Images</label>
+                <input type="file" ref="eventImgs" class="form-control file-style" name="eventImgs" multiple accept="image/*">
+                <small class="form-text text-muted"> Should be maximum 5 images (png,jpg,gif) </small>
+            </div>
+
+            <% if(editMode) { %>
+            <input type="hidden" name="eventId" value="<%= event._id %>">
+            <% } %>
+
+            <button type="submit" :disabled="transData === ''"  class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+    
+</div>
+<br><br>
+
+<script src="public/javascripts/activePopup.js"></script>
+<script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
+<script src="public/javascripts/editor.js" defer></script>
+<%- include('../includes/admin-footer.ejs',{
         page: 'Course Page'
     }) %>
 <%- include('../includes/footer.ejs') %>

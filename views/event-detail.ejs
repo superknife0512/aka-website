@@ -1,24 +1,30 @@
 <%- include('./includes/html-head.ejs') %>
     <%- include('./includes/client-header.ejs') %>
 
-    <div class="grid">
+    <div class="grid" id="event">
         <div class="event-left">
             <h1 class="heading heading--1"><%= event.eventName %></h1>
-            <h4 class="event-left__date">
-                <svg>
-                    <use xlink:href="images/course-detail.svg#icon-clock"></use>
-                </svg>
-                <%= event.dateHappen %>
-            </h4>
+            <div class="event-left__wrap">
+
+                <h5 class="views mr-6">
+                    <svg>
+                        <use xlink:href="images/benefits.svg#icon-eye"></use>
+                    </svg>
+                    <span><%= event.views %> Lượt xem</span>
+                </h5>
+                <h4 class="event-left__date">
+                    <svg>
+                        <use xlink:href="images/course-detail.svg#icon-clock"></use>
+                    </svg>
+                    <%= event.dateHappen %>
+                </h4>
+
+            </div>
+           
 
             <div class="event-left__body">
-                <% event.desc.forEach(des=>{ %>
-                    <p class="event-left__content"><%= des %></p>
-                <% }) %>
-                <br>
-                <% event.eventImgs.forEach(img=>{ %>
-                    <img src="<%= img %>" alt="image" class="event-left__img">
-                <% }) %>
+                <div v-html="markup"></div>
+                <input type="hidden" value="<%= event.desc %>" ref="desc">
             </div>
         </div>
         <div class="event-right">
@@ -42,6 +48,25 @@
            
         </div>
     </div>
+
+    <script>
+        const app = new Vue({
+            el:'#event',
+            data:{
+                markup:''
+            },
+            created(){
+                setTimeout(()=>{
+                    this.init();
+                }, 500)
+            },
+            methods:{
+                init(){
+                    this.markup = this.$refs.desc.value;
+                }
+            }
+        })
+    </script>
 
     <%- include('./includes/client-footer.ejs') %>
 <%- include('./includes/footer.ejs') %>

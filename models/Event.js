@@ -6,10 +6,12 @@ const eventSchema = mongoose.Schema({
         type: String,
         required: true,
     },
-    desc:[String],
-    videoUrl: String,
+    desc:String,
+    delta: String,
     eventImgs: [String],
     blobNames:[String],
+    views: Number,
+    category: String,
 }, {timestamps: true})
 
 module.exports = mongoose.model('Event', eventSchema);

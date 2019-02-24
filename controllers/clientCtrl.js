@@ -257,7 +257,11 @@ exports.getCourseDetail =async (req,res,next)=>{
        
         
         const course = await Course.findById(req.params.courseId).populate('teacher assistant');
-        const remainingCourse = await Course.find().sort('-updatedAt').populate('teacher');
+        let courseView = course.views + 1;
+        course.views = courseView;
+
+        await course.save()
+
         const adminData = await AdminData.find();
         const scheduleArr = course.learningSchedule.split(';;');
         const offPrices = remainingCourse.map(course => {
@@ -407,19 +411,28 @@ exports.getAlbumPage = async (req,res,next)=>{
 
 exports.getEventPage = async (req,res,next)=>{
     try{
-        const page = req.query.page || 1;
-        const PER_PAGE = 6;
-        
-        const events = await Events.find().limit(3).sort('-createdAt');
-        const numDocs = await Events.find().skip(3).countDocuments();
+        const page_event = req.query.pageEvent || 1;
+        const PER_PAGE_EVENT = 6;
 
-        const remainingEvent = await Events.find()
+        const page_news = req.query.pageNews || 1;
+        const PER_PAGE_NEWS = 6;
+
+        const events = await Events.find({category: 'event'})
                                         .sort('-createdAt')
-                                        .skip((page-1)*PER_PAGE+3)
-                                        .limit(PER_PAGE);
+                                        .skip((page_event-1)*PER_PAGE_EVENT)
+                                        .limit(PER_PAGE_EVENT);
+
+        const news = await Events.find({category: 'news'})
+                                        .sort('-createdAt')
+                                        .skip((page_news-1)*PER_PAGE_NEWS)
+                                        .limit(PER_PAGE_NEWS);
 
         const eventsDate = events.map(event=>{
             return event.createdAt.toISOString().split('T')[0].split('-').reverse().join('-');
+        })
+
+        const newsDate = news.map(newss=>{
+            return newss.createdAt.toISOString().split('T')[0].split('-').reverse().join('-');
         })
         const incomingEvent = await incEvent.findOne();
         const adminData = await AdminData.find();
@@ -430,11 +443,14 @@ exports.getEventPage = async (req,res,next)=>{
             contacts,
             socials,
             events,
+            news,
+            newsDate,
             eventsDate,
-            remainingEvent,
             incomingEvent,
-            numDocs: Math.ceil(numDocs/PER_PAGE),
-            curPage: page,
+            numDocsEvent: Math.ceil(events.length/PER_PAGE_EVENT),
+            numDocsNews: Math.ceil(news.length/PER_PAGE_NEWS),
+            curPageEvent: page_event,
+            curPageNews: page_news,
             adminData,
         })
 

@@ -58,6 +58,8 @@ const courseSchema =new mongoose.Schema({
 
     blobName: String,
 
+    views: Number,
+
     testimonials: [testimonialSchema]
 },{timestamps: true})
 
