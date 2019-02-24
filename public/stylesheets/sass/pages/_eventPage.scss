@@ -218,6 +218,14 @@
                 height: 25rem;
             }
         }
+        .ql-video{
+            width: 100%;
+            height: 40rem;
+        }
+        blockquote{
+            padding-left: 3.4rem;
+            border-left: 1rem solid rgba($color: #ee8e8e, $alpha: .4);
+        }
     }
     &__date{
         color: #555;

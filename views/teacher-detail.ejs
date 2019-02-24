@@ -55,7 +55,7 @@
                         </button>
                         <% if(teacher.role === 'teacher') { %>
                             <button id="btn-album" class="teacher-page__btn">
-                                Album khóa học
+                                Học online free
                             </button>                        
                             <button id="btn-schedule" class="teacher-page__btn">
                                 Thời khóa biểu
@@ -88,39 +88,38 @@
                         </div>
 
                         <div class="teacher-page__body fadeInAnim" id="pane-album">
-                            <h3>Album thể hiện quá trình giảng dạy hoặc các hoạt động của một giảng viên hay một khóa học nào đó.</h3>
-                            <% if(!albums[0]) { %>
-                                <h4>Hiện tại chưa có Album nào của giáo viên này.</h4>
+                            <h3>Đây là các khóa học miễn phí do các giảng viên giàu kinh nghiệm của AK biên soạn cẩn thận.</h3>
+                            <% if(!onCourses[0]) { %>
+                                <h4>Hiện tại chưa có Khóa học online nào của giáo viên này.</h4>
                             <% } else { %>
                                 <div class="teacher-page__body-wrap">
 
-                                    <% albums.forEach((album,i)=>{ %>
+                                    <% onCourses.forEach((course, i)=>{ %>
                                         <div class="teacher-page__album">
-                                            <img class="teacher-page__album-img" src="<%= album.posts[0].imgUrls[0] %>" alt="album img">
+                                            <img class="teacher-page__album-img" src="<%= course.imageUrl %>" alt="course img">
                                             <div class="teacher-page__album-info">
-                                                <h3><%= album.name %> 
-                                                    <a href="/album/<%= album._id %>?teacherId=<%= teacher._id %>" class="link-btn">Xem thêm</a> 
+                                                <h3><%= course.title %> 
+                                                    <a href="/course-online/học-online.<%= course._id %>" class="link-btn">Xem thêm</a> 
                                                 </h3>
-                                                <h4><%= album.shortDes.split(' ').slice(0-60).join(' ') %>...</h4>
+                                                <h4>Dạy bởi: <%= course.teacher.name %></h4>
                                                 <div class="teacher-page__date">
                                                     <h5 class="teacher-page__created">
                                                         <svg class="teacher-page__icon">
                                                             <use xlink:href="images/course-detail.svg#icon-calendar"></use>
                                                         </svg>
-                                                        Ngày đăng: <%= albumsDate[i].createdDate %>
+                                                        Ngày đăng: <%= date[i].create %> 
                                                     </h5>
                                                     <h5 class="teacher-page__updated">
                                                         <svg class="teacher-page__icon">
                                                             <use xlink:href="images/course-detail.svg#icon-pencil"></use>
                                                         </svg>
-                                                        Ngày cập nhật: <%= albumsDate[i].updatedDate %>
+                                                        Cập nhật: <%= date[i].update %> 
                                                     </h5>
                                                 </div>
                                                 
                                             </div>
                                         </div>
                                     <% }) %>
-
                                 </div>
                             <% } %>
                         </div>

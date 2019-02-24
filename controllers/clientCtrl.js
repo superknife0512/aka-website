@@ -257,6 +257,7 @@ exports.getCourseDetail =async (req,res,next)=>{
        
         
         const course = await Course.findById(req.params.courseId).populate('teacher assistant');
+        const remainingCourse = await Course.find().populate('teacher').sort('updatedAt').limit(6);
         let courseView = course.views + 1;
         course.views = courseView;
 
@@ -329,6 +330,17 @@ exports.getTeacherDetail = async (req,res,next)=>{
         const teacherId = mongoose.Types.ObjectId(teacher._id)
         const albums = await Album.find({createBy: teacherId});
         const courses = await Course.find({teacher: teacherId}).populate('teacher');
+        const onCourse = await OnlineCourse.find().populate('teacher').sort('-createdAt').limit(6);
+        const date = onCourse.map(course=>{
+            const create = course.createdAt.toISOString().split('T')[0].split('-').reverse().join('-');
+            const update = course.updatedAt.toISOString().split('T')[0].split('-').reverse().join('-');
+            return {
+                create,
+                update
+            }
+        })
+
+        console.log(onCourse);
         
         function changeDate(date){
             return date.toISOString().split('T')[0].split('-').reverse().join('-');
@@ -365,7 +377,9 @@ exports.getTeacherDetail = async (req,res,next)=>{
             albumsDate,
             offPrices,
             courses,
-            titleSEOs
+            titleSEOs,
+            onCourses: onCourse,
+            date
         })
 
     } catch (err) {
@@ -595,6 +609,7 @@ exports.postSearch = async (req,res,next)=>{
     try{
         const search = req.body.search;
         const courses = await Course.find().populate('teacher');
+        const events = await Events.find().sort('-updatedAt').limit(3);
 
         const searchPattern = new RegExp(search, "ig");
         const results = [];
@@ -622,7 +637,8 @@ exports.postSearch = async (req,res,next)=>{
             contacts,
             results,
             offPrices,
-            titleSEOs
+            titleSEOs,
+            events
         })
         
     } catch (err) {

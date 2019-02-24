@@ -27,7 +27,7 @@ const app = new Vue({
 })
 
 const toobarOption = [
-    ['bold', 'italic', 'underline', 'strike', 'link'],        // toggled buttons
+    ['bold', 'italic', 'underline', 'strike', 'link', 'video'],        // toggled buttons
     ['blockquote', 'code-block'],
 
     [{ 'header': 1 }, { 'header': 2 }],               // custom button values
@@ -40,7 +40,7 @@ const toobarOption = [
 
     [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
     [{ 'font': [] }],
-    [{ 'align': [] }],
+    [{ 'align': [] }], ,
 
     ['clean']     
 ];

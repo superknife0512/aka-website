@@ -17,6 +17,7 @@ const authRouter = require('./routes/auth');
 const adminRouter = require('./routes/admin');
 
 const Teacher = require('./models/Teacher');
+const Events = require('./models/Event')
 
 const app = express();
 
