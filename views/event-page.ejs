@@ -14,12 +14,16 @@
                         <% events.forEach(event=>{ %>
                             <div class="events-sect__card">
                                 <img src="<%= event.eventImgs[0] %>" alt="event img" class="events-sect__img">
-                                
+                                <div class="events-sect__wrap">
+                                    <h3><%= event.eventName %></h3>
+                                    <p>Click để xem thêm</p>
+                                </div>
                                 <div class="events-sect__wrap-btn">
                                     <button class="corner-btn corner-btn--trans">
                                         <a href="/event-page/tin-tức.<%= event._id %>">Xem thêm</a>
                                     </button>
                                     <p><%= event.dateHappen %></p>
+                                    
                                 </div>
                             </div>
                         <% }) %>
@@ -87,7 +91,10 @@
                             <% news.forEach(article =>{ %>
                                 <div class="events-sect__card">
                                     <img src="<%= article.eventImgs[0] %>" alt="event img" class="events-sect__img">
-                                    
+                                    <div class="events-sect__wrap">
+                                        <h3><%= article.eventName %></h3>
+                                        <p>Click để xem thêm</p>
+                                    </div>
                                     <div class="events-sect__wrap-btn">
                                         <button class="corner-btn corner-btn--trans">
                                             <a href="/event-page/tin-tức.<%= article._id %>">Xem thêm</a>

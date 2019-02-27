@@ -110,6 +110,38 @@ form {
     font-size: 1.5rem;
     color: #555; }
 
+.call {
+  position: fixed;
+  bottom: 2.7rem;
+  left: 2.7rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 6.1rem;
+  width: 6.1rem;
+  background-color: #f5546e;
+  border-radius: 50%;
+  z-index: 1000; }
+  @media only screen and (max-width: 800px) {
+    .call {
+      bottom: 1rem;
+      left: 1.3rem; } }
+  .call::before {
+    content: "";
+    height: 100%;
+    width: 100%;
+    background-color: #f5546e;
+    animation: pulse 1s infinite ease;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 50%;
+    z-index: -1; }
+  .call__icon {
+    fill: white;
+    height: 3rem;
+    width: 3rem; }
+
 @keyframes fadeIn {
   0% {
     transform: translate(-50%, -50%), scale(0.4);
@@ -161,6 +193,14 @@ form {
 
 .flapInAnim {
   animation: flapIn 0.5s cubic-bezier(0.25, 0.96, 0.72, 1.49) forwards; }
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+    transform: scale(1); }
+  100% {
+    opacity: 0;
+    transform: scale(1.5); } }
 
 .grid {
   display: grid;
@@ -1639,7 +1679,7 @@ form {
     height: 40rem;
     object-fit: cover;
     object-position: center;
-    width: 100%; }
+    width: 97%; }
   .overall__heading {
     display: flex; }
     @media only screen and (max-width: 1060px) {

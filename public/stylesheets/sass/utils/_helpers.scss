@@ -125,3 +125,38 @@ form{
         color: #555;
     }
 }
+
+.call{
+    position: fixed;
+    bottom: 2.7rem;
+    left: 2.7rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height:6.1rem;
+    width: 6.1rem;
+    background-color: $color-secondary;
+    border-radius: 50%;
+    z-index: 1000;
+    @media only screen and (max-width: 800px){
+        bottom: 1rem;
+        left: 1.3rem;
+    }
+    &::before{
+        content: "";
+        height: 100%;
+        width: 100%;
+        background-color: $color-secondary;
+        animation: pulse 1s infinite ease;
+        position: absolute;
+        top: 0;
+        left: 0;
+        border-radius: 50%;
+        z-index: -1;
+    }
+    &__icon{
+        fill: white;
+        height: 3rem;
+        width: 3rem;
+    }
+}

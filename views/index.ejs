@@ -21,6 +21,8 @@
         </div>
 
     </div>
+
+    <%- include('./includes/call-button.ejs') %>
     <div class="grid">
 
         <header class="grid__fluid hero">
@@ -174,8 +176,7 @@
                             <img src="<%= event.eventImgs[0] %>" alt="event img" class="events-sect__img">
                             <div class="events-sect__wrap">
                                 <h3><%= event.eventName %></h3>
-                                <p><%= event.desc[0].split(' ').slice(0,12).join(' ') %>
-                                    <%= event.desc[0].split(' ').length > 12 ? '...' : '' %></p>
+                                <p>Click để xem thêm</p>
                             </div>
                             <div class="events-sect__wrap-btn">
                                 <button class="corner-btn corner-btn--trans">
