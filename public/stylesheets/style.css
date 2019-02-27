@@ -1312,7 +1312,7 @@ form {
     align-items: center;
     transform-origin: top; }
     .homepage-popup__body h2 {
-      margin-bottom: 4rem !important; }
+      margin-bottom: 3rem !important; }
     .homepage-popup__body p {
       text-align: center; }
     @media only screen and (max-width: 800px) {
@@ -1329,6 +1329,16 @@ form {
     @media only screen and (max-width: 800px) {
       .homepage-popup__btn-group {
         flex-direction: column; } }
+  .homepage-popup__hot {
+    padding: 1rem 2.4rem;
+    background-color: #f5546e;
+    color: white;
+    font-size: 1.7rem;
+    text-transform: uppercase;
+    position: absolute;
+    top: 0rem;
+    left: -5rem;
+    transform: rotate(-30deg); }
 
 .course-page__heading {
   margin: 0 auto;

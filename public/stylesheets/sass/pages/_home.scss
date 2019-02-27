@@ -841,6 +841,7 @@ form{
     top: 0;
     left: 0;
     z-index: 5000;
+
     &__body{
         max-width: 80rem;
         background-color: white;
@@ -854,7 +855,7 @@ form{
         align-items: center;
         transform-origin: top;
         h2{
-            margin-bottom: 4rem !important;
+            margin-bottom: 3rem !important;
         }
         p{
             text-align: center;
@@ -875,5 +876,16 @@ form{
         @media only screen and (max-width: 800px){
             flex-direction: column;
         }
+    }
+    &__hot{
+        padding: 1rem 2.4rem;
+        background-color: #f5546e;
+        color: white;
+        font-size: 1.7rem;
+        text-transform: uppercase;
+        position: absolute;
+        top: 0rem;
+        left: -5rem;
+        transform: rotate(-30deg);
     }
 }

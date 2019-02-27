@@ -1,5 +1,25 @@
 <%- include('./includes/html-head.ejs') %>
     <%- include('./includes/client-header.ejs') %>
+        <div class="homepage-popup " v-if="isActive">
+            <div class="homepage-popup__body flapInAnim">
+                    <div class="homepage-popup__hot">HOT!! Don't miss</div>
+
+                <h2 class="heading heading--5 text-center">
+                    Đừng bỏ quên các khuyến mãi!!!
+                </h2>
+                <p>Ak thường xuyên đưa ra các tin tức nóng hổi về các khóa học được khuyến mãi 
+                    cùng với đó là các sự kiện hỗ trợ cộng đồng,... các bạn không nên bỏ qua.
+                </p>
+                <div class="d-flex justify-content-center mt-4 homepage-popup__btn-group">
+                    <button class="corner-btn mr-4" 
+                            @click="isActive = false">Để sau</button>
+                    <a href="/event-page"
+                        target="blank" 
+                        class="link-btn">Xem ngay!!!</a>
+                </div>
+            </div>
+
+        </div>
 
         <div class="grid">
             <div class="grid__container ">
@@ -78,5 +98,18 @@
                 </div>
         </div>
 
+        <script>
+            const app = new Vue({
+                el: '.homepage-popup',
+                data:{
+                    isActive:false
+                },
+                created(){
+                    setTimeout(()=>{
+                        this.isActive = true;
+                    }, 1000)
+                }
+            })
+        </script>
     <%- include('./includes/client-footer.ejs') %>
 <%- include('./includes/footer.ejs') %>
