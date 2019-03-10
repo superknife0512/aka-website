@@ -12,6 +12,7 @@ const app = new Vue({
         roleCode: '',
         codeInfo: '',
         popupActive: false,
+        validCode: false,
     },
     methods:{
         checkEmail(){
@@ -63,6 +64,11 @@ const app = new Vue({
                 return res.json()
             }).then(data=>{
                 this.codeInfo = data.msg;
+                if(data.msg.match(/invalid/)){
+                    this.validCode = false
+                } else {
+                    this.validCode = true
+                }
             }).catch(err=>{
                 console.log(err)
             })
@@ -80,14 +86,15 @@ const app = new Vue({
         cfPass(value){
             if(value !== this.pass){
                 this.sameCheck = false
-            } else {
+            } else if (value === this.pass) {
                 this.sameCheck = true
             }
-        }
+        },
+        
     },
     computed:{
         basicFill(){
             return this.email !== '' && this.pass !== '' && this.cfPass !==''
-        }
+        },
     }
 })

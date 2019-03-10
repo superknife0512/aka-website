@@ -1,6 +1,7 @@
 const Teacher = require('../models/Teacher');
 const Course = require('../models/Course');
 const Events = require('../models/Event');
+const Album = require('../models/Album')
 const IncomingEvent = require('../models/IncomingEvent');
 const AdminData = require('../models/AdminData');
 const OnCourse = require('../models/OnlineCourse');
@@ -562,19 +563,27 @@ exports.postDeleteTeacher = async (req,res,next)=>{
     try{
         const teacherId = req.body.teacherId;
         const album = await Album.find({createBy: teacherId});
+        console.log(album);
         const courses = await Course.find({teacher: teacherId});
+        console.log(courses);
         await Teacher.findByIdAndRemove(teacherId);
         console.log('Delete a teacher');
-        album.posts.forEach(post=>{
-            post.blobNames.forEach(blobName=>{
-                deleteBlob('post-photos', blobName)
+        if(album.length > 0){
+            
+            album.posts.forEach(post=>{
+                post.blobNames.forEach(blobName=>{
+                    deleteBlob('post-photos', blobName)
+                })
             })
-        })
-        courses.forEach(course=>{
-            deleteBlob('course-photo', course.blobName);
-        })
-        Album.deleteMany({createBy: teacherId});
-        Course.deleteMany({teacher: teacherId});
+            Album.deleteMany({createBy: teacherId});
+        }
+        if(courses.length > 0){
+
+            courses.forEach(course=>{
+                deleteBlob('course-photo', course.blobName);
+            })
+            Course.deleteMany({teacher: teacherId});
+        }
 
         res.redirect('/admin/teachers-info');
 
