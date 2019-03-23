@@ -39,7 +39,30 @@ const socials = [
 // *********************************************
 // HOME PAGE 
 // *********************************************
+exports.getTrack = async(req,res,next)=>{
+    
+    try{
+        
+        const teachers =await Teacher.find({role: 'teacher'});
+        const assistants =await Teacher.find({role: 'assistant'});
+        const seoName = teachers.map(teacher=>{
+            return teacher.name.replace(/[ .]/g, '-');
+        })
+        
+        res.render('teachers-page',{
+            title: 'Giảng viên',
+            path: '/teacher-page',
+            contacts,
+            socials,
+            seoName,
+            teachers,
+            assistants
+        })
 
+    } catch (err) {
+        next(err)
+    }
+}
 exports.getHomePage =async (req,res,next)=>{
     try{
        
