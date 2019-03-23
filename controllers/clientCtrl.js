@@ -8,6 +8,9 @@ const incEvent = require('../models/IncomingEvent');
 const Message = require('../models/Message');
 const sgMail = require('@sendgrid/mail');
 
+const fs = require('fs');
+const path = require('path');
+
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 const mongoose = require('mongoose');
@@ -39,30 +42,18 @@ const socials = [
 // *********************************************
 // HOME PAGE 
 // *********************************************
-exports.getTrack = async(req,res,next)=>{
-    
-    try{
-        
-        const teachers =await Teacher.find({role: 'teacher'});
-        const assistants =await Teacher.find({role: 'assistant'});
-        const seoName = teachers.map(teacher=>{
-            return teacher.name.replace(/[ .]/g, '-');
-        })
-        
-        res.render('teachers-page',{
-            title: 'Giảng viên',
-            path: '/teacher-page',
-            contacts,
-            socials,
-            seoName,
-            teachers,
-            assistants
-        })
-
+exports.track = async (req,res,next)=>{
+    try {
+      const linkFile = path.join(__dirname, '..', 'public', 'images', 'CTA.jpg')
+        fs.readFile(linkFile,function(err,data){
+          res.writeHead('200', {'Content-Type': 'image/jpg'});
+          res.end(data,'binary');
+        });
+        console.log('caxx');
     } catch (err) {
-        next(err)
+      throw err
     }
-}
+  }
 exports.getHomePage =async (req,res,next)=>{
     try{
        
